@@ -21,7 +21,6 @@ _(jean)_ :
 I believe we can treat these as separate issues:
   # Build a Plone with appropriate access rights for the various groups
    that will use it.
-
   # Deploy a subset to a second Plone later on.
 
 (2) doesn't have to impact (1), and it's worthwhile doing the access
