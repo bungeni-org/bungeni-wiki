@@ -21,15 +21,3 @@ There are various plone calendar products available. They could be modified for 
 We have a need to capture the calendar data in a relational table - so that the information can be cross-referenced / joined with other registry metadata tables.
 The Plone calendar products by default use zodb storage.
 For Bungeni we could still use the zodb storage, but just at the point of a state transition (new insertion, updation or deletion) insert a subset of the same data into a relational database table (which essentially then synchronizes with the plone calendar./...)
-
-
-
-
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
