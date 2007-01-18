@@ -1,0 +1,35 @@
+#summary This documents the requirements of the Parliamentary Calendar for Bungeni within Plone.
+
+= Introduction =
+The parliamentary calendar is one of the main metadata registries of Bungeni PIS.  The calendar provides a map of all parliamentary activities for the forthcoming year.
+
+= Similar Examples = 
+
+A calendar of public committee meetings, etc from the Parliament.UK website:
+
+  http://www.parliament.uk/what_s_on/hoc_news3.cfm
+
+The calendar must also provide a summarized, typical calendar style view.
+Note that the calendar provided in the example is a subset of the main parliamentary calendar which records all activities.
+
+= Plone products =
+
+There are various plone calendar products available. They could be modified for use by the PIS.
+
+= Calendar Storage - ZoDB vs RDBMS table =
+
+We have a need to capture the calendar data in a relational table - so that the information can be cross-referenced / joined with other registry metadata tables.
+The Plone calendar products by default use zodb storage.
+For Bungeni we could still use the zodb storage, but just at the point of a state transition (new insertion, updation or deletion) insert a subset of the same data into a relational database table (which essentially then synchronizes with the plone calendar./...)
+
+
+
+
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
