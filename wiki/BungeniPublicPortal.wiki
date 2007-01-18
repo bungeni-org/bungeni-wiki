@@ -1,0 +1,28 @@
+#summary This page refers to the public-portal interface of the Bungeni PIS application
+
+= Introduction =
+This page documents correspondence regarding the public portal interface.  
+
+
+= Levels of Content =
+
+_(jean)_ :
+There will likely be three levels of content in the site: public
+content (such as background documents), content for members (such as
+committee working documents, that aren't destined for publication), and
+content in progress (such as news items and reports that have been
+submitted for publication, but not yet edited and approved by the site
+editor(s)). 
+
+_(ashok)_ :
+We need a physical separation between the "public" plone and the "internal" plone - the one which provides content for members and contains the work-in-progress applications....i do remember you mentioning using RSS feeds - and XML (using Entransit) to feed a public website..... since for a real deployment we wouldnt want to put both the internal and external faces of the website on the same plone installation or server.
+
+_(jean)_ :
+I believe we can treat these as separate issues:
+  # Build a Plone with appropriate access rights for the various groups
+   that will use it.
+
+  # Deploy a subset to a second Plone later on.
+
+(2) doesn't have to impact (1), and it's worthwhile doing the access
+rights properly from the start.
