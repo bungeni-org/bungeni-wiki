@@ -1,0 +1,154 @@
+#labels Phase-Deploy
+= Updating Bungeni on metallica =
+
+Log in:
+
+{{{
+  $ ssh metallica.nidelven-it.no 
+  Enter passphrase for key '/home/jean/.ssh/id_dsa-zope': 
+}}}
+
+== Updating Plone ==
+
+This won't happen often, but in case it does, here are the steps ..
+
+  * Get the latest Plone distribution, in this case 2.5.2-1:
+
+{{{
+    wget http://plone.googlecode.com/files/Plone-2.5.2-1.tar.gz
+}}}
+
+  * Unpack it in the directory for added products, namely `/home/undesa/zope-instances/bungeni/Products-added`
+
+  * Move the previous Plone version away:
+
+{{{
+    undesa@metallica:~/zope-instances/bungeni/Products-added$ \
+      mv Plone-2.5.2-rc1 /home/undesa/tmp/
+}}}
+
+  * This will cause all the symlinks that referred to that Plone version to break, so we can easily remove them:
+
+{{{
+    undesa@metallica:~/zope-instances/bungeni/Products$ \
+      find -follow -ilname "*" -exec rm {} \;
+}}}
+
+  * Link in the new version of Plone:
+
+{{{
+    undesa@metallica:~/zope-instances/bungeni/Products$ \
+      ln -s ../Products-added/Plone-2.5.2-1/* .
+}}}
+
+  * After making changes in the Products directory, always restart. In case you've broken anything, start zope in the foreground first, to make sure it's happy (look for the "Ready to handle requests" message):
+
+{{{
+    undesa@metallica:~/zope-instances/bungeni$ ./bin/zopectl fg
+    /home/undesa/zope-instances/bungeni/bin/runzope -X debug-mode=on
+    2007-03-10 08:12:38 INFO ZServer HTTP server started at Sat Mar 10 08:12:38 2007
+    [... lots of output snipped ...]
+    2007-03-10 08:13:22 INFO Zope Ready to handle requests
+}}}
+
+== Updating Bungeni ==
+
+We're running Bungeni (among others) from an SVN checkout. To get the current version, update the checkout.
+
+.. Note:: If you want to know exactly what changed, make a copy of the working directory to `~/tmp/` and run `diff -ru checkout ~/tmp/checkout` (where `checkout` is the name of your checkout), or use `svn log`. 
+
+  * In this case, we're updating the Bungeni product:
+
+{{{
+    undesa@metallica:~/svn-checkouts/Bungeni-trunk$ svn up
+    U    i18n/generated.pot
+    U    AppConfig.py
+    U    Extensions/MemberAutoWorkflow.py
+    U    Extensions/BungeniWorkflow.py
+    U    Extensions/InstallWorkflows.py
+    A    Extensions/ParliamentaryEventWorkflow.py
+    U    Extensions/Install.py
+    U    Extensions/AppInstall.py
+    U    Extensions/MemberApprovalWorkflow.py
+    U    version.txt
+    A    doc/rss-module-bungeni.rst
+    U    doc/Bungeni.zuml
+    U    content/Motion.py
+    U    content/LegislationFolder.py
+    U    content/Question.py
+    U    content/ParliamentaryEvent.py
+    Updated to revision 192.
+}}}
+
+  * The output shows changed files. Dependencies are specified in `AppConfig.py`, so if that file has changed, check whether dependencies have changed (if you don't and they have changed, then you will get errors down the line, so you'll eventually find out what's missing ..):
+
+{{{
+    ------------------------------------------------------------------------
+    r193 | jean.jordaan | 2007-03-10 08:36:07 +0000 (Sat, 10 Mar 2007) | 3 lines
+
+    r5336@klippie:  jean | 2007-03-10 10:32:03 +0200
+    Added AuditTrail as dependency; point at AppConfig from the README
+
+    ------------------------------------------------------------------------
+    r180 | jean.jordaan | 2007-03-09 11:59:04 +0000 (Fri, 09 Mar 2007) | 3 lines
+
+    r5309@klippie:  jean | 2007-03-09 13:51:55 +0200
+    Added qRSS2Syndication as dependency, for generating RSS2 feeds
+}}}
+
+  * Fetch the missing dependencies. They may be svn checkouts or downloads, ask around to find out .. :
+
+{{{
+    undesa@metallica:~/distfiles$ \
+      wget http://belnet.dl.sourceforge.net/sourceforge/quintagroup/qRSS2Syndication-0.5.1.tar.gz
+    undesa@metallica:~/svn-checkouts$ \
+      svn co http://bungeni-portal.googlecode.com/svn/AuditTrail/trunk \
+      AuditTrail-trunk
+}}}
+
+  * Check to see whether the dependencies themselves introduce dependencies. You should be able to find out from `README.txt` and/or `INSTALL.txt`. Sure enough, in `AuditTrail/README.txt` we see:
+
+{{{
+    Requires patched DCWorkflow (CMF-1.6.2-bungeni) from
+    http://bungeni-portal.googlecode.com/svn/DCWorkflow/
+}}}
+
+  * Link in or unpack the dependencies. If the dependency is a bundle of many products (like Plone itself or CMFEditions), unpack it in Products-added and link it in. If it's a standalone product (like qRSS2Syndication), you may as well unpack it in the Products directory directly. If the dependency is an SVN checkout, link it in from the svn-checkouts directory. If the dependency replaces an existing product, remove that product first:
+
+{{{
+    undesa@metallica:~/zope-instances/bungeni/Products$ \
+      tar xzf /home/undesa/distfiles/qRSS2Syndication-0.5.1.tar.gz 
+    undesa@metallica:~/zope-instances/bungeni/Products$ \
+      ln -s /home/undesa/svn-checkouts/AuditTrail-trunk AuditTrail
+    undesa@metallica:~/zope-instances/bungeni/Products$ rm DCWorkflow
+    undesa@metallica:~/zope-instances/bungeni/Products$ \
+      ln -s /home/undesa/svn-checkouts/DCWorkflow .
+}}}
+
+  * Start Zope in the foreground to make sure everything's still working.
+
+  * If Zope starts up OK with the "Ready to handle requests" message, it's time to browse to it with your browser:
+
+{{{
+    http://metallica.nidelven-it.no:37090/plone
+    http://metallica.nidelven-it.no:37090/plone/manage_main
+}}}
+
+  * If you have updated Plone, the `portal_migration` tool will show a red exclamation mark, and allow you to run migration steps.
+
+  * If you have updated or added any other products, go to the "Add/Remove Products" area and do what needs to be done:
+
+{{{
+    http://metallica.nidelven-it.no:37090/plone/prefs_install_products_form
+}}}
+
+  * If everything is still OK, you can kill zope and start it as a service, so it runs in the background:
+
+{{{
+    undesa@metallica:~/zope-instances/bungeni$ ./bin/zopectl start
+}}}
+
+
+
+
+
