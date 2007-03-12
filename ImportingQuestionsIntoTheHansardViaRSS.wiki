@@ -34,10 +34,6 @@ Once the editor selects a question, the selected question will get inserted into
 
 Subsequent to import, the editor can then do whatever formatting they desire.
 
-true we gould do a second query after getting the question header
-details from the portal via rss ... but at the moment we dont have the
-registry up and running, synchronizing with plone...  so this is more
-for immediate working integration at the conference...
 
 ==Additional applications of RSS==
 
