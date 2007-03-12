@@ -1,26 +1,44 @@
-== Importing Questions into the Hansard via Rss ==
+=Importing Questions into the Hansard via Rss=
 
 The Hansard is an openoffice application, while the questions are created and recorded within the Bungeni plone portal.
 The Hansard is a verbatim record of discussions on the floor of parliament. There is a need to import full content of questions in to the hansard from the Bungeni plone portal as part of the drafting process.
 
-== Questions as they are depicted in Akoma Ntoso == 
+==Questions as they are depicted in Akoma Ntoso== 
 
 AkomaNotoso provides for markup involving questions and answers. This markup essential documents the "questions" process.
 
-{{{<question by="identifier of who is posing the question" 
-to="who is the question being addressed to"><from>in what capacity is the person posing the question</from><text>
-text of the question</text></question>
+{{{
+<question by="identifier of who is posing the question" 
+to="who is the question being addressed to">
+<from>in what capacity is the person posing the question</from>
+<text>
+text of the question
+</text>
+</question>
 }}}
 
-== Questions as RSS from the portal == 
+==Questions as RSS from the portal== 
 
 The questions tabled for the day will be provided as RSS feeds on the bungeni portal.
 The format of these feeds is described here:
-http://bungeni-portal.googlecode.com/svn/Bungeni/trunk/doc/rss-module-bungeni.rst 
 
-== Mechanism of Import == 
-The hansard editor will be presented a dialog with a list of questions available for tabling on that day. This list will be presented to him via  a RSS query to Plone. This rss query will also return otherdetails including the question text and identifier , etc...not shownto the editor..Once the editor selects a question, the selected question will get inserted into the hansard / minutes document with the associated text and metadata within a uniquely identified (probably the uuid) document section. The advantage of using the uuid as part of the document naming section is that the section names in are unique, this provides the additional benefit of automatic validation preventing double insertion of questions.Subsequent to import, the editor can then do whatever formatting they desire.true we gould do a second query after getting the question headerdetails from the portal via rss ... but at the moment we dont have theregistry up and running, synchronizing with plone...  so this is morefor immediate working integration at the conference...
+http://bungeni-portal.googlecode.com/svn/Bungeni/trunk/doc/rss-module-bungeni.rst 
 
-== Additional applications of RSS ==
+==Mechanism of Import== 
+
+The hansard editor will be presented a dialog with a list of questions available for tabling on that day. This list will be presented to him via  a RSS query to Plone. This rss query will also return other
+details including the question text and identifier , etc...not shown
+to the editor..
+
+Once the editor selects a question, the selected question will get inserted into the hansard / minutes document with the associated text and metadata within a uniquely identified (probably the uuid) document section. The advantage of using the uuid as part of the document naming section is that the section names in are unique, this provides the additional benefit of automatic validation preventing double insertion of questions.
+
+Subsequent to import, the editor can then do whatever formatting they desire.
+
+true we gould do a second query after getting the question header
+details from the portal via rss ... but at the moment we dont have the
+registry up and running, synchronizing with plone...  so this is more
+for immediate working integration at the conference...
+
+==Additional applications of RSS==
 
 Possibly import marginalia annotations into openoffice.
