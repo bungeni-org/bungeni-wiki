@@ -5,7 +5,7 @@ The Hansard is a verbatim record of discussions on the floor of parliament. Ther
 
 ==Questions as they are depicted in Akoma Ntoso== 
 
-AkomaNotoso provides for markup involving questions and answers. This markup essential documents the "questions" process.
+AkomaNtoso provides for markup involving questions and answers. This markup essential documents the "questions" process.
 
 {{{
 <question by="identifier of who is posing the question" 
