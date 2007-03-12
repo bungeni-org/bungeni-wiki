@@ -17,14 +17,15 @@ text of the question
 </question>
 }}}
 
-==Questions as RSS from the portal== 
+
+==Questions as RSS from the Portal==
 
 The questions tabled for the day will be provided as RSS feeds on the bungeni portal.
 The format of these feeds is described here:
 
 http://bungeni-portal.googlecode.com/svn/Bungeni/trunk/doc/rss-module-bungeni.rst 
 
-==Mechanism of Import== 
+==Mechanism of import==
 
 The hansard editor will be presented a dialog with a list of questions available for tabling on that day. This list will be presented to him via  a RSS query to Plone. This rss query will also return other
 details including the question text and identifier , etc...not shown
@@ -36,5 +37,4 @@ Subsequent to import, the editor can then do whatever formatting they desire.
 
 
 ==Additional applications of RSS==
-
 Possibly import marginalia annotations into openoffice.
