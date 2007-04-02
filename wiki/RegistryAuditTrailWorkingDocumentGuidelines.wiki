@@ -17,12 +17,12 @@
   * This log file is read periodically by a parsing script that reads the RFC822 data, record by record, parses it, does some basic checks on it, and pumps it into a relational database.
   * Plone content types are mapped to a relational table, and this mapping is done via a configuration file.
   * Similarly Plone content attributes are mapped to table columns via a configuration file.
-  * The frequency with which the script reads the audit log can be adjusted to reduce the lag between content published in plone, and content appearing in the registry.
+  * The frequency with which the script reads the audit log can be adjusted to reduce the lag between content published in plone, and content appearing in the registry- for instance the script could execute at intervals of every 10 minutes to check the audit log for updates...
 
 ==Consistency==
 
   * Plone is the authoritative generator of content in the system. Documents, Objects, Actors are constructed and modified within it.
-  * The registry built of the audit trail is a mirror of this consistency i.e.if plone is inconsistent, the registry would be inconsistent.
+  * The registry built of the audit trail is a mirror of this consistency i.e.if plone is inconsistent, the registry would be inconsistent. Plone would maintain consistency of data, prevent deletion of referenced etc. using its mechanism (for e.g. HoldingReferences could be checked to prevent deletion of an object)
   * Plone and the registry operate in a disconnected manner - Plone writes to an audit log, the registry is built and update by a different program that reads this audit log.
     * If the Plone server were to crash for whatever reason, the registry data would still be available to systems relying on portal data (like openoffice and the xml repository...)
     * If the registry to were to crash, plone would keep updating the audit log, when the registry system restarts it would read the audit log from where it last stopped and proceed to update itself.
