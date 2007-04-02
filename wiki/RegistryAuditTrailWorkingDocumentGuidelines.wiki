@@ -31,15 +31,15 @@
 
   * The plone object and the corresponding registry entry for that plone object need to be kept in a synchronized state.
     * For example, If an MP is added in Plone, this MP must be recorded in the audit trail log file. If the state of the MP changes (if his name was changed, or if his role was changed ) - the change of state must be recorded as clearly identifiable states for a document.
-  * Some actions are initiated directly upon a plone document, for instance - a user can select multiple documents in a folder and publish them (without actually opening the document).  Such actions must be recorded in the audit log in a predictable manner. [TO BE IDENTIFIED - OTHER SUCH ACTIONS]
+  * Some actions are initiated directly upon a plone document, for instance - a user can select multiple documents in a folder and publish them (without actually opening the document).  Such actions must be recorded in the audit log in a predictable manner. *TO BE IDENTIFIED - OTHER SUCH ACTIONS*
 
 
 ==Guidelines==
 
   * Audit log must record in a predictable manner changes made to certain plone objects
-  * Plone objects relevant to registry must be recorded in the audit log [PARTIALLY IDENTIFIED]
-  * Certain field (plone attribute) names (like identifier of MP) must be standardized across forms [TO BE IDENTIFIED]
-  * Specific actions for a plone object need to be recorded in the audit trail ("create", "update", "delete" and so on [TO BE IDENTIFIED]...)
-  * [HOW DOES PLONE HANDLE VERSIONS OF A PLONE OBJECT - DO THEY GET A NEW UID ??? ]
-  * Right now the audit log outputs into a single file - ideally it should output into an hourly / or half hourly file - with a time stamped name of the type YYYYMMDD-HH-MM.TXT
+  * Plone objects relevant to registry must be recorded in the audit log *PARTIALLY IDENTIFIED*
+  * Certain field (plone attribute) names (like identifier of MP) must be standardized across forms *TO BE IDENTIFIED*
+  * Specific actions for a plone object need to be recorded in the audit trail ("create", "update", "delete" and so on *TO BE IDENTIFIED*...)
+  * *HOW DOES PLONE HANDLE VERSIONS OF A PLONE OBJECT - DO THEY GET A NEW UID ??? *
+  * Right now the audit log outputs into a single file - ideally it should output into an hourly / or half hourly file - with a time stamped name of the type YYYYMMDD-HH-MM.TXT *TO BE DONE*
     * This is particularly relevant as the log parser needs to incrementally read the audit log file.
