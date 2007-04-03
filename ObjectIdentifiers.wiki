@@ -116,6 +116,15 @@ joe kagi making speech as Minister
 }}}
 
 
+==== Issue of case (b) political parties ====
+
+Political parties are not attributed in the hansard.  Search queries
+including political parties as filters are best handled by
+pre-filtering using the MP's identifer + party membership identifier
+to determine duration of membership in the political party (from and
+to dates...) and then querying on that date range for the MP's
+speeches. 
+
 === Bungeni/Plone URI implementation ===
 
 (*THIS SECTION NEEDS A LOT OF COMMENTS*)
@@ -139,7 +148,6 @@ Within that object there could be multiple URIs depending on the "state" of the 
 
 
      
-
 
 
 
