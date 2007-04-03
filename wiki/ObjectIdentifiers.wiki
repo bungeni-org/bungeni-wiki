@@ -75,7 +75,7 @@ or if we used the URI of the MP:
 }}}
 _joe kagi = name of the mp, 1956-01-01 = date of birth of the mp, /mp = identifies the person as an mp_
 
-However, the plone uid identifies the MP on the portal.  It does not seem to address the problem Case (b) (stated above) (*COMMENTS SOUGHT*)- how do we know from the output ANxml that we are talking of the MP in 2003 or 2007 ?
+However, the plone uid identifies the MP on the portal.  It does not seem to address the problem Case (a) (stated above) (*COMMENTS SOUGHT*)- how do we know from the output ANxml that we are talking of the MP in 2003 or 2007 ?
 
 One way out would be to use a more complete URI as the identifier for the MP
 
@@ -139,7 +139,6 @@ Within that object there could be multiple URIs depending on the "state" of the 
 
 
      
-
 
 
 
