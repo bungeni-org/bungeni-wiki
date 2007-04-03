@@ -24,9 +24,9 @@ An MP "Mr.X" can appear in different contexts within parliament:
   * As a member of parliament
     * The MP Mr.X is identified as a "member of parliament" when he is assigned the role "member of parliament"
   * As a minister
-    * **TO BE DONE ????**
+    * *TO BE DONE ????*
   * As a member of a political party
-    * **TO BE DONE ????**
+    * *TO BE DONE ????*
 
 Each of the above contexts needs to be identifiable.
 
@@ -73,7 +73,7 @@ or if we used the URI of the MP:
 }}}
 _joe kagi = name of the mp, 1956-01-01 = date of birth of the mp, /mp = identifies the person as an mp_
 
-However, the plone uid identifies the MP on the portal.  It does not seem to address the problem Case (b) (stated above) (**COMMENTS SOUGHT**)- how do we know from the output ANxml that we are talking of the MP in 2003 or 2007 ?
+However, the plone uid identifies the MP on the portal.  It does not seem to address the problem Case (b) (stated above) (*COMMENTS SOUGHT*)- how do we know from the output ANxml that we are talking of the MP in 2003 or 2007 ?
 
 One way out would be to use a more complete URI as the identifier for the MP
 
@@ -83,7 +83,7 @@ One way out would be to use a more complete URI as the identifier for the MP
  </speech>
 }}}
 
-This would clearly identify joe kagi as an mp in 2003. (**COMMENTS SOUGHT**)
+This would clearly identify joe kagi as an mp in 2003. (*COMMENTS SOUGHT*)
 In the metadata header of the ANxml for the hansard, the MP would be referred to with a permanent URI as this:
 
 {{{
@@ -112,7 +112,6 @@ joe kagi making speech as Minister
 
 
 }}}
-
 
 
 
