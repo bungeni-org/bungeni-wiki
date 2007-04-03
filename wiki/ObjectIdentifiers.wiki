@@ -50,6 +50,7 @@ Each of the above contexts needs to be identified and differentiated. Probably b
     * the MP who made the speech
     * the Entity that the speech was addressed to
     * the content of the speech
+  * Answers are typed in verbatim into the hansard, but the details of the MP imported from the Registry / Bungeni...
   * The MP who made the Speech can be identified by:
     * the URI of the MP
     * the Plone UID of the MP
@@ -59,7 +60,7 @@ Each of the above contexts needs to be identified and differentiated. Probably b
 We need to identify the "context" of the MP in the speech. If we use the Plone UID of the MP (which are equivalent in uniqueness..). We would get something like this in the AkomaNtoso output:
 
 {{{
- <speech id="plone uid of mp">
+ <speech by="plone uid of mp"  >
   speech of mp
  </speech>
 }}}
@@ -67,7 +68,7 @@ We need to identify the "context" of the MP in the speech. If we use the Plone U
 or if we used the URI of the MP:
 
 {{{
- <speech id="ke/person/joe_kagi_1956-01-01/mp">
+ <speech by="ke/person/joe_kagi_1956-01-01/mp" >
   speech of mp
  </speech>
 }}}
@@ -78,7 +79,7 @@ However, the plone uid identifies the MP on the portal.  It does not seem to add
 One way out would be to use a more complete URI as the identifier for the MP
 
 {{{
- <speech id="ke/person/joe_kagi_1956-01-01/mp/2003">
+ <speech by="ke/person/joe_kagi_1956-01-01/mp/2003">
   speech of mp
  </speech>
 }}}
@@ -96,17 +97,17 @@ This would seem to address the issue of identifying the person in two different 
 
 metadata header:
 
-<person ref="ke/person/joe_kagi_1956-01-01/" id="ke/person/joe_kagi_1956-01-01/mp/2003" as="MP" />
-<person ref="ke/person/joe_kagi_1956-01-01/" id="ke/person/joe_kagi_1956-01-01/mp/2003/minister/id-of-minister" as="Minister" />
+<person ref="ke/person/joe_kagi_1956-01-01/" id="ke/person/joe_kagi_1956-01-01/mp/2003" />
+<person ref="ke/person/joe_kagi_1956-01-01/" id="ke/person/joe_kagi_1956-01-01/mp/2003/minister/id-of-minister"  />
 
 hansard body:
 
-<speech id="ke/person/joe_kagi_1956-01-01/mp/2003">
+<speech by="ke/person/joe_kagi_1956-01-01/mp/2003">
 joe kagi making speech as MP
 </speech>
 .....
 
-<speech id="ke/person/joe_kagi_1956-01-01/mp/2003/minister/id-of-minister">
+<speech by="ke/person/joe_kagi_1956-01-01/mp/2003/minister/id-of-minister">
 joe kagi making speech as Minister
 </speech>
 
@@ -114,7 +115,29 @@ joe kagi making speech as Minister
 }}}
 
 
+=== Bungeni/Plone URI implementation ===
 
+(*THIS SECTION NEEDS A LOT OF COMMENTS*)
+
+Essentially we have an MP as an object in plone with a single Unique UID.
+We need to identify the MP with different identifiers, when we consider,
+the MP as: a person, a member of parliament, or as a minister... (along with something like "Date of Tenure").
+
+So for a Plone Object for MP. Mr Joe Kagi you would have:
+
+||Parent Plone UID||Base URI||
+||22828448484848||ke/joe_kagi_1956-01-01/||
+
+Within that object there could be multiple URIs depending on the "state" of the Plone object.
+
+||state||additional URI||
+||if the object had an MP role and "date of tenure" as 2003||ke/joe_kagi_1956-01-01/mp/2003||
+||if the object had an MP role and "date of tenure" as 2007||ke/joe_kagi_1956-01-01/mp/2003||
+||if the object was also a minister of roads in 2003||ke/joe_kagi_1956-01-01/mp/2003/minister/minister-identifier||
+
+
+
+     
 
 
 
