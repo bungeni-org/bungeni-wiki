@@ -1,30 +1,36 @@
-#summary This page refers to the public-portal interface of the Bungeni PIS application
+#summary The public portal interface of the Bungeni PIS application
 #labels Phase-Requirements
 
 = Introduction =
-This page documents correspondence regarding the public portal interface.  
 
+Besides facilitating parliamentary work for members and staff, the
+Bungeni PIS also has a public-facing side. This public portal interface
+publishes information about the parliament on a website. The portal
+content can be updated by parliamentary staff using normal Plone content
+management functionality.
 
-= Levels of Content =
+= Levels of access =
 
-_(jean)_ :
+There will be different levels of access. At least the following:
 
-There will likely be three levels of content in the site: public content (such as background documents), content for members (such as committee working documents, that aren't destined for publication), and content in progress (such as news items and reports that have been submitted for publication, but not yet edited and approved by the site editor(s)). 
+ # *public* content (such as background documents),
+ # *content for members* (such as committee working documents, that aren't destined for publication), and 
+ # *content in progress* (such as news items and reports that have been submitted for publication, but not yet edited and approved by the site editor(s)). 
 
-_(ashok)_ :
+As an added level of security beyond that offered by Plone, public content can be copied to a different, public, server for serving.
 
-We need a physical separation between the "public" Plone and the "internal" Plone - the one which provides content for members and contains the work-in-progress applications.... I do remember you mentioning using RSS feeds -- and XML (using Entransit) to feed a public website ..... since for a real deployment we wouldnt want to put both the internal and external faces of the website on the same Plone installation or server.
+This allows a physical separation between the "public" Plone and the "internal" Plone -- the one which provides content for members and contains the work-in-progress applications. 
 
-_(jean)_ :
+Any server with access to Bungeni can obtain information using RSS feeds (any Plone folder or smart folder can publish RSS).
 
-I believe we can treat these as separate issues:
+For more complete publishing, there are a number of Plone products that may be used (e.g. Entransit, CMFDeployment, PloneMultiSite).
 
-  # Build a Plone with appropriate access rights for the various groups that will use it. 
+Publishing to a remote server can be treated as a separate issue, which should not impact the configuration of the main portal. The two stages are:
+
+  # Build a Plone with appropriate access rights for the various groups (including the public) that will use it. 
   # Deploy a subset to a second Plone later on.
 
-Deployment to a remote Plone doesn't have to impact configuring the internal Plone, and it's worthwhile doing the access rights properly from the start anyway.
-
-_(jean)_ : *further notes on public plone portal*
+= Remote deployment techniques in Plone =
 
 This kind of thing is possible using e.g. feedfeeder -- using this, the public Plone would pull information from Atom feeds provided by the internal Plone. Feedfeeder creates content objects for the items in the feed. Other deployment possibilities are CMFDeployment (publishes static HTML) and Entransit (publishes to XML; incorporation of published transactions into public site would require work). However, federated Plone instances that seamlessly push/pull data between them aren't there yet.
 
