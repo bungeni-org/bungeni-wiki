@@ -1,7 +1,8 @@
 #summary This documents the requirements of the Parliamentary Calendar for Bungeni within Plone.
 
 = Introduction =
-The parliamentary calendar is one of the main metadata registries of Bungeni PIS.  The calendar provides a map of all parliamentary activities for the forthcoming year.
+
+The parliamentary calendar is one of the main metadata registries of the Bungeni PIS.  The calendar provides a map of all parliamentary activities for the forthcoming year.
 
 = Similar Examples = 
 
@@ -12,12 +13,16 @@ A calendar of public committee meetings, etc from the Parliament.UK website:
 The calendar must also provide a summarized, typical calendar style view.
 Note that the calendar provided in the example is a subset of the main parliamentary calendar which records all activities.
 
+Various calendar views are possible: an overview showing major dates, detail views showing the business of the day, public/parliamentary/private views.
+There may be many different calendars, relevant to different groups; e.g. committees may use calendars to coordinate their activities, and there may be a public calendar with dates of parliamentary tours.
+
 = Plone products =
 
-There are various plone calendar products available. They could be modified for use by the PIS.
+There are various Plone calendar products available.
+The chosen one is the approach taken by Plone4Artists. Instead of depending on specific content types, it augments existing Plone content types with calendar/event functionality.
 
-= Calendar Storage - ZoDB vs RDBMS table =
+= Calendar Storage - ZODB and RDBMS =
 
 We have a need to capture the calendar data in a relational table - so that the information can be cross-referenced / joined with other registry metadata tables.
-The Plone calendar products by default use zodb storage.
-For Bungeni we could still use the zodb storage, but just at the point of a state transition (new insertion, updation or deletion) insert a subset of the same data into a relational database table (which essentially then synchronizes with the plone calendar./...)
+[Please expand on this need. Who will be doing the joining, to what purpose.]
+All changes to Bungeni objects are written to an audit log, which is used to update the registry, keeping it in sync with the information in Plone. 

@@ -3,9 +3,13 @@
 
 = Intro = 
 
-See http://plone.org/products/plone/roadmap/0 for a quick motivation and plenty of examples.
+See http://plone.org/products/plone/roadmap/0 for a quick motivation and
+plenty of examples.
 
-We'll use the [http://code.google.com/p/bungeni-portal/issues/list issue tracker] for BIPs.
+We can use the [http://code.google.com/p/bungeni-portal/issues/list issue tracker] for drafting BIPs.
+
+In addition, we have an internal installation of Plone Software Center
+(the product used for product roadmaps at http://plone.org ).
 
 = Template = 
 
@@ -13,7 +17,8 @@ A BIP (Bungeni Improvement Proposal) should have the following structure:
 
 == Proposed by ==
 
-We can assume that the proposal is being made by the person creating the issue.
+In the case of the issue tracker, we can assume that the proposal is
+being made by the person creating the issue.
 
 == Proposal type ==
 
