@@ -15,8 +15,10 @@ Add your content here.  Format your content with:
   * Automatic links to other wiki pages
 
 
-=== Rota: Schedule denoting the time each reporter will report to the House
-Chamber to cover a certain portion of the proceedings. ===
+==Rota== 
+
+*Schedule denoting the time each reporter will report to the House
+Chamber to cover a certain portion of the proceedings.*
 
 In the context of Bungeni, we also need to know that:
   * the rota refers to a set of available reporters;
@@ -30,7 +32,9 @@ individuals or groups;
   * if necessary, it may need to be re-edited and re-sent (if e.g. a
 reporter became ill halfway through a sitting).
 
-===Take: Segment of the sitting time allocated to a reporter to record the proceedings in the house===
+===Take===
+
+ *Segment of the sitting time allocated to a reporter to record the proceedings in the house*
 
 
 An elaboration: it's the segment of the audio recording for the
