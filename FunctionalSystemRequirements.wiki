@@ -3,6 +3,8 @@
 
 = System Requirements / Invariants / Functionality =
 
+A wiki page devoted to trying to capture the current functional requirements and system invariants.
+
 ==Rota== 
 
 *Schedule denoting the time each reporter will report to the House
@@ -28,6 +30,5 @@ audio recording of the sitting, with an overlap of say 30s before and
 after the allocated time. Flavio has also mentioned that in some
 parliaments takes are speech-based, rather than time-based. I guess
 this would have implications for rota generation
-
 
 
