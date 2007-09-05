@@ -1,14 +1,16 @@
+#summary Glossary of Parliamentary terms
 #labels Featured
+
 Below you find a Parliamentary Glossary that we have developed. If you
 have words to be added or definition to be change, please let us know.
 
 Here you can find other online glossaries that could also be useful,
 again, if you any suggestions, let's know:
 
- * [http://www.parliament.uk/glossary/glossary.cfm "Glossary - Parliamentary Jargon Explained"] of the UK Parliament
- * [http://www.peo.gov.au/students/gloss_ab.html "Parliamentary Glossary A-B"] of the Australian Parliament
- * [http://www.parliament.vic.gov.au/gloss.html "A Parliamentary Glossary"] of the State of Victoria, Australia
- * [http://www.nancysylvester.com/docs/Resources/glossary.html "Glossary of Parliamentarian Terms"] of Nancy Sylvester
+ * [http://www.parliament.uk/glossary/glossary.cfm Glossary - Parliamentary Jargon Explained] of the UK Parliament
+ * [http://www.peo.gov.au/students/gloss_ab.html Parliamentary Glossary A-B] of the Australian Parliament
+ * [http://www.parliament.vic.gov.au/gloss.html A Parliamentary Glossary] of the State of Victoria, Australia
+ * [http://www.nancysylvester.com/docs/Resources/glossary.html Glossary of Parliamentarian Terms] of Nancy Sylvester
 
 == Parliamentary Glossary ==
 
@@ -97,7 +99,7 @@ again, if you any suggestions, let's know:
  * A person who records and transcribes each take of the house sitting from tape 
 
 *Rota*
- * Schedule denoting the time each reporter will report to the House Chamber to cover a certain portion of the proceedings.
+ * Schedule denoting the time each reporter will report to the House Chamber to cover a certain portion of the proceedings. See also FunctionalSystemRequirements.
 
 *Rota identifier*
  * The alphabet used to uniquely identify the take in the rota.
@@ -121,7 +123,7 @@ again, if you any suggestions, let's know:
  * Codified or accepted procedures governing the conduct of business in the house and the behaviour of Members
 
 *Take*
- * Segment of the sitting time allocated to a reporter to record the proceedings in the house
+ * Segment of the sitting time allocated to a reporter to record the proceedings in the house. See also FunctionalSystemRequirements.
 
 *Take Identifier*
  * This is a letter of the alphabet that uniquely identifies the take for a sitting.
@@ -131,5 +133,4 @@ again, if you any suggestions, let's know:
 
 *Votes & Proceedings*
  * Minutes to be discussed in a house sitting.
-
 
