@@ -23,6 +23,6 @@ There are four main stages to migration:
 
 == Keeping track ==
 
-During the audit and review process, please log bugs and feature requests at the [issue tracker http://code.google.com/p/bungeni-portal/issues/list]
+During the audit and review process, please log bugs and feature requests at the [http://code.google.com/p/bungeni-portal/issues/list issue tracker].
 
 Use proper labels.
