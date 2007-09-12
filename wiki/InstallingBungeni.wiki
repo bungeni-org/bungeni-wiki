@@ -1,0 +1,13 @@
+#summary How to install a development instance of Bungeni
+#labels Featured
+
+In order to install it, use buildout. These steps should be all you need:
+
+{{{
+$ svn co http://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk/
+bungeni
+$ cd bungeni
+$ python bootstrap.py
+$ ./bin/buildout  # wait a while..
+$ ./bin/instance start
+}}}
