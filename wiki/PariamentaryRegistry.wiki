@@ -1,4 +1,5 @@
 #summary what BUNGENI's Parliamentary Registry is meant do do and what data it should store.
+#labels Phase-Design
 
 = Introduction =
 
@@ -49,4 +50,5 @@ One current failing of this modeling is that cross-type queries, i.e. queries li
 Another question is regarding the storage of file/binary content in the registry... namely if it should be done. Initial discussions were that it shouldn't be.
 
 
+ 
  
