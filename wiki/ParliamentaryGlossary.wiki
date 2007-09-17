@@ -35,6 +35,9 @@ again, if you any suggestions, let's know:
 *Committee/commissions*
  * A small group of members of the house selected to deliberate on a specific house task
 
+*Debate Record*
+ * The DebateRecord is a verbatim record of proceedings on the floor of parliament. It is essentially a record of speeches and motions on the floor of parliament. See *Hansard*.
+
 *Gazette*
  * A weekly official government bulletin documenting legal notices including high ranking appointments and sanctioned changes in personnel 
 
@@ -134,3 +137,4 @@ again, if you any suggestions, let's know:
 *Votes & Proceedings*
  * Minutes to be discussed in a house sitting.
 
+ 
