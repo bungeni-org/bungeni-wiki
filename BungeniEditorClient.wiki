@@ -1,0 +1,16 @@
+#summary A customisation of OpenOffice.org to facilitate AkomoNtoso markup of parliamentary documents
+#labels Phase-Requirements,Phase-Design
+
+= Introduction =
+
+Add your content here.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+ 
