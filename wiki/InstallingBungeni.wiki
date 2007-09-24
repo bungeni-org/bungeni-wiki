@@ -1,7 +1,7 @@
 #summary How to install a development instance of Bungeni
 #labels Featured
 
-In order to install it, use buildout. These steps should be all you need:
+In order to install it, use buildout. These steps should be all you need to setup a Zope instance with all the required products and libraries:
 
 {{{
 $ svn co http://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk/
@@ -11,3 +11,15 @@ $ python bootstrap.py
 $ ./bin/buildout  # wait a while..
 $ ./bin/instance start
 }}}
+
+The buildout includes DeadlockDebugger, so if you start Zope in debug mode, it will stop at a debugger prompt if an exception is raised. 
+
+Next you have to add a Plone instance and configure it. 
+  * Add a plone site,
+  * browse to `portal_setup` in the new instance. 
+  * Go to the _Properties_ tab, select the `membrane` profile; go to the _Import_ tag, select _Import all steps_; 
+  * go back to the _Properties_ tab, select the `remember` profile; go to the _Import_ tag, select _Import all steps_ again. 
+  * Go to the Plone view of the instance, go to the setup area, and install the Bungeni product. This will automatically install the dependencies. 
+  * If you would like demo content to play with, install the BungeniDefaultContent product. (It raises an exception just as it's done. This is a quick'n'dirty way of enabling to you rerun it to re-add deleted content.)
+
+Also see ConfiguringBungeni.
