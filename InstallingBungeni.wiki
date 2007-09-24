@@ -12,7 +12,7 @@ $ ./bin/buildout  # wait a while..
 $ ./bin/instance start
 }}}
 
-The buildout includes DeadlockDebugger, so if you start Zope in debug mode, it will stop at a debugger prompt if an exception is raised. 
+The buildout includes !DeadlockDebugger, so if you start Zope in debug mode, it will stop at a debugger prompt if an exception is raised. 
 
 Next you have to add a Plone instance and configure it. 
   * Add a plone site,
@@ -23,3 +23,4 @@ Next you have to add a Plone instance and configure it.
   * If you would like demo content to play with, install the BungeniDefaultContent product. (It raises an exception just as it's done. This is a quick'n'dirty way of enabling to you rerun it to re-add deleted content.)
 
 Also see ConfiguringBungeni.
+ 
