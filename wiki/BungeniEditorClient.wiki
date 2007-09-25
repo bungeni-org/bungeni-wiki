@@ -1,16 +1,55 @@
 #summary A customisation of OpenOffice.org to facilitate AkomoNtoso markup of parliamentary documents
 #labels Phase-Requirements,Phase-Design
 
-= Introduction =
+=Introduction=
 
-Add your content here.
+The BungeniEditorClient is a Java [[http://wiki.services.openoffice.org/wiki/Category:Uno UNO]] client application.The editor is a J2SE application OpenOffice.org API support.  The application encapsulates a bootstrapped UNO environment and returns manipulates OpenOffice.org via a context object bridge. 
 
+=Features=
 
-= Details =
+The editor extends the OpenOffice.org Writer word processor in the following ways:
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+ * Helper tools for creating structured legislative document artifacts
+ * Additional tools to work easily with styles and manipulate sections
+ * Setting and retrieving document metadata
+ * Support for adding chronological historical notes to a Writer document
+ * Document semantic validation tools
+ * Retrieval and storage interface for documents to and from the server
+ * WebDAV support
 
- 
+=Required Libraries=
+
+ * OpenOffice.org [[http://www.openoffice.org UNO Libraries]] :
+	# juh.jar
+	# jurt.jar
+	# jut.jar
+	# officebean.jar
+	# ridl.jar
+	# unoil.jar
+ * [[http://commons.apache.org Jakarta Commons libraries] :
+	# commons-codec-1.3.jar
+	# commons-collections-3.2.jar
+	# commons-httpclient.jar
+	# commons-lang-2.3.jar
+	# commons-logging-adapters-1.1.jar
+	# commons-logging-api-1.1.jar
+	# commons-transaction-1.1b2.jar
+	# commons-xmlio-0.1pre.jar
+ * Swing Libraries :
+	# swing-layout-1.0.1.jar - [[http://www.netbeans.org Matisse]]
+	# swingx-2007_06_24.jar - [[http://swingx.dev.java.net SwingX controls]]
+ * H2 Db - embedded database libraries :
+	# h2.jar [[http://www.h2database.com H2]]
+ * XML libraries :
+	# jdom.jar [[http://www.jdom.org Jdom 1.0]]
+ * Jakarata Slide (Webdav Client)  :
+	# webdavlib2.2.jar [[http://svn.apache.org/viewvc/jakarta/slide/ Slide SVN Trunk]]
+ * [[http://jug.safehaus.org Java UUID generator]] :
+	# jug-lgpl-2.0.0.jar
+ * Logging (log4j and jakarata commons) :
+	# log4j.jar [[http://logging.apache.org/log4j Log4j]]
+	# commons-logging-1.1.jar [[http://commons.apache.org jakarta commons logging]]
+
+=Building=
+
+=Installing=
