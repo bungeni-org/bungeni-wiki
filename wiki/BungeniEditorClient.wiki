@@ -52,4 +52,14 @@ The editor extends the OpenOffice.org Writer word processor in the following way
 
 =Building=
 
+ * Build requirements : [[http://ant.apache.org Jakarta Ant]], Required Libraries listed above [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/dist/lib Can also be retrieved from SVN]]
+ * Retrieve the source from SVN [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/ BungeniEditorClient source]]
+ * Run Ant in the project folder to generate the executable: BungeniEditorClient.jar. You may also use [[http://www.netbeans.org NetBeans 5.5.1]] for the build process.
+
 =Installing=
+ * The application requires the folder structure generated in the [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/dist -dist- folder structure]].  
+ * The editor can be configured via various settings through the embedded settings database.
+ * <<more details required here>>
+
+=Running=
+ * <<to be done>>
