@@ -20,21 +20,21 @@ The editor extends the OpenOffice.org Writer word processor in the following way
 =Required Libraries=
 
  * OpenOffice.org [[http://www.openoffice.org UNO Libraries]] :
- 	* juh.jar
-	* jurt.jar
-	* jut.jar
-	* officebean.jar
-	* ridl.jar
-	* unoil.jar
+   * juh.jar
+   * jurt.jar
+   * jut.jar
+   * officebean.jar
+   * ridl.jar
+   * unoil.jar
  * [[http://commons.apache.org Jakarta Commons libraries] :
-	* commons-codec-1.3.jar
-	* commons-collections-3.2.jar
-	* commons-httpclient.jar
-	* commons-lang-2.3.jar
-	* commons-logging-adapters-1.1.jar
-	* commons-logging-api-1.1.jar
-	* commons-transaction-1.1b2.jar
-	* commons-xmlio-0.1pre.jar
+   * commons-codec-1.3.jar
+   * commons-collections-3.2.jar
+   * commons-httpclient.jar
+   * commons-lang-2.3.jar
+   * commons-logging-adapters-1.1.jar
+   * commons-logging-api-1.1.jar
+   * commons-transaction-1.1b2.jar
+   * commons-xmlio-0.1pre.jar
  * Swing Libraries :
 	* swing-layout-1.0.1.jar - [[http://www.netbeans.org Matisse]]
 	* swingx-2007_06_24.jar - [[http://swingx.dev.java.net SwingX controls]]
