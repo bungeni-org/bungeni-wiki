@@ -73,6 +73,10 @@ You can build using [[http://ant.apache.org Jakarta Ant]], or you can build usin
  * Execute the jar file BungeniEditorClient.jar by running "java -jar BungeniEditorClient.jar" from the command line
  * Note: on linux systems you will need the JAVA_HOME environment variable set to the JVM home. (At least JDK 1.5 required)
 
+=Architecture=
+
+[[http://bungeni-portal.googlecode.com/files/editorArchitecture.jpg Editor Architecture]]
+
 =Configuring=
 
  * The editor can be configured via various settings through the embedded settings database.
