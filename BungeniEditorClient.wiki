@@ -75,7 +75,7 @@ You can build using [[http://ant.apache.org Jakarta Ant]], or you can build usin
 
 =Architecture=
 
-[[http://bungeni-portal.googlecode.com/files/editorArchitecture.jpg Editor Architecture]]
+[http://bungeni-portal.googlecode.com/files/editorArchitecture.jpg Editor Architecture]
 
 =Configuring=
 
