@@ -41,6 +41,9 @@ again, if you any suggestions, let's know:
 *Gazette*
  * A weekly official government bulletin documenting legal notices including high ranking appointments and sanctioned changes in personnel 
 
+*Government*
+ * An object that records the state of a group that consists of Ministries. The object records internal state in terms of commencement date, end date, official gazetted date, official dissolution date, leader of government etc..
+
 *Hansard*
  * The official, complete report of proceedings in a Parliament 
 
