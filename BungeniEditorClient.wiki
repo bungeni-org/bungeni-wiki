@@ -3,11 +3,11 @@
 
 =Introduction=
 
-The BungeniEditorClient is a Java [[http://wiki.services.openoffice.org/wiki/Category:Uno UNO]] client application.The editor is a J2SE application OpenOffice.org API support.  The application encapsulates a bootstrapped UNO environment and returns manipulates OpenOffice.org via a context object bridge. 
+The BungeniEditorClient is a Java [[http://wiki.services.openoffice.org/wiki/Category:Uno UNO]] client application. The editor is a J2SE application !OpenOffice.org API support.  The application encapsulates a bootstrapped UNO environment and manipulates !OpenOffice.org via a context object bridge. 
 
 =Features=
 
-The editor extends the OpenOffice.org Writer word processor in the following ways:
+The editor extends the !OpenOffice.org Writer word processor in the following ways:
 
  * Helper tools for creating structured legislative document artifacts
  * Additional tools to work easily with styles and manipulate sections
@@ -20,35 +20,35 @@ The editor extends the OpenOffice.org Writer word processor in the following way
 =Required Libraries=
 
  * OpenOffice.org [[http://www.openoffice.org UNO Libraries]] :
-   * juh.jar
-   * jurt.jar
-   * jut.jar
-   * officebean.jar
-   * ridl.jar
-   * unoil.jar
+   * `juh.jar`
+   * `jurt.jar`
+   * `jut.jar`
+   * `officebean.jar`
+   * `ridl.jar`
+   * `unoil.jar`
  * [[http://commons.apache.org Jakarta Commons libraries]] :
-   * commons-codec-1.3.jar
-   * commons-collections-3.2.jar
-   * commons-httpclient.jar
-   * commons-lang-2.3.jar
-   * commons-logging-adapters-1.1.jar
-   * commons-logging-api-1.1.jar
-   * commons-transaction-1.1b2.jar
-   * commons-xmlio-0.1pre.jar
+   * `commons-codec-1.3.jar`
+   * `commons-collections-3.2.jar`
+   * `commons-httpclient.jar`
+   * `commons-lang-2.3.jar`
+   * `commons-logging-adapters-1.1.jar`
+   * `commons-logging-api-1.1.jar`
+   * `commons-transaction-1.1b2.jar`
+   * `commons-xmlio-0.1pre.jar`
  * Swing Libraries :
-   * swing-layout-1.0.1.jar - [[http://www.netbeans.org Matisse]]
-   * swingx-2007_06_24.jar - [[http://swingx.dev.java.net SwingX controls]]
+   * `swing-layout-1.0.1.jar` - [[http://www.netbeans.org Matisse]]
+   * `swingx-2007_06_24.jar` - [[http://swingx.dev.java.net SwingX controls]]
  * H2 Db - embedded database libraries :
-   * h2.jar [[http://www.h2database.com H2]]
+   * `h2.jar` [[http://www.h2database.com H2]]
  * XML libraries :
-   * jdom.jar [[http://www.jdom.org Jdom 1.0]]
+   * `jdom.jar` [[http://www.jdom.org Jdom 1.0]]
  * Jakarata Slide (Webdav Client)  :
-   * webdavlib2.2.jar [[http://svn.apache.org/viewvc/jakarta/slide/ Slide SVN Trunk]]
+   * `webdavlib2.2.jar` [[http://svn.apache.org/viewvc/jakarta/slide/ Slide SVN Trunk]]
  * [[http://jug.safehaus.org Java UUID generator]] :
-   * jug-lgpl-2.0.0.jar
+   * `jug-lgpl-2.0.0.jar`
  * Logging (log4j and jakarata commons) :
-   * log4j.jar [[http://logging.apache.org/log4j Log4j]]
-   * commons-logging-1.1.jar [[http://commons.apache.org jakarta commons logging]]
+   * `log4j.jar` [[http://logging.apache.org/log4j Log4j]]
+   * `commons-logging-1.1.jar` [[http://commons.apache.org jakarta commons logging]]
 
 =Building=
 
@@ -59,19 +59,19 @@ You can build using [[http://ant.apache.org Jakarta Ant]], or you can build usin
 ==Building using Netbeans==
 
  * Download netbeans 5.5.1 from [[http://www.netbeans.org netbeans.org]].
- * Run the automated installer to install netbeans
+ * Run the automated installer to install Netbeans
  * Retrieve the source for the BungeniEditorClient from SVN [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/ BungeniEditorClient source]]
  * Open the downloaded project in Netbeans
  * Copy the required libraries listed above [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/dist/lib (Can also be retrieved from SVN)]], and place them in a separate folder.
  * In the Netbeans project, open the project navigator, expand the Libraries view and the required libraries by browsing to the required libraries folder on your computer
- * Now build the BungeniEditorClient jar file  by clicking Build / Build Project
+ * Now build the `BungeniEditorClient.jar` file  by clicking Build / Build Project
 
 
 ==Installing==
- * The application requires the folder structure generated in the [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/dist -dist- folder structure]].  
- * Copy the folder structure under the "dist" folder of the netbeans project to any desired folder.
- * Execute the jar file BungeniEditorClient.jar by running "java -jar BungeniEditorClient.jar" from the command line
- * Note: on linux systems you will need the JAVA_HOME environment variable set to the JVM home. (At least JDK 1.5 required)
+ * The application requires the folder structure generated in the [[http://bungeni-portal.googlecode.com/svn/BungeniOOo/BungeniEditorClient/dist dist folder structure]].  
+ * Copy the folder structure under the `dist` folder of the netbeans project to any desired folder.
+ * Execute the jar file `BungeniEditorClient.jar` by running `java -jar BungeniEditorClient.jar` from the command line
+ * Note: on linux systems you will need the `JAVA_HOME` environment variable set to the JVM home. (At least JDK 1.5 required)
 
 =Architecture=
 
