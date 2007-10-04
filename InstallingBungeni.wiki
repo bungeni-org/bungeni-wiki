@@ -7,7 +7,7 @@ In order to install it, use buildout. These steps should be all you need to setu
 $ svn co http://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk/
 bungeni
 $ cd bungeni
-$ python bootstrap.py
+$ python bootstrap.py # not the system python! The one you use with Zope, i.e. 2.4.x. 
 $ ./bin/buildout  # wait a while..
 $ ./bin/instance start
 }}}
