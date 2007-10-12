@@ -1,7 +1,9 @@
 #summary How to install a development instance of Bungeni
 #labels Featured
 
-Note: the python setuptools package is used by buildout, and needs to be installed first (from http://cheeseshop.python.org/pypi/setuptools/) in the python used for zope.
+Note: 
+the python setuptools package (a python egg) is used by buildout, and needs to be installed first (from http://cheeseshop.python.org/pypi/setuptools/) in the python used for zope. 
+Installation instructions at: http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions
 
 In order to install it, use buildout. These steps should be all you need to setup a Zope instance with all the required products and libraries:
 
