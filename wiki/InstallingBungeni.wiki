@@ -2,8 +2,10 @@
 #labels Featured
 
 Note: 
-the python setuptools package (a python egg) is used by buildout, and needs to be installed first (from http://cheeseshop.python.org/pypi/setuptools/) in the python used for zope. 
-Installation instructions at: http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions
+the python setuptools package (a python egg) is used by buildout, if you have an older version of setuptools, you might need to update it manually first (from http://cheeseshop.python.org/pypi/setuptools/) in the python used for zope. 
+Update instructions at: http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions
+
+If you dont have setuptools installed, buildout downloads and installs it automatically.
 
 In order to install it, use buildout. These steps should be all you need to setup a Zope instance with all the required products and libraries:
 
