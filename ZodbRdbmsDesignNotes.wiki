@@ -11,14 +11,9 @@ questions are raised by this requirement:
 
   * Should all or some of this information should also be stored in Plone?
 
-  * Should some or all Plone-specific operational data be stored in the
-  RDBMS, and where exactly should the line be drawn between
-  parliamentary and operational information?
+  * Should some or all Plone-specific operational data be stored in the RDBMS, and where exactly should the line be drawn between parliamentary and operational information?
 
-  * Besides the storing of data, should the RDBMS additionally contain
-  stored procedures and triggers to implement some of the business rules
-  and constraints of the data, or should Plone ensure data integrity
-  from the outset?
+  * Besides the storing of data, should the RDBMS additionally contain stored procedures and triggers to implement some of the business rules and constraints of the data, or should Plone ensure data integrity from the outset?
 
 This document is an attempt to delineate the different possible choices,
 to describe the trade-offs and issues to be considered, and to describe
