@@ -1,5 +1,5 @@
+#summary Updating a Bungeni buildout installation
 #labels Featured
-#Updating a Bungeni buildout installation
 
 = Updating Bungeni =
 Updating a buildout installation is quite easy. 
