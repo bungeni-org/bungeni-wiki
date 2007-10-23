@@ -1,0 +1,13 @@
+#labels Featured
+#Updating a Bungeni buildout installation
+
+= Updating Bungeni =
+Updating a buildout installation is quite easy. 
+
+Running ''svn up'' from the buildout root folder will update all the products under ''develop-products'' and ''vendor-products.''
+
+
+To update selective products, run ''svn up'' from the specific product folder. For e.g. to update just ''develop-products/Bungeni'' run ''svn up'' from that folder.
+
+
+Finally you may have to reinstall or upgrade the product in via Plone->Site Setup. Note that the upgrade may take a long time depending upon how much content your plone installation has.
