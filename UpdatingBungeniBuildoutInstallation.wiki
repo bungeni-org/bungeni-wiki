@@ -2,12 +2,13 @@
 #labels Featured
 
 = Updating Bungeni =
+
 Updating a buildout installation is quite easy. 
 
-Running ''svn up'' from the buildout root folder will update all the products under ''develop-products'' and ''vendor-products.''
+If anything changed in the configuration files for the buildout (in our case, `buildout.cfg` and `dependencies.cfg`), you need to re-run buildout. To do this without making it check for newer versions of distributions, run `./bin/buildout -N` (see `./bin/buildout --help` for this and other options).
 
+Running `svn up` from the buildout root folder will update all the products under `develop-products` and `vendor-products.` 
 
-To update selective products, run ''svn up'' from the specific product folder. For e.g. to update just ''develop-products/Bungeni'' run ''svn up'' from that folder.
+To update selective products, run `svn up` from the specific product folder. For e.g. to update just `develop-products/Bungeni` run `svn up` from that folder. Note that this only makes sense for products where you're working on *trunk* or on a *branch*; i.e. not on a specific revision or tag. Generally, this *should* only be the case for products under active development.
 
-
-Finally you may have to reinstall or upgrade the product in via Plone->Site Setup. Note that the upgrade may take a long time depending upon how much content your plone installation has.
+Finally, depending on the nature of the changes to the product, you may have to reinstall or upgrade the product via "Plone->Site Setup->Add/Remove Products". If the product defines workflows and the site has lots of content, the upgrade may take a long time as security settings is updated on all that content.
