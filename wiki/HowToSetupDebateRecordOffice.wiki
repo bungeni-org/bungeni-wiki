@@ -17,7 +17,7 @@ _Note: if [http://code.google.com/p/bungeni-portal/issues/detail?id=130 Issue 13
 
 1) You need to update the globalPolicy setup for the teams first.
 
-After installing bungeni go to portal_teams/manage_globalTeamPolicyForm (ZMI)
+After installing bungeni go to *portal_teams/manage_globalTeamPolicyForm* (ZMI)
 
 There, edit the "Allowed Roles" to include:
 
@@ -50,7 +50,7 @@ Give the team a name, but dont add members just yet.
 
 3) Now edit the local policy for the debatrecordOffice team by going to the url:
 
-portal_teams/debaterecord-office/manage_localTeamPolicyForm (ZMI)
+*portal_teams/debaterecord-office/manage_localTeamPolicyForm* (ZMI)
 
 Now edit the "Default Roles" to at least one of :
 
