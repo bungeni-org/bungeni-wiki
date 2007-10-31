@@ -1,0 +1,75 @@
+#summary Installing the Bungeni Editor Client on Ubuntu Linux.
+#labels BungeniEditorClient,Phase-Deploy
+
+= Installing the Bungeni EditorCient on Ubuntu Linux =
+
+== Introduction ==
+These installation instructions were tested on Ubuntu Dapper (6.06) and the same should apply for subsequent Ubuntu releases.
+
+
+== Prerequisites ==
+
+*OpenJVM / Sun Java JRE* - Ubuntu by default comes packaged with the GCJ open source JRE. The EditorClient will not work on this JRE as it requires the Swing UI libraries that come packaged with the Sun JVM / OpenJVM release. Install the Sun JRE on the Ubuntu box either through package manager or download the RPM package from [http://java.sun.com/ http://java.sun.com]. The EditorClient requires at least JRE / JDK version 1.5.0.11.
+
+
+*OpenOffice 2.3* - Ubuntu comes packaged with an OpenOffice release. Unfortunately this OpenOffice installation is a repackaged installation produced by Ubuntu and it changes the folder structure of the OpenOffice installation. This change makes it incompatible with the cross platform UNO class loader used by Bungeni EditorClient. As a preliminary step, uninstall the packaged OpenOffice provided by ubuntu by uninstalling it using package manager. 
+Download the OpenOffice 2.3 debian package from [http://download.openoffice.org/ http://download.openoffice.org] . Download the OpenOffice installation package _Without JRE_. 
+
+Install the package with the following command:
+
+{{{
+sudo dpkg -i *.deb
+}}}
+
+in the folder into which you downloaded the OpenOffice debian package files.
+
+
+*Alien* - This is required to convert the RPM installer of the JRE / JDK downloaded from the Sun.com website. Install Alien by running the following command from the command line:
+
+{{{
+sudo aptitude install alien
+}}}
+
+If you did not use package manager to install the JRE or JDK you will need to convert the downloaded RPM package to a debian package with the following command:
+
+{{{
+sudo alien -d --scripts <RPM file name>
+}}}
+
+then install the debian package with :
+
+{{{
+sudo dpkg -i *.deb
+}}}
+
+
+== Installing Bungeni EditorClient ==
+1) Download the latest release of the Editor Client from:
+
+[http://code.google.com/p/bungeni-portal/downloads http://code.google.com/p/bungeni-portal/downloads]
+
+Also download the latest release of BungeniLibs_revXXX.oxt from the same page. This is the OpenOffice Basic client libraries used by the EditorClient.
+
+
+2) Now launch OpenOffice. Go to Tools->Extensions, click _Add ..._, and select the BungeniLibs_revXXX.oxt file that you downloaded in step (1), and click _OK_.
+
+
+3) Close OpenOffice.
+
+
+4) Extract the zip archive for the Bungeni EditorClient into its own folder. 
+
+5)Edit the file runEditor.sh by opening it in Gnome TextEditor.
+
+{{{
+export JAVA_HOME=/usr/java/jdk1.5.0_11
+$JAVA_HOME/bin/java -jar BungeniEditorClient.jar
+}}}
+Set the JAVA_HOME variable to the path of the JAVA installation in your computer (usually /usr/java/<folder where jre was installed> ). Now save the file and exit from the editor. 
+
+
+6) Make sure the _runEditor.sh_ file has _execute_ permissions, if not, give it _execute_ permissions. Do this by right clicking on runEditor.sh in nautilus and clicking properties. Select the permissions tab and give the _group_ and the _owner_ execute permissions. Click OK. 
+
+7) Now double click on _runEditor.sh_ and select _Run_. 
+
+
