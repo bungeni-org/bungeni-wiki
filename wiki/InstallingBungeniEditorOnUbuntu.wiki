@@ -1,7 +1,7 @@
 #summary Installing the Bungeni Editor Client on Ubuntu Linux.
 #labels BungeniEditorClient,Phase-Deploy
 
-= Installing the Bungeni EditorCient on Ubuntu Linux =
+= Installing the BungeniEditorClient on Ubuntu Linux =
 
 == Introduction ==
 These installation instructions were tested on Ubuntu Dapper (6.06) and the same should apply for subsequent Ubuntu releases.
@@ -71,5 +71,3 @@ Set the JAVA_HOME variable to the path of the JAVA installation in your computer
 6) Make sure the _runEditor.sh_ file has _execute_ permissions, if not, give it _execute_ permissions. Do this by right clicking on runEditor.sh in nautilus and clicking properties. Select the permissions tab and give the _group_ and the _owner_ execute permissions. Click OK. 
 
 7) Now double click on _runEditor.sh_ and select _Run_. 
-
-
