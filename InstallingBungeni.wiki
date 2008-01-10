@@ -1,6 +1,14 @@
 #summary How to install a development instance of Bungeni
 #labels Featured
 
+==Pre-requisites==
+
+  * Build environment (on ubunutu do a `sudo apt-get install build-essentials` )
+  * Python 2.5 (or 2.4) built from source. (on ubuntu you might need to install development libaries/headers for imaging and bz2 libraries)
+  * PostGreSQL build from source requires development libraries/headers for bison, flex and readline. (on ubuntu installed via apt-get)
+
+==Setup==
+
 Note: 
 the python setuptools package (a python egg) is used by buildout, if you have an older version of setuptools, you might need to update it manually first (from http://cheeseshop.python.org/pypi/setuptools/) in the python used for zope. 
 Update instructions at: http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions
