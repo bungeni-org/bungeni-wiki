@@ -1,0 +1,33 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+How to add Objects to the DB schema
+
+
+= Details =
+
+The database schema is defined in the file bungeni.core/bungeni/core/schema.py
+
+to add a table you define the table in python like:
+{{{
+provinces = rdb.Table(
+    "provinces",
+    metadata,
+    rdb.Column( "province_id", rdb.Integer, primary_key=True ),
+    rdb.Column( "province", rdb.Unicode(80), nullable=False ),
+    )
+}}}
+
+after you changed the file the db has to be rebuilt with
+be sure all connections to the db are closed.
+
+bin/reset_db
+
+(in my tests this failed sometimes so I had to manually drop the db)
+bin/psql bungeni
+> drop database
+
+after that reset_db worked.
+
+
+
