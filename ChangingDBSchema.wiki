@@ -82,6 +82,7 @@ that its doing.
      descriptor=".descriptor.ProvinceDescriptor"
      interface_module=".interfaces"
      ui_module="bungeni.ui.content"
+     echo="True"
     />
 }}}
 
@@ -93,10 +94,9 @@ views from the generation.. but its not yet wired into the site
 layout/hierarchy.. open app.py.. the app object is basically the root
 of the site, there's an appsetup adapter there which setups the
 application structure when the app server is started. you can adjust
-to add in the question container, in the same manner as the others.
-
+to add in the region container, in the same manner as the others.
 
 {{{
         region = domain.RegionContainer()
         self.context['regions'] = region
-}}
+}}}
