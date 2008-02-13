@@ -1,5 +1,4 @@
 
-
 = Introduction =
 How to add Objects to the DB schema
 
@@ -18,9 +17,9 @@ provinces = rdb.Table(
     )
 }}}
 
-after you changed the file the db has to be rebuilt with
-be sure all connections to the db are closed.
-
+after you changed the file the db has to be rebuilt.
+ * be sure all connections to the db are closed (bin/pg_ctl stop, bin/pg_ctl start).
+ * run resetdb.
 bin/reset_db
 
 (in my tests this failed sometimes so I had to manually drop the db)
@@ -28,4 +27,10 @@ bin/psql bungeni
 > drop database
 
 after that reset_db worked.
+
+have a look at the logs in logs/pg.log and search for the table you created:
+{{{
+NOTICE:  CREATE TABLE will create implicit sequence "provinces_province_id_seq" for serial column "provinces.province_id"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "provinces_pkey" for table "provinces"
+}}}
 
