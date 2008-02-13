@@ -58,4 +58,29 @@ mapper( domain.Province, schema.provinces )
 
 Add a model descriptor in descriptor.py
 {{{
+class ProvinceDescriptor( ModelDescriptor ):
+    fields = [
+        dict( name="province_id", omit=True ),
+        dict( name="province", 
+              label=_(u"Province"), 
+              description=_(u"Name of the Province"), 
+              listing=True ),
+        ]
+}}}
+
+==Apply the Generation Components to the domain Model==
+
+After your done there, then open up catalyst.zcml and a declaration
+like the others, which explicitly applies the generation components
+to the domain model using the descriptor. use echo="True" on the
+db:catalyst declaration and it will log to the stdout all the things
+that its doing.
+
+{{{
+    <db:catalyst
+     class=".domain.Province"
+     descriptor=".descriptor.ProvinceDescriptor"
+     interface_module=".interfaces"
+     ui_module="bungeni.ui.content"
+    />
 }}}
