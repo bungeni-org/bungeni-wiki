@@ -1,9 +1,10 @@
-
 = Introduction =
 How to add Objects to the DB schema
 
 
 = Details =
+
+==Set up the Schema==
 
 The database schema is defined in the file bungeni.core/bungeni/core/schema.py
 
@@ -34,3 +35,27 @@ NOTICE:  CREATE TABLE will create implicit sequence "provinces_province_id_seq" 
 NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "provinces_pkey" for table "provinces"
 }}}
 
+
+==Create a Domain Object==
+
+In domain.py add an object to the domain model:
+{{{
+class Province( object ):
+    """
+    Province of the Constituency
+    """
+    pass
+}}}
+
+==Map the Domain Model to the Database Schema==
+
+In orm.py add the mapper:
+{{{
+mapper( domain.Province, schema.provinces )   
+}}}
+
+==Define the UI in the Descriptor==
+
+Add a model descriptor in descriptor.py
+{{{
+}}}
