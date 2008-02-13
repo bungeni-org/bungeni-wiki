@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+
 
 = Introduction =
 How to add Objects to the DB schema
@@ -28,6 +28,4 @@ bin/psql bungeni
 > drop database
 
 after that reset_db worked.
-
-
 
