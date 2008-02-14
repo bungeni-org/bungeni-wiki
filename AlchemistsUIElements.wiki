@@ -1,0 +1,33 @@
+#summary Use the descriptor to define your UI.
+
+= Introduction =
+
+A short introduction
+
+
+= Details =
+
+The required imports are:
+{{{
+from ore.alchemist.vocabulary import DatabaseSource
+}}}
+
+
+The Field with the name Province is defined in the schema as:
+{{{
+ rdb.Column( "province", rdb.Integer, rdb.ForeignKey('provinces.province_id') ),
+}}}
+
+to get a combobox into the UI use:
+
+
+{{{
+dict(name="province",
+            property = schema.Choice( 
+            title=_(u"Province"), 
+            source=DatabaseSource(domain.Province,'province', 'province_id'), 
+            required=True )
+            ),
+}}}
+
+where 'province' is the row to be displayed and 'province_id' the value to be saved in the field province.
