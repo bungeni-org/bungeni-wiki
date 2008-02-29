@@ -5,7 +5,7 @@
 A rough guide to tweak the layout of your forms.
 
 
-= Add a ComboBox to display data from a referenced table =
+= Add a Combo box to display data from a referenced table =
 
 The required imports are:
 {{{
@@ -31,6 +31,8 @@ dict(name="province",
 }}}
 
 where 'province' is the row to be displayed and 'province_id' the value to be saved in the field province.
+
+== Display Data from more than one field in the combo box ==
 
 If the field you need is not present in your table you may add a definition to your object-relational mapper.
 
@@ -78,5 +80,3 @@ mapper( domain.ParliamentMember,
         polymorphic_identity='memberofparliament'
       )
 }}}
-
-
