@@ -80,3 +80,5 @@ mapper( domain.ParliamentMember,
         polymorphic_identity='memberofparliament'
       )
 }}}
+
+_Note that if  one of the fields has a NULL value the user_id will be returned instead!_
