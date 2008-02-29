@@ -1,5 +1,5 @@
 #summary A customisation of OpenOffice.org to facilitate AkomoNtoso markup of parliamentary documents
-#labels Phase-Requirements,Phase-Design
+#labels Phase-Requirements,Phase-Design,BungeniEditorClient
 
 =Introduction=
 
