@@ -65,7 +65,7 @@ class GroupMembershipDescriptor( ModelDescriptor ):
         ]
 }}}
 
-The attribute full name is defined in orm.py as an additional property of ParliamentMember:
+The attribute 'fullname' is defined in orm.py as an additional property of ParliamentMember:
 
 {{{
 mapper( domain.ParliamentMember, 
@@ -82,3 +82,12 @@ mapper( domain.ParliamentMember,
 }}}
 
 _Note that if  one of the fields has a NULL value the user_id will be returned instead!_
+
+==Add a column with data from a referenced table to the container listing==
+
+==Access data of the parent object==
+
+==Display data of parent object in the (view/edit) form==
+
+
+
