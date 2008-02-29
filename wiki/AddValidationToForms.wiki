@@ -7,16 +7,39 @@ To avoid user errors validations must be carried out and a feedback to the user 
 
 = How to write Validators =
 
+=Required Validators=
+
+
+
 ==Validate field against db-constraints==
 
 === Required Field ===
+
+required fields mus contain a value
+
 === Maximum length of Input ===
+
+If the database has a restriction e.g. VARCHAR(16) the user has to be warned if the 
+input does not fit
+
 === Check Type of Input ===
+
+make sure that in a number field you may input only numbers 
+
 === Unique values ===
 
 ==Validate one field against another==
 
-* field A must be present if field B has value X
-* field A must have a value in comparison to field B
+=== field A must be present if field B has value X===
+
+example: if a MP is inactive a leave reason must be given.
+
+=== field A must have a value in comparison to field B===
+
+example: end date must be greater (or equal) then start date.
 
 ==Access the data of the parent to validate==
+
+===field must be filled to constraints of the parent==
+
+example: a sitting date must be inside the dates for a session.
