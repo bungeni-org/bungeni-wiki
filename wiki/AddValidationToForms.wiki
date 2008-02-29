@@ -15,7 +15,7 @@ To avoid user errors validations must be carried out and a feedback to the user 
 
 === Required Field ===
 
-required fields mus contain a value
+required fields must contain a value
 
 === Maximum length of Input ===
 
@@ -27,6 +27,8 @@ input does not fit
 make sure that in a number field you may input only numbers 
 
 === Unique values ===
+
+give the user a feedback if the value is already present
 
 ==Validate one field against another==
 
