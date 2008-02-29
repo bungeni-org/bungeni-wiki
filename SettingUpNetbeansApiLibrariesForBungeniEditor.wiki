@@ -1,4 +1,5 @@
 #summary Setting up Netbeans API libraries for BungeniEditor
+#labels BungeniEditorClient
 
 External libraries used for building the Editor are located here :
 
