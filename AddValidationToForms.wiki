@@ -9,7 +9,7 @@ To avoid user errors validations must be carried out and a feedback to the user 
 
 =Required Validators=
 
-
+Common requirements for validation in Bungeni are:
 
 ==Validate field against db-constraints==
 
