@@ -1,0 +1,15 @@
+#summary How to configure BungeniEditor actions
+
+= Definitions = 
+
+= Configuring Toolbar Actions =
+
+Add your content here.
+
+
+= Configuring Toolbar SubActions =
+
+  * Make an entry for the subAction in [http://code.google.com/p/bungeni-portal/source/browse/BungeniOOo/BungeniEditor/trunk/BungeniEditorClient/dist/settings/toolbar.xml toolbar.xml]
+  * Make an entry for the subAction (subAction name is the suffix of the subAction target defined in toolbar.xml) in the sub_action_settings table in the settings database
+  * Add a conditional validator for the newly added subAction in the EditorSectionHandler class, and add a validator function for it (note: this is intended to be replacde by a apache chains or commons validator interface to parametrize)
+  
