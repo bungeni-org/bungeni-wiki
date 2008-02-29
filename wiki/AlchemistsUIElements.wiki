@@ -2,10 +2,10 @@
 
 = Introduction =
 
-A short introduction
+A rough guide to tweak the layout of your forms.
 
 
-= Details =
+= Add a ComboBox to display data from a referenced table =
 
 The required imports are:
 {{{
@@ -31,3 +31,52 @@ dict(name="province",
 }}}
 
 where 'province' is the row to be displayed and 'province_id' the value to be saved in the field province.
+
+If the field you need is not present in your table you may add a definition to your object-relational mapper.
+
+e.g. you want to choose full names from parliament members but in your data schema the name is stored in three different fields:
+{{{
+
+users = rdb.Table(
+   "users",
+   metadata,
+   rdb.Column( "user_id", rdb.Integer,  primary_key=True ),
+   rdb.Column( "login", rdb.Unicode(16), unique=True, nullable=True ),
+   rdb.Column( "titles", rdb.Unicode(32)),
+   rdb.Column( "first_name", rdb.Unicode(80), nullable=False ),
+   rdb.Column( "last_name", rdb.Unicode(80), nullable=False ),
+   rdb.Column( "middle_name", rdb.Unicode(80) ),
+   )
+
+}}}
+
+In the descriptor you query the attribute 'fullname' from the mapped object:
+{{{
+class GroupMembershipDescriptor( ModelDescriptor ):
+
+   fields = [       
+        dict( name="user_id",
+            property=schema.Choice( title=_(u"Member of Parliament"),
+                                    source=DatabaseSource(domain.ParliamentMember, 
+                                                          'fullname', 'user_id'))
+            ),     
+        ]
+}}}
+
+The attribute full name is defined in orm.py as an additional property of ParliamentMember:
+
+{{{
+mapper( domain.ParliamentMember, 
+        inherits=domain.User,
+          properties={
+           'fullname' : column_property(
+                             (schema.users.c.first_name + " " + 
+                             schema.users.c.middle_name + " " + 
+                             schema.users.c.last_name).label('fullname')
+                                           )
+                    },
+        polymorphic_identity='memberofparliament'
+      )
+}}}
+
+
