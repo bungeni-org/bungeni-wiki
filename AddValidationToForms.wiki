@@ -1,0 +1,22 @@
+#summary How to add validation to the add/edit forms
+
+= Validate Input =
+
+To avoid user errors validations must be carried out and a feedback to the user is required indicating the error/requirement.
+
+
+= How to write Validators =
+
+==Validate field against db-constraints==
+
+=== Required Field ===
+=== Maximum length of Input ===
+=== Check Type of Input ===
+=== Unique values ===
+
+==Validate one field against another==
+
+* field A must be present if field B has value X
+* field A must have a value in comparison to field B
+
+==Access the data of the parent to validate==
