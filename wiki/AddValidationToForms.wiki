@@ -49,15 +49,22 @@ class UserDescriptor( ModelDescriptor ):
 If the database has a restriction e.g. VARCHAR(16) the user has to be warned if the 
 input does not fit
 
+This is handled at database schema level.
+
 === Check Type of Input ===
 
 make sure that in a number field you may input only numbers 
+
+This is handled at database schema level
+
 
 === Unique values ===
 
 give the user a feedback if the value is already present
 
 ==Validate one field against another==
+
+Validations of this kind can be imlemented using invariants.
 
 === field A must be present if field B has value X===
 
