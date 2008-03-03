@@ -33,6 +33,14 @@ In the descriptor you may define a field as required, this overrides the definit
 {{{
 class UserDescriptor( ModelDescriptor ):
     fields = [
+        dict( name="user_id", omit=True),      
+        dict( name="middle_name", label=_(u"Middle Name"), required=True),
+        ]
+}}}
+or using the property:
+{{{
+class UserDescriptor( ModelDescriptor ):
+    fields = [
         dict( name="birth_country", 
             property = schema.Choice( title=_(u"Country of Birth"), 
                                        source=DatabaseSource(domain.Country,
@@ -61,6 +69,28 @@ This is handled at database schema level
 === Unique values ===
 
 give the user a feedback if the value is already present
+
+===Custom validations===
+
+If we need a special validation for a certain field (e.g. an email) this can be defined at the descriptor.
+
+{{{
+class UserDescriptor( ModelDescriptor ):
+    fields = [
+        #dict( name="email", label=_(u"Email")),
+        dict( name="email",
+            property = schema.TextLine( title =_(u"Email"), 
+                                        description=_(u"Email address"),
+                                        constraint=check_email,
+                                        required=True
+                                        ),
+             ),                                                                                
+        dict( name="login", label=_(u"Login Name")),
+        ]
+}}}
+
+
+The constraint check_mail is a function that returns True if the input is a valid mail address and False otherwise
 
 ==Validate one field against another==
 
