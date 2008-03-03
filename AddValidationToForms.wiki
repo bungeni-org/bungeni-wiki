@@ -15,7 +15,34 @@ Common requirements for validation in Bungeni are:
 
 === Required Field ===
 
-required fields must contain a value
+A required fields must contain a value.
+
+This is normally handled at database schema level:
+{{{
+reporters = rdb.Table(
+   "reporters",
+   metadata,
+   rdb.Column( "reporter_id", rdb.Integer, rdb.ForeignKey('users.user_id'), primary_key=True ),
+   rdb.Column( "initials", rdb.Unicode(4), nullable=False ),
+   )
+}}}
+
+The field 'initials' will be a required field.
+
+In the descriptor you may define a field as required, this overrides the definition in the schema:
+{{{
+class UserDescriptor( ModelDescriptor ):
+    fields = [
+        dict( name="birth_country", 
+            property = schema.Choice( title=_(u"Country of Birth"), 
+                                       source=DatabaseSource(domain.Country,
+                                                            'country_name', 'country_id'),
+                                       required=True )
+            ),       
+        ]
+
+}}}
+
 
 === Maximum length of Input ===
 
