@@ -108,7 +108,13 @@ EMAIL_RE = "([0-9a-zA-Z_&.+-]+!)*[0-9a-zA-Z_&.+-]+@(([0-9a-zA-Z]([0-9a-zA-Z-]*[0
 
 ==Validate one field against another==
 
-Validations of this kind can be imlemented using invariants.
+Validations of this kind can be implemented using invariants.
+
+There are two ways to go about this. One is supply a base interface
+with an invariant already defined. The second is an
+additional syntax via the descriptor. You can define a sequence of
+functions to act as invariants via the descriptor attribute
+schema_invariants. You'll need to raise an invariant exception 
 
 === field A must be present if field B has value X===
 
