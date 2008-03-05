@@ -116,6 +116,32 @@ additional syntax via the descriptor. You can define a sequence of
 functions to act as invariants via the descriptor attribute
 schema_invariants. You'll need to raise an invariant exception 
 
+The validation is:
+{{{
+class DeathBeforeLifeError(schema.interfaces.ValidationError):
+     """One cannot die before being born"""
+    
+def DeathBeforeLife(User):
+    """Check if date of death is after date of birth"""
+    if User.date_of_death is None: return
+    if User.date_of_death < User.date_of_birth:
+        #raise interface.Invalid("One cannot die before being born")
+        raise DeathBeforeLifeError
+}}}
+
+And it is tied to the descriptor:
+{{{
+class UserDescriptor( ModelDescriptor ):
+    fields = [
+        dict( name="user_id", omit=True),      
+        dict( name="date_of_birth", label=_(u"Date of Birth")),       
+        dict( name="date_of_death", label=_(u"Date of Death")),        
+        ]
+        
+    schema_invariants = [DeathBeforeLife]
+}}}
+
+
 === field A must be present if field B has value X===
 
 example: if a MP is inactive a leave reason must be given.
