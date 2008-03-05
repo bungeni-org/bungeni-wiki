@@ -116,7 +116,8 @@ additional syntax via the descriptor. You can define a sequence of
 functions to act as invariants via the descriptor attribute
 schema_invariants. You'll need to raise an invariant exception 
 
-The validation is:
+For example the date of death must be after the date of birth and if a user is dead he must have the status 'active_p = 'D''
+
 {{{
 class DeathBeforeLifeError(schema.interfaces.ValidationError):
      """One cannot die before being born"""
@@ -125,30 +126,39 @@ def DeathBeforeLife(User):
     """Check if date of death is after date of birth"""
     if User.date_of_death is None: return
     if User.date_of_death < User.date_of_birth:
-        #raise interface.Invalid("One cannot die before being born")
         raise DeathBeforeLifeError
+    
+def IsDeceased(User):
+    """If a user is deceased a date of death must be given"""
+    if User.active_p is None: 
+        if User.date_of_death is None: 
+            return
+        else: 
+            raise interface.Invalid("If a user is deceased he must have the status 'D'")
+    if User.active_p == 'D':
+        if User.date_of_death is None:
+            raise interface.Invalid("A Date of Death must be given if a user is deceased")
+    else:
+        if User.date_of_death is not None:
+            raise interface.Invalid("If a user is deceased he must have the status 'D'")
+
 }}}
 
-And it is tied to the descriptor:
+Add the functions to the descriptor:
+
 {{{
 class UserDescriptor( ModelDescriptor ):
     fields = [
         dict( name="user_id", omit=True),      
         dict( name="date_of_birth", label=_(u"Date of Birth")),       
-        dict( name="date_of_death", label=_(u"Date of Death")),        
+        dict( name="date_of_death", label=_(u"Date of Death")),
+        dict( name="active_p", label=_(u"Active")),        
         ]
         
-    schema_invariants = [DeathBeforeLife]
+    schema_invariants = [DeathBeforeLife, IsDeceased]
 }}}
 
 
-=== field A must be present if field B has value X===
-
-example: if a MP is inactive a leave reason must be given.
-
-=== field A must have a value in comparison to field B===
-
-example: end date must be greater (or equal) then start date.
 
 ==Access the data of the parent to validate==
 
