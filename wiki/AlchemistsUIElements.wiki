@@ -3,7 +3,7 @@
 = Introduction =
 
 A rough guide to tweak the layout of your forms.
-Read ChangingDBSchema first to understand how the descriptor, schema and mapping work together.
+Read [ChangingDBSchema] first to understand how the descriptor, schema and mapping work together.
 
 
 = Add a Combo box to display data from a referenced table =
@@ -114,17 +114,12 @@ mapper( mps_sitting, _mp_sitting,
 
 Add the your query to the descriptor.
 
-# token_field is the field you want to display to the user (in this case the full name of the parliament member)
-
-# value_field is the value you want to save as the fields value
-
-# filter_field is the name of the field in your query you want to filter by
-
-# filter_value is the name of the field in your object, the filter will be base on it's value
-
-# order_by_field is the name of the field in your query you want to order by
-
-# title_field is the name of the field ... in your query
+  # token_field is the field you want to display to the user (in this case the full name of the parliament member)
+  # value_field is the value you want to save as the fields value
+  # filter_field is the name of the field in your query you want to filter by
+  # filter_value is the name of the field in your object, the filter will be base on it's value
+  # order_by_field is the name of the field in your query you want to order by
+  # title_field is the name of the field ... in your query
 
 {{{
 class AttendanceDescriptor( ModelDescriptor ):
