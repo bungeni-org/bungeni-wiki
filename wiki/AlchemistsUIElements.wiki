@@ -207,7 +207,7 @@ List the same value you display in your edit combobox in the listing:
 class AttendanceDescriptor( ModelDescriptor ):
     display_name =_(u"Sitting Attendance")
     attendanceVocab = DatabaseSource(domain.AttendanceType, 'attendance_type', 'attendance_id' )
-    membersVocab = vocabulary.QuerySource(vocabulary.mps_sitting, 
+    membersVocab = QuerySource(vocabulary.mps_sitting, 
                                           token_field='fullname', 
                                           value_field='user_id', 
                                           filter_field='sitting_id', 
@@ -218,7 +218,7 @@ class AttendanceDescriptor( ModelDescriptor ):
         dict( name="sitting_id", omit=True ),
         dict( name="member_id", listing=True,
                 property = schema.Choice(title=_(u"Attendance"), source=membersVocab, ),
-              listing_column=member_fk_column("member_id", _(u"Member of Parliament") ) ),
+              listing_column=vocab_column("member_id", _(u"Member of Parliament"),membersVocab ) ),
         dict( name="attendance_id", listing=True, 
                 property = schema.Choice( title=_(u"Attendance"), source=attendanceVocab, required=True),
                 listing_column = vocab_column("attendance_id", _(u"Attendance"), attendanceVocab )),            
