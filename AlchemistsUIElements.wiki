@@ -9,7 +9,7 @@ A rough guide to tweak the layout of your forms.
 
 The required imports are:
 {{{
-from ore.alchemist.vocabulary import DatabaseSource
+from ore.alchemist.vocabulary import DatabaseSource, QuerySource
 }}}
 
 
@@ -83,11 +83,65 @@ mapper( domain.ParliamentMember,
 
 _Note that if  one of the fields has a NULL value the user_id will be returned instead!_
 
+QuerySource gives you a more control over the data being retrieved based on your current object. You have to pass additional parameters for the filter (sqlalchemist filter(), SQL: WHERE clause) and ordering (sqlalchemist order_by(), SQL: ORDER BY clause).
+Therefore your domain model *must* not have a filter or order defined!
+
+{{{
+# object that will get passed to QuerySource
+class mps_sitting( object ):
+    """ returns the mps for a sitting """
+
+# _mp_sitting defines our query that joins the tables together
+# DO NOT define any filters only joins here!    
+_mp_sitting = rdb.join(schema.sittings, schema.parliament_sessions,
+                        schema.sittings.c.session_id == schema.parliament_sessions.c.session_id).join(
+                            schema.user_group_memberships,
+                            schema.parliament_sessions.c.parliament_id == schema.user_group_memberships.c.group_id).join(
+                                schema.users,
+                                schema.user_group_memberships.c.user_id == schema.users.c.user_id)
+
+# set up object relational mapping
+mapper( mps_sitting, _mp_sitting,
+          properties={
+           'fullname' : column_property(
+                             (schema.users.c.first_name + u" " + 
+                             schema.users.c.middle_name + u" " + 
+                             schema.users.c.last_name).label('fullname')
+                                           )
+                    },)
+}}}
+
+Add the your query to the descriptor.
+#token_field is the field you want to display to the user (in this case the full name of the parliament member)
+#value_field is the value you want to save as the fields value
+#filter_field is the name of the field in your query you want to filter by
+#filter_value is the name of the field in your object, the filter will be base on it's value
+#order_by_field is the name of the field in your query you want to order by
+#title_field is the name of the field ... in your query
+
+{{{
+class AttendanceDescriptor( ModelDescriptor ):
+    display_name =_(u"Sitting Attendance")
+    membersVocab = QuerySource(vocabulary.mps_sitting, 
+                                          token_field='fullname', 
+                                          value_field='user_id', 
+                                          filter_field='sitting_id', 
+                                          filter_value='sitting_id', 
+                                          order_by_field='last_name',
+                                          title_field='fullname' )                                    
+    fields = [
+        dict( name="sitting_id", omit=True ),
+        dict( name="member_id", listing=True,
+                property = schema.Choice(title=_(u"Attendance"), source=membersVocab, ),
+               ),       
+        ]
+}}}
+
+
+
 ==Add a column with data from a referenced table to the container listing==
 
 ==Access data of the parent object==
 
 ==Display data of parent object in the (view/edit) form==
-
-
 
