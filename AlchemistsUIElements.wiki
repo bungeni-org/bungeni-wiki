@@ -114,17 +114,17 @@ mapper( mps_sitting, _mp_sitting,
 
 Add the your query to the descriptor.
 
-#token_field is the field you want to display to the user (in this case the full name of the parliament member)
+# token_field is the field you want to display to the user (in this case the full name of the parliament member)
 
-#value_field is the value you want to save as the fields value
+# value_field is the value you want to save as the fields value
 
-#filter_field is the name of the field in your query you want to filter by
+# filter_field is the name of the field in your query you want to filter by
 
-#filter_value is the name of the field in your object, the filter will be base on it's value
+# filter_value is the name of the field in your object, the filter will be base on it's value
 
-#order_by_field is the name of the field in your query you want to order by
+# order_by_field is the name of the field in your query you want to order by
 
-#title_field is the name of the field ... in your query
+# title_field is the name of the field ... in your query
 
 {{{
 class AttendanceDescriptor( ModelDescriptor ):
@@ -240,7 +240,18 @@ class GroupDescriptor( ModelDescriptor ):
 }}}
 
 
+==Define widgets to edit the object==
 
+Simply pass an edit widget to you descriptor to override the build in widgets.
+
+{{{
+   fields = [
+        dict( name="start_date", label=_(u"Start Date"), edit_widget=SelectDateWidget ),
+        dict( name="end_date", label=_(u"End Date"), edit_widget=SelectDateWidget ),
+        dict( name="active_p", label=_(u"Active") ),
+}}}
+
+The same approach is taken for the display widget too. 
 
 ==Access data of the parent object==
 
