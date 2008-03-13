@@ -117,9 +117,9 @@ Add the your query to the descriptor.
   # token_field is the field you want to display to the user (in this case the full name of the parliament member)
   # value_field is the value you want to save as the fields value
   # filter_field is the name of the field in your query you want to filter by
-  # filter_value is the name of the field in your object, the filter will be base on it's value
-  # order_by_field is the name of the field in your query you want to order by
-  # title_field is the name of the field ... in your query
+  # filter_value (optional) is the name of the field in your object, the filter will be base on it's value. If you do not pass a value (or None as the value) QuerySource tries to figure out the value by looking up the parents primary key (most common use case)
+  # order_by_field (optional) is the name of the field in your query you want to order by
+  # title_field (optional) is the name of the field ... in your query
 
 {{{
 class AttendanceDescriptor( ModelDescriptor ):
