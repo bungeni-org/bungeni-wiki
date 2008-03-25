@@ -1,0 +1,10 @@
+#summary How to configure BungeniEditor
+#labels BungeniEditorClient
+
+= Introduction =
+Links to wiki pages documenting how to configure the BungeniEditor
+
+
+= Details =
+
+[ConfiguringEditorActions How to configure Editor Actions]
