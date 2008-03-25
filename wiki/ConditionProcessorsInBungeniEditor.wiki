@@ -1,0 +1,40 @@
+#summary how to setup conditional processors in the editor
+#labels BungeniEditorClient
+
+= Introduction =
+
+The Bungeni editor has a contextual toolbar driven editing interface that changes state based on the cursor position in the document. The behaviour of the toolbar is determined by a set of rule-based conditions defined in the settings, and activated via entries in toolbar.xml
+
+
+= Writing a new Conditon =
+
+Currently the ":and:" and ":or:" operators are supported by the toolbar.xml syntax, and allow chaining of conditions.
+
+To write a new condition, the class must implement the IBungeniToolbarCondition interface, and implement 2 methods: 
+setOOComponentHelper() - which allows passing the openoffice context object to the condition processor, and a ;
+processCondition() function that returns a boolean value indicating whether the condition was true or false. THe processCondition() function receives a BungeniToolbarCondition object which is created and passed in by the editor.
+for e.g. if the condition in toolbar.xml was: tableExists:tblFigures
+here the condition name is = tableExists
+and the condition value is = tblFigures 
+this value is used by the processCondition() function to evaluate the condition.
+
+See the package: org.bungeni.editor.toolbar.conditions.runnable in the BungeniEditor to see examples of conditions.
+
+= Registering a Conditon =
+
+A condition needs to be registered once the condition has been written and compiled. 
+This is done in the settings database in the table: toolbar_conditions.
+
+The new condition must be registered here witht he following parameters.
+DocType - which doctype is this condition registered for
+ConditionName - this is the class name of the condition (for example if the condition class was called tableExists, then the condition name must be the same)
+ConditonClass - this is the full canoncial class path to the condition class,
+for example if the condition tableExists was created in a package called :
+
+org.bungeni.plugins.toolbarconditions
+
+then the ConditionClass for the conditon would be:
+
+org.bungeni.plugins.toolbarconditions.tableExists
+
+Once a condition has been registered in the settings database it is available for use in toolbar.xml, and can be chained with other conditions using operators.
