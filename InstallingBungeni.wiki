@@ -27,7 +27,7 @@ $ ./bin/setup-database # this will setup the postgres db
 $ ./bin/paster serve debug.ini # this will launch the server in debug mode...
 }}}
 
-
+On a Mac, you may need to shmmax value to get postgresql up and running.
 
 The buildout includes !DeadlockDebugger, so if you start Zope in debug mode, it will stop at a debugger prompt if an exception is raised. 
 
