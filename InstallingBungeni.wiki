@@ -18,7 +18,7 @@ If you dont have setuptools installed, buildout downloads and installs it automa
 In order to install it, use buildout. These steps should be all you need to setup a Zope instance with all the required products and libraries:
 
 {{{
-$ svn co http://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk/
+$ svn co https://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk/ --username <username>
 bungeni
 $ cd bungeni
 $ python bootstrap.py # not the system python! The one you use with Zope, i.e. 2.4.x. 
