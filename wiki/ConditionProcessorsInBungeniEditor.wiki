@@ -33,7 +33,7 @@ for example if the condition tableExists was created in a package called :
 
 `org.bungeni.plugins.toolbarconditions`
 
-then the ConditionClass for the conditon would be:
+then the Condition Class for the conditon would be:
 
 `org.bungeni.plugins.toolbarconditions.tableExists`
 
