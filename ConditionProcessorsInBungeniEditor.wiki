@@ -11,8 +11,8 @@ The Bungeni editor has a contextual toolbar driven editing interface that change
 Currently the ":and:" and ":or:" operators are supported by the toolbar.xml syntax, and allow chaining of conditions.
 
 To write a new condition, the class must implement the IBungeniToolbarCondition interface, and implement 2 methods: 
-setOOComponentHelper() - which allows passing the openoffice context object to the condition processor, and a ;
-processCondition() function that returns a boolean value indicating whether the condition was true or false. THe processCondition() function receives a BungeniToolbarCondition object which is created and passed in by the editor.
+`setOOComponentHelper()` - which allows passing the openoffice context object to the condition processor, and a ;
+`processCondition()` - function that returns a boolean value indicating whether the condition was true or false. THe processCondition() function receives a BungeniToolbarCondition object which is created and passed in by the editor.
 for e.g. if the condition in toolbar.xml was: tableExists:tblFigures
 here the condition name is = tableExists
 and the condition value is = tblFigures 
@@ -23,18 +23,70 @@ See the package: org.bungeni.editor.toolbar.conditions.runnable in the BungeniEd
 = Registering a Conditon =
 
 A condition needs to be registered once the condition has been written and compiled. 
-This is done in the settings database in the table: toolbar_conditions.
+This is done in the settings database in the table: `toolbar_conditions`
 
 The new condition must be registered here witht he following parameters.
-DocType - which doctype is this condition registered for
-ConditionName - this is the class name of the condition (for example if the condition class was called tableExists, then the condition name must be the same)
-ConditonClass - this is the full canoncial class path to the condition class,
+`DocType` - which doctype is this condition registered for
+`ConditionName` - this is the class name of the condition (for example if the condition class was called tableExists, then the condition name must be the same)
+`ConditonClass` - this is the full canoncial class path to the condition class,
 for example if the condition tableExists was created in a package called :
 
-org.bungeni.plugins.toolbarconditions
+`org.bungeni.plugins.toolbarconditions`
 
 then the ConditionClass for the conditon would be:
 
-org.bungeni.plugins.toolbarconditions.tableExists
+`org.bungeni.plugins.toolbarconditions.tableExists`
 
 Once a condition has been registered in the settings database it is available for use in toolbar.xml, and can be chained with other conditions using operators.
+
+= Currently Available Conditions = 
+
+== cursorInSection == 
+*parameter* - sectionName
+example:
+{{{
+cursorInSection:sectionName
+}}
+returns true if the cursor is in a section called sectionName
+
+== fieldExists / fieldNotExists == 
+*parameter* - fieldName
+example:
+{{{
+fieldExists:fieldName
+}}
+
+== imageSelected == 
+*parameter* - imageName
+example:
+{{{
+imageSelected:imageName
+}}
+evaluates to true if imageSelected is `imageName`
+
+
+== imageSelectedIsNot == 
+*parameter* - imageName
+example:
+{{{
+imageSelectedIsNot:imageName
+}}
+evaluates to true if image Selected is not `imageName`
+
+
+== sectionExists / sectionNotExists == 
+*parameter* - sectionName
+example:
+{{{
+sectionExists:sectionName
+}}
+evaluates to true if the section `sectionName` exists in the document
+
+
+== textSelected == 
+*parameter* - true or false
+example:
+{{
+textSelected:true
+}}
+evaluates to true if text was selected
