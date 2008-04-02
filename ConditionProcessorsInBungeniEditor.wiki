@@ -54,6 +54,7 @@ returns true if the cursor is in a section called sectionName
 == fieldExists / fieldNotExists == 
 
 *parameter* - fieldName
+
 example:
 {{{
 fieldExists:fieldName
@@ -62,6 +63,7 @@ fieldExists:fieldName
 == imageSelected == 
 
 *parameter* - imageName
+
 example:
 {{{
 imageSelected:imageName
@@ -72,6 +74,7 @@ evaluates to true if imageSelected is `imageName`
 == imageSelectedIsNot == 
 
 *parameter* - imageName
+
 example:
 {{{
 imageSelectedIsNot:imageName
@@ -82,6 +85,7 @@ evaluates to true if image Selected is not `imageName`
 == sectionExists / sectionNotExists == 
 
 *parameter* - sectionName
+
 example:
 {{{
 sectionExists:sectionName
@@ -92,8 +96,19 @@ evaluates to true if the section `sectionName` exists in the document
 == textSelected == 
 
 *parameter* - true or false
+
 example:
 {{{
 textSelected:true
 }}}
 evaluates to true if text was selected
+
+== Condition usage examples == 
+
+Chained conditions :
+
+{{{
+condition="cursorInSection:masthead :and: textSelected:true :and: fieldNotExists:debaterecord_official_date"
+}}}
+
+[http://code.google.com/p/bungeni-portal/source/browse/BungeniOOo/BungeniEditor/trunk/BungeniEditorClient/dist/settings/toolbar.xml  example toolbar.xml file]
