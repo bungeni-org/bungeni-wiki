@@ -44,6 +44,7 @@ Once a condition has been registered in the settings database it is available fo
 == cursorInSection == 
 
 *parameter* - sectionName
+
 example:
 {{{
 cursorInSection:sectionName
@@ -64,7 +65,7 @@ fieldExists:fieldName
 example:
 {{{
 imageSelected:imageName
-}}
+}}}
 evaluates to true if imageSelected is `imageName`
 
 
@@ -74,7 +75,7 @@ evaluates to true if imageSelected is `imageName`
 example:
 {{{
 imageSelectedIsNot:imageName
-}}
+}}}
 evaluates to true if image Selected is not `imageName`
 
 
@@ -84,7 +85,7 @@ evaluates to true if image Selected is not `imageName`
 example:
 {{{
 sectionExists:sectionName
-}}
+}}}
 evaluates to true if the section `sectionName` exists in the document
 
 
@@ -92,7 +93,7 @@ evaluates to true if the section `sectionName` exists in the document
 
 *parameter* - true or false
 example:
-{{
+{{{
 textSelected:true
-}}
+}}}
 evaluates to true if text was selected
