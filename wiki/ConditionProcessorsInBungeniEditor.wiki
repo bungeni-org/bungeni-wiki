@@ -48,7 +48,7 @@ Once a condition has been registered in the settings database it is available fo
 example:
 {{{
 cursorInSection:sectionName
-}}
+}}}
 returns true if the cursor is in a section called sectionName
 
 == fieldExists / fieldNotExists == 
