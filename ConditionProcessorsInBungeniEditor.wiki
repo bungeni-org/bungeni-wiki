@@ -57,7 +57,7 @@ returns true if the cursor is in a section called sectionName
 example:
 {{{
 fieldExists:fieldName
-}}
+}}}
 
 == imageSelected == 
 
