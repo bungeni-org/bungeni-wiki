@@ -34,11 +34,11 @@ Such key-value pairs when assigned to a section, get stored as part of the Style
 
 {{{
 	<text:section text:name="Section1" text:style-name="Sect1">
-			</text:section>
-			<text:section text:name="Section2" text:style-name="Sect2">
+        </text:section>
+	<text:section text:name="Section2" text:style-name="Sect2">
 				<text:section text:name="Section4" text:style-name="Sect2">
 				</text:section>
-			</text:section>
+	</text:section>
 }}}
 
 
@@ -86,4 +86,4 @@ Sometimes we would like to store metadata in a hierarchical format (for e.g. ele
 
 ==The Future==
 
-ODF 1.2 promises support for hierarchical metadata using an RDF schema.  This will tbe the metadata mechanism also adopted by OpenOffice. (The current UserDefinedAttributes api captures attribute metadata within  the ODF document's,  <style:style>  stylesheet definition. This is hackish method that currently works)
+ODF 1.2 promises support for [http://blogs.sun.com/GullFOSS/entry/new_extensible_metadata_support_with hierarchical metadata using an RDF schema].  This will tbe the metadata mechanism also adopted by OpenOffice. (The current UserDefinedAttributes api captures attribute metadata within  the ODF document's,  <style:style>  stylesheet definition. This is hackish method that currently works)
