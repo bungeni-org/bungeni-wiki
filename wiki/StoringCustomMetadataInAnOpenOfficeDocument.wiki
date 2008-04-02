@@ -1,0 +1,46 @@
+#labels BungeniEditorClient
+# Storing Custom Metadata contextually within an OpenOffice Document
+
+OpenOffice 2.4 provides various mechanisms for storing metadata within a document. 
+
+==Document Level Metadata==
+
+At the most basic level, custom metadata at the document global level is supported via a concept of document properties. Currently OpenOffice does not provide an inbuilt user interface to get and set these properties, however, full API support for getting and setting document level properties is provided.
+
+In the context of Bungeni, setting of metadata at the document element level is a desirable functionality. 
+
+For example, a debate-record document will have multiple speeches, and every speech requires certain metadata to be recorded. Typical metadata for a speech could include – identifier of member of parliament, who was the speech addressed to, what language was the speech made in.
+
+As the document can have multiple speeches, storing the speeches at the document level is not feasible. Instead a mechanism that allows storing the metadata along with the speech text will be more appropriate.
+
+==Sections as Containers==
+
+OpenOffice Writer supports a concept of “Sections”.  In the context of the word-processor the “Section” is used to identify a block of text that has a certain kind of styling.  °Sections also need to be named, and follow a unique naming convention (i.e. only one section of a particular name can exist in a document).  Additionally Sections are block level, non-overlapping elements and can be contained inside one another.  These attributes make sections suitable as a container for storing Speeches in a debaterecord document.
+
+==Container level metadata attributes==
+
+OpenOffice currently supports assigning attribute metadata to document Container elements. Sections support setting of custom Attributes via the `Section.UserDefinedAttributes` ([http://api.openoffice.org/docs/common/ref/com/sun/star/text/TextSection.html TextSection api reference]) property.
+
+This allows assigning attribute metadata as key-value pairs to a section, for e.g. :
+
+{{{
+MP-Identifer: alpha.kariuki.1953-01-03
+Speech-Lang: en
+}}}
+
+can be metdata name: value pairs set within a speech container section.
+
+==Limitations==
+
+Sometimes we would like to store metadata in a hierarchical format (for e.g. element metadata depicted as an XML fragment). The attribute metadata storage does not support hierarchical metadata, of this type:
+
+{{{
+<note id=”92748” class=”debaterecord”>
+	<author>author name</author>
+	<publishedOn>date</date>
+</note>
+}}}
+
+==The Future==
+
+ODF 1.2 promises support for hierarchical metadata using an RDF schema.  This will tbe the metadata mechanism also adopted by OpenOffice. (The current UserDefinedAttributes api captures attribute metadata within  the ODF document's,  <style:style>  stylesheet definition. This is hackish method that currently works)
