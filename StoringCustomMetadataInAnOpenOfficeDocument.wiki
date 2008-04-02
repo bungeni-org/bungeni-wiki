@@ -30,6 +30,49 @@ Speech-Lang: en
 
 can be metdata name: value pairs set within a speech container section.
 
+Such key-value pairs when assigned to a section, get stored as part of the Style assigned to the section. By default all sections have the same style, but assigning a unique custom key-value UserDefinedAttribute to the section, generates a new section style, and captures the metadata within the style. For instance, for the section hierarchy below:
+
+{{{
+	<text:section text:name="Section1" text:style-name="Sect1">
+			</text:section>
+			<text:section text:name="Section2" text:style-name="Sect2">
+				<text:section text:name="Section4" text:style-name="Sect2">
+				</text:section>
+			</text:section>
+}}}
+
+
+The key-value pair  with the key `BungeniSectionType` is stored as shown below:
+
+{{{
+
+<office:automatic-styles>
+		<style:style style:family="section" style:name="Sect1">
+			<style:section-properties BungeniSectionType="Article" style:editable="false">
+				<style:columns fo:column-count="1" fo:column-gap="0in"/>
+			</style:section-properties>
+		</style:style>
+		<style:style style:family="section" style:name="Sect2">
+			<style:section-properties style:editable="false">
+				<style:columns fo:column-count="1" fo:column-gap="0in"/>
+			</style:section-properties>
+		</style:style>
+		<style:style style:family="section" style:name="Sect3">
+			<style:section-properties BungeniSectionType="Clause" style:editable="false">
+				<style:columns fo:column-count="1" fo:column-gap="0in"/>
+			</style:section-properties>
+		</style:style>
+		<style:style style:family="section" style:name="Sect4">
+			<style:section-properties BungeniSectionType="Part" style:editable="false">
+				<style:columns fo:column-count="1" fo:column-gap="0in"/>
+			</style:section-properties>
+		</style:style>
+	</office:automatic-styles>
+}}}
+
+
+
+
 ==Limitations==
 
 Sometimes we would like to store metadata in a hierarchical format (for e.g. element metadata depicted as an XML fragment). The attribute metadata storage does not support hierarchical metadata, of this type:
