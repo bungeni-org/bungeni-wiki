@@ -139,6 +139,38 @@ class AttendanceDescriptor( ModelDescriptor ):
         ]
 }}}
 
+Some People are more at ease with wit SQL Statements than to create sqlalchemy mappings or if you need a more complicated query it will be easier to formulate this in SQL:
+
+{{{
+    sql_members ='''SELECT "users"."titles" || ' ' || "users"."first_name" || ' ' || "users"."middle_name" || ' ' || "users"."last_name" as user_name, 
+                    "users"."user_id", "group_sittings"."sitting_id" 
+                    FROM "public"."group_sittings", "public"."sessions", 
+                    "public"."user_group_memberships", "public"."users" 
+                    WHERE ( "group_sittings"."session_id" = "sessions"."session_id" 
+                    AND "user_group_memberships"."group_id" = "sessions"."parliament_id" 
+                    AND "user_group_memberships"."user_id" = "users"."user_id" )
+                    AND ("group_sittings"."sitting_id" = %(primary_key)s)
+                    AND ( "users"."user_id" NOT IN (SELECT member_id 
+                                                    FROM sitting_attendance 
+                                                    WHERE sitting_id = %(primary_key)s)                                           
+                         )
+                    ORDER BY "users"."last_name"                    
+                    '''
+}}}
+
+and it is added to the descriptor like:
+{{{
+    membersVocab = vocabulary.SQLQuerySource(sql_members, 'user_name', 'user_id')                                                                        
+    fields = [
+        dict( name="sitting_id", omit=True ),
+        dict( name="member_id", listing=True,
+                property = schema.Choice(title=_(u"Attendance"), source=membersVocab, ),
+              listing_column=member_fk_column("member_id", _(u"Member of Parliament") ) ),
+        dict( name="attendance_id", listing=True, 
+                property = schema.Choice( title=_(u"Attendance"), source=attendanceVocab, required=True),
+                listing_column = vocab_column("attendance_id", _(u"Attendance"), attendanceVocab )),            
+        ]
+}}}
 
 
 ==Add a column with data from a referenced table to the container listing==
