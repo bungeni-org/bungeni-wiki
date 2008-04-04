@@ -1,4 +1,5 @@
 #summary walk through the process and files necessary to add a table into the UI
+#labels zope,sqlalchemy
 = Introduction =
 How to add Objects to the DB schema
 
