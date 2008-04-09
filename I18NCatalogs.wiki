@@ -1,0 +1,12 @@
+#summary How to Generate i18n catalogs.
+#labels zope,Phase-Implementation
+
+= Setup i18n scripts =
+
+due to a minor issue in one of the recipes used in buildout, we need to modify the generated i18n scripts to include the path to our xapian library.
+
+so after running buildout you'll need to add an additional 
+
+ '$buildout_directory/parts/xapian/lib/python' 
+
+to the list at the top of the bin/i18nextract script, substituting the full path for $buildout_directory. after which you can use the i18nextract script to generate a message catalog (pot file) for translation.
