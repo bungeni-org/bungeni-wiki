@@ -41,6 +41,7 @@ from bungeni.core.interfaces import IMyContent
 class ContentEditForm( EditFormViewlet ):
    form_fields = form.Fields( interfaces.IMyContent )
    form_fields['name'].for_display= True
+   template = NamedTemplate('alchemist.subform')   
 
     def update(self):
         """
@@ -48,8 +49,7 @@ class ContentEditForm( EditFormViewlet ):
         the method you can use to update form fields from your class
         and adapt the custom fields to our object
         """               
-        self.adapters = { IMyContent : self.context }
-
+        self.adapters = { IMyContent : self.context }        
 }}}
 
 
