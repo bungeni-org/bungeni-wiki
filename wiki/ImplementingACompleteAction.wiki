@@ -1,5 +1,7 @@
 #labels BungeniEditorClient
-= First define a toolbar action in toolbar.xml =
+= 1 - Define a toolbar action in toolbar.xml =
+
+== Adding a blockAction == 
 
 Add a block action for the action.  A complete block action is illustrated below.
 
@@ -53,6 +55,8 @@ The blockAction element is described here.
 
 [http://code.google.com/p/bungeni-portal/wiki/ConditionProcessorsInBungeniEditor Condition Processors]
 
+== Adding a Action element == 
+
 blockActions can contain <action> elements.
 
 The action element is described here.
@@ -80,4 +84,20 @@ target="toolbarSubAction.makeQA.section_creation"
 There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. 
 
 For differences between the two action types see BungeniEditorActionTypes.
-`showChildren`  - true / false enables/disables dispaly of child actions
+`showChildren`  - true / false enables/disables dispaly of child actions.
+
+
+== Adding a subAction element == 
+
+<action> elements can contain <subAction> elements.
+The subAction element is described here:
+
+{{{
+<subaction name="QA.selection.title" 
+	tooltip="Markup selection as title" 
+	title="Markup Title" 
+	mode="TEXT_SELECTED_INSERT" 
+	target="toolbarSubAction.makeQASection.apply_style:qa" 
+	visible="true" 
+	condition="cursorInSection:qa :and: textSelected:true" />
+}}}
