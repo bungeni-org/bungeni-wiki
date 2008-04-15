@@ -51,9 +51,7 @@ The blockAction element is described here.
 
 `target` - the address of the handler that is invoked upon clicking the toolbar item. Use _null_  - to indicate no action.
 
-`condition` - conditions under which the action is displayed. For condition syntax see: 
-
-[http://code.google.com/p/bungeni-portal/wiki/ConditionProcessorsInBungeniEditor Condition Processors]
+`condition` - conditions under which the action is displayed. For condition syntax see: [http://code.google.com/p/bungeni-portal/wiki/ConditionProcessorsInBungeniEditor Condition Processors]
 
 == Adding a Action element == 
 
@@ -81,10 +79,13 @@ The action element is described here.
 target="toolbarSubAction.makeQA.section_creation"
 }}}
 
-There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. 
+The target syntax is a combination of "action_type.parent_action_name.sub_action_name" , out of these action_type can either be toolbarAction or toolbarSubAction, the other two values correspond to parent action, and sub action entries for the  target in the SUB_ACTION_SETTINGS table.
 
-For differences between the two action types see BungeniEditorActionTypes.
-`showChildren`  - true / false enables/disables dispaly of child actions.
+(There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. 
+For differences between the two action types see BungeniEditorActionTypes)
+
+`showChildren`  - true / false enables/disables dispaly of child actions
+
 
 
 == Adding a subAction element == 
@@ -101,3 +102,5 @@ The subAction element is described here:
 	visible="true" 
 	condition="cursorInSection:qa :and: textSelected:true" />
 }}}
+
+The attributes function exactly as described for the <action> element
