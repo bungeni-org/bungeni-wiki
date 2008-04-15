@@ -6,32 +6,38 @@ Add a block action for the action.  A complete block action is illustrated below
 Example:
 {{{
 
-            <blockAction name="QA" tooltip="Create a QA Section" title="Papers" target="null" visible="true" condition="none" >
-                <action name="QA.selection" 
-title="From Selection" 
-mode="TEXT_SELECTED_INSERT" 
-target="toolbarSubAction.makeQA.section_creation" 
-condition="sectionNotExists:qa :and: textSelected:true" 
-visible="true" showChildren="true" >
+    <blockAction name="QA" tooltip="Create a QA Section" title="Papers" 
+    	target="null" 
+    	visible="true" 
+    	condition="none" >
+    	
+        <action name="QA.selection" 
+		title="From Selection" 
+		mode="TEXT_SELECTED_INSERT" 
+		target="toolbarSubAction.makeQA.section_creation" 
+		condition="sectionNotExists:qa :and: textSelected:true" 
+		visible="true" showChildren="true" >
+		
                     <subaction name="QA.selection.title" 
-tooltip="Markup selection as title" 
-title="Markup Title" 
-mode="TEXT_SELECTED_INSERT" 
-target="toolbarSubAction.makeQASection.apply_style:qa" 
-visible="true" 
-condition="cursorInSection:qa :and: textSelected:true" />
+				tooltip="Markup selection as title" 
+				title="Markup Title" 
+				mode="TEXT_SELECTED_INSERT" 
+				target="toolbarSubAction.makeQASection.apply_style:qa" 
+				visible="true" 
+				condition="cursorInSection:qa :and: textSelected:true" />
+				
                  </action>
-            </blockAction>
+    </blockAction>
 }}}
 
 The blockAction element is described here. 
 
 {{{
-            <blockAction name="QA" 
-tooltip="Create a QA Section" 
-title="Papers" 
-target="null" visible="true" 
-condition="none" >
+
+    <blockAction name="QA" tooltip="Create a QA Section" title="Papers" 
+    	target="null" 
+    	visible="true" 
+    	condition="none" >
 }}}
 `name` - the name attribute
 
@@ -52,11 +58,12 @@ blockActions can contain <action> elements.
 The action element is described here.
 
 {{{
- <action name="QA.selection" title="From Selection" 
-mode="TEXT_SELECTED_INSERT" 
-target="toolbarSubAction.makeQA.section_creation" 
-condition="sectionNotExists:qa :and: textSelected:true" 
-visible="true" showChildren="true" >
+   <action name="QA.selection" 
+		title="From Selection" 
+		mode="TEXT_SELECTED_INSERT" 
+		target="toolbarSubAction.makeQA.section_creation" 
+		condition="sectionNotExists:qa :and: textSelected:true" 
+		visible="true" showChildren="true" >
 }}}
 
 `name` - the name of the action element
