@@ -2,12 +2,24 @@
 = First define a toolbar action in toolbar.xml =
 
 Add a block action for the action.  A complete block action is illustrated below.
+
 Example:
 {{{
 
             <blockAction name="QA" tooltip="Create a QA Section" title="Papers" target="null" visible="true" condition="none" >
-                <action name="QA.selection" title="From Selection" mode="TEXT_SELECTED_INSERT" target="toolbarSubAction.makeQA.section_creation" condition="sectionNotExists:qa :and: textSelected:true" visible="true" showChildren="true" >
-                    <subaction name="QA.selection.title" tooltip="Markup selection as title" title="Markup Title" mode="TEXT_SELECTED_INSERT" target="toolbarSubAction.makeQASection.apply_style:qa" visible="true" condition="cursorInSection:qa :and: textSelected:true" />
+                <action name="QA.selection" 
+title="From Selection" 
+mode="TEXT_SELECTED_INSERT" 
+target="toolbarSubAction.makeQA.section_creation" 
+condition="sectionNotExists:qa :and: textSelected:true" 
+visible="true" showChildren="true" >
+                    <subaction name="QA.selection.title" 
+tooltip="Markup selection as title" 
+title="Markup Title" 
+mode="TEXT_SELECTED_INSERT" 
+target="toolbarSubAction.makeQASection.apply_style:qa" 
+visible="true" 
+condition="cursorInSection:qa :and: textSelected:true" />
                  </action>
             </blockAction>
 }}}
@@ -15,30 +27,50 @@ Example:
 The blockAction element is described here. 
 
 {{{
-            <blockAction name="QA" tooltip="Create a QA Section" title="Papers" target="null" visible="true" condition="none" >
+            <blockAction name="QA" 
+tooltip="Create a QA Section" 
+title="Papers" 
+target="null" visible="true" 
+condition="none" >
 }}}
 `name` - the name attribute
+
 `tooltip` - the tooltip text to display when mousing over the block action in the toolbar
+
 `title` - the title text displayed in the toolbar
+
 `visible` - true / false to display / hide the element
+
 `target` - the address of the handler that is invoked upon clicking the toolbar item. Use _null_  - to indicate no action.
-`condition` - conditions under which the action is displayed. For condition syntax see: [http://code.google.com/p/bungeni-portal/wiki/ConditionProcessorsInBungeniEditor Condition Processors]
+
+`condition` - conditions under which the action is displayed. For condition syntax see: 
+
+[http://code.google.com/p/bungeni-portal/wiki/ConditionProcessorsInBungeniEditor Condition Processors]
 
 blockActions can contain <action> elements.
 
 The action element is described here.
 
 {{{
- <action name="QA.selection" title="From Selection" mode="TEXT_SELECTED_INSERT" target="toolbarSubAction.makeQA.section_creation" condition="sectionNotExists:qa :and: textSelected:true" visible="true" showChildren="true" >
+ <action name="QA.selection" title="From Selection" 
+mode="TEXT_SELECTED_INSERT" 
+target="toolbarSubAction.makeQA.section_creation" 
+condition="sectionNotExists:qa :and: textSelected:true" 
+visible="true" showChildren="true" >
 }}}
 
 `name` - the name of the action element
+
 `title` - the title text displayed in the toolbar for the action
+
 `mode` - applicable modes for this action. For modes and their description, see BungeniEditorModes
+
 `target` - same as blockAction. in the example below, the target is :
 {{{
 target="toolbarSubAction.makeQA.section_creation"
 }}}
-There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. For differences between the two action types see BungeniEditorActionTypes.
-`showChildren`  - true / false enables/disables dispaly of child actions
 
+There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. 
+
+For differences between the two action types see BungeniEditorActionTypes.
+`showChildren`  - true / false enables/disables dispaly of child actions
