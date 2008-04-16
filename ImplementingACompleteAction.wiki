@@ -107,7 +107,13 @@ The subAction element is described here:
 
 The attributes function exactly as described for the <action> element
 
-= Adding required interfaces to the selector dialog class =
+= 2. Calling a router action in response to a toolbar action =
+
+Typically router actions, act on the document without requesting user interaction.
+The router action is defined for the subAction in the ROUTER_CLASS column for the subAction in the 'SUB_ACTION_SETTINGS' table.
+For information on how to write a router action, see HowToWriteARouterAction.
+
+= 3. Invoking dialogs in response to a toolbar action =
 
 Clicking a toolbar action, can invoke  dialog that interacts with the currently selected openoffice document. This dialog needs to extend the `selectorTemplatePanel` class and implement the `IBungeniForm` interface:
 
@@ -120,4 +126,3 @@ public  class InitPapers extends selectorTemplatePanel implements IBungeniForm {
 == Connecting the dialog class to the toolbar action == 
 
 The dialog class is invoked via standard interface by the bungeni editor. The above class for example needs to be specified in the `DIALOG_CLASS` column in the appropriate entry for the subAction in SUB_ACTION_SETTINGS table.
-
