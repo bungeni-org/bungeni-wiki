@@ -1,0 +1,96 @@
+#summary The OOComponentHelper class is an OpenOffice UNO library encapsulation class
+#labels BungeniEditorClient
+
+= The OOComponentHelper Class =
+
+OpenOffice basic is very useful for quick prototyping and testing of OpenOffice automation code. OO Basic uses the same underlying UNO interface layer used by the OpenOffice Java API. This makes it possible to quickly prototype in OO Basic and translate the code into java at a later point for more extensive adaptation.
+
+However the Java OpenOffice API is cumbersome and requires navigating through the complete hierarchy of UNO objects requiring explicit discovery and query interfacing of services and methods.
+
+The OOComponentHelper makes this translation easier.
+
+= Example Usage =
+
+The following is an OpenOffice basic function :
+
+{{{
+sub InsertGetReferenceAtCurrentCursorPos(sRefname as string)
+'Inserts a reference into the document at the current cursor location
+    oDoc = ThisComponent
+    dim oRefField as object
+    dim oViewCursor
+
+    oViewCursor =  oDoc.CurrentController.ViewCursor
+    oRefField = oDoc.createInstance("com.sun.star.text.TextField.GetReference")
+    oRefField.ReferenceFieldSource = com.sun.star.text.ReferenceFieldSource.REFERENCE_MARK
+    oRefField.SourceName = sRefname
+    oRefField.ReferenceFieldPart = com.sun.star.text.ReferenceFieldPart.TEXT
+    oDoc.getText().insertTextContent(oViewCursor, oRefField, true)
+    oDoc.getText().insertString(oViewCursor," , ", false)
+    oDoc.TextFields.refresh()
+end sub
+}}}
+
+Writing the same function in Java requires navingating through UNO API / Object hierarchy, which requires getting object handles, querying them for supported services,
+and then doing query interfaces to access their methods.  The OOoComponentHelper class simplifies UNO object navigation in java by abstracting a lot of the query interfacing mechanism.
+
+The following is a line-by-line translation of the above function to java, using the OOoComponentHelper API library
+
+{{{
+ /*
+ sub InsertGetReferenceAtCurrentCursorPos(sRefname as string)
+ */
+ void InsertGetReferenceAtCurrentCursorPos(OOComponentHelper ooDoc, String sRefName) {
+
+    /*
+   'Inserts a reference into the document at the current cursor location
+    oDoc = ThisComponent 
+    */
+
+    XTextDocument xDoc = ooDoc.getTextDocument();
+
+    /*
+    dim oRefField as object
+     dim oViewCursor
+    oViewCursor =  oDoc.CurrentController.ViewCursor
+    */
+
+    XTextViewCursor xViewCursor = ooDoc.getViewCursor();
+
+    /*
+    oRefField = oDoc.createInstance("com.sun.star.text.TextField.GetReference")
+    */
+
+    Object oField = ooDoc.createInstance("com.sun.star.text.TextField.GetReference");
+
+    /*
+    oRefField.ReferenceFieldSource = com.sun.star.text.ReferenceFieldSource.REFERENCE_MARK
+    */
+    XPropertySet oFieldSet = ooQueryInterface.XPropertySet(oField);
+    oFieldSet.setPropertyValue("ReferenceFieldSource", com.sun.star.text.ReferenceFieldSource.REFERENCE_MARK);
+    /*
+    oRefField.SourceName = sRefname
+    */
+    oFieldSet.setPropertyValue("SourceName", sRefName);
+    /*
+    oRefField.ReferenceFieldPart = com.sun.star.text.ReferenceFieldPart.TEXT
+    */
+    oFieldSet.setPropertyValue("ReferenceFieldPart", com.sun.star.text.ReferenceFieldPart.TEXT);
+    /*
+    oDoc.getText().insertTextContent(oViewCursor, oRefField, true)
+    */
+    xDoc.getText().insertTextContent( xViewCursor , oField, true);
+    /*
+    oDoc.getText().insertString(oViewCursor," , ", false)
+    */
+    xDoc.getText().insertTextContent( xViewCursor , " , ", false);
+    /*
+    oDoc.TextFields.refresh()
+    */ 
+    ooDoc.textFieldsRefresh();
+    /*
+    end sub
+    */
+ }
+
+}}}
