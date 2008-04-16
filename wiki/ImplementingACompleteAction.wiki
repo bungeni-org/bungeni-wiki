@@ -111,7 +111,7 @@ The attributes function exactly as described for the <action> element
 
 Typically router actions, act on the document without requesting user interaction.
 The router action is defined for the subAction in the ROUTER_CLASS column for the subAction in the 'SUB_ACTION_SETTINGS' table.
-For information on how to write a router action, see HowToWriteARouterAction.
+For information on how to write a router action, see HowToWriteaRouterAction.
 
 = 3. Invoking dialogs in response to a toolbar action =
 
