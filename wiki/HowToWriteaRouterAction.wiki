@@ -1,0 +1,59 @@
+#summary How to write a router action for Bungeni Editor
+#labels BungeniEditorClient
+
+= Introduction =
+
+Router actions are actions that can be invoked directly from the Bungeni Editor toolbar.
+Router actions are defined in classes which are dynamically class loaded, initialized, and executed by the editor. 
+
+
+= Details =
+
+To implement a router Action you need to extend the 'org.bungeni.editor.actions.routers.defaultRouter' class , for e.g. example #1:
+
+
+{{{
+
+public class routerApplyStyle extends defaultRouter {
+
+   private static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(routerApplyStyle.class.getName());
+ 
+
+    /** Creates a new instance of routerCreateSection */
+    public routerApplyStyle() {
+        super();
+        
+    }
+    
+    public BungeniValidatorState route_TextSelectedInsert(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDocument) {
+      String styleName = subAction.action_value();
+      boolean bState = ooDocument.setSelectedTextStyle(styleName);
+      if (bState)
+          return new BungeniValidatorState(true, new BungeniMsg("SUCCESS")); 
+      else    
+          return new BungeniValidatorState(true, new BungeniMsg("APPLY_STYLE_FAILURE")); 
+    }
+
+}
+
+}}}
+
+The defaultRouter base class implements the `IBungeniActionRouter` interface, which exposes the following methods:
+
+
+{{{
+
+public interface IBungeniActionRouter {
+    
+    public  org.bungeni.error.BungeniValidatorState route(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDoc);
+    public org.bungeni.error.BungeniValidatorState route_DocumentLevelAction(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDocument) ;
+    public org.bungeni.error.BungeniValidatorState route_TextSelectedInsert(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDocument) ;
+    public org.bungeni.error.BungeniValidatorState route_TextSelectedEdit(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDocument) ;
+    public org.bungeni.error.BungeniValidatorState route_FullInsert(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDocument) ;
+    public org.bungeni.error.BungeniValidatorState route_FullEdit(toolbarAction action, toolbarSubAction subAction, OOComponentHelper ooDocument) ;
+
+}
+
+}}}
+
+Depending on the editor mode that you are routing the action for, you can override the respective method in the routing class that you are implementing. For instance example #1 above, extends the route_TextSelectedInsert() method which is invoked only when the editor is in TEXT_SELECTED_INSERT mode.
