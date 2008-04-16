@@ -81,8 +81,10 @@ target="toolbarSubAction.makeQA.section_creation"
 
 The target syntax is a combination of "action_type.parent_action_name.sub_action_name" , out of these action_type can either be toolbarAction or toolbarSubAction, the other two values correspond to parent action, and sub action entries for the  target in the SUB_ACTION_SETTINGS table.
 
-(There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. 
-For differences between the two action types see BungeniEditorActionTypes)
+                                                                                                                                                                                 (There are 2 kinds of target actions possible, those that are defined in 'ACTION_SETTINGS' in the BungeniEditorSettingsDatabase and those that are defined in 'SUB_ACTION_SETTINGS'. 
+For differences between the two action types see BungeniEditorActionTypes).
+
+
 
 `showChildren`  - true / false enables/disables dispaly of child actions
 
@@ -104,3 +106,18 @@ The subAction element is described here:
 }}}
 
 The attributes function exactly as described for the <action> element
+
+= Adding required interfaces to the selector dialog class =
+
+Clicking a toolbar action, can invoke  dialog that interacts with the currently selected openoffice document. This dialog needs to extend the `selectorTemplatePanel` class and implement the `IBungeniForm` interface:
+
+{{{
+public  class InitPapers extends selectorTemplatePanel implements IBungeniForm {
+.......
+}
+}}}
+
+== Connecting the dialog class to the toolbar action == 
+
+The dialog class is invoked via standard interface by the bungeni editor. The above class for example needs to be specified in the `DIALOG_CLASS` column in the appropriate entry for the subAction in SUB_ACTION_SETTINGS table.
+
