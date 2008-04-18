@@ -1,0 +1,97 @@
+#summary Bungeni Editor selector forms use a flow processor to process submissions. This page details how the flow processor has been implemented
+#labels BungeniEditorClient
+
+== Introduction ==
+
+Selector forms use the "chain of responsibilty" pattern for submission processing. The command processor has been implemented using [http://commons.apache.org/chain/ Apache chain] .
+
+
+== Command Catalogs ==
+
+The command chain is a series of cataloged commands which can be invoked by the application. This catalog of commands resides in an XML file called commandChain.xml.
+The editor supports multiple catalog sources, and catalog sources can be set per dialog.
+The directory of call command catalogs available to the editor is stored in the 'CATALOG_SOURCE' table:
+
+||form name||catalog source||
+||org.bungeni.editor.selectors.InitPapers||/org/bungeni/commands/chains/commandChain.xml||
+||org.bungeni.editor.selectors.InitDebateRecord||/org/bungeni/commands/chains/commandChain.xml||
+||org.bungeni.editor.selectors.InitQAsection||/org/bungeni/commands/chains/commandChain.xml||
+
+The editor loads a specific command chain depending on the dialog invoked.
+
+== Command Chains ==
+
+Command chains are contained within the command catalog.
+These are named sequences of grouped commands which are invoked by the dialog on clicking submit.
+The example below shows the command chain for creating the mast head in TEXT_INSERTION mode :
+
+{{{
+<catalogs>
+    <catalog name="debaterecord">
+        <chain name="debateRecordFullInsertMasthead">
+            <command   id="addSectionIntoSectionWithStyling"
+                       className="org.bungeni.commands.addSectionIntoSectionWithStyling"/>
+            <command   id="setSectionMetadataForAction"
+                       className="org.bungeni.commands.setSectionMetadataForAction"/>
+            <command   id="addImageIntoSection"
+                       className="org.bungeni.commands.addImageIntoSection"/>
+            <command   id="addDocumentIntoSection"
+                       className="org.bungeni.commands.addDocumentIntoSection"/>
+            <command   id="setInputFieldValue"
+                       className="org.bungeni.commands.setInputFieldValue"/>
+            <command   id="setInputFieldValue2"
+                       className="org.bungeni.commands.setInputFieldValue"/>
+            <command   id="addDocumentMetadata"
+                       className="org.bungeni.commands.addDocumentMetadata"/>
+        </chain>
+   ..........
+     </catalog>
+</catalogs>
+}}}
+
+The dialog knows which command chain to invoke based on the metadata set in the 'FORM_COMMAND_CHAIN' table:
+
+||item no||form name||form mode||command catalog|| command chain||
+||1||org.bungeni.editor.selectors.InitDebateRecord||TEXT_INSERTION||debaterecord||debateRecordFullInsertMasthead||
+||2||org.bungeni.editor.selectors.InitDebateRecord||TEXT_EDIT||debaterecord||debateRecordFullEditMasthead||
+||3||org.bungeni.editor.selectors.InitDebateRecord||TEXT_SELECTED_INSERT||debaterecord||debateRecordSelectedInsertMasthead||
+
+In the above example, the depicted command chain is represented in item#1.
+
+== Commands ==
+
+Command chains are composed of individual commands.  Individual commands in Bungeni Editor are implemented as individual classes.  Every class wishing to become a 'Command' must implement the Command interface, for e.g. the following command imports an image into a document section.
+
+{{{
+public class addImageIntoSection implements Command {
+    
+    /** Creates a new instance of addImageIntoSection */
+    public addImageIntoSection() {
+    }
+
+    /**
+     * Requires: current_section and selected_logo variables to be set in the preInserMap of the caller class
+     */
+    public boolean execute(Context context) throws Exception {
+        BungeniFormContext formContext = (BungeniFormContext) context;
+        String currentSection = (String) formContext.getPreInsertMap().get("current_section");
+        String logoPath = (String) formContext.getPreInsertMap().get("selected_logo");
+        boolean bAddImage = CommonActions.action_addImageIntoSection(formContext.getOoDocument(), 
+                    currentSection, 
+                    logoPath );
+        return false;
+    }
+    
+}
+
+}}}
+
+The command must return false to continue processing the next command in the chain. Returning true halts the chain.
+
+== Passing parameters ==
+
+A command usually requires an input parameter. Input parameters are passed using the command chain's context.
+The context is set using the BungeniFormContext class, which is an extension of the contextBase class provided by Apache Chain.  The BungeniFormContext class acts as a marshaller of variables between the command chain and the dialog invoking the command chain.  The dialog, prior to invoking the chain sets all the input variables into  a HashMap, using standard names known by the commands as keys.  This map is then passed into  the form context, and used by the individual commands to retrieve their input variables.
+
+
+ 
