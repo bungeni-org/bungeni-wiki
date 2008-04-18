@@ -115,7 +115,7 @@ For information on how to write a router action, see HowToWriteaRouterAction.
 
 = 3. Invoking dialogs in response to a toolbar action =
 
-Clicking a toolbar action, can invoke  dialog that interacts with the currently selected openoffice document. This dialog needs to extend the `selectorTemplatePanel` class and implement the `IBungeniForm` interface:
+Clicking a toolbar action, can invoke the dialog that interacts with the currently selected openoffice document. This dialog (a JPanel) needs to extend the `selectorTemplatePanel` class and implement the `IBungeniForm` interface:
 
 {{{
 public  class InitPapers extends selectorTemplatePanel implements IBungeniForm {
@@ -123,6 +123,26 @@ public  class InitPapers extends selectorTemplatePanel implements IBungeniForm {
 }
 }}}
 
+At runtime the Bungeni Editor invokes the panel by creating JDialog object and adding the panel to the JDialog.
+
+for e.g. :
+{{{
+     dlg= new JDialog();
+     dlg.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+     /*
+     dialog panel class loaded and initialized here. the class name is retrieved from the toolbarSubAction object
+    */
+     IDialogSelector panel = DialogSelectorFactory.getDialogClass(subAction.dialog_class());
+     panel.initObject(ooDocument, dlg, action, subAction);
+     dlg.getContentPane().add(panel.getPanel());
+     dlg.pack();
+     dlg.setLocationRelativeTo(null);
+     dlg.setVisible(true);
+     dlg.setAlwaysOnTop(true);   
+}}}
+
+
 == Connecting the dialog class to the toolbar action == 
 
-The dialog class is invoked via standard interface by the bungeni editor. The above class for example needs to be specified in the `DIALOG_CLASS` column in the appropriate entry for the subAction in SUB_ACTION_SETTINGS table.
+The dialog class is invoked via a standard interface by the bungeni editor. The above class for example needs to be specified in the `DIALOG_CLASS` column in the appropriate entry for the subAction in SUB_ACTION_SETTINGS table.
+
