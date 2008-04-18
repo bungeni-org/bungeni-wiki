@@ -91,7 +91,38 @@ The command must return false to continue processing the next command in the cha
 == Passing parameters ==
 
 A command usually requires an input parameter. Input parameters are passed using the command chain's context.
-The context is set using the BungeniFormContext class, which is an extension of the contextBase class provided by Apache Chain.  The BungeniFormContext class acts as a marshaller of variables between the command chain and the dialog invoking the command chain.  The dialog, prior to invoking the chain sets all the input variables into  a HashMap, using standard names known by the commands as keys.  This map is then passed into  the form context, and used by the individual commands to retrieve their input variables.
+The context is set using the BungeniFormContext class, which is an extension of the contextBase class provided by Apache Chain.  
+
+The BungeniFormContext class acts as a marshaller of variables between the command chain and the dialog invoking the command chain.  The dialog, prior to invoking the chain sets all the input variables into  a HashMap, using standard names known by the commands as keys.  
+
+{{{
+public class BungeniFormContext extends ContextBase implements IBungeniFormContext{
+
+.....
+
+  public HashMap<String, Object> getPreInsertMap() {
+        return preInsertMap;
+    }
+
+    public void setPreInsertMap(HashMap<String, Object> preInsertMap) {
+        this.preInsertMap = preInsertMap;
+    }
+  
+  ....
+
+      public ArrayList<ooDocMetadataFieldSet> getMetadataFieldSets() {
+        return metadataFieldSets;
+    }
+
+    public void setMetadataFieldSets(ArrayList<ooDocMetadataFieldSet> metadataFieldSets) {
+        this.metadataFieldSets = metadataFieldSets;
+    }
+
+}
+
+}}}
+
+This map is then passed into  the form context, and used by the individual commands to retrieve their input variables. The get & set methods of the preInsertMap (see above example source) is used to get and set the marshalled variables.
 
 
  
