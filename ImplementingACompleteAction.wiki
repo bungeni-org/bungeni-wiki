@@ -141,6 +141,61 @@ for e.g. :
      dlg.setAlwaysOnTop(true);   
 }}}
 
+== Dialog class implementation requirements ==
+
+=== Over-ride methods ===
+
+The dialog class must necessarily extend the following methods :
+
+This is used to initialize the dialog class :
+
+{{{
+public void initObject(OOComponentHelper ooDoc, JDialog dlg, toolbarAction act, toolbarSubAction subAct) {
+    super.initObject( ooDoc, dlg, act, subAct);
+    init();
+    setControlModes();
+}
+}}}
+
+This is invoked by the dialog class:
+
+{{{ 
+public void init(){
+    super.init();
+    initComponents();
+    initFields();
+}
+}}}
+
+This sets the formContext used by the form's command chain.  This is invoked by the base class init() function.
+
+{{{
+public void createContext(){
+      super.createContext();
+      formContext.setBungeniForm(this);
+  }
+
+}}}
+
+This needs to be overriden by the derived class so the form's command chain handler can retrieve the appropriate command catalog based on the dialog class hierarchy.
+
+{{{
+public String getClassName(){
+    return this.getClass().getName();
+}
+}}}
+
+=== Naming form controls ===
+
+For the contextual enabling/disabling of form controls, the form controls need to be explicitly named. This can be done using the dialog editor interface in netbeans (set the name attribute for the controls.).  The table 'ACTION_MODES' allows setting of control states based on mode.
+
+DOC_TYPE|| ACTION_NAME ||ACTION_MODE ||MODE_HIDDEN_FIELD ||SUB_ACTION_NAME||  
+debaterecord ||makePrayerSection ||TEXT_EDIT ||btn_initdebate_selectlogo ||none ||
+debaterecord ||makePrayerSection ||TEXT_EDIT ||txt_initdebate_selectlogo ||none||
+debaterecord ||makePrayerSection ||TEXT_EDIT ||lbl_initdebate_selectlogo ||none||
+debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||lbl_initpapers_title ||none||
+debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||txt_initpapers_title ||none||
+
 
 == Connecting the dialog class to the toolbar action == 
 
