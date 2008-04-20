@@ -1,0 +1,44 @@
+#summary How to validate Bungeni Editor selector forms
+#labels BungeniEditorClient
+
+== Introduction ==
+
+Bungeni Editor selector forms can have different types of fields allowing user input, and these need to be validated in a standard manner.
+
+
+== selectorTemplatePanel helper events ==
+
+The base class for all selector forms, 'selectorTemplatePanel' provides an event infrastructure to validate forms.
+Derived dialog classes need to override the 'validateFieldValue' function e.g. :
+
+The function takes two parameters, the base class invokes the function for each component on the form, and passes in the field-value.
+
+{{{
+public boolean validateFieldValue(Component field, Object fieldValue ) {
+}}}
+
+The field to be validated can be determined by its name using Component::geName() : 
+
+{{{
+	String formFieldName = field.getName();
+
+}}}
+
+The field name can then be evaluated to call a field specific validator :
+
+{{{
+      boolean bFailure=true;
+      if (formFieldName.equals("tbl_initpapers_tableddocs")) {
+          bFailure = validateTabledDocs(field);
+      } else if (formFieldName.equals("txt_initpapers_title")) {
+          bFailure = validateTitle(field, fieldValue);
+      }
+}}}
+
+Finally, return true / false to cause the validation to succeed / fail.
+
+{{{
+   return bFailure;
+}}}
+
+
