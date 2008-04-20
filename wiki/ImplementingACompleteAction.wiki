@@ -189,12 +189,12 @@ public String getClassName(){
 
 For the contextual enabling/disabling of form controls, the form controls need to be explicitly named. This can be done using the dialog editor interface in netbeans (set the name attribute for the controls.).  The table 'ACTION_MODES' allows setting of control states based on mode.
 
-DOC_TYPE|| ACTION_NAME ||ACTION_MODE ||MODE_HIDDEN_FIELD ||SUB_ACTION_NAME||  
-debaterecord ||makePrayerSection ||TEXT_EDIT ||btn_initdebate_selectlogo ||none ||
-debaterecord ||makePrayerSection ||TEXT_EDIT ||txt_initdebate_selectlogo ||none||
-debaterecord ||makePrayerSection ||TEXT_EDIT ||lbl_initdebate_selectlogo ||none||
-debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||lbl_initpapers_title ||none||
-debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||txt_initpapers_title ||none||
+||DOC_TYPE|| ACTION_NAME ||ACTION_MODE ||MODE_HIDDEN_FIELD ||SUB_ACTION_NAME||  
+||debaterecord ||makePrayerSection ||TEXT_EDIT ||btn_initdebate_selectlogo ||none ||
+||debaterecord ||makePrayerSection ||TEXT_EDIT ||txt_initdebate_selectlogo ||none||
+||debaterecord ||makePrayerSection ||TEXT_EDIT ||lbl_initdebate_selectlogo ||none||
+||debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||lbl_initpapers_title ||none||
+||debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||txt_initpapers_title ||none||
 
 
 == Connecting the dialog class to the toolbar action == 
