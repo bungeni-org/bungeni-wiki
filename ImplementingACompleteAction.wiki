@@ -193,8 +193,15 @@ For the contextual enabling/disabling of form controls, the form controls need t
 ||debaterecord ||makePrayerSection ||TEXT_EDIT ||btn_initdebate_selectlogo ||none ||
 ||debaterecord ||makePrayerSection ||TEXT_EDIT ||txt_initdebate_selectlogo ||none||
 ||debaterecord ||makePrayerSection ||TEXT_EDIT ||lbl_initdebate_selectlogo ||none||
+||debaterecord ||makePrayerSection ||TEXT_SELECTED_INSERT ||txt_initdebate_selectlogo ||debatedate_entry||
+||debaterecord ||makePrayerSection ||TEXT_SELECTED_INSERT ||lbl_initdebate_selectlogo ||debatedate_entry||
+||debaterecord ||makePrayerSection ||TEXT_SELECTED_INSERT ||txt_initdebate_selectlogo ||debatetime_entry||
+||debaterecord ||makePrayerSection ||TEXT_SELECTED_INSERT ||lbl_initdebate_selectlogo ||debatetime_entry||
+||debaterecord ||makePrayerSection ||TEXT_SELECTED_INSERT ||dt_initdebate_timeofhansard ||debatedate_entry||
+||debaterecord ||makePrayerSection ||TEXT_SELECTED_INSERT ||dt_initdebate_hansarddate ||debatetime_entry||
 ||debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||lbl_initpapers_title ||none||
 ||debaterecord ||makePaperSection ||TEXT_SELECTED_INSERT ||txt_initpapers_title ||none||
+
 
 
 == Connecting the dialog class to the toolbar action == 
