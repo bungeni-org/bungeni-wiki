@@ -1,5 +1,12 @@
+#summary How to implement a complete action
 #labels BungeniEditorClient
-= 1 - Define a toolbar action in toolbar.xml =
+
+*Table of Contents*
+
+[ImplementingACompleteAction#1_define_a_toolbar_action_in_toolbar.xml 1 Define a toolbar action in toolbar.xml]
+[ImplementingACompleteAction#2_calling_a_router_action_in_response_to_a_toolbar_action 2 Calling a router action in response to a toolbar action]
+
+= 1 Define a toolbar action in toolbar.xml =
 
 == Adding a blockAction == 
 
