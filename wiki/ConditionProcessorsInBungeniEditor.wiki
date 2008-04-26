@@ -1,4 +1,4 @@
-#summary how to setup conditional processors in the editor
+#summary how to setup conditional processors in the Bungeni Editor
 #labels BungeniEditorClient
 
 = Introduction =
