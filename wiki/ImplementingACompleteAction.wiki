@@ -3,8 +3,8 @@
 
 *Table of Contents*
 
-[ImplementingACompleteAction#1_define_a_toolbar_action_in_toolbar.xml 1 Define a toolbar action in toolbar.xml]
-[ImplementingACompleteAction#2_calling_a_router_action_in_response_to_a_toolbar_action 2 Calling a router action in response to a toolbar action]
+[ImplementingACompleteAction#1_Define_a_toolbar_action_in_toolbar.xml 1 Define a toolbar action in toolbar xml]
+[ImplementingACompleteAction#2_Calling_a_router_action_in_response_to_a_toolbar_action 2 Calling a router action in response to a toolbar action]
 
 = 1 Define a toolbar action in toolbar.xml =
 
@@ -114,7 +114,7 @@ The subAction element is described here:
 
 The attributes function exactly as described for the <action> element
 
-= 2. Calling a router action in response to a toolbar action =
+= 2 Calling a router action in response to a toolbar action =
 
 Typically router actions, act on the document without requesting user interaction.
 The router action is defined for the subAction in the ROUTER_CLASS column for the subAction in the 'SUB_ACTION_SETTINGS' table.
