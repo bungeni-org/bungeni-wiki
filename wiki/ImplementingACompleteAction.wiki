@@ -4,9 +4,9 @@
 *Table of Contents*
 
 * [ImplementingACompleteAction#1_Define_a_toolbar_action_in_toolbar_xml 1 Define a toolbar action in toolbar xml]
-  * [ImplementingACompleteAction#Adding_a_blockaction  Adding a block action]
-  * [ImplementingACompleteAction#Adding_a_action_element Adding a action element]
-  * [ImplementingACompleteAction#Adding_a_subaction_element Adding a subAction element]
+  * [ImplementingACompleteAction#Adding_a_blockAction  Adding a blockAction]
+  * [ImplementingACompleteAction#Adding_a_Action_element Adding a action element]
+  * [ImplementingACompleteAction#Adding_a_subAction_element Adding a subAction element]
 * [ImplementingACompleteAction#2_Calling_a_router_action_in_response_to_a_toolbar_action 2 Calling a router action in response to a toolbar action]
 
 = 1 Define a toolbar action in toolbar xml =
