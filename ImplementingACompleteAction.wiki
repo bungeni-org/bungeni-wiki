@@ -224,6 +224,36 @@ indicate that the controls named,
 
 for the sub_action named 'debatedate_entry', will be hidden in TEXT_SELECTED_INSERT mode.
 
+=== Handling form Submissions ===
+
+Form submission is handled in the forms via a standard call back mechanism.  The base class 'selectorTemplatePanel' provides the following overridable API to trap events in specific modes :
+
+{{{
+
+ /** events invoked for TEXT_EDIT mode **/ 
+  public boolean preFullEdit();
+  public boolean postFullEdit();
+  public boolean processFullEdit();
+
+ /** events invoked for TEXT_INSERTION mode **/  
+  public boolean preFullInsert();
+  public boolean postFullInsert();
+  public boolean processFullInsert();
+  
+ /** events invoked for TEXT_SELECTED_INSERT mode **/
+  public boolean preSelectInsert();
+  public boolean postSelectInsert();
+  public boolean processSelectInsert();
+ 
+}}}
+
+The API functions are always invoked in the following order :
+
+pre<mode function>() ==> process<mode function>() ==> post<mode function>() 
+
+
+
+
 == Connecting the dialog class to the toolbar action == 
 
 The dialog class is invoked via a standard interface by the bungeni editor. The above class for example needs to be specified in the `DIALOG_CLASS` column in the appropriate entry for the subAction in SUB_ACTION_SETTINGS table.
