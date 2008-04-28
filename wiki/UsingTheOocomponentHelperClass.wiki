@@ -1,6 +1,14 @@
 #summary The OOComponentHelper class is an OpenOffice UNO library encapsulation class
 #labels BungeniEditorClient
 
+= Table of Contents = 
+
+* [UsingTheOocomponentHelperClass#The_OOComponentHelper_Class The OOComponentHelperClass]
+	* [UsingTheOocomponentHelperClass#Example_1 Example 1]
+	* [UsingTheOocomponentHelperClass#Example_2 Example 2]
+
+
+
 = The OOComponentHelper Class =
 
 OpenOffice basic is very useful for quick prototyping and testing of OpenOffice automation code. OO Basic uses the same underlying UNO interface layer used by the OpenOffice Java API. This makes it possible to quickly prototype in OO Basic and translate the code into java at a later point for more extensive adaptation.
@@ -9,7 +17,7 @@ However the Java OpenOffice API is cumbersome and requires navigating through th
 
 The OOComponentHelper makes this translation easier.
 
-= Example Usage =
+== Example 1 ==
 
 The following is an OpenOffice basic function :
 
@@ -94,3 +102,50 @@ The following is a line-by-line translation of the above function to java, using
  }
 
 }}}
+
+== Example 2 ==
+
+{{{
+  private ArrayList<Object> getRefMarkPortionFromPara (Object oTextElement, String refHeading) {
+ // Function getReferenceMarkPortionFromPara (oTextElement as Object)
+       /* BASIC:
+        Dim arrSize as integer          
+       Dim oPortionEnum 'textportion enumerator object
+       Dim oPortion
+       Dim arrPortions()
+        */
+      ArrayList<Object> arrPortions = new ArrayList<Object>(0);
+      /* BASIC:
+      oPortion = Nothing      
+       */
+      //BASIC: oPortionEnum = oTextElement.createEnumeration
+      XEnumerationAccess xAccess = ooQueryInterface.XEnumerationAccess(oTextElement);
+      XEnumeration paraEnumeration = xAccess.createEnumeration();
+      
+      // BASIC: do while oPortionEnum.hasMoreElements
+      while (paraEnumeration.hasMoreElements()) {
+               //BASIC: oPortion = oPortionEnum.nextElement
+               Object oPortion = paraEnumeration.nextElement();
+               XPropertySet xPortionPropertySet = ooQueryInterface.XPropertySet(oPortion);
+               //BASIC: if oPortion.TextPortionType = "ReferenceMark" then
+               if (xPortionPropertySet.getPropertySetInfo().hasPropertyByName("TextPortionType") ) {
+                  String portionType = AnyConverter.toString(xPortionPropertySet.getPropertyValue("TextPortionType"));
+                  if (portionType.equals("ReferenceMark")) {
+                       /* BASIC:
+                        arrSize=UBound(arrPortions) + 1
+                       Redim preserve arrPortions(arrSize)    
+                       arrPortions(UBound(arrPortions)) = OPortion
+                       */
+                      arrPortions.add(oPortion);
+                  }  
+               }
+      }
+      
+      //BASIC: getReferenceMarkPortionFromPara = arrPortions
+      return arrPortions;
+
+//End Function
+  }
+
+}}}
+
