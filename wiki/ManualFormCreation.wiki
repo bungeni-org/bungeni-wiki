@@ -189,20 +189,43 @@ class GroupSittingAdd( ContentAddForm ):
                  CheckSittingDatesInsideParentDates( self.context, data))      
 }}}
 
+==Display Invariant or custom validation errors in the context of the field(s) that caused it==
 
-third, yes you can use a schema invariant and still have access to
-context, but thats only meaningful in certain an edit form context.
+The exceptions raised by invariants/custom validations can be displayed at the fields involved.
+If you test for start/end date the invariant error or validation error
+should not be displayed at the top of the form but at the start/end date
+fields (like a widget validation error)
 
-a parent is accessed via ob.__parent__
+{{{
+####
+# Display invariant errors /  custom validation errors in the context of the field
+# that raised the error.
 
+def set_widget_errors(widgets, errors):
+    for widget in widgets:
+        name = widget.context.getName()
+        for error in errors:
+            if isinstance(error, interface.Invalid) and name in error.args[1:]:
+                if widget._error is None:
+                    widget._error = error
+}}}
 
->
->  If i check constraints with invariants i can only access the current
->  fields of the form. afaik there is no way to access the parent of the
->  object i am editing (or is there?).
->
->  the computed field must not be editable and should be hidden by default,
->  though in some use cases it would make sense to display it.
->
+Then make the form update method do: 
+{{{
+    def update(self):
+        """
+        Called by formlib after __init__ for every page update. This is
+        the method you can use to update form fields from your class
+        """        
+        self.status = self.request.get('portal_status_message','')        
+        form.AddForm.update( self )
+        set_widget_errors(self.widgets, self.errors)    
+}}}
 
-use a custom form and omit the field or set it to display mode.
+Then when you define your invariant, pass the field names it refers,
+such as:
+{{{
+     @invariant
+     def checkSomething(data):
+         raise Invalid("Some error", 'field1', 'field2') 
+}}}
