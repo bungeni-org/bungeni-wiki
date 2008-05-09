@@ -23,6 +23,7 @@ sudo dpkg -i *.deb
 
 in the folder into which you downloaded the OpenOffice debian package files.
 
+_NOTE: the below steps using Alien are required only if you want to install the openoffice rpm package on ubuntu_
 
 *Alien* - This is required to convert the RPM installer of the JRE / JDK downloaded from the Sun.com website. Install Alien by running the following command from the command line:
 
