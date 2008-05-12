@@ -13,15 +13,33 @@ These installation instructions were tested on Ubuntu Dapper (6.06) and the same
 
 
 *OpenOffice 2.3* - Ubuntu comes packaged with an OpenOffice release. Unfortunately this OpenOffice installation is a repackaged installation produced by Ubuntu and it changes the folder structure of the OpenOffice installation. This change makes it incompatible with the cross platform UNO class loader used by Bungeni EditorClient. As a preliminary step, uninstall the packaged OpenOffice provided by ubuntu by uninstalling it using package manager. 
-Download the OpenOffice 2.3 debian package from [http://download.openoffice.org/ http://download.openoffice.org] . Download the OpenOffice installation package _Without JRE_. 
+Download the OpenOffice 2.3 debian package from [http://download.openoffice.org/ http://download.openoffice.org] . Download the OpenOffice installation package _Without JRE_ and extract it a folder on your computer. 
 
-Install the package with the following command:
+Install the package by running the following command from the openoffice-extracted-folder/DEBS path :
 
 {{{
 sudo dpkg -i *.deb
 }}}
 
-in the folder into which you downloaded the OpenOffice debian package files.
+Install the desktop integration package :
+
+{{{
+cd desktop-integration
+sudo dpkg -i *.deb
+}}}
+
+_Setting Nautilus to appear as the default File->Open dialog_ :
+
+Launch Openoffice go to tools->options->OpenOffice.org->General 
+Uncheck "Use OpenOffice dialogs in file/open dialogs"
+
+_Enabling TTF fonts in openoffice_ :
+
+Open a terminal window and install the core TTF fonts :
+{{{
+	sudo apt-get install msttcorefonts
+}}}
+
 
 _NOTE: the below steps using Alien are required only if you want to install the openoffice rpm package on ubuntu_
 
@@ -63,10 +81,13 @@ Also download the latest release of BungeniLibs_revXXX.oxt from the same page. T
 5)Edit the file runEditor.sh by opening it in Gnome TextEditor.
 
 {{{
-export JAVA_HOME=/usr/java/jdk1.5.0_11
-$JAVA_HOME/bin/java -jar BungeniEditorClient.jar
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+export BUNGENI_EDITOR_HOME=${PWD}
+export LOG4J_PROPS=file://$BUNGENI_EDITOR_HOME/settings/log4j.properties
+$JAVA_HOME/bin/java -Dlog4j.ignoreTCL=true -Dlog4j.configuration=$LOG4J_PROPS -jar BungeniEditorClient.jar
 }}}
-Set the JAVA_HOME variable to the path of the JAVA installation in your computer (usually /usr/java/<folder where jre was installed> ). Now save the file and exit from the editor. 
+
+Set the JAVA_HOME variable (the first line of the script) to the path of the JAVA installation in your computer (usually /usr/java/<folder where jre was installed> ). Now save the file and exit from the editor. 
 
 
 6) Make sure the _runEditor.sh_ file has _execute_ permissions, if not, give it _execute_ permissions. Do this by right clicking on runEditor.sh in nautilus and clicking properties. Select the permissions tab and give the _group_ and the _owner_ execute permissions. Click OK. 
