@@ -1,0 +1,15 @@
+#labels Phase-Deploy
+This page contains instructions for installing Bungeni Metavid on Linux. It may be possible to install Bungeni Metavid on Windows but this has not been tested.
+
+= Introduction =
+
+Bungeni Metavid is a PHP application for the transcription of parliamentary records and is built on Metavid [[http://metavid.ucsc.edu/]]
+
+TO DO : more info here
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
