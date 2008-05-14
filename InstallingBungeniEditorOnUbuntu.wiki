@@ -9,7 +9,7 @@ These installation instructions were tested on Ubuntu Dapper (6.06) and the same
 
 == Prerequisites ==
 
-*OpenJVM / Sun Java JRE* - Ubuntu by default comes packaged with the GCJ open source JRE. The EditorClient will not work on this JRE as it requires the Swing UI libraries that come packaged with the Sun JVM / OpenJVM release. Install the Sun JRE on the Ubuntu box either through package manager or download the RPM package from [http://java.sun.com/ http://java.sun.com]. The EditorClient requires at least JRE / JDK version 1.5.0.11.
+*OpenJVM / Sun Java JRE* - Ubuntu by default comes packaged with the GCJ open source JRE. The EditorClient will not work on this JRE as it requires the Swing UI libraries that come packaged with the Sun JVM / OpenJVM release. Install the Sun JRE on the Ubuntu box either through package manager or download the from [http://java.sun.com/ http://java.sun.com]. The EditorClient requires at least JRE / JDK version 1.5.0.11.
 
 
 *OpenOffice 2.3* - Ubuntu comes packaged with an OpenOffice release. Unfortunately this OpenOffice installation is a repackaged installation produced by Ubuntu and it changes the folder structure of the OpenOffice installation. This change makes it incompatible with the cross platform UNO class loader used by Bungeni EditorClient. As a preliminary step, uninstall the packaged OpenOffice provided by ubuntu by uninstalling it using package manager. 
