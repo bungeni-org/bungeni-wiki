@@ -1,6 +1,14 @@
 #summary how to setup conditional processors in the Bungeni Editor
 #labels BungeniEditorClient
 
+*Table of Contents*
+
+* [ConditionProcessorsInBungeniEditor#Introduction Introduction]
+* [ConditionProcessorsInBungeniEditor#Writing_a_new_Conditon  Writing a new condition]
+* [ConditionProcessorsInBungeniEditor#Registering_a_Conditon Registering a condition]
+* [ConditionProcessorsInBungeniEditor#Currently_Available_Conditions Currently Available Conditions]
+
+
 = Introduction =
 
 The Bungeni editor has a contextual toolbar driven editing interface that changes state based on the cursor position in the document. The behaviour of the toolbar is determined by a set of rule-based conditions defined in the settings, and activated via entries in toolbar.xml
@@ -47,9 +55,21 @@ Once a condition has been registered in the settings database it is available fo
 
 example:
 {{{
-cursorInSection:sectionName
+cursorInSection:sectionQuestion
 }}}
-returns true if the cursor is in a section called sectionName
+
+the above returns true if the cursor is in a section called sectionQuestion.
+
+sectionName can be a regular expression pattern:
+
+example:
+{{{
+cursorInSection:sectionQ.
+}}}
+
+the above returns true for all section names matching the sectionQ. pattern :
+sectionQuestion, sectionQuestionAnswer, sectionQA...etc..
+
 
 == fieldExists / fieldNotExists == 
 
@@ -91,7 +111,7 @@ example:
 sectionExists:sectionName
 }}}
 evaluates to true if the section `sectionName` exists in the document
-
+sectionName can be a regular expression pattern.
 
 == textSelected == 
 
