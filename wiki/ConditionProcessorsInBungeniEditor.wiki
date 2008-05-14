@@ -3,10 +3,10 @@
 
 *Table of Contents*
 
-* [ConditionProcessorsInBungeniEditor#Introduction Introduction]
-* [ConditionProcessorsInBungeniEditor#Writing_a_new_Conditon  Writing a new condition]
-* [ConditionProcessorsInBungeniEditor#Registering_a_Conditon Registering a condition]
-* [ConditionProcessorsInBungeniEditor#Currently_Available_Conditions Currently Available Conditions]
+* [ConditionProcessorsInBungeniEditor#Introduction Introduction] 
+* [ConditionProcessorsInBungeniEditor#Writing_a_new_Conditon  Writing a new condition] 
+* [ConditionProcessorsInBungeniEditor#Registering_a_Conditon Registering a condition] 
+* [ConditionProcessorsInBungeniEditor#Currently_Available_Conditions Currently Available Conditions] 
 
 
 = Introduction =
@@ -131,4 +131,4 @@ Chained conditions :
 condition="cursorInSection:masthead :and: textSelected:true :and: fieldNotExists:debaterecord_official_date"
 }}}
 
-[http://code.google.com/p/bungeni-portal/source/browse/BungeniOOo/BungeniEditor/trunk/BungeniEditorClient/dist/settings/toolbar.xml  example toolbar.xml file]
+[http://code.google.com/p/bungeni-portal/source/browse/BungeniOOo/BungeniEditor/trunk/BungeniEditorClient/dist/settings/toolbar_debate.xml  example toolbar.xml file]
