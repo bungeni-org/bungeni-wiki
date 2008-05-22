@@ -6,13 +6,35 @@
 The BungeniEditor supports multiple document types.  Additional document types can be added by adding configuration entries into the editor's settings database.
 The following steps describe the config entries required to register a new document type in the editor.
 
-= Registering the new Document Type =
+== 1. Register the new Document Type ==
 
 Make an entry in the settings db's DOCUMENT_TYPES table, for e.g. if we were registering the bill document type, the following entry will be required :
 
 || DOC_TYPE || DESCRIPTION || TEMPLATE_PATH ||
 || debaterecord || debate record || workspace/templates/hansard.ott||
 || bill || bill document || workspace/templates/bill.ott||
+
+The DOC_TYPE column records the document type identifier used by the system.
+The TEMPLATE_PATH points to the document template for the document type.
+
+== 2. Root section definition ==
+
+The root section is the container for the document contents. The name of the root section needs to be parametrized as a general editor property.
+Add a general editor property in the following format:
+
+Property Name  = root:DOC_TYPE
+Property Value = rootName
+
+for e.g to define the root section for the bill document type :
+
+Property Name  = root:bill
+Property Value = root
+
+defines the root of the bill document type as "root".
+
+
+
+
 
 
 <<<< TO DO >>>>> 
