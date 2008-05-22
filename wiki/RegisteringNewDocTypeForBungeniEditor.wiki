@@ -1,0 +1,18 @@
+#summary How to register a new document type for BungeniEditor
+#labels BungeniEditorClient
+
+= Introduction =
+
+The BungeniEditor supports multiple document types.  Additional document types can be added by adding configuration entries into the editor's settings database.
+The following steps describe the config entries required to register a new document type in the editor.
+
+= Registering the new Document Type =
+
+Make an entry in the settings db's DOCUMENT_TYPES table, for e.g. if we were registering the bill document type, the following entry will be required :
+
+|| DOC_TYPE || DESCRIPTION || TEMPLATE_PATH ||
+|| debaterecord || debate record || workspace/templates/hansard.ott||
+|| bill || bill document || workspace/templates/bill.ott||
+
+
+<<<< TO DO >>>>> 
