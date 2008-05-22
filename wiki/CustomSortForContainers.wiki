@@ -12,9 +12,9 @@ This can be done with a customizations of the container display view.
 
 Specifically you have to customize the listing method which returns a rendered table using the zc.table library. You can specify any sequence of the contained instances that you want, when instantiating the formatter.
 
-E.g. to sort by the query parameter 'order_by':
+E.g. to sort by the query parameter `order_by`:
 
-The 'context._class.c._data._list' is a list of all column names in your current context. For security reasons (SQL injection) the parameter is checked against them. Anyway it would not make much sense to order by a column which is not part of the query ;)
+The `context._class.c._data._list` is a list of all column names in your current context. For security reasons (SQL injection) the parameter is checked against them. Anyway it would not make much sense to order by a column which is not part of the query ;)
 
 {{{
 import alchemist.ui.container
