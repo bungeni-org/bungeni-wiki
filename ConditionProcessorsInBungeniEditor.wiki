@@ -4,9 +4,13 @@
 *Table of Contents*
 
 * [ConditionProcessorsInBungeniEditor#Introduction Introduction] 
+
 * [ConditionProcessorsInBungeniEditor#Writing_a_new_Conditon  Writing a new condition] 
+
 * [ConditionProcessorsInBungeniEditor#Registering_a_Conditon Registering a condition] 
+
 * [ConditionProcessorsInBungeniEditor#Currently_Available_Conditions Currently Available Conditions] 
+
 
 
 = Introduction =
@@ -14,9 +18,23 @@
 The Bungeni editor has a contextual toolbar driven editing interface that changes state based on the cursor position in the document. The behaviour of the toolbar is determined by a set of rule-based conditions defined in the settings, and activated via entries in toolbar.xml
 
 
-= Writing a new Conditon =
+= Operators = 
 
-Currently the ":and:" and ":or:" operators are supported by the toolbar.xml syntax, and allow chaining of conditions.
+Currently the ":and:" and ":or:" operators are supported by the toolbar xml syntax, and allow chaining of conditions.
+e.g. you can chain as follows :
+
+cursorInSection:mainsection :and: sectionExists:sectionname
+
+UPDATE:
+
+A negation operator ("!") is also allowed to negate conditions :
+
+{{{
+!cursorInSection:mainsection :and: !sectionExists:asection
+}}}
+
+
+= Writing a new Conditon =
 
 To write a new condition, the class must implement the IBungeniToolbarCondition interface, and implement 2 methods: 
 `setOOComponentHelper()` - which allows passing the openoffice context object to the condition processor, and a ;
