@@ -240,5 +240,5 @@ A simple way to define the order in which the fields are displayed is to define 
     form_fields["start_date"].custom_widget = SelectDateWidget
     form_fields["start_date"].field.description = _(u"Begin of the parliamentary mandate")
     form_fields["start_date"].field.title = _(u"Mandate start")
-    form_fields["start_date"].field.default = datetime.date.totady()
+    form_fields["start_date"].field.default = datetime.date.today()
 }}}
