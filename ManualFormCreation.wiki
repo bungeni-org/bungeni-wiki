@@ -230,11 +230,15 @@ such as:
          raise Invalid("Some error", 'field1', 'field2') 
 }}}
 
-==Changing the sort order of the fields==
+==Changing the sort order and attributes of the fields==
 
-A simple way to define the order in which the fields are displayed is to define their order by explicitly selecting them for display in the form.
+A simple way to define the order in which the fields are displayed is to define their order by explicitly selecting them for display in the form. You may also change attribute of the fields here.
 
 {{{
     form_fields = form.Fields( IMemberOfParliamentAdd ).select( "user_id",    
                     "elected_nominated", "start_date", "end_date", "leave_reason")
+    form_fields["start_date"].custom_widget = SelectDateWidget
+    form_fields["start_date"].field.description = _(u"Begin of the parliamentary mandate")
+    form_fields["start_date"].field.title = _(u"Mandate start")
 }}}
+
