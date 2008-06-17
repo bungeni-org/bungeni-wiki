@@ -229,3 +229,12 @@ such as:
      def checkSomething(data):
          raise Invalid("Some error", 'field1', 'field2') 
 }}}
+
+==Changing the sort order of the fields==
+
+A simple way to define the order in which the fields are displayed is to define their order by explicitly selecting them for display in the form.
+
+{{{
+    form_fields = form.Fields( IMemberOfParliamentAdd ).select( "user_id",    
+                    "elected_nominated", "start_date", "end_date", "leave_reason")
+}}}
