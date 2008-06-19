@@ -1,3 +1,0 @@
-#summary Bungeni needs some configuration in order to be usable.
-
-The RotaTool needs to be configured before it will be possible to add a rota folder to a sitting. You can find the configlet for the RotaTool in the Plone setup area.
