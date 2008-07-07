@@ -4,8 +4,8 @@
 ==Pre-requisites==
 
   * Build environment (on ubunutu do a `sudo apt-get install build-essentials` )
-  * Python 2.5 (or 2.4) built from source. (on ubuntu you might need to install development libaries/headers for imaging and bz2 libraries)
-  * PostGreSQL build from source requires development libraries/headers for bison, flex and readline. (on ubuntu installed via apt-get)
+  * Python 2.5 (or 2.4) built from source. (on ubuntu you might need to install development libaries/headers for imaging and bz2 (libbz2-dev) libraries)
+  * PostGreSQL build from source requires development libraries/headers for: bison, flex ,readline (libreadline5-dev), zlib (zlib1g-dev). (on ubuntu installed via apt-get)
 
 ==Setup==
 
