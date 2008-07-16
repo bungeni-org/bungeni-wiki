@@ -8,11 +8,12 @@ Bungeni Metavid is a PHP application for the transcription of parliamentary reco
 = Requirements =
 
 Metavid Bungeni depends on
-  * PHP5
-  * MySQL
-  * Apache
+
+  * MediaWiki (current stable version is 1.12.0)
+  * Web Server such as Apache or IIS
+  * PHP version 5.0 or later (5.1.x recommended)
+  * MySQL 4.0 or later
   * mod_annodex or oggz-chop
-  * Mediawiki
   * Semantic MediaWiki
 
 = Installation =
