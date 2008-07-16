@@ -29,7 +29,7 @@ For windows, download and install the java 6 JRE using the instructions provided
 ===Installing OpenOffice.org===
 
 *OpenOffice.org 2.4* - Ubuntu comes packaged with an OpenOffice release. Unfortunately this OpenOffice installation is a repackaged installation produced by Ubuntu and it changes the folder structure of the OpenOffice installation. This change makes it incompatible with the cross platform UNO class loader used by Bungeni EditorClient. As a preliminary step, uninstall the packaged OpenOffice provided by ubuntu by uninstalling it using package manager. 
-Download the OpenOffice 2.3 debian package from [http://download.openoffice.org/ http://download.openoffice.org] . Download the OpenOffice installation package _Without JRE_ and extract it a folder on your computer. 
+Download the OpenOffice 2.4 debian package from [http://download.openoffice.org/ http://download.openoffice.org] . Download the OpenOffice installation package _Without JRE_ and extract it a folder on your computer. 
 
 Install the package by running the following command from the openoffice-extracted-folder/DEBS path :
 
