@@ -12,29 +12,23 @@ These installation instructions were tested on Ubuntu Dapper (6.06) and the same
 
 ===Installing the Java Runting===
 
-*OpenJVM / Sun Java JRE* - Ubuntu by default comes packaged with the GCJ open source JRE. The EditorClient will not work on this JRE as it requires the Swing UI libraries that come packaged with the Sun JVM / OpenJVM release. Install the Sun JRE on the Ubuntu box either through package manager or download the RPM package from [http://java.sun.com/ http://java.sun.com]. The EditorClient requires at least JRE / JDK version 1.5.0.11.
+*OpenJVM / Sun Java JRE* - Ubuntu by default comes packaged with the GCJ open source JRE. The EditorClient will not work on this JRE as it requires the Swing UI libraries that come packaged with the Sun JVM / OpenJVM release. Install the Sun JRE on the Ubuntu box either through package manager or download the RPM package from [http://java.sun.com/ http://java.sun.com]. The EditorClient requires at least JRE / JDK version 1.6 + 
 
-To install the JAV JRE on Ubuntu in the terminal window run the following:
+To install the Sun Java JRE on Ubuntu in the terminal window run the following:
 {{{
 sudo apt-get install sun-java6-jre
-}}}
-Or alternatively for the java5 jre :
-{{{
-sudo apt-get install sun-java5-jre
 }}}
 
 To install the full JDK 1.6 on Ubuntu (useful for running a development instance of the editor)  in the terminal window, run the following :
 {{{
 sudo apt-get install sun-java6-jdk
 }}}
-To install the JDK 1.5 on Ubuntu in the terminal window run the following :
-{{{
-sudo apt-get install sun-java5-jdk
-}}}
+
+For windows, download and install the java 6 JRE using the instructions provided [http://java.sun.com/javase/6/webnotes/install/jre/install-windows.html here]
 
 ===Installing OpenOffice.org===
 
-*OpenOffice.org 2.3* - Ubuntu comes packaged with an OpenOffice release. Unfortunately this OpenOffice installation is a repackaged installation produced by Ubuntu and it changes the folder structure of the OpenOffice installation. This change makes it incompatible with the cross platform UNO class loader used by Bungeni EditorClient. As a preliminary step, uninstall the packaged OpenOffice provided by ubuntu by uninstalling it using package manager. 
+*OpenOffice.org 2.4* - Ubuntu comes packaged with an OpenOffice release. Unfortunately this OpenOffice installation is a repackaged installation produced by Ubuntu and it changes the folder structure of the OpenOffice installation. This change makes it incompatible with the cross platform UNO class loader used by Bungeni EditorClient. As a preliminary step, uninstall the packaged OpenOffice provided by ubuntu by uninstalling it using package manager. 
 Download the OpenOffice 2.3 debian package from [http://download.openoffice.org/ http://download.openoffice.org] . Download the OpenOffice installation package _Without JRE_ and extract it a folder on your computer. 
 
 Install the package by running the following command from the openoffice-extracted-folder/DEBS path :
@@ -49,6 +43,8 @@ Install the desktop integration package :
 cd desktop-integration
 sudo dpkg -i *.deb
 }}}
+
+On windows, download and install openoffice.org 2.4 from the [http://download.openoffice.org openoffice.org download page]
 
 ==== Setting Nautilus to appear as the default File->Open dialog ====
 
@@ -87,12 +83,12 @@ sudo dpkg -i *.deb
 
 
 == Installing BungeniEditor Client ==
+
 1) Download the latest release of the Editor Client from:
 
-[http://code.google.com/p/bungeni-portal/downloads http://code.google.com/p/bungeni-portal/downloads]
+[http://code.google.com/p/bungeni-portal/downloads/list?q=label:BungeniEditorClient  BungeniEditor client download]
 
-Also download the latest release of BungeniLibs_revXXX.oxt from the same page. This is the OpenOffice Basic client libraries used by the EditorClient.
-
+Download the 2 listed files, one is a .jar installer application, the second is .oxt OpenOffice basic extension library.
 
 2) Now launch OpenOffice. Go to Tools->Extensions, click _Add ..._, and select the BungeniLibs_revXXX.oxt file that you downloaded in step (1), and click _OK_.
 
@@ -100,23 +96,12 @@ Also download the latest release of BungeniLibs_revXXX.oxt from the same page. T
 3) Close OpenOffice.
 
 
-4) Extract the zip archive for the Bungeni EditorClient into its own folder. 
+4) Right click on the jar file downloaded in step (1) and in Nautilus select open with "sun java runtime 6.0" (in windows explorer double click on the jar file).
 
-5)Edit the file runEditor.sh by opening it in Gnome TextEditor.
+5) Follow the on-screen instructions of the installer.
 
-{{{
-export JAVA_HOME=/usr/lib/jvm/java-6-sun
-export BUNGENI_EDITOR_HOME=${PWD}
-export LOG4J_PROPS=file://$BUNGENI_EDITOR_HOME/settings/log4j.properties
-$JAVA_HOME/bin/java -Dlog4j.ignoreTCL=true -Dlog4j.configuration=$LOG4J_PROPS -jar BungeniEditorClient.jar
-}}}
-
-Set the JAVA_HOME variable (the first line of the script) to the path of the JAVA installation in your computer (usually /usr/java/<folder where jre was installed> ). Now save the file and exit from the editor. 
-
-
-6) Make sure the _runEditor.sh_ file has _execute_ permissions, if not, give it _execute_ permissions. Do this by right clicking on runEditor.sh in nautilus and clicking properties. Select the permissions tab and give the _group_ and the _owner_ execute permissions. Click OK. 
-
-7) Now double click on _runEditor.sh_ and select _Run_. 
+6) In ubuntu : double click on _runEditor.sh_ and select _Run_ to launch the editor.
+ In windows : double click on _runEditor.bat_ to launch the editor.
 
 === Logging and error messages === 
 
@@ -124,4 +109,4 @@ The editor logs error and debug messages into the log/logs.txt (path relative to
 
 === Modifying Editor settings ===
 
-TO - BE - DONE
+The editor settings can be modified by accesing the configuration database. The configuration database is an embedded java database accessible via the web browser.
