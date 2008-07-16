@@ -39,3 +39,5 @@ enableSemantics('localhost');
 //include after enableSemantics to enable metavid Extension semantic wiki overrides
 enableMetavid();
 }}}
+
+Metavid Bungeni uses some extra tables in addition to those used by Mediawiki. Run the sql: maintenance/mv_tables.sql to add them.
