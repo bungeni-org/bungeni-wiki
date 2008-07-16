@@ -1,15 +1,41 @@
 #labels Phase-Deploy
-This page contains instructions for installing Bungeni Metavid on Linux. It may be possible to install Bungeni Metavid on Windows but this has not been tested.
+This page contains instructions for installing Bungeni Metavid on Linux. It may be possible to install Bungeni Metavid on other platforms but this has not been tested.
 
 = Introduction =
 
 Bungeni Metavid is a PHP application for the transcription of parliamentary records and is built on Metavid [[http://metavid.ucsc.edu/]]
 
-TO DO : more info here
+= Requirements =
 
-= Details =
+Metavid Bungeni depends on
+  *PHP5
+  *MySQL
+  *Apache
+  *mod_annodex or oggz-chop
+  *Mediawiki
+  *Semantic MediaWiki
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= Installation =
+
+Bungeni Metavid is an extension of Mediawiki thus Mediawiki has to be installed. Instructions for installing Mediawiki can be found [[here|http://www.mediawiki.org/wiki/Installation]].
+
+Help on installing Mediawiki extensions can be found here
+
+Add the following lines to LocalSettings.php
+
+ParserFunctions are necessary
+require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
+
+//set up namespace:
+$smwgNamespaceIndex=100;
+//set metavid namespace to smw namespace + 6
+$mvNamespaceIndex=$smwgNamespaceIndex + 6;
+include_once("$IP/extensions/MetavidWiki/includes/MV_Settings.php");
+
+//include SemanticMediaWiki settings (if used) 
+include_once("$IP/extensions/SemanticMediaWiki/includes/SMW_Settings.php");
+enableSemantics('localhost');
+
+//include after enableSemantics to enable metavid Extension semantic wiki overrides
+enableMetavid();
+
