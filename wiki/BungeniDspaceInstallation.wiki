@@ -1,0 +1,15 @@
+#labels BungeniDspace
+Dspace installation procedure [http://www.dspace.org/index.php?option=com_content&task=view&id=152 see]
+
+The name for the bungeni theme is "bungeni"
+
+Details on how to install a theme into dspace [http://wiki.dspace.org/index.php/Install_a_theme_%28Manakin%29 see this link]
+
+Retrieving the cross search interface from svn
+
+The web archive(.war) file and other files are available from the svn repository situated at
+http://bungeni-portal.googlecode.com/svn/dspace.bungeni/trunk
+
+A readme file is included in the web archive giving details of how to make the cross search app communicate with your dspace installation.
+
+The readme file also contains information on how to configure the cross search application using the crsssearch.cfg file
