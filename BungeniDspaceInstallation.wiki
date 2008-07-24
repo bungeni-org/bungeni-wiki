@@ -1,6 +1,5 @@
 #labels BungeniDspace
 
-
 == Setup PostGresQL ==
 
  * Add a database called 'dspace' to Postgres
@@ -18,6 +17,7 @@
  * Extract and install ant to ~/apps/ant
  * Extract DSpace to ~/builds/dspace
  * Edit dspace.cfg :
+        {{{
 	# Edit ~/builds/dspace/dspace/config/dspace.cfg, in particular you'll need to set these properties:
 	dspace.dir -- must be set to the [dspace] (installation) directory.
 	dspace.url -- complete URL of this server's DSpace home page.
@@ -30,6 +30,7 @@
 	mail.admin -- mailbox for DSpace site administrator.
 	alert.recipient -- mailbox for server errors/alerts (not essential but very useful!)
 	registration.notify -- mailbox for emails when new users register (optional) 
+      }}}
  * Create the directory for the DSpace installation (i.e. ~/apps/dspacesrv ) : `mkdir ~/apps/dspacesrv`
  * Now run maven : `cd ~/builds/dspace/dspace; ~/apps/maven/bin/mvn package`
  	* this will take a while to complete
