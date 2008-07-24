@@ -1,9 +1,48 @@
 #labels BungeniDspace
-Dspace installation procedure [http://www.dspace.org/index.php?option=com_content&task=view&id=152 see]
 
+
+== Setup PostGresQL ==
+
+ * Add a database called 'dspace' to Postgres
+ * Create a login role called 'dspace' with password 'dspace'
+ * Make the 'dspace' role the owner of the 'dspace' db.
+
+== Dspace installation procedure ==
+
+ * Install the JDK on your system : `sudo apt-get install sun-java6-jdk`
+ * Download Apache Maven : `wget http://www.apache.org/dist/maven/binaries/apache-maven-2.0.9-bin.tar.gz`
+ * Download Apache Ant : `wget http://www.apache.org/dist/ant/binaries/apache-ant-1.7.1-bin.tar.gz`
+ * Downloa [http://sourceforge.net/project/dspace DSpace] : `wget http://voxel.dl.sourceforge.net/sourceforge/dspace/dspace-1.5.0-release.tar.gz` 
+ * Set the JAVA_HOME to the jdk directory : `export JAVA_HOME=/usr/lib/jvm/java-5-sun`
+ * Extract and install maven to ~/apps/maven 
+ * Extract and install ant to ~/apps/ant
+ * Extract DSpace to ~/builds/dspace
+ * Edit dspace.cfg :
+	# Edit ~/builds/dspace/dspace/config/dspace.cfg, in particular you'll need to set these properties:
+	dspace.dir -- must be set to the [dspace] (installation) directory.
+	dspace.url -- complete URL of this server's DSpace home page.
+	dspace.hostname -- fully-qualified domain name of web server.
+	dspace.name -- "Proper" name of your server, e.g. "My Digital Library".
+	db.password -- the database password you entered in the previous step.
+	mail.server -- fully-qualified domain name of your outgoing mail server.
+	mail.from.address -- the "From:" address to put on email sent by DSpace.
+	feedback.recipient -- mailbox for feedback mail.
+	mail.admin -- mailbox for DSpace site administrator.
+	alert.recipient -- mailbox for server errors/alerts (not essential but very useful!)
+	registration.notify -- mailbox for emails when new users register (optional) 
+ * Create the directory for the DSpace installation (i.e. ~/apps/dspacesrv ) : `mkdir ~/apps/dspacesrv`
+ * Now run maven : `cd ~/builds/dspace/dspace; ~/apps/maven/bin/mvn package`
+ 	* this will take a while to complete
+ * Now run run ant after maven has completed: `cd ~/builds/dspace/dspace/target/dspace-1.5.0.dir/ ; ant fresh_install`
+ * Once ant runs successfully dspace has been installed under ~/apps/dspacesrv
+
+
+== Dspace Theme == 
 The name for the bungeni theme is "bungeni"
 
 Details on how to install a theme into dspace [http://wiki.dspace.org/index.php/Install_a_theme_%28Manakin%29 see this link]
+
+== DSpace KOHA cross search == 
 
 Retrieving the cross search interface from svn
 
