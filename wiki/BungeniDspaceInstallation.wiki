@@ -1,5 +1,4 @@
 #labels BungeniDspace
-
 == Setup PostGresQL ==
 
  * Add a database called 'dspace' to Postgres
@@ -38,7 +37,28 @@
  * Once ant runs successfully dspace has been installed under ~/apps/dspacesrv
 
 
-== Dspace Theme == 
+== Installing Manakin == 
+
+ * Download Manakin from [http://di.tamu.edu/projects/xmlui/snapshots/ Manakin download page]
+{{{
+ wget http://di.tamu.edu/projects/xmlui/snapshots/Manakin_1.1a.targ.gz
+ tar xvf Manakin_1.1a.targ.gz
+}}}
+
+ * Edit the dspace.cfg file in dspace to include the following manaking configurations :
+{{{
+ #
+  # Repository metadata
+  #
+  xmlui.repository.identifier = DSpace Manakin
+  xmlui.repository.description = This is the default repository description
+  xmlui.repository.publisher = Default DSpace publisher
+  xmlui.repository.subject = Default repository subject
+  xmlui.repository.title = DSpace XMLUI :: Manakin
+}}}
+
+== Installing the Bungeni Manakin theme == 
+
 The name for the bungeni theme is "bungeni"
 
 Details on how to install a theme into dspace [http://wiki.dspace.org/index.php/Install_a_theme_%28Manakin%29 see this link]
