@@ -33,19 +33,26 @@
  * Create the directory for the DSpace installation (i.e. ~/apps/dspacesrv ) : `mkdir ~/apps/dspacesrv`
  * Now run maven : `cd ~/builds/dspace/dspace; ~/apps/maven/bin/mvn package`
  	* this will take a while to complete
- * Now run run ant after maven has completed: `cd ~/builds/dspace/dspace/target/dspace-1.5.0.dir/ ; ant fresh_install`
+ * Now run run ant after maven has completed: `cd ~/builds/dspace/dspace/target/dspace-1.5.0.dir/ ; ~/apps/ant/bin/ant fresh_install`
  * Once ant runs successfully dspace has been installed under ~/apps/dspacesrv
 
 
-== Installing Manakin == 
+== Configuring Tomcat == 
 
- * Download Manakin from [http://di.tamu.edu/projects/xmlui/snapshots/ Manakin download page]
-{{{
- wget http://di.tamu.edu/projects/xmlui/snapshots/Manakin_1.1a.targ.gz
- tar xvf Manakin_1.1a.targ.gz
-}}}
+Tell your Tomcat installation where to find your DSpace web application(s). As an example, in the <Host> section of your [tomcat]/conf/server.xml you could add lines similar to the following:
 
- * Edit the dspace.cfg file in dspace to include the following manaking configurations :
+<!-- DEFINE A CONTEXT PATH FOR DSpace JSP User Interface  -->
+<Context path="/jspui" docBase="/home/undesa/apps/dspacesrv/webapps/jspui" debug="0" reloadable="true" cachingAllowed="false" allowLinking="true"/>
+	
+<!-- DEFINE A CONTEXT PATH FOR DSpace OAI User Interface  -->
+<Context path="/oai" docBase="/home/undesa/apps/dspacesrv/webapps/oai" debug="0" reloadable="true" cachingAllowed="false" allowLinking="true"/>
+
+<!-- DEFINE A CONTEXT PATH FOR DSpace XMLUI User Interface  -->
+<Context path="/xmlui" docBase="/home/undesa/apps/dspacesrv/webapps/xmlui" debug="0" reloadable="true" cachingAllowed="false" allowLinking="true"/>
+
+== Configuring the Bungeni Theme == 
+
+ * Edit the dspace.cfg file in dspace to include the following xml ui configurations :
 {{{
  #
   # Repository metadata
@@ -56,12 +63,18 @@
   xmlui.repository.subject = Default repository subject
   xmlui.repository.title = DSpace XMLUI :: Manakin
 }}}
+ * Get the bungeni dspace theme, the theme is installed into the dspace/webapps/xmlui/themes folder :
+{{{
+svn co http://bungeni-portal.googlecode.com/svn/dspace.bungeni/trunk/xmlui/themes/bungeni ~/apps/dspacesrv/webapps/xmlui/themes/bungeni
+}}}
+ * Add the theme as the default theme to the Dspace installation : 
+   * Open Manakin's configuration file, [dspace]/config/xmlui.xconf, scroll to the bottom and locate the <themes> element.
+   * Add a new tag <theme> element inside the <themes> element as below:
+{{{
+<theme name=”bungeni” regex=".*" path=”/bungeni”/>
+}}}
 
-== Installing the Bungeni Manakin theme == 
 
-The name for the bungeni theme is "bungeni"
-
-Details on how to install a theme into dspace [http://wiki.dspace.org/index.php/Install_a_theme_%28Manakin%29 see this link]
 
 == DSpace KOHA cross search == 
 
