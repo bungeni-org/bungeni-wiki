@@ -76,9 +76,22 @@ svn co http://bungeni-portal.googlecode.com/svn/dspace.bungeni/trunk/xmlui/theme
 <theme name=”bungeni” regex=".*" path=”bungeni/”/>
 }}}
 
+ * Restart Tomcat. The themed view for Dspace should be accessible on http://<address:port>/xmlui
+
+== Installing the dspace-koha cross search application == 
+
+The dspace-koha cross search application is a dspace extension application that makes use of marc4j to index Koha marc records.  
+
+To install the application :
+{{{
+ wget http://bungeni-portal.googlecode.com/svn/dspace.bungeni/trunk/cross-search/digitalrepository.war ~/apps/tomcat/webapps
+}}}
+
+Restart tomcat, and the cross search application should be visible from http://server:port/digitalrepository
 
 
-== DSpace KOHA cross search == 
+== Setting up the cross search and indexing of Koha records == 
+<<<<<<<<to be done>>>>>>
 
 Retrieving the cross search interface from svn
 
