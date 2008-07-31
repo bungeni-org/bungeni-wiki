@@ -40,7 +40,7 @@
 == Configuring Tomcat == 
 
 Tell your Tomcat installation where to find your DSpace web application(s). As an example, in the <Host> section of your [tomcat]/conf/server.xml you could add lines similar to the following:
-
+{{{
 <!-- DEFINE A CONTEXT PATH FOR DSpace JSP User Interface  -->
 <Context path="/jspui" docBase="/home/undesa/apps/dspacesrv/webapps/jspui" debug="0" reloadable="true" cachingAllowed="false" allowLinking="true"/>
 	
@@ -49,6 +49,7 @@ Tell your Tomcat installation where to find your DSpace web application(s). As a
 
 <!-- DEFINE A CONTEXT PATH FOR DSpace XMLUI User Interface  -->
 <Context path="/xmlui" docBase="/home/undesa/apps/dspacesrv/webapps/xmlui" debug="0" reloadable="true" cachingAllowed="false" allowLinking="true"/>
+}}}
 
 == Configuring the Bungeni Theme == 
 
