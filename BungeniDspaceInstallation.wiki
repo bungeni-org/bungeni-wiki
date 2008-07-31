@@ -53,6 +53,7 @@ Tell your Tomcat installation where to find your DSpace web application(s). As a
 
 == Configuring the Bungeni Theme == 
 
+ * Manakin is installed by default with DSpace 1.5 within the dspace/webapps/xmlui folder.
  * Edit the dspace.cfg file in dspace to include the following xml ui configurations :
 {{{
  #
@@ -70,9 +71,9 @@ svn co http://bungeni-portal.googlecode.com/svn/dspace.bungeni/trunk/xmlui/theme
 }}}
  * Add the theme as the default theme to the Dspace installation : 
    * Open Manakin's configuration file, [dspace]/config/xmlui.xconf, scroll to the bottom and locate the <themes> element.
-   * Add a new tag <theme> element inside the <themes> element as below:
+   * Add a new tag <theme> element inside the <themes> element as below, to make the below theme the default theme, make sure that it is the first <theme> element inside <themes>:
 {{{
-<theme name=”bungeni” regex=".*" path=”/bungeni”/>
+<theme name=”bungeni” regex=".*" path=”bungeni/”/>
 }}}
 
 
