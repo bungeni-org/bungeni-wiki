@@ -16,6 +16,22 @@ Metavid Bungeni depends on
   * mod_annodex or oggz-chop
   * Semantic MediaWiki
 
+= Preparing the installation =
+  
+  * Installing apache2, mysql and php :
+{{{
+sudo apt-get install apache2 mysql-server php5
+}}}
+  * Install mod_annodex, this will install the following:
+    * libannodex0 - annotated and indexed media library
+    * libcmml1 - Continuous Media Markup Language document handler
+    * libogg0 - Ogg Bitstream Library
+    * libsndfile1 - Library for reading/writing audio files
+    * liboggz1 - convenience interface for Ogg stream I/O
+{{{
+sudo apt-get install libannodex0 annodex-tools cmml-tools
+}}}
+
 = Installation =
 
 Bungeni Metavid is an extension of Mediawiki thus Mediawiki has to be installed. Instructions for installing Mediawiki can be found [http://www.mediawiki.org/wiki/Installation here].
