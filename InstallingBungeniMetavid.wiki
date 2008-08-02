@@ -18,10 +18,12 @@ Metavid Bungeni depends on
 
 = Preparing the installation =
   
-  * Installing apache2, mysql and php :
+  * Installing apache2, mysql and php and php-mysql:
 {{{
-sudo apt-get install apache2 mysql-server php5
+sudo apt-get install apache2 mysql-server php5 php5-mysql
+sudo apache2ctl restart # restart apache to load php and other modules
 }}}
+
   * Install mod_annodex, this will install the following:
     * libannodex0 - annotated and indexed media library
     * libcmml1 - Continuous Media Markup Language document handler
@@ -32,9 +34,55 @@ sudo apt-get install apache2 mysql-server php5
 sudo apt-get install libannodex0 annodex-tools cmml-tools
 }}}
 
-= Installation =
+ * Installing libgd image manipulation libraries :
+{{{
+sudo apt-get install libgd2-xpm libgd2-xpm-dev php5-gd
+}}}
 
-Bungeni Metavid is an extension of Mediawiki thus Mediawiki has to be installed. Instructions for installing Mediawiki can be found [http://www.mediawiki.org/wiki/Installation here].
+ * Configuring PHP  - edit php.ini 
+{{{
+sudo vim /etc/apache2/php/php.ini
+}}}
+    * Change - Maximum Upload Filesize
+{{{
+ #from : upload_max_filesize = 2M
+ #to :
+ upload_max_filesize = 8M
+}}}
+    * Change - Memory Limit
+{{{ 
+#from : memory_limit = 8M
+# to
+memory_limit = 16M
+}}}
+
+ * Configuring MySQL - we will need to add a mysql user for mediawiki :
+{{{
+#run the mysql admin from the command line 
+mysql -u root -p mysql
+}}}
+  * when prompted, enter the root password for mysql
+  * add a user called `wikiuser` :
+{{{
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'wikiuser'@'localhost'
+    IDENTIFIED BY 'some_pass' WITH GRANT OPTION;
+}}}
+
+= Installing MediaWiki =
+ 
+  * We will install mediawiki in /var/www which is the document root folder for apache on ubuntu :
+{{{
+cd /var/www
+#download mediawiki
+sudo wget http://download.wikimedia.org/mediawiki/1.12/mediawiki-1.12.0.tar.gz
+#extract the downloaded archive
+sudo tar vxfz mediawiki-1.12.0.tar.gz
+#rename the extracted folder to mvwiki
+sudo mv mediawiki-1.12.0 mvwiki
+#make the mediawiki config subdirectory writable by the web server.
+cd /var/www/mvwiki
+sudo chmod a+w config
+}}}
 
 Help on installing Mediawiki extensions can be found [http://www.mediawiki.org/wiki/Manual:Extensions here]
 
