@@ -83,6 +83,18 @@ sudo mv mediawiki-1.12.0 mvwiki
 cd /var/www/mvwiki
 sudo chmod a+w config
 }}}
+ * Launch a web browser and run :
+{{{
+http://ip-of-server/mvwiki
+}}}
+   * Click setup, and on the next page enter the required settings
+   * Enter the user name and password for mysql that you created in the previous step
+   * Click 'install mediawiki'
+   * Finally remove the installation configuration files :
+{{{
+undesa@mediawiki:/var/www/mvwiki$ sudo mv config/LocalSettings.php .
+undesa@mediawiki:/var/www/mvwiki$ sudo rm -rf config
+}}}
 
 Help on installing Mediawiki extensions can be found [http://www.mediawiki.org/wiki/Manual:Extensions here]
 
