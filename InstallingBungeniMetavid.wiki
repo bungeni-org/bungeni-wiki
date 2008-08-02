@@ -95,6 +95,18 @@ http://ip-of-server/mvwiki
 undesa@mediawiki:/var/www/mvwiki$ sudo mv config/LocalSettings.php .
 undesa@mediawiki:/var/www/mvwiki$ sudo rm -rf config
 }}}
+   * mediawiki should be up and running on, http://server-ip-address/mvwiki
+
+==Installing semantic mediawiki == 
+
+ * The [http://semantic-mediawiki.org semantic mediawiki extension] is used by metavid
+ * To install semantic mediawiki, download the installation files from [http://sourceforge.net/projects/semediawiki/ semantic mediawiki on sourceforge] :
+{{{
+cd /var/www
+wget http://voxel.dl.sourceforge.net/sourceforge/semediawiki/semediawiki-1.2.tar.gz
+}}}
+
+ 
 
 Help on installing Mediawiki extensions can be found [http://www.mediawiki.org/wiki/Manual:Extensions here]
 
