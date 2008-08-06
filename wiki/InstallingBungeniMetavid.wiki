@@ -16,7 +16,9 @@ Metavid Bungeni depends on
   * PHP version 5.0 or later (5.1.x recommended)
   * MySQL 4.0 or later
   * mod_annodex or oggz-chop
-  * Semantic MediaWiki
+  * Various mediawiki Extensions :
+    * SemanticMediawiki
+    * Parser Functions
 
 = Preparing the installation =
   
@@ -75,16 +77,13 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'wikiuser'@'localhost'
   * We will install mediawiki in /var/www which is the document root folder for apache on ubuntu :
 {{{
 cd /var/www
-#download mediawiki
-sudo wget http://download.wikimedia.org/mediawiki/1.12/mediawiki-1.12.0.tar.gz
-#extract the downloaded archive
-sudo tar vxfz mediawiki-1.12.0.tar.gz
-#rename the extracted folder to mvwiki
-sudo mv mediawiki-1.12.0 mvwiki
+#get mediawiki from the wikimedia svn repo
+svn checkout http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3 mvwiki
 #make the mediawiki config subdirectory writable by the web server.
 cd /var/www/mvwiki
 sudo chmod a+w config
 }}}
+
  * Launch a web browser and run :
 {{{
 http://ip-of-server/mvwiki
@@ -99,16 +98,24 @@ undesa@mediawiki:/var/www/mvwiki$ sudo rm -rf config
 }}}
    * mediawiki should be up and running on, http://server-ip-address/mvwiki
 
-==Installing semantic mediawiki == 
+== Required Extensions for Metavid == 
 
- * The [http://semantic-mediawiki.org semantic mediawiki extension] is used by metavid
- * To install semantic mediawiki, download the installation files from [http://sourceforge.net/projects/semediawiki/ semantic mediawiki on sourceforge] :
+Metavid depends on various mediawiki extensions, the installation procedures for these extensions is listed below in the order of installtio
+
+=== Installing Parser Functions ===
+
+put stuff here
+
+===Installing Semantic Mediawiki ===
+
+ * To install semantic mediawiki,do the following :
 {{{
-cd /var/www
-wget http://voxel.dl.sourceforge.net/sourceforge/semediawiki/semediawiki-1.2.tar.gz
+cd /var/www/mvwiki/extensions
+svn checkout http://svn.wikimedia.org/svnroot/mediawiki/trunk/extensions/SemanticMediaWiki SemanticMediaWiki
+
 }}}
 
- * Extract and copy the `SemanticMediaWiki` folder to the `/var/www/mvwiki/extensions` folder :
+ * Add the following to LocalSettings.php in the mediawiki installation folder at /var/www/mvwiki/ :
 {{{
 include_once('extensions/SemanticMediaWiki/includes/SMW_Settings.php');
 enableSemantics('localhost');
@@ -116,6 +123,10 @@ enableSemantics('localhost');
 
  * Log in to mediawiki using the WikiSysop user (the admin user), and access the page, '/wiki/Special:SMWAdmin' in your browser. Follow and complete the setup instructions for semantic mediawiki.
 
+
+===Installing Other Extensions===
+
+put stuff here...
 
 == Installing Metavid ==
 
@@ -147,4 +158,3 @@ enableMetavid();
 cd /var/www/mvwiki/extensions/MetavidWiki/maintenance
 mysql -u wikiuser -p wikidb < mv_tables.sql
 }}}
-
