@@ -1,4 +1,6 @@
-#labels Phase-Deploy
+#summary How to install Metavid with Bungeni customizations on Ubuntu / Debian
+#labels Phase-Deploy,Bungeni-Metavid
+
 This page contains instructions for installing Bungeni Metavid on Linux. It may be possible to install Bungeni Metavid on other platforms but this has not been tested.
 
 = Introduction =
@@ -109,7 +111,7 @@ wget http://voxel.dl.sourceforge.net/sourceforge/semediawiki/semediawiki-1.2.tar
  * Extract and copy the `SemanticMediaWiki` folder to the `/var/www/mvwiki/extensions` folder :
 {{{
 include_once('extensions/SemanticMediaWiki/includes/SMW_Settings.php');
-enableSemantics('example.org');
+enableSemantics('localhost');
 }}}
 
  * Log in to mediawiki using the WikiSysop user (the admin user), and access the page, '/wiki/Special:SMWAdmin' in your browser. Follow and complete the setup instructions for semantic mediawiki.
@@ -117,26 +119,32 @@ enableSemantics('example.org');
 
 == Installing Metavid ==
 
-
-Help on installing Mediawiki extensions can be found [http://www.mediawiki.org/wiki/Manual:Extensions here]
-
-Add the following lines to LocalSettings.php
+ * Get metavid from the svn repository : 
 {{{
-ParserFunctions are necessary
+cd /var/www/mvwiki/extensions
+svn co http://bungeni-portal.googlecode.com/svn/metavid.bungeni/trunk MetavidWiki
+}}}
+ * Edit LocalSettings.php in the mediawiki installation folder to add the following before and after semantic mediawiki extension settings :
+{{{
+##next line added for metavidwiki extension
 require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
 
-//set up namespace:
+##next 3 lines added for metavidwiki extension
 $smwgNamespaceIndex=100;
-//set metavid namespace to smw namespace + 6
 $mvNamespaceIndex=$smwgNamespaceIndex + 6;
 include_once("$IP/extensions/MetavidWiki/includes/MV_Settings.php");
 
-//include SemanticMediaWiki settings (if used) 
+##next 2 lines are from the semantic mediawiki installation from the previous step
 include_once("$IP/extensions/SemanticMediaWiki/includes/SMW_Settings.php");
 enableSemantics('localhost');
 
-//include after enableSemantics to enable metavid Extension semantic wiki overrides
+##next line added for enabling metavid
 enableMetavid();
 }}}
 
-Metavid Bungeni uses some extra tables in addition to those used by Mediawiki. Run the sql: maintenance/mv_tables.sql to add them.
+ * Install the tables required by metavid wiki into the mediawiki database : 
+{{{
+cd /var/www/mvwiki/extensions/MetavidWiki/maintenance
+mysql -u wikiuser -p wikidb < mv_tables.sql
+}}}
+
