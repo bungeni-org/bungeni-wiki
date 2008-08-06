@@ -106,7 +106,17 @@ cd /var/www
 wget http://voxel.dl.sourceforge.net/sourceforge/semediawiki/semediawiki-1.2.tar.gz
 }}}
 
- 
+ * Extract and copy the `SemanticMediaWiki` folder to the `/var/www/mvwiki/extensions` folder :
+{{{
+include_once('extensions/SemanticMediaWiki/includes/SMW_Settings.php');
+enableSemantics('example.org');
+}}}
+
+ * Log in to mediawiki using the WikiSysop user (the admin user), and access the page, '/wiki/Special:SMWAdmin' in your browser. Follow and complete the setup instructions for semantic mediawiki.
+
+
+== Installing Metavid ==
+
 
 Help on installing Mediawiki extensions can be found [http://www.mediawiki.org/wiki/Manual:Extensions here]
 
