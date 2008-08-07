@@ -104,7 +104,7 @@ Metavid depends on various mediawiki extensions, the installation procedures for
 
 === Installing Parser Functions ===
 
-put stuff here
+Follow instructions for installing the parser functions extension [http://www.mediawiki.org/wiki/Extension:ParserFunctions here]
 
 ===Installing Semantic Mediawiki ===
 
