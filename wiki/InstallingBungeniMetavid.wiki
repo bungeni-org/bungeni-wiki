@@ -47,11 +47,11 @@ sudo apt-get install libgd2-xpm libgd2-xpm-dev php5-gd
 {{{
 sudo vim /etc/apache2/php/php.ini
 }}}
-    * Change - Maximum Upload Filesize
+    * Change - Maximum Upload Filesize. Video files are quite large so upload_max_filesize needs to be changed accordingly
 {{{
  #from : upload_max_filesize = 2M
  #to :
- upload_max_filesize = 8M
+ upload_max_filesize = 2000M
 }}}
     * Change - Memory Limit
 {{{ 
@@ -103,8 +103,18 @@ undesa@mediawiki:/var/www/mvwiki$ sudo rm -rf config
 Metavid depends on various mediawiki extensions, the installation procedures for these extensions is listed below in the order of installtio
 
 === Installing Parser Functions ===
+Download the extension into the extensions folder of Mediawiki
 
-Follow instructions for installing the parser functions extension [http://www.mediawiki.org/wiki/Extension:ParserFunctions here]
+{{{
+cd extensions
+svn co http://svn.wikimedia.org/svnroot/mediawiki/trunk/extensions/ParserFunctions
+}}}
+
+Add the following line to LocalSettings.php
+
+{{{ require_once("$IP/extensions/ParserFunctions/ParserFunctions.php"); }}}
+
+More information about installing ParserFunctions extension may be found [http://www.mediawiki.org/wiki/Extension:ParserFunctions here]
 
 ===Installing Semantic Mediawiki ===
 
