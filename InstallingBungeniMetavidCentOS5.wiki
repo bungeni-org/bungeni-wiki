@@ -1,0 +1,78 @@
+#summary Installing Bungeni Metavid on CentOS 5
+= Introduction =
+
+Bungeni Metavid is a PHP application for the transcription of parliamentary records and is built on [http://metavid.ucsc.edu/ Metavid]
+
+= Requirements =
+
+Metavid Bungeni depends on
+
+  * MediaWiki (current stable version is 1.12.0)
+  * Web Server such as Apache or IIS
+  * PHP version 5.0 or later (5.1.x recommended)
+  * MySQL 4.0 or later
+  * mod_annodex or oggz-chop
+  * Various mediawiki Extensions :
+    * SemanticMediawiki
+    * Parser Functions
+
+= Installation =
+
+Install PHP, MySQL and Apache(LAMP stack) on CentOS. 
+{{{
+su -c 'yum -y install php mysql apache php-mysql php-gd ImageMagick'
+}}}
+* Configuring PHP  - edit php.ini 
+{{{
+sudo vim /etc/apache2/php/php.ini
+}}}
+    * Change - Maximum Upload Filesize. Video files are quite large so upload_max_filesize needs to be changed accordingly
+{{{
+ #from : upload_max_filesize = 2M
+ #to :
+ upload_max_filesize = 2000M
+}}}
+    * Change - Memory Limit
+{{{ 
+#from : memory_limit = 8M
+# to
+memory_limit = 16M
+}}}
+
+  * Instructions for installing and configuring Apache may be found [http://www.centos.org/docs/5/html/Cluster_Administration/s1-apache-inshttpd-CA.html here]
+  * Instructions for installing and configuring MySQL may be found 
+  * Instructions for installing and configuring PHP may be found
+
+== Mod_Annodex Installation ==
+
+Mod_annodex depends on 
+  * libannodex, which in turn depends on
+  * libcmml,
+  * liboggz and
+  * libogg
+
+{{{
+rpm -i ftp://bo.mirror.garr.it/pub/1/fedora/linux/extras/6/x86_64/libcmml-0.9.1-3.fc6.x86_64.rpm
+
+rpm -i ftp://ftp.pbone.net/mirror/www-ccrma.stanford.edu/planetccrma/mirror/centos/linux/planetccrma/5/x86_64/liboggz-0.9.4-3.el5.ccrma.x86_64.rpm
+
+rpm -i ftp://ftp.muug.mb.ca/mirror/fedora/linux/extras/6/x86_64/libsndfile-1.0.17-2.fc6.x86_64.rpm
+
+rpm -i ftp://ftp.muug.mb.ca/mirror/fedora/linux/extras/6/x86_64/libannodex-0.7.3-7.fc6.x86_64.rpm
+
+rpm -i ftp://ftp.muug.mb.ca/mirror/fedora/linux/extras/5/x86_64/mod_annodex-0.2.2-4.fc5.x86_64.rpm
+}}}
+
+== Mediawiki Installation ==
+
+ * Add a mysql user for mediawiki :
+{{{
+#run the mysql admin from the command line 
+mysql -u root -p mysql
+}}}
+  * when prompted, enter the root password for mysql
+  * add a user called `wikiuser` :
+{{{
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'wikiuser'@'localhost'
+    IDENTIFIED BY 'some_pass' WITH GRANT OPTION;
+}}}
