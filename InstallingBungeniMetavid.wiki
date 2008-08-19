@@ -100,7 +100,7 @@ undesa@mediawiki:/var/www/mvwiki$ sudo rm -rf config
 
 == Required Extensions for Metavid == 
 
-Metavid depends on various mediawiki extensions, the installation procedures for these extensions is listed below in the order of installtio
+Metavid depends on various mediawiki extensions, the installation procedures for these extensions is listed below in the order of installation
 
 === Installing Parser Functions ===
 Download the extension into the extensions folder of Mediawiki
