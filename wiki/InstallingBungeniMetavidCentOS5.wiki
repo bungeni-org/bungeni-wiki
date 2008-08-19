@@ -18,13 +18,15 @@ Metavid Bungeni depends on
 
 = Installation =
 
-Install PHP, MySQL and Apache(LAMP stack) on CentOS. 
+Install PHP, MySQL, Apache and the PHP image manipulation libraries.  
 {{{
-su -c 'yum -y install php mysql apache php-mysql php-gd ImageMagick'
+su -c 'yum -y install php mysql apache php-mysql php-gd php-xml ImageMagick'
 }}}
+
+Additional instructions for installing the LAMP stack and dependencies for mediawiki on RPM based distros based on Red Hat may be found [http://www.mediawiki.org/wiki/Manual:Running_MediaWiki_on_Red_Hat_Linux here] 
 * Configuring PHP  - edit php.ini 
 {{{
-sudo vim /etc/apache2/php/php.ini
+sudo vim /etc/php.ini
 }}}
     * Change - Maximum Upload Filesize. Video files are quite large so upload_max_filesize needs to be changed accordingly
 {{{
@@ -36,12 +38,8 @@ sudo vim /etc/apache2/php/php.ini
 {{{ 
 #from : memory_limit = 8M
 # to
-memory_limit = 16M
+memory_limit = 20M
 }}}
-
-  * Instructions for installing and configuring Apache may be found [http://www.centos.org/docs/5/html/Cluster_Administration/s1-apache-inshttpd-CA.html here]
-  * Instructions for installing and configuring MySQL may be found 
-  * Instructions for installing and configuring PHP may be found
 
 == Mod_Annodex Installation ==
 
@@ -75,4 +73,108 @@ mysql -u root -p mysql
 {{{
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'wikiuser'@'localhost'
     IDENTIFIED BY 'some_pass' WITH GRANT OPTION;
+mysql>quit;
+}}}
+
+  * Download Mediawiki from SVN
+{{{
+cd /var/www
+#get mediawiki from the wikimedia svn repo
+svn checkout http://svn.wikimedia.org/svnroot/mediawiki/trunk/phase3 wiki
+#make the mediawiki config subdirectory writable by the web server.
+cd /var/www/wiki
+sudo chmod a+w config
+}}}
+  * Change apache www root to wiki directory by editing
+{{{
+vi /usr/local/apache2/conf/httpd.conf
+
+ #DocumentRoot "/usr/local/apache2/htdocs"
+ DocumentRoot "/var/www/wiki"
+}}}
+  * Launch a web browser and run :
+{{{
+http://server-ip-address
+}}}
+   * Click setup, and on the next page enter the required settings
+   * Enter the user name and password for mysql that you created in the previous step
+   * Click 'install mediawiki'
+   * Finally remove the installation configuration files :
+{{{
+undesa@mediawiki:/var/www/wiki$ sudo mv config/LocalSettings.php .
+undesa@mediawiki:/var/www/wiki$ sudo rm -rf config
+}}}
+   * mediawiki should be up and running on, http://server-ip-address
+
+Note: If you get a blank page after successfully installing Mediawiki, ensure the DocumentRoot for apache is set to the wiki directory and that php-xml is properly installed.
+
+== Required Extensions for Metavid == 
+
+Metavid depends on various mediawiki extensions, the installation procedures for these extensions is listed below in the order of installation
+
+=== Installing Parser Functions ===
+Download the extension into the extensions folder of Mediawiki
+
+{{{
+cd extensions
+svn co http://svn.wikimedia.org/svnroot/mediawiki/trunk/extensions/ParserFunctions
+}}}
+
+Add the following line to LocalSettings.php
+
+{{{ require_once("$IP/extensions/ParserFunctions/ParserFunctions.php"); }}}
+
+More information about installing ParserFunctions extension may be found [http://www.mediawiki.org/wiki/Extension:ParserFunctions here]
+
+===Installing Semantic Mediawiki ===
+
+ * To install semantic mediawiki,do the following :
+{{{
+cd /var/www/mvwiki/extensions
+svn checkout http://svn.wikimedia.org/svnroot/mediawiki/trunk/extensions/SemanticMediaWiki SemanticMediaWiki
+
+}}}
+
+ * Add the following to LocalSettings.php in the mediawiki installation folder at /var/www/mvwiki/ :
+{{{
+include_once('extensions/SemanticMediaWiki/includes/SMW_Settings.php');
+enableSemantics('localhost');
+}}}
+
+ * Log in to mediawiki using the WikiSysop user (the admin user), and access the page, '/wiki/Special:SMWAdmin' in your browser. Follow and complete the setup instructions for semantic mediawiki.
+
+
+===Installing Other Extensions===
+
+put stuff here...
+
+== Installing Metavid ==
+
+ * Get metavid from the svn repository : 
+{{{
+cd /var/www/mvwiki/extensions
+svn co http://bungeni-portal.googlecode.com/svn/metavid.bungeni/trunk MetavidWiki
+}}}
+ * Edit LocalSettings.php in the mediawiki installation folder to add the following before and after semantic mediawiki extension settings :
+{{{
+##next line added for metavidwiki extension
+require_once( "$IP/extensions/ParserFunctions/ParserFunctions.php" );
+
+##next 3 lines added for metavidwiki extension
+$smwgNamespaceIndex=100;
+$mvNamespaceIndex=$smwgNamespaceIndex + 6;
+include_once("$IP/extensions/MetavidWiki/includes/MV_Settings.php");
+
+##next 2 lines are from the semantic mediawiki installation from the previous step
+include_once("$IP/extensions/SemanticMediaWiki/includes/SMW_Settings.php");
+enableSemantics('localhost');
+
+##next line added for enabling metavid
+enableMetavid();
+}}}
+
+ * Install the tables required by metavid wiki into the mediawiki database : 
+{{{
+cd /var/www/mvwiki/extensions/MetavidWiki/maintenance
+mysql -u wikiuser -p wikidb < mv_tables.sql
 }}}
