@@ -1,0 +1,74 @@
+#summary How to setup and run openoffice in Headless mode
+#labels OpenOffice
+
+=Assumptions=
+
+Ubuntu / Debian OS without an installed instance of OpenOffice.org
+
+=Installing a 'user' OpenOffice.org installation=
+
+While it is possible to install OpenOffice.org from the aptitude repositories using a command like `sudo apt-get install openoffice.org', the customized installation of OpenOffice.org available from the Ubuntu repository does not function properly in headless (server) mode.
+
+Instead we will install an instance of openoffice which will be installed and run within a user home directory as a non-root user.
+
+==Install the sun java JRE ==
+
+OpenOffice.org requires a Java runtime engine
+{{{
+sudo apt-get install sun-java6-jre
+}}}
+
+==Downloading OpenOffice.org==
+
+Download the debian package from [http://download.openoffice.org http://download.openoffice.org] :
+{{{
+wget http://spout.ussg.indiana.edu/openoffice/stable/2.4.1/OOo_2.4.1_LinuxIntel_install_en-US_deb.tar.gz
+}}}
+
+==Extracting and Installing==
+
+Extract the application from the debian package :
+{{{
+mkdir tmp_inst
+cd tmp_inst/
+tar -xzvf ../OOo_2.4.1_LinuxIntel_install_en-US_deb.tar.gz 
+cd OOH680_m17_native_packed-1_en-US.9310/DEBS/
+mkdir tmp_root
+cd tmp_root/
+for i in ../openoffice.org*.deb; do dpkg-deb -x $i . ; done
+}}}
+
+The openoffice installation is now available within the tmp_root folder as under ./opt, we move the installation to the user home directory :
+{{{
+cd opt
+mv openoffice.org2.4/ ~
+}}}
+
+A user installation of OpenOffice.org will be available under `/home/undesa/openoffice.org2.4`
+
+==Update the config directory of the OpenOffice.org installation==
+
+We change the user directory used by the user instance. This is neccesary only if you are running multiple instances of OpenOffice.org.
+{{{
+cd ~/openoffice.org2.4/program
+chmod +w bootstraprc
+}}}
+
+Edit bootstraprc, and change UserInstallationDirectory variable  to the following :
+{{{
+[Bootstrap]
+BaseInstallation=$ORIGIN/..
+InstallMode=<installmode>
+ProductKey=OpenOffice.org 2.4
+UserInstallation=$ORIGIN/..
+[ErrorReport]
+ErrorReportPort=80
+ErrorReportServer=report.services.openoffice.org
+}}}
+
+==Running OpenOffice.org in headless mode==
+
+{{{
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+./openoffice.org2.4/program/soffice -headless -accept="socket,host=localhost,port=8100;urp" -nofirststartwizard -nologo -nolockcheck & 
+}}}
