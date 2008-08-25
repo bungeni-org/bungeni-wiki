@@ -1,0 +1,50 @@
+#summary how to setup JODConverter
+#labels OpenOffice.org
+
+= Requirements =
+
+* Sun java jre
+  * if not present install using the command : `sudo apt-get install sun-java6-jre`
+  * this will install the JRE under, /usr/lib/jvm/java-6-sun
+* Install and setup OpenOffice.org to run in Server mode, instructions provided here: RunningOpenOfficeInServerMode
+
+
+= Downloading JODconverter =
+
+ * Download JODConverter from sourceforge : [http://sourceforge.net/project/showfiles.php?group_id=91849 link] 
+ * Download both the JODConverter server, and the command line version :
+   {{{
+    wget http://heanet.dl.sourceforge.net/sourceforge/jodconverter/jodconverter-tomcat-2.2.1.zip
+    wget http://surfnet.dl.sourceforge.net/sourceforge/jodconverter/jodconverter-2.2.1.zip
+    }}}
+ * unzip both the downloaded archives, so you will have a folder structure like the following if you extracted in /home/undesa :
+    {{{
+   /home/undesa/jodconverter-2.2.1
+   /home/undesa/jodconverter-tomcat-2.2.1
+   /home/undesa/openoffice.org2.4
+   }}}
+ 
+= Running the command-line version =
+
+* to convert a file called sample.doc to a pdf :
+{{{
+/usr/lib/jvm/java-6-sun/bin/java -jar ./jodconverter-2.2.1/lib/jodconverter-cli-2.2.1.jar sample.doc sample.pdf
+}}}
+
+= Running the converter server =
+
+The following script starts OpenOffice.org in headless mode and then starts the JODCOnverter server in headless mode :
+{{{
+unset DISPLAY
+echo "starting openoffice server..."
+export JRE_HOME=/usr/lib/jvm/java-6-sun
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+./openoffice.org2.4/program/soffice -headless -accept="socket,host=localhost,port=8100;urp" -nofirststartwizard -nologo -nolockcheck & 
+echo "started openoffice server, starting converter server..."
+./jodconverter/bin/startup.sh
+echo "started converter server...."
+}}}
+
+= Using the converter server =
+
+Various examples are provide [http://artofsolving.com/node/15 here]
