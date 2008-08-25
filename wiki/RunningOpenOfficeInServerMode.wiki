@@ -68,6 +68,7 @@ ErrorReportServer=report.services.openoffice.org
 
 ==Running OpenOffice.org in headless mode==
 
+The following will start OpenOffice in server mode,listening on port 8100
 {{{
 export JAVA_HOME=/usr/lib/jvm/java-6-sun
 ./openoffice.org2.4/program/soffice -headless -accept="socket,host=localhost,port=8100;urp" -nofirststartwizard -nologo -nolockcheck & 
