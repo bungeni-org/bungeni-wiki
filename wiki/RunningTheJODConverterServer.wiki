@@ -3,10 +3,13 @@
 
 = Requirements =
 
-* Sun java jre
-  * if not present install using the command : `sudo apt-get install sun-java6-jre`
+* Sun java JRE :
+
+  * if not present install using the command : `sudo apt-get install sun-java6-jre` 
+
   * this will install the JRE under, /usr/lib/jvm/java-6-sun
-* Install and setup OpenOffice.org to run in Server mode, instructions provided here: RunningOpenOfficeInServerMode
+
+  * Install and setup OpenOffice.org to run in Server mode, instructions provided here: RunningOpenOfficeInServerMode
 
 
 = Downloading JODconverter =
