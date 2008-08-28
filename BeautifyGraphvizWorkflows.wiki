@@ -1,0 +1,18 @@
+#summary The Workflows can be exported to GraphViz for visualisation.
+
+= Introduction =
+
+To make the resulting output more readable you can cluster the states.
+
+
+= Details =
+ For the question workflow you can cluster the states by the actor who can view/edit the states
+
+{{{
+subgraph "cluster_mp" { label="Member of parliament"; draft; private; requires_amend; }
+subgraph "cluster_co" { label="Clerks office"; submitted; received; responded }
+subgraph "cluster_so" { label="Speakers office"; complete; admissible; deferred; postponed; scheduled;}
+subgraph "cluster_ministry" { label="Ministry"; "pending response"; }
+subgraph "cluster_end" { label="End States"; answered; withdrawn; inadmissible; }
+
+}}}
