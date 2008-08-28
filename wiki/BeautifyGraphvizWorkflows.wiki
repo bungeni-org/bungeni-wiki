@@ -98,3 +98,78 @@ subgraph "cluster_ministry" { label="Ministry"; "pending response"; }
 subgraph "cluster_co2" { label="Clerks office"; responded; }
 subgraph "cluster_end" { label="End States"; answered; withdrawn; inadmissible; rank=sink }
 }}}
+
+A little adjustment to the cluster_co label and we come up with the file:
+{{{
+digraph g {
+ratio=auto
+None [shape=doublecircle]
+t1 [shape=none, label="Create"]
+"None" -> t1 -> "draft"
+t2 [shape=none, label="Make private"]
+"draft" -> t2 -> "private"
+t3 [shape=none, label="Submit to Clerk"]
+"draft" -> t3 -> "submitted"
+t4 [shape=none, label="Withdraw"]
+"submitted" -> t4 -> "withdrawn"
+t5 [shape=none, label="Receive"]
+"submitted" -> t5 -> "received"
+t6 [shape=none, label="Needs Clarification by MP"]
+"received" -> t6 -> "requires_amend"
+t7 [shape=none, label="Withdraw"]
+"received" -> t7 -> "withdrawn"
+t8 [shape=none, label="Reject"]
+"received" -> t8 -> "inadmissible"
+t9 [shape=none, label="Complete"]
+"received" -> t9 -> "complete"
+t10 [shape=none, label="Withdraw"]
+"complete" -> t10 -> "withdrawn"
+t11 [shape=none, label="Approve"]
+"complete" -> t11 -> "admissible"
+t12 [shape=none, label="Needs Clarification by MP"]
+"complete" -> t12 -> "requires_amend"
+t13 [shape=none, label="Reject"]
+"complete" -> t13 -> "inadmissible"
+t14 [shape=none, label="Defer"]
+"admissible" -> t14 -> "deferred"
+t15 [shape=none, label="Withdraw"]
+"admissible" -> t15 -> "withdrawn"
+t16 [shape=none, label="Send to ministry"]
+"admissible" -> t16 -> "pending response"
+t17 [shape=none, label="Schedule"]
+"admissible" -> t17 -> "scheduled"
+t18 [shape=none, label="Postpone"]
+"scheduled" -> t18 -> "postponed"
+t19 [shape=none, label="Withdraw"]
+"scheduled" -> t19 -> "withdrawn"
+t20 [shape=none, label="Respond"]
+"scheduled" -> t20 -> "responded"
+t21 [shape=none, label="Answer"]
+"responded" -> t21 -> "answered"
+t22 [shape=none, label="Schedule"]
+"postponed" -> t22 -> "scheduled"
+t23 [shape=none, label="Withdraw"]
+"postponed" -> t23 -> "withdrawn"
+t24 [shape=none, label="Respond"]
+"pending response" -> t24 -> "responded"
+t25 [shape=none, label="Schedule"]
+"deferred" -> t25 -> "scheduled"
+t26 [shape=none, label="Send to ministry"]
+"deferred" -> t26 -> "pending response"
+t27 [shape=none, label="Withdraw"]
+"deferred" -> t27 -> "withdrawn"
+t28 [shape=none, label="Resubmit to clerk"]
+"requires_amend" -> t28 -> "submitted"
+t29 [shape=none, label="Withdraw"]
+"requires_amend" -> t29 -> "withdrawn"
+t30 [shape=none, label="Re draft"]
+"private" -> t30 -> "draft"
+{ rank=source; None }
+subgraph "cluster_mp" { label="Member of parliament"; draft; private; requires_amend; t2; t30 }
+subgraph "cluster_co" { label="Clerks office"; submitted; received;  t5; }
+subgraph "cluster_so" { label="Speakers office"; complete; admissible; deferred; postponed; scheduled; t11; t14; t17; t18; t25; t22; }
+subgraph "cluster_ministry" { label="Ministry"; "pending response"; }
+subgraph "cluster_co2" { label="Clerks office - final review"; responded; }
+subgraph "cluster_end" { label="End States"; answered; withdrawn; inadmissible; rank=sink }
+}
+}}}
