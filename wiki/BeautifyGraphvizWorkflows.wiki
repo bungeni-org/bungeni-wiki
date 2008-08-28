@@ -181,3 +181,25 @@ subgraph "cluster_end" { label="End States"; answered; withdrawn; inadmissible; 
 which renders into this graphic:
 
 http://bungeni-portal.googlecode.com/files/question_clustered.png
+
+To render the dot file into a graphic use the command:
+{{{
+ dot -Tpng -O question.dot
+}}}
+to render a png, or:
+{{{
+ dot -Tsvg -O question.dot
+}}}
+to render a SVG
+
+When you render the dot file into a SVG file you may experience that the output gets cropped and that the whole diagramm is not visible. if that is the case simply open the svg with a text editor and adjust the dimensions e.g. from:
+{{{
+<svg width="17.35in" height="12.90in"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+}}}
+
+to:
+{{{
+<svg width="20in" height="15in"
+ xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+}}} 
