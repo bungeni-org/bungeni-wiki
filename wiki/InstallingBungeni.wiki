@@ -7,6 +7,10 @@
   * user Python 2.5 (or 2.4) built from source. (on ubuntu /debian you will need to install development libaries/headers for imaging (libjpeg62-dev, libfreetype6-dev, libpng12-dev)  and bz2 (libbz2-dev) libraries). 
     * For comipling the xapian bindings you will have to switch the user python to the primary python on the system either by aliasing it (alias='/my/path/to/myuser/python') or by changing the python referenced by /usr/bin/python (on debian /ubuntu you can switch between system pythons by using the update-alternatives command).
   * PostGreSQL build from source requires development libraries/headers for: bison, flex ,readline (libreadline5-dev), zlib (zlib1g-dev). (on ubuntu installed via apt-get)
+  * SVN build from source requires dev - libraries and installs of the following :
+    * libaprutl1-dev
+    * libneon26-dev
+    * swig
 
 ==Setup==
 
