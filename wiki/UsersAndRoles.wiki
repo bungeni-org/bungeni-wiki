@@ -9,16 +9,16 @@ Roles in the system are groups of users, e.g. 'CurrentMPsInParliament' is a role
 = Using Permissions =
 
 Object permissions can be set to multiple multiple roles or users. e.g. a Question form in the system can have the following set of default permissions :
-create - CurrentMPsInParliament
-read - <user-id-of-creating-mp>
-edit - <user-id-of-creating-mp>
-delete - <user-id-of-creating-mp>
+ * create - CurrentMPsInParliament
+ * read - <user-id-of-creating-mp>
+ * edit - <user-id-of-creating-mp>
+ * delete - <user-id-of-creating-mp>
 
 Once the question has been created and submitted by the MP, the workflow process changes the permissions of the Question object during workflow transitions.
 
 e.g. once the MP submits the Question to the clerk, the state transition changes the state of the submitted question object as follows :
-read - <user-id-of-creating-mp>, ClerksOffice (role containing users in the clerk's office)
-edit - ClerksOffice (""  ""  "")
+ * read - <user-id-of-creating-mp>, ClerksOffice (role containing users in the clerk's office)
+ * edit - ClerksOffice (""  ""  "")
 
 
 
