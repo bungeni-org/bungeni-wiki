@@ -2,10 +2,38 @@
 
 = Introduction =
 
-
+The system has a concept of 'Roles' which have permissions assigned to them. So for e.g. for the Question form, the role 'Editor' will have both 'create' and 'edit' permissions for the complete form, while for e.g. the role of 'Submitter' will have permissions to create a new Question and submit it.
 
 
 = Details =
+
+
+Roles can be assigned to users and groups, in case there are multiple roles assigned to the same group, the roles are evaluated into permissions by using an 'OR' operator - (for e.g. if one role does not give access to a particular form, while another role assigned to the group does, then the 'OR' merge of the roles into permissions results in the user getting access.).
+
+= Roles in Bungeni Portal=
+
+==Document & Field level roles==
+
+We primarily need the following kinds of generic roles , assignable to users and objects :
+
+ * Submitter - allowed to submit a form, but not edit or read the submission. Form must have the submitter role.
+ * Reader - allowed to only read documents with the 'Reader' role.
+ * Author - combination of Submitter & Reader...
+ * Editor - allowed to read / edit / create new documents 
+ * Admin - super user access to edit / create / modify all fields in a document.
+
+The role applied to the document level also applies to the fields on the form, unless the fields themselves have permissions of their own.
+
+e.g. case #1 - user has 'Submitter' role, form has 'Submitter' role, user is allowed to submit a document through the form. The user cannot read the document once submitted (unless the form had a 'Reader' role, and the user also had a 'Reader' role'
+
+e.g. case #2 -  the user X is a member of group called 'CurrentMembersOfParliament', the group has 'Editor' permissions on the 'Question' form (at form level). But the field 'Requested Date' has only 'Submitter' permission for the group 'CurrentmembersofParliament' , but the same field has 'Editor' permissions for the group 'Clerks'.  So the field is available to the user X upon creating the question, but not while editing it again. 
+
+= Users & Groups =
+
+Users are created in Bungeni portal, initially all users are the same.
+Groups are containers for 1 or more users.
+Roles are assignable to either a user or to a group.
+More than one role can be assigned to a group.
 
 == System==
 
