@@ -1,0 +1,37 @@
+#summary User, Group and Role definition
+
+= Introduction =
+
+
+
+
+= Details =
+
+== System==
+
+  * Admin
+
+==Members of Parliament==
+
+  * Member of Parliament
+  * MPs Staff
+  * Committee Member
+  * Working Group Member
+
+==Political Groups==
+
+  * Party Member
+
+==Parliamentary Staff==
+
+  * Speakers Office
+  * Clerks Office
+  * Debate Record Office (Hansard)
+  * Committee Clerks
+  * Committee Researchers
+  * Parliamentary Staff
+
+==Government==
+
+  * Minister 
+  * Ministry staff
