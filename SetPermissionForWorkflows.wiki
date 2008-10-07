@@ -15,7 +15,7 @@ from zope.publisher.interfaces import IRequest
 
 def getUserId( ):
        interaction = getInteraction()
-        for participation in interaction.participations:
+       for participation in interaction.participations:
             if IRequest.providedBy(participation):
                 return participation.principal.id
 }}}
@@ -61,10 +61,9 @@ chain.
 
 so the action handler for the transition gives this user the Owner local
 role via the local role principal role map.
-
-zope.securitypolicy.interfaces.IPrincipalRoleMap( question
-).assignRoleToUser( role_name, qualfiied_user_id)
-
+{{{
+zope.securitypolicy.interfaces.IPrincipalRoleMap( question ).assignRoleToPrincipal( role_name, qualfied_user_id)
+}}}
 
 > the role owner gets the
 > permissions 'edit', 'view' and 'delete' for the object_type 'Question'
@@ -93,13 +92,15 @@ those permissions should be defined globally for the owner role, imo.
 so now we use the rolepermission map local in an action handler
 
 grant the new permissions to the clerks office
+{{{
  zope.securitypolicy.interfaces.IRolePermissionMap( question
 ).grantPermissionToRole( permission_name, role_name )
-
+}}}
 remove the permissions for editing, deleting from the owner
+{{{
  zope.securitypolicy.interfaces.IRolePermissionMap( question
 ).denyPermissionToRole( permission_name, role_name )
-
+}}}
 
 > clerks office transition: 'recieve':
 >
