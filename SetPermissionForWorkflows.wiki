@@ -7,6 +7,19 @@
  in the workflow itself + in the roles and grants.zml for the workflow,
 
 
+==Get the user id for the current user==
+
+{{{
+from zope.security.management import getInteraction
+from zope.publisher.interfaces import IRequest
+
+def getUserId( ):
+       interaction = getInteraction()
+        for participation in interaction.participations:
+            if IRequest.providedBy(participation):
+                return participation.principal.id
+}}}
+
 
 so currently lots of permissions have been defined corresponding to every
 transition. thats probably overkill versus doing some generic permissions
@@ -133,5 +146,3 @@ yes
 >
 
 yes
-
-
