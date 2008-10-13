@@ -147,3 +147,9 @@ yes
 >
 
 yes
+
+==Setting permissions on Child Objects==
+
+responses can only be added to questions in a certain state - so
+the response container should not allow for responses to be added if the
+question does not have that state. You may simply set the permission 'add response' on a question object and the setting will be acquired.
