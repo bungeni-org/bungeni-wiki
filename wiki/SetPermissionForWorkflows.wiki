@@ -62,7 +62,7 @@ chain.
 so the action handler for the transition gives this user the Owner local
 role via the local role principal role map.
 {{{
-zope.securitypolicy.interfaces.IPrincipalRoleMap( question ).assignRoleToPrincipal( role_name, qualfied_user_id)
+zope.securitypolicy.interfaces.IPrincipalRoleMap( question ).assignRoleToPrincipal(role_name, qualfied_user_id)
 }}}
 
 > the role owner gets the
@@ -93,27 +93,17 @@ so now we use the rolepermission map local in an action handler
 
 grant the new permissions to the clerks office
 {{{
- zope.securitypolicy.interfaces.IRolePermissionMap( question
-).grantPermissionToRole( permission_name, role_name )
+ zope.securitypolicy.interfaces.IRolePermissionMap( question ).grantPermissionToRole( permission_name, role_name )
 }}}
 remove the permissions for editing, deleting from the owner
 {{{
- zope.securitypolicy.interfaces.IRolePermissionMap( question
-).denyPermissionToRole( permission_name, role_name )
+ zope.securitypolicy.interfaces.IRolePermissionMap( question ).denyPermissionToRole( permission_name, role_name )
 }}}
 
-> clerks office transition: 'recieve':
->
-> permission edit is added to role:'Clerks Office' for object_id '1234',
-> object_type 'Question"
->
->
-> .........
->
->
-> additional questions:
-> in zope_principial_role_map if object_type, object_id is NULL => It is a
-> global role?
+
+
+
+* in zope_principial_role_map if object_type, object_id is NULL => It is a global role
 
 
 
@@ -124,29 +114,11 @@ you should use the api for manipulating these tables, do not attempt to
 directly manipulate the table, use the api.
 
 
->
->
-> in zope_principial_role_map if object_type is NULL => It is a global
-> role for this Object_type?
+  * in zope_principial_role_map if object_type is NULL => It is a global role for this Object_type
+  * if object_type, object_id is NULL => global permission
+  * object_type and object_id in these tables are used for local roles
 
 
-yes
-
-
->
->
->
-> same question for zope_role_permission_map, if object_type, object_id is
-> NULL => global permission?
->
-
-yes
-
->
-> so object_type and object_id in these tables are used for local roles?
->
-
-yes
 
 ==Setting permissions on Child Objects==
 
