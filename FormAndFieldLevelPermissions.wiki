@@ -65,7 +65,6 @@ admin wants to change the permissions of Object person, field email
  * default setting is : visible to everybody
  * change to: visible for clerk and speakers office and the MP himself 
 
-The UI wil present him a mock up form with all fields and permissions by default fields have the permission bungeni.public,  the email field has the permission (view) bungeni.public => visible
- for everbody, permission (edit) => editable only  for clerk (assuming that the clerks office has this permission system wide)
+The UI wil present him a mock up form with all fields and permissions by default fields have the permission bungeni.public,  the email field has the permission (view) bungeni.public => visible for everbody, permission (edit) => editable only  for clerk (assuming that the clerks office has this permission system wide)
 
-So the admin changes the permission (view) to bungeni.content.edit,  and permission (edit) and bungeni.speaker.edit (edit permission  specially for speakers office assigned systemwide) and  bungeni.owner.edit (systemwide permission to edit the content somebody  owns).
+So the admin changes the permission (view) to group.Clerks,  and permission (edit) and group.Speaker (edit permission  specially for speakers office assigned systemwide) and  user.MP.John.Smith (systemwide permission to edit the content somebody  owns).
