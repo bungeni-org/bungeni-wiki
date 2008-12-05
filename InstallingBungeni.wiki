@@ -10,7 +10,7 @@
 
 ==Python bindings for SVN==
 
-For installing on Ubuntu 8.04 - a custom build of the python subversion bindings may be required. Building the subversion bindings requires building subversion from source.  To do a custom build of subversion the following prerequisites are required :
+For installing on Ubuntu 8.04 - a custom build of the python subversion bindings may be required (especially if you get an error while starting bungeni which looks like : 'libtool missing file libneon.la' ) . Building the subversion bindings requires building subversion from source.  To do a custom build of subversion the following prerequisites are required :
  * Custom build of libneon - this is required because subversion 1.5.4 requires libneon 0.28.3 while Ubuntu 8.04 ships with libneon 0.27.2.
    * Get the appropriate version of libneon source from [http://svn.webdav.org/repos/projects/neon/tags/ http://svn.webdav.org/repos/projects/neon/tags/] (e.g. 0.28.3 is the correct version for subversion 1.5.4)
    * To build libneon you will need to setup autoconf and automake. To do that install the following packages :
