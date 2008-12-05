@@ -7,10 +7,50 @@
   * user Python 2.5 (or 2.4) built from source. (on ubuntu /debian you will need to install development libaries/headers for imaging (libjpeg62-dev, libfreetype6-dev, libpng12-dev)  and bz2 (libbz2-dev) libraries). 
     * For comipling the xapian bindings you will have to switch the user python to the primary python on the system either by aliasing it (alias='/my/path/to/myuser/python') or by changing the python referenced by /usr/bin/python (on debian /ubuntu you can switch between system pythons by using the update-alternatives command). [UPDATE: setting the environment variable PYTHON to the path of the user python binary also appears to work : `export PYTHON=/home/user/bungeni/python/bin/python'` 
   * PostGreSQL build from source requires development libraries/headers for: bison, flex ,readline (libreadline5-dev), zlib (zlib1g-dev). (on ubuntu installed via apt-get)
-  * SVN build from source requires dev - libraries and installs of the following :
-    * libaprutl1-dev
-    * libneon26-dev
-    * swig
+
+==Python bindings for SVN==
+
+For installing on Ubuntu 8.04 - a custom build of the python subversion bindings may be required. Building the subversion bindings requires building subversion from source.  To do a custom build of subversion the following prerequisites are required :
+ * Custom build of libneon - this is required because subversion 1.5.4 requires libneon 0.28.3 while Ubuntu 8.04 ships with libneon 0.27.2.
+   * Get the appropriate version of libneon source from [http://svn.webdav.org/repos/projects/neon/tags/ http://svn.webdav.org/repos/projects/neon/tags/] (e.g. 0.28.3 is the correct version for subversion 1.5.4)
+   * To build libneon you will need to setup autoconf and automake. To do that install the following packages :
+{{{
+sudo apt-get install libtool automake autoconf
+}}}
+   * Now switch to the folder where you downloaded the libneon source and run `./autogen.sh` to generate the make files
+   * Build libneon with :
+{{{
+./configure --prefix=/home/my/path/to/custom/neon
+make
+make install
+}}}
+ * Prerequisities for building subversion :
+{{{
+sudo apt-get install libaprutil1-dev swig
+}}}
+ * Building subversion :
+   * Switch to the subversion source folder 
+   * First we need to tell subversion to use our custom build of neon :
+{{{
+export neon_config=/path/to/neon/installation/bin/neon-config
+}}}
+   * Now build subversion :
+{{{
+./configure --prefix=/home/my/custom/svn/install PYTHON=/home/my/user/python/install/path
+make
+make install
+}}}
+   * Now build the python subversion bindings. from the subversion source build root folder run the following :
+{{{
+make swig-py
+# check the installation
+make check-swig-py
+# install 
+make install-swig-py
+}}}
+   * svn-python gets installed under the custom subversion installations lib/svn-python folder, so for our custom python to use the subversion module, create a file called 'subversion.pth' with the path to the lib/svn-python and place it inside the 'site-packages' folder of the custom python build.
+   * This completes the setup of the python subversion bindings
+
 
 ==Setup==
 
