@@ -1,4 +1,5 @@
 #summary The Workflows can be exported to GraphViz for visualisation.
+#labels workflow
 
 = Introduction =
 
