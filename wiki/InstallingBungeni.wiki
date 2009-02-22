@@ -77,5 +77,11 @@ On a Mac, you may need to increase shmmax value to get postgresql up and running
 The buildout includes !DeadlockDebugger, so if you start Zope in debug mode, it will stop at a debugger prompt if an exception is raised. 
 
 
+==Ubuntu Intrepid (8.10) Prerequistes==
+{{{
+sudo apt-get install build-essential python-dev zlib1g-dev libreadline5-dev uuid-dev python-dev python-subversion
+}}}
+
+
 Also see ConfiguringBungeni.
  
