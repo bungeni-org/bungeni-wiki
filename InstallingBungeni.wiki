@@ -10,30 +10,10 @@
 
 ==SSL support for Python==
 
-In ubuntu installing openssl and libssl-dev does not result in Python getting built with ssl support as the default ssl paths for include/ lib referenced by the Python build are different in Ubuntu. To build ssl support into Python on Ubuntu you need to edit the `Modules/Setup.dist` in the python source folder. 
-
-change these lines in Modules/Setup.dist :
+In ubuntu installing openssl and libssl-dev does not result in Python getting built with ssl support as the default ssl paths for include/ lib referenced by the Python build are different in Ubuntu. To build ssl support into Python on Ubuntu set the CPPFLAGS and LDFLAGS environment variables as follows :
 
 {{{
-# Socket module helper for SSL support; you must comment out the other
-# socket line above, and possibly edit the SSL variable:
-#SSL=/usr/local/ssl
-#_ssl _ssl.c \
-#	-DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl \
-#	-L$(SSL)/lib -lssl -lcrypto
-}}}
-
-to :
-
-{{{
-# Socket module helper for SSL support; you must comment out the other
-# socket line above, and possibly edit the SSL variable:
-SSL_INCLUDE=/usr/include/openssl
-SSL_LIB=/usr/lib/ssl
-SSL=/usr/bin/openssl
-_ssl _ssl.c \
-	-DUSE_SSL -I$(SSL_INCLUDE) -I$(SSL_INCLUDE) \
-	-L$(SSL_LIB) -lssl -lcrypto
+ CPPFLAGS=-I/usr/include/openssl LDFLAGS=-L/usr/lib/ssl
 }}}
 
 now run ./configure ; make ; make install 
