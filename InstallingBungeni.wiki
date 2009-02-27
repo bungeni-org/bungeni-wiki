@@ -40,7 +40,7 @@ sudo apt-get install libtool automake autoconf
    * Now switch to the folder where you downloaded the libneon source and run `./autogen.sh` to generate the make files
    * Build libneon with :
 {{{
-LIBS="-ldl" ./configure --prefix=/path/to/install/neon --with-ssl=openssl --with-libxml2 --with-libs=/usr/local/openssl/:/usr/local/libxml2/ --without-zlib
+ ./configure --prefix=/path/to/install/neon --with-ssl=openssl 
 make
 make install
 }}}
