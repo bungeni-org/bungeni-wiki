@@ -103,5 +103,5 @@ sudo apt-get install build-essential python-dev zlib1g-dev libreadline5-dev uuid
 }}}
 
 
-Also see ConfiguringBungeni. BungeniTranscribe
+Also see ConfiguringBungeni.
  
