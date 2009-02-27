@@ -8,6 +8,46 @@
     * For comipling the xapian bindings you will have to switch the user python to the primary python on the system either by aliasing it (alias='/my/path/to/myuser/python') or by changing the python referenced by /usr/bin/python (on debian /ubuntu you can switch between system pythons by using the update-alternatives command). [UPDATE: setting the environment variable PYTHON to the path of the user python binary also appears to work : `export PYTHON=/home/user/bungeni/python/bin/python'` 
   * PostGreSQL build from source requires development libraries/headers for: bison, flex ,readline (libreadline5-dev), zlib (zlib1g-dev). (on ubuntu installed via apt-get)
 
+==SSL support for Python==
+
+In ubuntu installing openssl and libssl-dev does not result in Python getting built with ssl support as the default ssl paths for include/ lib referenced by the Python build are different in Ubuntu. To build ssl support into Python on Ubuntu you need to edit the `Modules/Setup.dist` in the python source folder. 
+
+change these lines in Modules/Setup.dist :
+
+{{{
+# Socket module helper for SSL support; you must comment out the other
+# socket line above, and possibly edit the SSL variable:
+#SSL=/usr/local/ssl
+#_ssl _ssl.c \
+#	-DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl \
+#	-L$(SSL)/lib -lssl -lcrypto
+}}}
+
+to :
+
+{{{
+# Socket module helper for SSL support; you must comment out the other
+# socket line above, and possibly edit the SSL variable:
+SSL_INCLUDE=/usr/include/openssl
+SSL_LIB=/usr/lib/ssl
+SSL=/usr/bin/openssl
+_ssl _ssl.c \
+	-DUSE_SSL -I$(SSL_INCLUDE) -I$(SSL_INCLUDE) \
+	-L$(SSL_LIB) -lssl -lcrypto
+}}}
+
+now run ./configure ; make ; make install 
+
+To test if python has ssl support run this in the python shell :
+
+{{{
+import urllib
+f = urllib.urlopen('https://svn.openplans.org')
+# if it returns no errors ... the ssl support works.. 
+}}}
+
+(tested on Ubuntu 8.04)
+
 ==Python bindings for SVN==
 
 For installing on Ubuntu 8.04 - a custom build of the python subversion bindings may be required (especially if you get an error while starting bungeni which looks like : 'libtool missing file libneon.la' ) . Building the subversion bindings requires building subversion from source.  To do a custom build of subversion the following prerequisites are required :
