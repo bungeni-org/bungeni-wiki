@@ -1,0 +1,118 @@
+#summary How to deploy a bungeni buildout with capistrano and webistrano
+#labels Phase-Deploy
+
+= Introduction =
+
+[http://www.capify.org Capistrano] is a configuration management tool that makes it possible to automate deployments and builds over the web. 
+[http://labs.peritor.com/webistrano Webistrano] is a web UI version of Capistrano - and packages Capistrano in a more user friendly web based interface.
+
+= Installing Capistrano / Webistrano =
+
+Both capistrano and webistrano require ruby, rubygems and rake to be installed.
+
+== Installing Ruby == 
+
+{{{
+sudo apt-get install ruby-full build-essential
+}}}
+
+== Installing Ruby Gems == 
+
+{{{
+wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz
+tar xzvf rubygems-1.3.1.tgz
+cd rubygems-1.3.1
+## NOTE :
+## running without sudo will install the ruby gems within the user's
+## home folder e.g. /home/user/.gem/ruby/1.x/bin
+sudo ruby setup.rb
+sudo ln -s /usr/bin/gem1.8 /usr/bin/gem
+sudo gem update --system
+}}}
+
+== Installing rake == 
+
+{{{
+sudo gem install rake -y
+## if you had installed ruby gems into the user folder. i.e installed it without
+## using sudo. you will have to invoke gem from the user bin folder .. 
+## i.e : /home/user/.gem./ruby/1.8/bin/gem install rake -y
+}}}
+
+== Installing capistrano == 
+
+{{{
+sudo gem install capistrano -y
+## if you had installed ruby gems into the user folder. i.e installed it without
+## using sudo. you will have to invoke gem from the user bin folder .. 
+## i.e : /home/user/.gem./ruby/1.8/bin/gem install capistrano -y
+}}}
+
+
+== Installing webistrano ==
+
+Note : it is not neccessary to install capistrano to use webistrano as webistrano packages its own installation of capistrano.
+
+[http://labs.peritor.com/webistrano/wiki/Install Installing Webistrano]
+
+= Deploying the Bungeni Buildout with Capistrano =
+
+Create a folder on the machine to checkout the capistrano config for the bungeni buildout
+
+{{{
+svn co https://bungeni-portal.googlecode.com/svn/capistrano/trunk
+}}}
+
+The capistrano deployment makes the following assumptions :
+ * All the system [http://code.google.com/p/bungeni-portal/wiki/InstallingBungeni#Pre-requisites pre-requisites for the bungeni buildout] have been setup. 
+ * [http://supervisord.org/install/ Supervisord] has been installed on the system
+
+[note: the installation of pre-requisites should ideally be also added as a capistrano task]
+
+Edit the configuration parameters in config/deploy.rb :
+
+{{{
+### path to svn repository
+set :repository,  "https://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk"
+
+### path to user python
+set :user_python, "/home/undesa/dev/bungeni/python/254/bin/python"
+
+### path to admin python - the supervisor daemon uses a different python from the 
+### bungeni python installation. You may as well use the user_python as the admin 
+### python
+set :adm_python_home, "/home/undesa/dev/bungeni/python/adm"
+set :adm_python, "#{adm_python_home}/bin/python"
+
+set :supervisord, "#{adm_python_home}/bin/supervisord"
+### path to supervisord configuation file
+set :supervisord_config, "/home/undesa/dev/bungeni/supervisor/supervisord.conf"
+
+# Path to deploy on
+set :deploy_to, "/home/undesa/dev/capdeploy/#{application}"
+}}}
+
+Finally build & deploy bungeni using the following command :
+
+{{{
+cap deploy:setup deploy:update deploy:bootstrap_bo deploy:buildout_full deploy:setup_db deploy:install_demo_data deploy:start_supervisor
+}}}
+
+We do not execute some of the other deployment types e.g. deploy:cold as these are specific to Ruby on Rails installations and require a primary 'db' role in capistrano.
+
+= Deploying the Bungeni Buildout with Webistrano =
+
+For webistrano -- we import the deploy.rb from the previous step into webistrano.
+
+Webistrano does not support #{parameter} evaluation like Capistrano. So add the configurations into a new webistrano project with explict paths.
+
+Copy and paste the individual capistrano tasks as webistrano recipes.
+
+An additional configuration parameter is required to point webistrano to the correct path to rake, so add the follow custom configuration variable :
+{{{
+set :rake, "/home/user/.gem/ruby/1.8/bin/rake"
+}}}
+
+Finally add the recipes to a webistrano stage. Within the stage you can now run individual tasks ("Recipes").
+
+
