@@ -20,3 +20,9 @@ some text :
  * hellow 
    * world
      * world again
+
+
+this is some source code
+{{{
+$ find . -name '*.xml' | print
+}}}
