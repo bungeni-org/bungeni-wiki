@@ -1,6 +1,9 @@
 #summary How to deploy a bungeni buildout with capistrano and webistrano
 #labels Phase-Deploy
 
+
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
 [http://www.capify.org Capistrano] is a configuration management tool that makes it possible to automate deployments and builds over the web. 
@@ -65,40 +68,16 @@ svn co https://bungeni-portal.googlecode.com/svn/capistrano/trunk
 
 The capistrano deployment makes the following assumptions :
  * All the system [http://code.google.com/p/bungeni-portal/wiki/InstallingBungeni#Pre-requisites pre-requisites for the bungeni buildout] have been setup. 
- * [http://supervisord.org/install/ Supervisord] has been installed on the system
 
 [note: the installation of pre-requisites should ideally be also added as a capistrano task]
 
-Edit the configuration parameters in config/deploy.rb :
+Build & deploy bungeni using the single command :
 
 {{{
-### path to svn repository
-set :repository,  "https://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk"
-
-### path to user python
-set :user_python, "/home/undesa/dev/bungeni/python/254/bin/python"
-
-### path to admin python - the supervisor daemon uses a different python from the 
-### bungeni python installation. You may as well use the user_python as the admin 
-### python
-set :adm_python_home, "/home/undesa/dev/bungeni/python/adm"
-set :adm_python, "#{adm_python_home}/bin/python"
-
-set :supervisord, "#{adm_python_home}/bin/supervisord"
-### path to supervisord configuation file
-set :supervisord_config, "/home/undesa/dev/bungeni/supervisor/supervisord.conf"
-
-# Path to deploy on
-set :deploy_to, "/home/undesa/dev/capdeploy/#{application}"
+cap bungeni_install:setup
 }}}
 
-Finally build & deploy bungeni using the following command :
-
-{{{
-cap deploy:setup deploy:update deploy:bootstrap_bo deploy:buildout_full deploy:setup_db deploy:install_demo_data deploy:start_supervisor
-}}}
-
-We do not execute some of the other deployment types e.g. deploy:cold as these are specific to Ruby on Rails installations and require a primary 'db' role in capistrano.
+This command invokes the recipe commands in the correct order by first running deploy:setup, then deploy:update and then invokes the recipes in the bungeni_install namespace.
 
 = Deploying the Bungeni Buildout with Webistrano =
 
@@ -114,5 +93,3 @@ set :rake, "/home/user/.gem/ruby/1.8/bin/rake"
 }}}
 
 Finally add the recipes to a webistrano stage. Within the stage you can now run individual tasks ("Recipes").
-
-
