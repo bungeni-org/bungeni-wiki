@@ -1,0 +1,5 @@
+#summary One-sentence summary of this page.
+
+instruction on how to install apache 2 in  Ubuntu 8.04 - the Hardy Heron
+at this link:
+http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_apache2.odt
