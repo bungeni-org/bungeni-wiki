@@ -1,0 +1,61 @@
+#summary Setting up a Bungeni installation environment using capistrano.
+#labels Phase-Implementation
+
+= Introduction =
+
+The instructions below are for preparing the pre-requisites for a bungeni installation. Getting the pre-requisites setup correctly ensures a successful buildout. The capistrano recipe has been tested on Ubuntu 8.04.
+
+= Installing Capistrano =
+
+The following commands run in a terminal window setup the basic components for running a capistrano recipe.
+
+{{{
+sudo apt-get update
+sudo apt-get install subversion ssh ruby-full rubygems
+sudo -s
+gem install rake -y
+gem install capistrano -y
+}}}
+
+
+= Setup =
+
+Create a folder within your home directory, lets call it 'cap-setup'.
+In a terminal window change directory to that folder and get the capistrano recipe from svn.
+
+{{{
+cd cap-setup
+svn export http://bungeni-portal.googlecode.com/svn/capistrano/trunk 
+}}}
+
+It will take a few minutes to download the recipe from svn.
+Now open the `trunk/config/bungeni_presetup.rb` file in a text-editor, and edit lines 37 - 44 to suit your local installation environment :
+(user_build_root and user_install_root) are paths on the setup computer - the required bungeni components will get installed within 'user_install_root'
+
+{{{
+### only the following 2 parameters need to be set by the user to customize
+### this installation script for different computers
+set :user_build_root, "/home/bungeni/cap_builds"
+set :user_install_root, "/home/bungeni/cap_installs"
+
+#### download URLs for components #####
+### can be set to a http / ftp url or an absolute path to the file on the computer
+set :python_download_url, "/home/bungeni/cache/Python-2.5.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
+set :python_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7b1.tar.gz"
+set :svn_download_url,  "/home/bungeni/cache/subversion-1.5.4.tar.gz" #"http://subversion.tigris.org/downloads/subversion-1.5.4.tar.gz"
+}}}
+
+Now run the following command :
+
+{{{
+cd trunk
+cap bungeni_presetup:build_all
+}}}
+
+This will setup the following :
+ * Install required OS libraries
+ * Build a user python with required binding for :
+    * ssl
+    * imaging 
+    * subversion
+
