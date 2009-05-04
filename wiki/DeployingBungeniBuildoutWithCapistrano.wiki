@@ -13,13 +13,18 @@
 
 Both capistrano and webistrano require ruby, rubygems and rake to be installed.
 
-== Installing Ruby == 
+== Installing Ruby, RubyGems, Rake & Capistrano == 
 
 {{{
-sudo apt-get install ruby-full build-essential
+sudo apt-get install ruby-full build-essential rubygems
+sudo -s
+gem install rake -y
+gem install capistrano -y
 }}}
 
-== Installing Ruby Gems == 
+For installing a newer version of rubygems see below.
+
+== Installing Ruby Gems (Latest Build) == 
 
 {{{
 wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz
