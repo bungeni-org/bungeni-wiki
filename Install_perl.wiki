@@ -1,0 +1,4 @@
+# How to install perl
+
+Instruction on how to install perl in Ubuntu 8.04 - the Hardy Heron at this link: 
+http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_perl.odt
