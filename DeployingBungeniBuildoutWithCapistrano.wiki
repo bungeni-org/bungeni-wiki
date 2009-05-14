@@ -22,7 +22,18 @@ gem install rake -y
 gem install capistrano -y
 }}}
 
+Add the following lines to your ~/.bashrc file  to add rubygems to your system path:
+{{{
+export PATH=$PATH:/var/lib/gems/1.8/bin
+}}}
+
+and then run the following command :
+{{{
+source ~/.bashrc
+}}}
+
 For installing a newer version of rubygems see below.
+(Otherwise skip to "Deploying a Bungeni Buildout with Capistrano")
 
 == Installing Ruby Gems (Latest Build) == 
 
@@ -71,7 +82,7 @@ Create a folder on the machine to checkout the capistrano config for the bungeni
 svn co https://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/trunk
 }}}
 
-Install pre-requisites for the buildout :
+Install pre-requisites for the buildout. Please see SettingUpBungeniInstallationEnvironment for details:
 
 {{{
 cap bungeni_presetup:build_all
