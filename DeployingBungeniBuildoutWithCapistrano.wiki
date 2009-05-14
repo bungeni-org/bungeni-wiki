@@ -68,19 +68,22 @@ Note : it is not neccessary to install capistrano to use webistrano as webistran
 Create a folder on the machine to checkout the capistrano config for the bungeni buildout
 
 {{{
-svn co https://bungeni-portal.googlecode.com/svn/capistrano/trunk
+svn co https://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/trunk
 }}}
 
-The capistrano deployment makes the following assumptions :
- * All the system [http://code.google.com/p/bungeni-portal/wiki/InstallingBungeni#Pre-requisites pre-requisites for the bungeni buildout] have been setup. 
+Install pre-requisites for the buildout :
 
-[note: the installation of pre-requisites should ideally be also added as a capistrano task]
+{{{
+cap bungeni_presetup:build_all
+}}}
 
 Build & deploy bungeni using the single command :
 
 {{{
 cap bungeni_install:setup
 }}}
+
+You will be prompted for the bungeni-portal svn repository user-name / password - installation will proceed upon entering that.
 
 This command invokes the recipe commands in the correct order by first running deploy:setup, then deploy:update and then invokes the recipes in the bungeni_install namespace.
 
