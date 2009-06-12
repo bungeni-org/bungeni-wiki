@@ -4,6 +4,7 @@
 = Introduction =
 
 The instructions below are for preparing the pre-requisites for a bungeni installation. Getting the pre-requisites setup correctly ensures a successful buildout. The capistrano recipe has been tested on Ubuntu 8.04.
+This is pre-requisite step for DeployingBungeniBuildoutWithCapistrano
 
 = Installing Capistrano =
 
@@ -59,3 +60,4 @@ This will setup the following :
     * imaging 
     * subversion
 
+Also see DeployingBungeniBuildoutWithCapistrano
