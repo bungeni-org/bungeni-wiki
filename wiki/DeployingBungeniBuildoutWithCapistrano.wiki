@@ -146,6 +146,9 @@ cap bungeni_services:restart_bungeni
 
 To use the supervisor service controller to start and stop bungeni, browse to http://app-host:8888/ to access the browser based service manager.
 
+== Updating a running bungeni installation == 
+
+<<<<TODO >>>>
 
 
 = Deploying the Bungeni Buildout with Webistrano =
