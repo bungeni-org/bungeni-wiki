@@ -88,15 +88,65 @@ Install pre-requisites for the buildout. Please see SettingUpBungeniInstallation
 cap bungeni_presetup:build_all
 }}}
 
-Build & deploy bungeni using the single command :
+
+== Installing using the online package index ==
+
+Bungeni can be installed and deployed over the internet -- or locally if you have a local python package index cache.
+
+Build & deploy bungeni using the online package index using the following command :
 
 {{{
 cap bungeni_install:setup
 }}}
 
+
 You will be prompted for the bungeni-portal svn repository user-name / password - installation will proceed upon entering that.
 
 This command invokes the recipe commands in the correct order by first running deploy:setup, then deploy:update and then invokes the recipes in the bungeni_install namespace.
+
+== Installing using the local package index ==
+
+Set the capistrano parameters for the cached buildout by editing `config/bungeniconfiglocalcache.rb` :
+
+{{{
+set :local_buildout_index, "http://192.168.0.14:6543/bungeni"
+set :pg_download_url, "http://192.168.0.14:6543/cache/postgresql/postgresql-8.3.7.tar.gz"
+set :xapian_download_url, "http://192.168.0.14:6543/cache/xapian-core/xapian-core-11831.tgz"
+set :xapian_binding_download_url, "http://192.168.0.14:6543/cache/xapian-bindings/xapian-bindings-11831.tgz"
+set :exist_download_url, "http://192.168.0.14:6543/cache/eXist/eXist-setup-1.2.0-rev7233.jar"
+}}}
+
+Build & deploy bungeni using the cached package index using the following command :
+
+{{{
+cap bungeni_install:setup_from_cache
+}}}
+
+You will be prompted for the bungeni-portal svn repository user-name / password - installation will proceed upon entering that.
+
+This recipe sets up a custom buildout configuration and installs bungeni using the local cache index.
+
+
+== Starting and stopping bungeni ==
+
+To start / stop / restart postgresql :
+{{{
+cap bungeni_services:start_pg
+cap bungeni_services:stop_pg
+cap bungeni_services:restart_pg
+}}}
+
+
+To start / stop / restart bungeni :
+{{{
+cap bungeni_services:start_bungeni
+cap bungeni_services:stop_bungeni
+cap bungeni_services:restart_bungeni
+}}}
+
+To use the supervisor service controller to start and stop bungeni, browse to http://app-host:8888/ to access the browser based service manager.
+
+
 
 = Deploying the Bungeni Buildout with Webistrano =
 
