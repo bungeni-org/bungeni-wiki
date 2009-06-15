@@ -16,7 +16,7 @@ Both capistrano and webistrano require ruby, rubygems and rake to be installed.
 == Installing Ruby, RubyGems, Rake & Capistrano == 
 
 {{{
-sudo apt-get install ruby-full build-essential rubygems
+sudo apt-get install ruby-full build-essential rubygems ssh
 sudo -s
 gem install rake -y
 gem install capistrano -y
