@@ -15,13 +15,13 @@ Download the source package from
 
 Assumes you already have Apache2(mpm) installed
 
-`sudo apt-get install libannodex-dev libcmml-dev libogg-dev libapr-dev apache2-threaded-dev`
+{{{ sudo apt-get install libannodex-dev libcmml-dev libogg-dev libapr-dev apache2-threaded-dev }}}
 
 = Build and Install =
 
-`tar xvf mod_annodex-ap20-0.2.2.tar.gz`
-`cd mod_annodex-ap20-0.2.2`
-`apxs2 -c mod_annodex.c -lannodex -ldl -loggz -logg -lcmml -lexpat -lm`
-`sudo apxs2 -i mod_annodex.la`
-`sudo cp annodex.load /etc/apache/mod_available/`
-`sudo cp annodex.conf /etc/apache/mod_available/`
+{{{ tar xvf mod_annodex-ap20-0.2.2.tar.gz
+cd mod_annodex-ap20-0.2.2
+apxs2 -c mod_annodex.c -lannodex -ldl -loggz -logg -lcmml -lexpat -lm
+sudo apxs2 -i mod_annodex.la
+sudo cp annodex.load /etc/apache/mod_available/
+sudo cp annodex.conf /etc/apache/mod_available/ }}}
