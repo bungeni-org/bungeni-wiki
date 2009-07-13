@@ -1,5 +1,4 @@
 #summary Updating a Bungeni buildout installation
-#labels Featured
 
 = Updating Bungeni =
 
