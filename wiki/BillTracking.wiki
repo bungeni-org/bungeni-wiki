@@ -1,5 +1,4 @@
 #summary Keeping track of the parliamentary activities related to the life of a bill
-#labels Featured
 
 The legislative activity of Parliaments is one of its fundamental
 activities. Keeping track of the parliamentary activities related to the
@@ -68,4 +67,3 @@ Search by:
     * *Full*: text search in: Text, Bills Summaries, Amendments, Fiscal Notes, Committee Reports, Courtesy Resolutions and also Debate Records
     * *Statute*: Citation (law that may be referred or affected by ... )
     * *Committees*: (where the bill has been referred, debated)
-
