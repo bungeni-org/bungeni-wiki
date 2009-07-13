@@ -1,5 +1,5 @@
 #summary Setting up a Bungeni installation environment using capistrano.
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured
 
 = Introduction =
 
