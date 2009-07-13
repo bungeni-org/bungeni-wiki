@@ -1,5 +1,5 @@
 #summary How to deploy a bungeni buildout with capistrano and webistrano
-#labels Phase-Deploy
+#labels Phase-Deploy,Featured
 
 
 <wiki:toc max_depth="3" />
