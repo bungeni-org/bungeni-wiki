@@ -26,7 +26,7 @@ In a terminal window change directory to that folder and get the capistrano reci
 
 {{{
 cd cap-setup
-svn export http://bungeni-portal.googlecode.com/svn/capistrano/trunk 
+svn export http://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/trunk 
 }}}
 
 It will take a few minutes to download the recipe from svn.
