@@ -18,6 +18,13 @@ gem install rake -y
 gem install capistrano -y
 }}}
 
+You may need to add rubygems to your system path ;
+Add the following lines to your ~/.bashrc file to add rubygems to your system path:
+{{{
+export PATH=$PATH:/var/lib/gems/1.8/bin
+}}}
+and then reboot or run `source ~/.bashrc` in your currently open terminal window.
+
 
 = Setup =
 
