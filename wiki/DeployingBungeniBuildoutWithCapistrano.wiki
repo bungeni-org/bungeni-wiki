@@ -49,6 +49,36 @@ sudo ln -s /usr/bin/gem1.8 /usr/bin/gem
 sudo gem update --system
 }}}
 
+=== Error while updating rubygems == 
+
+Sometimes while running `sudo gem update --system` the following error can occur :
+{{{
+Bulk updating Gem source index for: http://gems.rubyforge.org
+Attempting remote update of rubygems-update
+ERROR:  While executing gem ... (Gem::GemNotFoundException)
+    Could not find rubygems-update (> 0) in any repository
+}}}
+
+To resolve this we need to clear the source cache of rubygems :
+
+run `gem env` and not the output :e.g.
+{{{
+$gem env
+
+RubyGems Environment:
+  - VERSION: 0.9.4 (0.9.4)
+  - INSTALLATION DIRECTORY: /var/lib/gems/1.8
+  - GEM PATH:
+     - /var/lib/gems/1.8
+  - REMOTE SOURCES:
+     - http://gems.rubyforge.org
+}}}
+
+clear the source_cache file on the GEM installation PATH :
+{{{
+$ sudo rm /var/lib/gems/1.8/source_cache
+}}}
+
 == Installing rake == 
 
 {{{
