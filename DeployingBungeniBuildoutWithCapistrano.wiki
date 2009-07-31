@@ -78,6 +78,10 @@ clear the source_cache file on the GEM installation PATH :
 {{{
 $ sudo rm /var/lib/gems/1.8/source_cache
 }}}
+finally clear the local gem folder :
+{{{
+rm -rf ~/.gem/
+}}}
 
 == Installing rake == 
 
