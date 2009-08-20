@@ -83,15 +83,15 @@ Select the following in the installation profiles for the plone site:
  * Bungeni CMS Policy
  * Bungeni CMS Theme
 
-Then browse to the newly created plone site zmi : Root Folder -> site -> portal_quickinstaller
+Now log in to the newly created plone site as admin.
 
-Scroll down to 'Add Form', select Bungeni CMS Policy & Bungeni CMS theme, and click reinstall.
+Click on site-setup -> Add on products.
 
-Now select 'GroupWorkspace Profile' in the same page and click 'reinstall'.
+ * Bungeni CMS Policy & Bungeni CMS theme, and click install.
+ * select 'GroupWorkspace Profile' in the same page and click 'install'.
+ * do the same for "BungeniHelpCenter", ContentWellPortlets", collective.plonetruegallery and slideshowfolder.
 
-After this do the same for  "BungeniHelpCenter", ContentWellPortlets", collective.plonetruegallery and slideshowfolder.
-
-=== Import bungeni structure ===
+=== Import demo structure ===
 
  * On the filesystem create an import folder in the root plone directory (the buildout foldr for plone) .The folder should be called import.
 
