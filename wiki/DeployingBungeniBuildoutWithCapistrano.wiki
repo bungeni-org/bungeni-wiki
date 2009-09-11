@@ -112,7 +112,7 @@ Note : it is not neccessary to install capistrano to use webistrano as webistran
 
 = Deploying the Bungeni Buildout with Capistrano =
 
-== Option 1: Setup with capistrano trunk ==
+== Setting up Bungeni installation environment ==
 
 Create a folder within your home directory, lets call it 'cap-setup'.
 In a terminal window change directory to that folder and get the capistrano recipe from svn.
@@ -158,7 +158,7 @@ This will setup the following :
 
 
 
-== Option 2: Installing using the online package index ==
+== Option 1: Installing using the online package index ==
 
 Bungeni can be installed and deployed over the internet -- or locally if you have a local python package index cache.
 
@@ -173,7 +173,7 @@ You will be prompted for the bungeni-portal svn repository user-name / password 
 
 This command invokes the recipe commands in the correct order by first running deploy:setup, then deploy:update and then invokes the recipes in the bungeni_install namespace.
 
-== Option 3: Installing using the local package index ==
+== Option 2: Installing using the local package index ==
 
 Set the capistrano parameters for the cached buildout by editing `config/bungeniconfiglocalcache.rb` :
 
