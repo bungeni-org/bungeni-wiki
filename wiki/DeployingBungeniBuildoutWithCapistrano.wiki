@@ -51,7 +51,7 @@ sudo gem update --system
 
 === Error while updating rubygems == 
 
-_italic_
+_
 
 Sometimes while running `sudo gem update --system` the following error can occur :
 {{{
@@ -85,7 +85,7 @@ finally clear the local gem folder :
 rm -rf ~/.gem/
 }}}
 
-_italic_
+_
 
 == Installing rake == 
 
