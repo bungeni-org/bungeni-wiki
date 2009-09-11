@@ -58,6 +58,9 @@ Now run the following command :
 {{{
 cd trunk
 cap bungeni_presetup:build_all
+
+User name to run as: [bungeni] : "the user name you currently use on your machine"
+
 }}}
 
 This will setup the following :
