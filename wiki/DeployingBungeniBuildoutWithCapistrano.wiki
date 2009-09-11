@@ -78,7 +78,7 @@ _clear_ _the_ _source_ _cache_ _file_ _on_ _the_ _GEM_ _installation_ _PATH_ _:_
 {{{
 $ sudo rm /var/lib/gems/1.8/source_cache
 }}}
-finally clear the local gem folder :
+_finally_ _clear_ _the_ _local_ _gem_ _folder_ :
 {{{
 rm -rf ~/.gem/
 }}}
