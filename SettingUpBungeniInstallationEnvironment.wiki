@@ -37,7 +37,7 @@ svn export http://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/tru
 }}}
 
 It will take a few minutes to download the recipe from svn.
-Now open the `trunk/config/bungeni_presetup.rb` file in a text-editor, and edit lines 37 - 44 to suit your local installation environment :
+Now open the `trunk/config/bungeni_presetup.rb` file in a text-editor, and edit lines 21-22 to suit your local installation environment :
 (user_build_root and user_install_root) are paths on the setup computer - the required bungeni components will get installed within 'user_install_root'
 
 {{{
