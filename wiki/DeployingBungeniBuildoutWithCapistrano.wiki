@@ -51,6 +51,8 @@ sudo gem update --system
 
 === Error while updating rubygems == 
 
+_italic_
+
 Sometimes while running `sudo gem update --system` the following error can occur :
 {{{
 Bulk updating Gem source index for: http://gems.rubyforge.org
@@ -82,6 +84,8 @@ finally clear the local gem folder :
 {{{
 rm -rf ~/.gem/
 }}}
+
+_italic_
 
 == Installing rake == 
 
