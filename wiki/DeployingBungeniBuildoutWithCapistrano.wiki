@@ -110,17 +110,10 @@ Note : it is not neccessary to install capistrano to use webistrano as webistran
 
 = Deploying the Bungeni Buildout with Capistrano =
 
-Create a folder on the machine to checkout the capistrano config for the bungeni buildout
+Please refer to this page for this step:
 
-{{{
-svn co https://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/trunk
-}}}
 
-Install pre-requisites for the buildout. Please see SettingUpBungeniInstallationEnvironment for details:
-
-{{{
-cap bungeni_presetup:build_all
-}}}
+http://code.google.com/p/bungeni-portal/wiki/SettingUpBungeniInstallationEnvironment
 
 
 == Installing using the online package index ==
