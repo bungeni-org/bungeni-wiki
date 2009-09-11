@@ -112,13 +112,53 @@ Note : it is not neccessary to install capistrano to use webistrano as webistran
 
 = Deploying the Bungeni Buildout with Capistrano =
 
-Please refer to this page for this step:
+== Option 1: Setup with capistrano trunk ==
+
+Create a folder within your home directory, lets call it 'cap-setup'.
+In a terminal window change directory to that folder and get the capistrano recipe from svn.
+
+{{{
+cd cap-setup
+svn export http://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/trunk 
+}}}
+
+It will take a few minutes to download the recipe from svn.
+Now open the `trunk/config/bungeni_presetup.rb` file in a text-editor, and edit lines 21-22 to suit your local installation environment :
+(user_build_root and user_install_root) are paths on the setup computer - the required bungeni components will get installed within 'user_install_root'
+
+{{{
+### only the following 2 parameters need to be set by the user to customize
+### this installation script for different computers
+set :user_build_root, "/home/bungeni/cap_builds"
+set :user_install_root, "/home/bungeni/cap_installs"
+
+#### download URLs for components #####
+### can be set to a http / ftp url or an absolute path to the file on the computer
+set :python_download_url, "/home/bungeni/cache/Python-2.5.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
+set :python_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7b1.tar.gz"
+set :svn_download_url,  "/home/bungeni/cache/subversion-1.5.4.tar.gz" #"http://subversion.tigris.org/downloads/subversion-1.5.4.tar.gz"
+}}}
+
+Now run the following command :
+
+{{{
+cd trunk
+cap bungeni_presetup:build_all
+
+User name to run as: [bungeni] : "the user name you currently use on your machine"
+
+}}}
+
+This will setup the following :
+ * Install required OS libraries
+ * Build a user python with required binding for :
+    * ssl
+    * imaging 
+    * subversion
 
 
-http://code.google.com/p/bungeni-portal/wiki/SettingUpBungeniInstallationEnvironment
 
-
-== Installing using the online package index ==
+== Option 2: Installing using the online package index ==
 
 Bungeni can be installed and deployed over the internet -- or locally if you have a local python package index cache.
 
@@ -133,7 +173,7 @@ You will be prompted for the bungeni-portal svn repository user-name / password 
 
 This command invokes the recipe commands in the correct order by first running deploy:setup, then deploy:update and then invokes the recipes in the bungeni_install namespace.
 
-== Installing using the local package index ==
+== Option 3: Installing using the local package index ==
 
 Set the capistrano parameters for the cached buildout by editing `config/bungeniconfiglocalcache.rb` :
 
@@ -156,7 +196,7 @@ You will be prompted for the bungeni-portal svn repository user-name / password 
 This recipe sets up a custom buildout configuration and installs bungeni using the local cache index.
 
 
-== Starting and stopping bungeni ==
+= Starting and stopping bungeni =
 
 To start / stop / restart postgresql :
 {{{
