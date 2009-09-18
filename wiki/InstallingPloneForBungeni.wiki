@@ -99,6 +99,10 @@ Click on site-setup -> Add on products.
 
  * Run the python script 'import_data' in the /etc folder (using the plone python). Edit the file appropriately and put in the necessary values for username, password and the plone site that you want to import to.
 
+== Updating existing Plone installation == 
+
+TODO
+
 == Setup (automated using Capistrano) == 
 
 TODO
