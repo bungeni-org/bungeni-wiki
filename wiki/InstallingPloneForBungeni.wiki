@@ -101,7 +101,9 @@ Click on site-setup -> Add on products.
 
 == Updating existing Plone installation == 
 
-TODO
+It is standard procedure to re-install a product when any changes have been made to it.
+This done in the zmi->portal_setup. Import the profile of the product that has changed.
+Or alternativley use the zmi-portal_quickinstaller to reinstall said product.
 
 == Setup (automated using Capistrano) == 
 
