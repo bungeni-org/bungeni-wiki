@@ -132,7 +132,7 @@ The following command will install plone :
 cap plone_install:setup_from_cache
 }}}
 
-After this you will have to run the following steps manually 
+After this you will have to run the following steps manually [#Installing_specific_products_used_by_Plone_for_Bungeni Installing specific products used by Plone for Bungeni]
 
 
 
