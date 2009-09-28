@@ -3,6 +3,8 @@
 
 <wiki:toc max_depth="4" />
 
+= Manual Install = 
+
 ==Pre-requisites==
 
   * Build environment (on ubunutu do a `sudo apt-get install build-essentials` )
@@ -105,6 +107,34 @@ It is standard procedure to re-install a product when any changes have been made
 This done in the zmi->portal_setup. Import the profile of the product that has changed.
 Or alternativley use the zmi-portal_quickinstaller to reinstall said product.
 
-== Setup (automated using Capistrano) == 
+= Automated Install (using capistrano) =
+
+The assumption here is that you have already installed bungeni using capistrano.
+
+== Installing pre-requisites == 
+
+Edit plone_presetup.rb , specifically the following 2 settings as required :
+{{{
+set :python24_download_url, "/home/undesa/cache/Python-2.4.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
+set :python24_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7b1.tar.gz"
+}}}
+
+Now run the following command :
+{{{
+cap plone_presetup:build_all
+}}}
+
+== Installing Plone == 
+
+The following command will install plone :
+
+{{{
+cap plone_install:setup_from_cache
+}}}
+
+After this you will have to run the following steps manually 
+
+
+
 
 TODO
