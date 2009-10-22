@@ -1,4 +1,5 @@
 #summary How to build an index from a directory containing tarballs, eggs, zip files and any other packaged files.
+#labels Phase-Implementation,install,packageindex
 
 = Introduction =
 This page describes how to setup a local index to serve up packages that are needed for a Bungeni installation.
@@ -8,31 +9,41 @@ This page describes how to setup a local index to serve up packages that are nee
     It is advisable to install repoze.bfg into a virtualenv
 
   * UNIX 
-    - Ensure that setuptools is installed - download [http://peak.telecommunity.com/dist/ez_setup.py ez_setup.py]; invoke it using the Python interpreter you want to install setuptools into: $ sudo python ez_setup.py
-
-    - Install the virtualenv package - use the easy_install command:
-      $ easy_install virtualenv
-
-    - Create the virtual python environment - 
+    * Ensure that setuptools is installed - download [http://peak.telecommunity.com/dist/ez_setup.py ez_setup.py]; invoke it using the Python interpreter you want to install setuptools into: 
+{{{
+$ sudo python ez_setup.py
+}}}
+    * Install the virtualenv package - use the easy_install command:
+{{{   
+   $ easy_install virtualenv
+}}}
+    * Create the virtual python environment 
+ {{{
       $ virtualenv --no-site-packages bfgenv
-
-    - Install repoze.bfg Into the virtual python environment 
+}}}
+    * Install repoze.bfg Into the virtual python environment 
+{{{
       $ bin/easy_install -i http://dist.repoze.org/bfg/current/simple repoze.bfg
-       
+}}}       
 
 = Setting up repoze.pkgindex =
 
 Install this package in the root of the virtualenv:
+{{{
 $ svn co https://bungeni-portal.googlecode.com/svn/repoze.pkgindex/trunk/  repoze --username <username>
+}}}
 
 Create the index folder in the root of the repoze package.
 Name it 'index' - Add any packages and sub-folders necessary for your installation into this folder.
 
 Using the interpreter from the virtualenv created when installing repoze.bfg, invoke the following command when inside the project directory against the setup.py:
+{{{
 $ ../bin/python setup.py develop
-
+}}}
 Run the package:
+{{{
 $ ./bin/paster serve deployment.ini
+}}}
   
 Note: 
 You can modify the deployment.ini file to look for the index in a different folder other than the one named 'index' and to run on a different port other than the default '6543'.
