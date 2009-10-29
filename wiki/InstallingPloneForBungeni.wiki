@@ -91,7 +91,9 @@ Click on site-setup -> Add on products.
 
  * Bungeni CMS Policy & Bungeni CMS theme, and click install.
  * select 'GroupWorkspace Profile' in the same page and click 'install'.
- * do the same for "BungeniHelpCenter", ContentWellPortlets", collective.plonetruegallery and slideshowfolder.
+ * do the same for "BungeniHelpCenter", ContentWellPortlets", plonegalleryview, iqpp.plone.commenting and FCKeditor.
+ * Adjust the commenting options: These are found on the Plone Control Panel under Add-on Product Configuration, the button named 'Commenting'.
+  * Enable the following settings: Comments, Moderation and Show Preview.
 
 === Import demo structure ===
 
