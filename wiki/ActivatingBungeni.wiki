@@ -1,6 +1,8 @@
 #summary How to automate bungeni activation
 #labels Phase-Implementation
 
+<wiki:toc max_depth="4" />
+
 == Introduction == 
 
 After Installing Bungeni to be able to use the system, certain activation configurations need to be done within the system. 
@@ -48,5 +50,3 @@ svn export http://bungeni-portal.googlecode.com/svn/SeleniumTestSuites/
  # Set the speed of the test to "Slow", and click run test case.
  # The test case will take about 5 - 8 minutes to run - at the end you will have an activated Bungeni installation
  # The test case also activates all the ministries and committees for the parliament.
-
-
