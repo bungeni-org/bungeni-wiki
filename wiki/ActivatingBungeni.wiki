@@ -36,7 +36,7 @@ After this -- Government, Ministries and Committees can be activated as required
 
 == Automated Activation == 
 
-Automated activation can be done via  selenium script.
+Automated activation can be done via  selenium script. Note: this will only work on a freshly installed system where no parliament has been activated. Usually that is the state right after a reset-db and load-demo-data has been run on the Bungeni installation.
 
  # Download and install Selenium IDE into your firefox installation from [http://www.seleniumhq.org Selenium]
  # Checkout the latest version of the Activate Bungeni test case from subversion :
