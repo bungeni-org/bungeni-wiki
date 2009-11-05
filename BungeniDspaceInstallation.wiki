@@ -33,7 +33,7 @@
  * Create the directory for the DSpace installation (i.e. ~/apps/dspacesrv ) : `mkdir ~/apps/dspacesrv`
  * Now run maven : `cd ~/builds/dspace/dspace; ~/apps/maven/bin/mvn package`
  	* this will take a while to complete
- * Now run run ant after maven has completed: `cd ~/builds/dspace/dspace/target/dspace-1.5.0.dir/ ; ~/apps/ant/bin/ant fresh_install`
+ * Now run ant after maven has completed: `cd ~/builds/dspace/dspace/target/dspace-1.5.0.dir/ ; ~/apps/ant/bin/ant fresh_install`
  * Once ant runs successfully dspace has been installed under ~/apps/dspacesrv
 
 
