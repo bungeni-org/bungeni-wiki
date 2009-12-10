@@ -131,8 +131,16 @@ cap plone_presetup:build_all
 The following command will install plone :
 
 {{{
-cap plone_install:setup_from_cache
+cap plone_install:setup_from_cache plone_install:full_from_cache
 }}}
+
+If you are using the public index instead of the cached index, do this :
+
+{{{
+cap plone_install:setup plone_install:full
+}}}
+
+
 
 After this you will have to run the following steps manually [#Installing_specific_products_used_by_Plone_for_Bungeni Installing specific products used by Plone for Bungeni]
 
