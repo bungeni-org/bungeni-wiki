@@ -16,9 +16,11 @@ The recommended way to install the full application stack is to use the capistra
 
  # *Installing Bungeni* -- Start here: SettingUpBungeniInstallationEnvironment and then do this: DeployingBungeniBuildoutWithCapistrano
  # *Installing Plone* -- Follow these instructions : [http://code.google.com/p/bungeni-portal/wiki/InstallingPloneForBungeni#Automated_Install_(using_capistrano) Installing Plone]
- # *Installing Deliverance Portal* -- Requires a working capistrano installation of Bungeni. From the capistrano folder run the following command if installing from local package index:  {{{
+ # *Installing Deliverance Portal* -- Requires a working capistrano installation of Bungeni. From the capistrano folder run the following command if installing from local package index:  
+{{{
 cap portal_install:full_from_cache 
 }}}
+
 For using the internet package index :
 {{{
 cap portal_install:full
