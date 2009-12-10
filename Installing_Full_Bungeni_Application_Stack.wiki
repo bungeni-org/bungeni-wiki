@@ -1,0 +1,28 @@
+#summary Installing the complete bungeni application stack
+#labels Featured,Phase-Implementation
+
+= Introduction =
+
+The Bungeni System is composed of 3 different applications --
+ * Bungeni Parliamentary Information System
+ * Plone Content Management System
+ * Deliverance application proxy (this is used to present a unified interface into both the Bungeni PIS and Plone to the user )
+
+The installation instructions here describe how to install all three.
+
+= Installation Steps =
+
+The recommended way to install the full application stack is to use the capistrano installation scripts.
+
+ # *Installing Bungeni* -- Start here: SettingUpBungeniInstallationEnvironment and then do this: DeployingBungeniBuildoutWithCapistrano
+ # *Installing Plone* -- Follow these instructions : [http://code.google.com/p/bungeni-portal/wiki/InstallingPloneForBungeni#Automated_Install_(using_capistrano) Installing Plone]
+ # *Installing Deliverance Portal* -- Requires a working capistrano installation of Bungeni. From the capistrano folder run the following command if installing from local package index:  {{{
+cap portal_install:full_from_cache 
+}}}
+For using the internet package index :
+{{{
+cap portal_install:full
+}}}
+
+Supervisor (running on localhost port 8888) is used to control these services.
+Additional the postgresql service is also controlled via supervisor.
