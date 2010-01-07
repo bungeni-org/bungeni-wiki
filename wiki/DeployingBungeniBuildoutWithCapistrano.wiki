@@ -15,6 +15,8 @@ Both capistrano and webistrano require ruby, rubygems and rake to be installed.
 
 == Installing Ruby, RubyGems, Rake & Capistrano == 
 
+(On ubuntu enable backports to get a more recent rubygems release)
+
 {{{
 sudo apt-get install ruby-full build-essential rubygems ssh
 sudo -s
@@ -36,6 +38,10 @@ For installing a newer version of rubygems see below.
 (Otherwise skip to "Deploying a Bungeni Buildout with Capistrano")
 
 == Installing Ruby Gems (Latest Build) == 
+
+In case installation of rubygems is unsuccessful via the ubuntu package installer - you can install it manually -- assuming that your ruby installation went successfully.
+
+Remember to uninstall the rubygems from the system (`sudo apt-get remove rubygems`)
 
 {{{
 wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz
