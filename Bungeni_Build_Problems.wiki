@@ -1,0 +1,18 @@
+#summary Typical Build Problems & Resolutions
+#labels Phase-Implementation,Phase-Deploy
+
+= Primary Checklist =
+
+ # Is the package index server running ?
+   * Check if your package index server is up and running. This is the web server that hosts the python package index. To find out which is the package server used by the build. Open buildout.cfg and look for the line 'index='. You will see something like :
+   {{{
+    index = http://pypi.python.org/simple
+   }}}
+   Test this link by trying to browse to it. If the link works your package index server is up and running.
+ # SVN does not checkout 
+   * Do you have an account on the bungeni-portal googlecode project ? 
+    If no then contact the project admins to get an account.
+   * I have account on the project but I still cannot checkout using my user name.
+    Are you sure you are using the google code svn password and not the gmail password ? The googlecode password is available on [http://code.google.com/hosting/settings http://code.google.com/hosting/settings]
+ # During pre-setup I get file not found for certain components (e.g. subversion) 
+    * Open the bungeni_presetup.rb capistrano script -- there are three parameters that can be set there either to a location on the local computer or an http link to the required component. Edit these appropriately to a known location
