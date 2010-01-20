@@ -16,3 +16,4 @@
     Are you sure you are using the google code svn password and not the gmail password ? The googlecode password is available on [http://code.google.com/hosting/settings http://code.google.com/hosting/settings]
  # During pre-setup I get file not found for certain components (e.g. subversion) 
     * Open the bungeni_presetup.rb capistrano script -- there are three parameters that can be set there either to a location on the local computer or an http link to the required component. Edit these appropriately to a known location
+ # Svn prompts for missing certicate - but user cannot respond -- this usually happens when there is no ssl root certificate recognised by googlecode installed in the system. Because the prompt is within an automated script the user cannot respond to it. To resolve this issue refer to [http://code.google.com/p/bungeni-portal/wiki/InstallingRootCertificateForGoogleCode How to install root certificate for googlecode]
