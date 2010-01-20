@@ -25,9 +25,9 @@ This is page lists the recognized root authorities on googlecode :
 We have to install a root certificate in svn :
 
 {{{
-# sudo -s
-# wget -O equifax-secureca.cer http://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Certificate_Authority.cer
-# cp equifax-secureca.cer /etc/ssl/certs
+sudo -s
+wget -O equifax-secureca.cer http://www.geotrust.com/resources/root_certificates/certificates/Equifax_Secure_Certificate_Authority.cer
+cp equifax-secureca.cer /etc/ssl/certs
 }}}
 
 The above downloads a root authority certificate and copies it to /etc/ssl/certs
