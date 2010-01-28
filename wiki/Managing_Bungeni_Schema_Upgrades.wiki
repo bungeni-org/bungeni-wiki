@@ -52,3 +52,7 @@ insert into main (col1, col2.... colX)
 select col1,col2, .... , colX
 from backup_main where colX is not null;
 }}}
+
+== Example == 
+
+TO DO 
