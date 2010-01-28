@@ -1,0 +1,54 @@
+#summary Managing Bungeni Schema changes
+#labels Phase-Implementation
+
+== Schema Changes == 
+
+Bungeni runs on Postgresql, a relational database. Occasionally due to new requirements or because of a defect fix, the schema of an existing table changes. There are various use cases here which need to be handled with care while upgrading the schema.
+
+== Bungeni Schema == 
+
+The Bungeni Schema is documented in schema.py as a SQLAlchemy schema (See here [http://bungeni-portal.googlecode.com/svn/bungeni.models/trunk/bungeni/models/schema.py schema.py] ). Occasionally the schema changes, this can be tracked via the change tracker on googlecode (See here [http://code.google.com/p/bungeni-portal/source/browse/bungeni.models/trunk/bungeni/models/schema.py schema.py change tracker]. On the right hand side of the page you can view the revision history and diff the changes between versions.
+
+== Use cases for Schema Change == 
+
+=== Schema change on a blank table === 
+
+If a schema change occurs on a blank table -- it is any easy case since there is no data involved. A alter table statement in postgresql will change the schema. Or alternatively dropping and recreating the table with the new schema should upgrade it.
+
+=== Nullable column added on a table with data ===
+
+This is the case where a new nullable column is added to the table. This is also a relatively easy change. An `alter table add column` statement will add a new column to the table without affecting the data.
+
+=== Non nullable column added on a table with data == 
+
+This is the case where a 'non nullable' column is added to a table with data. This is a problematic issue as the table already has data -- and adding a new 'non nullable' column to the table leads to the question  -- what happens to the data in the new column for existing data rows ? A default will be required for the existing data rows for the new column.
+
+Secondly an `alter table alter column` will not work in this case -- we will first have to create a backup table for the table being upgraded :
+
+{{{
+create table backup_main
+select * from main;
+}}}
+
+Then we drop the main table -- but first we would need to delete the constraints.
+Then we recreate the main table with the new structure, and we add the constraints back (if the constraints are cascaded -- we will need to re-create all the constraints down the chain). And then we reimport the data from the backup table with the default for the new non-nullable column.
+
+{{{
+insert into main (col1, col2.... new_col)
+select col1,col2, .... , 'default value for new col'
+from backup_main;
+}}}
+
+=== An existing column is made non-null for a table with data == 
+
+The use case is similar to the above, except for the last step where we need a default only for the rows where the existing column appeared as null. So we reload the data with 2 queries.
+
+{{{
+insert into main (col1, col2.... colX)
+select col1,col2, .... , 'default value for where the col is null'
+from backup_main where colX is null;
+
+insert into main (col1, col2.... colX)
+select col1,col2, .... , colX
+from backup_main where colX is not null;
+}}}
