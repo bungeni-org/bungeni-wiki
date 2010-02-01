@@ -24,4 +24,11 @@
 undefined symbol: PyUnicodeUCS4_EncodeUTF8
 }}}  
       - This usually indicates that the python used by the buildout is out of date / corrupted because of some change in the operating system (or some other reason). The solution in these cases is to backup your db - run the bungeni_presetup steps again, bootstrap and run a full buildout.
+  # Plone buildout fails while installing psycopg2 with the following error :
+    {{{
+        NameError: global name 'w' is not defined
+    }}} - This occurs on some versions of Ubuntu - to prevent this error install libpq-dev
+    {{{
+      sudo apt-get install libpq-dev
+    }}}
      
