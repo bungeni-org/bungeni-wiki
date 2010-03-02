@@ -10,7 +10,7 @@ This is pre-requisite step for DeployingBungeniBuildoutWithCapistrano
 
 Capistrano is based on [http://en.wikipedia.org/wiki/Ruby_programming_language Ruby] and is installed via the [http://en.wikipedia.org/wiki/RubyGems RubyGems] package management system.
 
-The following commands run in a terminal window sets up the basic components for setting up Capistrano, which will then us to install Bungeni as a capistrano recipe.
+The following commands run in a terminal window sets up the basic components for setting up Capistrano, which we will then use to install Bungeni as a capistrano recipe.
 
 {{{
 # first update ubuntu 
