@@ -8,22 +8,34 @@ This is pre-requisite step for DeployingBungeniBuildoutWithCapistrano
 
 = Installing Capistrano =
 
-The following commands run in a terminal window setup the basic components for running a capistrano recipe.
+Capistrano is based on [http://en.wikipedia.org/wiki/Ruby_programming_language Ruby] and is installed via the [http://en.wikipedia.org/wiki/RubyGems RubyGems] package management system.
+
+The following commands run in a terminal window sets up the basic components for setting up Capistrano, which will then us to install Bungeni as a capistrano recipe.
 
 {{{
+# first update ubuntu 
 sudo apt-get update
-sudo apt-get install subversion ssh ruby-full rubygems
-sudo -s
-gem install rake -y
-gem install capistrano -y
-}}}
+sudo apt-get upgrade
 
-You may need to add rubygems to your system path ;
-Add the following lines to your ~/.bashrc file to add rubygems to your system path:
-{{{
-export PATH=$PATH:/var/lib/gems/1.8/bin
+# install ruby, ruby gems and other required software 
+sudo apt-get install ruby-full build-essential rubygems ssh subversion -y
+
+# the ubuntu 8.04 rubygems installation is usually out of date so 
+#we remove the one we just installed and update it with one built from source
+sudo apt-get autoremove rubygems -y
+wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz
+tar xzvf rubygems-1.3.5.tgz
+cd rubygems-1.3.5
+
+## note: running without sudo will install the ruby gems within the user's
+## home folder e.g. /home/user/.gem/ruby/1.x/bin
+## we install it as root and symlink the system install of gem to the one we updated
+sudo ruby setup.rb && sudo ln -s /usr/bin/gem1.8 /usr/bin/gem && sudo gem update --system
+
+## now install rake and capistrano
+sudo gem install rake -y 
+sudo gem install capistrano -y
 }}}
-and then reboot or run `source ~/.bashrc` in your currently open terminal window.
 
 
 = Setup =
@@ -37,21 +49,31 @@ svn export http://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/tru
 }}}
 
 It will take a few minutes to download the recipe from svn.
-Now open the `trunk/config/bungeni_presetup.rb` file in a text-editor, and edit lines 21-22 to suit your local installation environment :
-(user_build_root and user_install_root) are paths on the setup computer - the required bungeni components will get installed within 'user_install_root'
-
-{{{
-### only the following 2 parameters need to be set by the user to customize
-### this installation script for different computers
-set :user_build_root, "/home/bungeni/cap_builds"
-set :user_install_root, "/home/bungeni/cap_installs"
-
-#### download URLs for components #####
-### can be set to a http / ftp url or an absolute path to the file on the computer
-set :python_download_url, "/home/bungeni/cache/Python-2.5.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
-set :python_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7b1.tar.gz"
-set :svn_download_url,  "/home/bungeni/cache/subversion-1.5.4.tar.gz" #"http://subversion.tigris.org/downloads/subversion-1.5.4.tar.gz"
+To setup the build we have to edit build configurations. The following :
+ * Open 'trunk/config/manual_configs.rb' in a text editor - and set the parameters appropriately for the 3 lines below :
+ {{{
+## EDIT THESE ##
+set :bungeni_username, "ssh user name"  <-- usually your log in user name
+set :password, "ssh password" <-- usually your login password
+set :system_build_root, "/home/undesa/disk1/bungeni" <-- path to the folder where you want to install bungeni
 }}}
+ * Open 'trunk/config/download_urls.rb' - and set the paths to the downloadable components as required 
+{{{
+### python_download_url is the url to python 2.5 source ###
+set :python_download_url, "/home/undesa/cache/Python-2.5.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
+set :python_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz"
+
+### python24_download_url is the url to python 2.4 source ###
+set :python24_download_url, "/home/#{bungeni_username}/cache/Python-2.4.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
+set :python24_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz"
+
+### subversion source ###
+set :svn_download_url,  "/home/undesa/cache/subversion-1.5.4.tar.gz" #"http://subversion.tigris.org/downloads/subversion-1.5.4.tar.gz"
+
+### varnish source ###
+set :varnish_download_url, "/home/undesa/cache/varnish-2.0.6.tar.gz"
+}}}
+
 
 Now run the following command :
 
