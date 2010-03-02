@@ -9,158 +9,9 @@
 [http://www.capify.org Capistrano] is a configuration management tool that makes it possible to automate deployments and builds over the web. 
 [http://labs.peritor.com/webistrano Webistrano] is a web UI version of Capistrano - and packages Capistrano in a more user friendly web based interface.
 
-= Installing Capistrano / Webistrano =
-
-Both capistrano and webistrano require ruby, rubygems and rake to be installed.
-
-== Installing Ruby, RubyGems, Rake & Capistrano == 
-
-(On ubuntu enable backports to get a more recent rubygems release)
-
-{{{
-sudo apt-get install ruby-full build-essential rubygems ssh
-sudo -s
-gem install rake -y
-gem install capistrano -y
-}}}
-
-Add the following lines to your ~/.bashrc file  to add rubygems to your system path:
-{{{
-export PATH=$PATH:/var/lib/gems/1.8/bin
-}}}
-
-and then run the following command :
-{{{
-source ~/.bashrc
-}}}
-
-For installing a newer version of rubygems see below.
-(Otherwise skip to "Deploying a Bungeni Buildout with Capistrano")
-
-== Installing Ruby Gems (Latest Build) == 
-
-In case installation of rubygems is unsuccessful via the ubuntu package installer - you can install it manually -- assuming that your ruby installation went successfully.
-
-Remember to uninstall the rubygems from the system (`sudo apt-get remove rubygems`)
-
-{{{
-wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz
-tar xzvf rubygems-1.3.1.tgz
-cd rubygems-1.3.1
-## NOTE :
-## running without sudo will install the ruby gems within the user's
-## home folder e.g. /home/user/.gem/ruby/1.x/bin
-sudo ruby setup.rb
-sudo ln -s /usr/bin/gem1.8 /usr/bin/gem
-sudo gem update --system
-}}}
-
-=== Error while updating rubygems == 
-
-_Sometimes_ _while_ _running_ `sudo gem update --system` _the_ _following_ _error_ _can_ _occur_ :
-{{{
-Bulk updating Gem source index for: http://gems.rubyforge.org
-Attempting remote update of rubygems-update
-ERROR:  While executing gem ... (Gem::GemNotFoundException)
-    Could not find rubygems-update (> 0) in any repository
-}}}
-
-_To_ _resolve_ _this_ _we_ _need_ _to_ _clear_ _the_ _source_ _cache_ _of_ _rubygems_ _:_
-
-run `gem env` and not the output :e.g.
-{{{
-$gem env
-
-RubyGems Environment:
-  - VERSION: 0.9.4 (0.9.4)
-  - INSTALLATION DIRECTORY: /var/lib/gems/1.8
-  - GEM PATH:
-     - /var/lib/gems/1.8
-  - REMOTE SOURCES:
-     - http://gems.rubyforge.org
-}}}
-
-_clear_ _the_ _source_ _cache_ _file_ _on_ _the_ _GEM_ _installation_ _PATH_ _:_
-{{{
-$ sudo rm /var/lib/gems/1.8/source_cache
-}}}
-_finally_ _clear_ _the_ _local_ _gem_ _folder_ :
-{{{
-rm -rf ~/.gem/
-}}}
-
-_
-
-== Installing rake == 
-
-{{{
-sudo gem install rake -y
-## if you had installed ruby gems into the user folder. i.e installed it without
-## using sudo. you will have to invoke gem from the user bin folder .. 
-## i.e : /home/user/.gem./ruby/1.8/bin/gem install rake -y
-}}}
-
-== Installing capistrano == 
-
-{{{
-sudo gem install capistrano -y
-## if you had installed ruby gems into the user folder. i.e installed it without
-## using sudo. you will have to invoke gem from the user bin folder .. 
-## i.e : /home/user/.gem./ruby/1.8/bin/gem install capistrano -y
-}}}
+== Pre-requisites == 
 
 
-== Installing webistrano ==
-
-Note : it is not neccessary to install capistrano to use webistrano as webistrano packages its own installation of capistrano.
-
-[http://labs.peritor.com/webistrano/wiki/Install Installing Webistrano]
-
-= Deploying the Bungeni Buildout with Capistrano =
-
-== Setting up Bungeni installation environment ==
-
-Create a folder within your home directory, lets call it 'cap-setup'.
-In a terminal window change directory to that folder and get the capistrano recipe from svn.
-
-{{{
-cd cap-setup
-svn export http://bungeni-portal.googlecode.com/svn/capistrano/bungeni_setup/trunk 
-}}}
-
-It will take a few minutes to download the recipe from svn.
-Now open the `trunk/config/bungeni_presetup.rb` file in a text-editor, and edit lines 21-22 to suit your local installation environment :
-(user_build_root and user_install_root) are paths on the setup computer - the required bungeni components will get installed within 'user_install_root'
-
-{{{
-### only the following 2 parameters need to be set by the user to customize
-### this installation script for different computers
-set :user_build_root, "/home/bungeni/cap_builds"
-set :user_install_root, "/home/bungeni/cap_installs"
-
-#### download URLs for components #####
-### can be set to a http / ftp url or an absolute path to the file on the computer
-set :python_download_url, "/home/bungeni/cache/Python-2.5.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
-set :python_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz"
-set :svn_download_url,  "/home/bungeni/cache/subversion-1.5.4.tar.gz" #"http://subversion.tigris.org/downloads/subversion-1.5.4.tar.gz"
-}}}
-
-Now run the following command :
-
-{{{
-cd trunk
-cap bungeni_presetup:build_all
-
-User name to run as: [bungeni] : "the user name you currently use on your machine"
-
-}}}
-
-This will setup the following :
- * Install required OS libraries
- * Build a user python with required binding for :
-    * ssl
-    * imaging 
-    * subversion
 
 
 
@@ -175,12 +26,9 @@ cap bungeni_install:setup
 }}}
 
 
-You will be prompted for the bungeni-portal svn repository user-name / password - installation will proceed upon entering that.
-
-This command invokes the recipe commands in the correct order by first running deploy:setup, then deploy:update and then invokes the recipes in the bungeni_install namespace.
-
 == Option 2: Installing using the local package index ==
 
+Use this option only if you have a Bungeni package index running on your local network.
 Set the capistrano parameters for the cached buildout by editing `config/bungeniconfiglocalcache.rb` :
 
 {{{
@@ -197,10 +45,6 @@ Build & deploy bungeni using the cached package index using the following comman
 cap bungeni_install:setup_from_cache
 }}}
 
-You will be prompted for the bungeni-portal svn repository user-name / password - installation will proceed upon entering that.
-
-This recipe sets up a custom buildout configuration and installs bungeni using the local cache index.
-
 
 = Starting and stopping bungeni =
 
@@ -210,7 +54,6 @@ cap bungeni_services:start_pg
 cap bungeni_services:stop_pg
 cap bungeni_services:restart_pg
 }}}
-
 
 To start / stop / restart bungeni :
 {{{
