@@ -37,6 +37,8 @@ sudo gem install rake -y
 sudo gem install capistrano -y
 }}}
 
+For common errors encountered during Capistrano setup see here 
+
 
 = Setup =
 
@@ -89,6 +91,7 @@ This will setup the following :
     * imaging 
     * subversion
 
+Also see DeployingBungeniBuildoutWithCapistrano
 
 = Folder Structures =
 
@@ -113,4 +116,38 @@ The folder structure used is as follows -- within the bungeni installation folde
 
 
 
-Also see DeployingBungeniBuildoutWithCapistrano
+== Common problems while setting up capistrano == 
+=== Error while updating rubygems == 
+
+_Sometimes_ _while_ _running_ `sudo gem update --system` _the_ _following_ _error_ _can_ _occur_ :
+{{{
+Bulk updating Gem source index for: http://gems.rubyforge.org
+Attempting remote update of rubygems-update
+ERROR:  While executing gem ... (Gem::GemNotFoundException)
+    Could not find rubygems-update (> 0) in any repository
+}}}
+
+_To_ _resolve_ _this_ _we_ _need_ _to_ _clear_ _the_ _source_ _cache_ _of_ _rubygems_ _:_
+
+run `gem env` and not the output :e.g.
+{{{
+$gem env
+
+RubyGems Environment:
+  - VERSION: 0.9.4 (0.9.4)
+  - INSTALLATION DIRECTORY: /var/lib/gems/1.8
+  - GEM PATH:
+     - /var/lib/gems/1.8
+  - REMOTE SOURCES:
+     - http://gems.rubyforge.org
+}}}
+
+_clear_ _the_ _source_ _cache_ _file_ _on_ _the_ _GEM_ _installation_ _PATH_ _:_
+{{{
+$ sudo rm /var/lib/gems/1.8/source_cache
+}}}
+_finally_ _clear_ _the_ _local_ _gem_ _folder_ :
+{{{
+rm -rf ~/.gem/
+}}}
+
