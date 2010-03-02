@@ -1,5 +1,5 @@
 #summary How to build an index from a directory containing tarballs, eggs, zip files and any other packaged files.
-#labels Phase-Implementation,install,packageindex
+#labels Phase-Implementation,installation,packageindex
 
 = Introduction =
 This page describes how to setup a local index to serve up packages that are needed for a Bungeni installation.
