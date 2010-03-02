@@ -11,9 +11,8 @@
 
 == Pre-requisites == 
 
-
-
-
+ # The installation scripts have been primarily tested on Ubuntu 8.04.
+ # The bungeni build environment has been setup and configured as described in [http://code.google.com/p/bungeni-portal/wiki/SettingUpBungeniInstallationEnvironment Setting up a Bungeni installation environment]
 
 == Option 1: Installing using the online package index ==
 
