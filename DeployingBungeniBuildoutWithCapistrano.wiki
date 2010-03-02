@@ -1,18 +1,14 @@
-#summary How to deploy a bungeni buildout with capistrano and webistrano
+#summary How to deploy a bungeni buildout with capistrano
 #labels Phase-Deploy
-
 
 <wiki:toc max_depth="3" />
 
-= Introduction =
-
-[http://www.capify.org Capistrano] is a configuration management tool that makes it possible to automate deployments and builds over the web. 
-[http://labs.peritor.com/webistrano Webistrano] is a web UI version of Capistrano - and packages Capistrano in a more user friendly web based interface.
-
-== Pre-requisites == 
+= Pre-requisites =
 
  # The installation scripts have been primarily tested on Ubuntu 8.04.
  # The bungeni build environment has been setup and configured as described in [http://code.google.com/p/bungeni-portal/wiki/SettingUpBungeniInstallationEnvironment Setting up a Bungeni installation environment]
+
+= Build & Setup =
 
 == Option 1: Installing using the online package index ==
 
