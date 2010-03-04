@@ -43,6 +43,7 @@ Documentation headings are listed below - further details are required.
  * Start Xvfb with a appropriate display property
  * Export the DISPLAY property
  * Start firefox
+ * Start the selenium server
  * Run the selenium tests
  * Report back failures
  * Shutdown firefox
