@@ -1,0 +1,48 @@
+#summary Setting up a Bungeni Build Monitor with Hudson and Selenium
+#labels Phase-QA
+
+= TO DO =
+Documentation headings are listed below - further details are required.
+
+= Introduction =
+
+ * Hudson - automated build monitor for Bungeni; runs continuous integration builds and reports back errors
+ * Selenium RC - automated test server proxy - runs prepared unit tests on Bungeni using a headless browser
+
+
+= Pre-requisities =
+
+ * Install Sun Java6 - `sudo apt-get install sun-java6-jdk`
+
+= Setting up Hudson = 
+
+ * Install Tomcat 
+ * Get the Hudson war file
+ * Deploy the hudson war file
+ * Add a build task for bungeni 
+   * Add a cron schedule
+   * Add  notification parameters
+   * Add a build script
+
+= Setting up Selenium RC = 
+
+ * Install selenium
+
+== Running the Selenium tests == 
+ 
+ * Checkout the Selenium tests from svn
+ * Start Xvfb with a appropriate display property
+ * Export the DISPLAY property
+ * Start firefox
+ * Run the selenium tests
+ * Report back failures
+ * Shutdown firefox
+
+
+ 
+
+== Pre-requisites == 
+ 
+ * Install firefox - `sudo apt-get install firefox` 
+ * Install Xvfb - `sudo apt-get install Xvfb`
+
