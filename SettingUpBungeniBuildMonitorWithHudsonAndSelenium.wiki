@@ -44,10 +44,7 @@
 	cp hudson.war ./tomcat-server/webapps
 	}}}
  * After few minutes Hudson should be available on http://localhost:8080/hudson
- * Add a build task for bungeni 
-   * Add a cron schedule
-   * Add  notification parameters
-   * Add a build script
+
 
 = Setting up Selenium RC = 
 
@@ -173,3 +170,11 @@ Edit the file `firefox.path` appropriately to point it to the firefox binary and
 	{{{
 	cd tests && ./runall.sh
 	}}}
+
+= Setup the Automated Build & Test task on Hudson =
+
+ * Add a build task for bungeni 
+   * Add Build script & notification parameters
+ * Add a test task for Bungeni
+   * Add Build script & notification parameters
+ * Add a cron schedule
