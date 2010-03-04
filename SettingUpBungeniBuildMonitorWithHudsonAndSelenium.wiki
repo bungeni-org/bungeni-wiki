@@ -12,27 +12,26 @@
 
  * Install Sun Java6 - 
 	{{{
-		sudo apt-get install sun-java6-jdk
+	sudo apt-get install sun-java6-jdk
 	}}}
 
 = Setting up Hudson = 
 
  * Install Tomcat 
 	* Get the tomcat binary and extract to folder :
-	    {{{
-	
-		wget http://apache.imghat.com/tomcat/tomcat-5/v5.5.28/bin/apache-tomcat-5.5.28.tar.gz
-		mkdir tomcat-server	
-		tomcat -C tomcat-server -xvf apache-tomcat-5.5.28.tar.gz 
-	     }}}
+	  {{{
+	wget http://apache.imghat.com/tomcat/tomcat-5/v5.5.28/bin/apache-tomcat-5.5.28.tar.gz
+	mkdir tomcat-server	
+	tomcat -C tomcat-server -xvf apache-tomcat-5.5.28.tar.gz 
+	}}}
 	* Setup tomcat:
 	   * Edit bin/startup.sh, bin/shutdown.sh and the following line at the beginning of the file : 
 		{{{
-			export JAVA_HOME=/path/to/java/installation
+		export JAVA_HOME=/path/to/java/installation
 		}}}
-	   * Edit conf/tomcat-users.xml, and add the following line before the closing </tomcat-users> :
+	   * Edit conf/tomcat-users.xml, and add the following line before the closing &lt;/tomcat-users&gt; :
 		{{{
-			<user username="admin" password="admin" roles="tomcat,manager"/>
+		<user username="admin" password="admin" roles="tomcat,manager"/>
 		}}}
 	* You can now startup tomcat by runnnig bin/startup.sh. Tomcat starts up on port 8080.
      
