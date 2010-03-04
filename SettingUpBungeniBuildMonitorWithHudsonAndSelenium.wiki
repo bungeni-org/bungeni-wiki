@@ -28,8 +28,17 @@ Documentation headings are listed below - further details are required.
 
  * Install selenium
 
-== Running the Selenium tests == 
+== Using the Selenium tests == 
+
+
+=== Pre-requisites === 
  
+ * Install firefox - `sudo apt-get install firefox` 
+ * Install Xvfb - `sudo apt-get install Xvfb`
+
+ 
+=== Running the tests ===
+
  * Checkout the Selenium tests from svn
  * Start Xvfb with a appropriate display property
  * Export the DISPLAY property
@@ -37,12 +46,3 @@ Documentation headings are listed below - further details are required.
  * Run the selenium tests
  * Report back failures
  * Shutdown firefox
-
-
- 
-
-== Pre-requisites == 
- 
- * Install firefox - `sudo apt-get install firefox` 
- * Install Xvfb - `sudo apt-get install Xvfb`
-
