@@ -100,17 +100,10 @@ The folder structure used is as follows -- within the bungeni installation folde
 .
 |-- cap_builds 		<== build folder, not used at runtime
 |   |-- imaging  	<== imaging build for python 2.5
-|   |-- imaging24 	<== imaging build for python 2.4
-|   |-- neon
-|   |-- python
-|   |-- python24
-|   `-- svn
+|   `-- python
 `-- cap_installs 	<== main installation folder
     |-- bungeni_install <== main bungeni installation
-    |-- neon 		<== neon build for svn 
-    |-- python24 	<== python 2.4
-    |-- python25 	<== python 2.5
-    `-- svn 		<== svn build for bungeni
+    `-- python25 	<== python 2.5
 
 }}}
 
