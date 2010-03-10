@@ -103,7 +103,7 @@ This will setup the following :
     * imaging 
     * subversion
 
-Also see DeployingBungeniBuildoutWithCapistrano
+
 
 = Folder Structures =
 
@@ -121,6 +121,12 @@ The folder structure used is as follows -- within the bungeni installation folde
     `-- python25 	<== python 2.5
 
 }}}
+
+= Next Steps = 
+
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone Content Management System]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_DeliverancePortal How to setup Deliverance Portal]* 
 
 
 
