@@ -1,14 +1,18 @@
 #summary How to install all the bungeni components
 #labels Phase-Implementation
 
-= Introduction =
+The Bungeni Application is composed of 3 different applications --
+ * Bungeni Parliamentary Information System
+ * Plone Content Management System
+ * Deliverance application proxy (this is used to present a unified interface into both the Bungeni PIS and Plone to the user )
 
-Add your content here.
+[http://bungeni-portal.googlecode.com/files/bungeni_diagram.png]
 
+The installation instructions here describe how to install all three. Certain pre-requisites need to be set-up for installing all three. 
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+The recommended way to install the full application stack is to use the capistrano installation scripts.
+ 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_PreRequisites How to setup the Pre-requisites]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_DeliverancePortal How to setup Deliverance Portal]* 
