@@ -1,14 +1,63 @@
 #summary Installing Bungeni
 #labels Phase-Implementation
 
-= Introduction =
 
-Add your content here.
+<wiki:toc max_depth="3" />
+
+= Pre-requisites =
+
+[http://code.google.com/p/bungeni-portal/wiki/Install_PreRequisites How to setup the Pre-requisites]
+
+= Build & Setup =
+
+== Option 1: Installing using the online package index ==
+
+Bungeni can be installed and deployed over the internet -- or locally if you have a local python package index cache.
+
+Build & deploy bungeni using the online package index using the following command :
+
+{{{
+cap bungeni_install:setup
+}}}
 
 
-= Details =
+== Option 2: Installing using the local package index ==
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Use this option only if you have a Bungeni package index running on your local network.
+Set the capistrano parameters for the cached buildout by editing `config/bungeniconfiglocalcache.rb` :
+
+{{{
+set :local_buildout_index, "http://192.168.0.14:6543/bungeni"
+set :pg_download_url, "http://192.168.0.14:6543/cache/postgresql/postgresql-8.3.7.tar.gz"
+set :xapian_download_url, "http://192.168.0.14:6543/cache/xapian-core/xapian-core-11831.tgz"
+set :xapian_binding_download_url, "http://192.168.0.14:6543/cache/xapian-bindings/xapian-bindings-11831.tgz"
+set :exist_download_url, "http://192.168.0.14:6543/cache/eXist/eXist-setup-1.2.0-rev7233.jar"
+}}}
+
+Build & deploy bungeni using the cached package index using the following command :
+
+{{{
+cap bungeni_install:setup_from_cache
+}}}
+
+
+= Starting and stopping bungeni =
+
+To start / stop / restart postgresql :
+{{{
+cap bungeni_services:start_pg
+cap bungeni_services:stop_pg
+cap bungeni_services:restart_pg
+}}}
+
+To start / stop / restart bungeni :
+{{{
+cap bungeni_services:start_bungeni
+cap bungeni_services:stop_bungeni
+cap bungeni_services:restart_bungeni
+}}}
+
+To use the supervisor service controller to start and stop bungeni, browse to http://app-host:8888/ to access the browser based service manager.
+
+
+= Next Steps =
