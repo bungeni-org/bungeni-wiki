@@ -13,6 +13,6 @@ The installation instructions here describe how to install all three. Certain pr
 The recommended way to install the full application stack is to use the capistrano installation scripts.
  
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_PreRequisites How to setup the Pre-requisites]* 
- * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni]* 
- * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone Content Management System]* 
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_DeliverancePortal How to setup Deliverance Portal]* 
