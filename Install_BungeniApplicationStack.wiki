@@ -16,3 +16,4 @@ The recommended way to install the full application stack is to use the capistra
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone Content Management System]* 
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_DeliverancePortal How to setup Deliverance Portal]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/How_To_Use_Supervisor_Service_Manager How to use the Supervisor Service Manager]* 
