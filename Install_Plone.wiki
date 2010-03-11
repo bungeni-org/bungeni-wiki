@@ -11,15 +11,15 @@ You should have completed the following steps :
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_PreRequisites How to setup the Pre-requisites]* 
  * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
 
-= Installing Plone =
+= Build & Setup =
 
-If you are using the public package index do this :
+== Option 1: Installing using the online package index ==
 
 {{{
 cap plone_install:setup plone_install:full
 }}}
 
-The following command will install plone from a local package index:
+== Option 2: Installing using the local package index ==
 
 {{{
 cap plone_install:setup_from_cache plone_install:full_from_cache
