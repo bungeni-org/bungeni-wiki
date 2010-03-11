@@ -43,7 +43,7 @@ Click on site-setup -> Add on products.
  * Adjust the commenting options: These are found on the Plone Control Panel under Add-on Product Configuration, the button named 'Commenting'.
   * Enable the following settings: Comments, Moderation and Show Preview.
 
-=== Import demo structure ===
+== Import demo structure ==
 
  * On the filesystem create an import folder in the root plone directory (the buildout foldr for plone) .The folder should be called import.
 
@@ -59,14 +59,20 @@ This done in the zmi->portal_setup. Import the profile of the product that has c
 Or alternativley use the zmi-portal_quickinstaller to reinstall said product.
 
 
+= Next Steps =
+
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone Content Management System]* 
+ * *[http://code.google.com/p/bungeni-portal/wiki/Install_DeliverancePortal How to setup Deliverance Portal]* 
+
 = Manual Install = 
 
-This documents manual installation of plone without using assistive scripts like Capistrano. The following steps have been tested on Ubuntu 8.04
+This documents manual installation of plone without using assistive scripts like Capistrano. The following steps have been tested on Ubuntu 8.04.
 
 ==Pre-requisites==
 
   * Build environment (on ubunutu do a `sudo apt-get install build-essentials` )
   * user Python 2.4 built from source. (on ubuntu /debian you will need to install development libaries/headers for imaging (libjpeg62-dev, libfreetype6-dev, libpng12-dev)  and bz2 (libbz2-dev) libraries) and for ssl support openssl and libssl (openssl, libssl-dev)
+  * A working bungeni parlimentary information system installation
    
 ==SSL support for Python==
 
@@ -129,3 +135,4 @@ Now you can start plone :
 ./bin/paster serve etc/deploy.ini
 }}}
 
+Now run the configuration steps as described in [#Configure_the_Installation Configure the Installation]
