@@ -1,5 +1,5 @@
 #summary How to install all the bungeni components
-#labels Phase-Implementation
+#labels Phase-Implementation,Featured
 
 The Bungeni Application is composed of 3 different applications --
  * Bungeni Parliamentary Information System
