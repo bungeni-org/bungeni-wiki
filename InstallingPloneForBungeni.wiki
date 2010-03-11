@@ -1,5 +1,5 @@
 #summary How to install a development instance of Plone for Bungeni
-#labels bungeni,plone
+#labels bungeni,plone,Deprecated
 
 <wiki:toc max_depth="4" />
 
