@@ -1,4 +1,4 @@
-#summary Installing Bungeni
+#summary How to install Bungeni Parliamentary Information System
 #labels Phase-Implementation
 
 
