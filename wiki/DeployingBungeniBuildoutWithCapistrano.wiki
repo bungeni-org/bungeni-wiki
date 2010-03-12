@@ -1,5 +1,5 @@
 #summary How to deploy a bungeni buildout with capistrano
-#labels Phase-Deploy,installation
+#labels Phase-Deploy,installation,Deprecated
 
 <wiki:toc max_depth="3" />
 
