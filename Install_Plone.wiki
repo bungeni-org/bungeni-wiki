@@ -110,7 +110,9 @@ $ cd bungeni_buildout_folder
 $ svn co https://bungeni-portal.googlecode.com/svn/plone.buildout/trunk/ --username <username> plone
 $ cd plone
 $ python bootstrap.py # not the system python! The one you use with Plone, i.e. 2.4.x. 
-$ ./bin/buildout  # wait a while..
+## prefix the buildout command with the path to Bungeni's postgresql bin so that
+## the plone buildout finds the correct pg_config
+$ PATH=../parts/postgresql/bin:$PATH ./bin/buildout  # wait a while..
 }}}
 
 Once this has successfully completed. Add the 1st user to plone - the admin user :
