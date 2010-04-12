@@ -10,3 +10,46 @@ so after running buildout you'll need to add an additional
  '$buildout_directory/parts/xapian/lib/python' 
 
 to the list at the top of the bin/i18nextract script, substituting the full path for $buildout_directory. after which you can use the i18nextract script to generate a message catalog (pot file) for translation.
+
+
+replace the lines 
+{{{
+import lovely.recipe.i18n.i18nextract
+
+if __name__ == '__main__':
+    lovely.recipe.i18n.i18nextract.main(['i18nextract', '-d', 'bungeni', '-s', '/home/undesa/devel/svn/bungeni-portal/parts/i18n/configure.zcml', '-p', 'src/bungeni.core', '-o', 'locales'])
+}}}
+
+with
+{{{
+
+import lovely.recipe.i18n.i18nextract
+import getopt
+
+argv = sys.argv[1:]
+
+try:                                
+    opts, args = getopt.getopt(argv, "p:d:", ["path=", "domain="])
+except getopt.GetoptError:          
+    usage()                         
+    sys.exit(2)       
+
+domain = 'bungeni'
+path = 'src/bungeni.core'
+for opt, arg in opts:                
+    if opt in ("-p", "--path"):      
+        path = arg
+    if opt in ("-d", "--domain"):      
+        domain = arg
+
+print 'generate locales for domain: ', domain, ' in: ', path
+print  
+      
+if __name__ == '__main__':
+    lovely.recipe.i18n.i18nextract.main(['i18nextract', 
+        '-d', domain, 
+        '-s', '/home/undesa/devel/svn/test-bungeni-portal/parts/i18n/configure.zcml', 
+        '-p', path, 
+        '-o', 'locales'])
+
+}}}
