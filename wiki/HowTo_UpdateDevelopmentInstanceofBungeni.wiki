@@ -38,6 +38,13 @@ cd src
 svn up bungeni.portal/
 }}}
 
+There is also a helper script in src to make this easier :
+{{{
+cd src
+## 
+./svnup_head.sh bungeni.portal
+}}}
+
 = Managing deploy.ini =
 
 deploy.ini is the file used by paster for startup configurations, entry points etc.
@@ -56,5 +63,3 @@ For regular instances, you can simply kill the supervisor process after shutting
 ps ax | grep supervisor
 kill -9 <the process id of the supervisor service>
 }}}
-
-
