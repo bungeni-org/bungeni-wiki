@@ -1,0 +1,3 @@
+#summary Table of Contents for the wiki
+
+ *  [Install_BungeniApplicationStack How to install a full Bungeni setup]
