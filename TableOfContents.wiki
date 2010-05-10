@@ -1,4 +1,5 @@
 #summary Table of Contents for the wiki
+#labels Featured
 
  *  [Install_BungeniApplicationStack How to install a full Bungeni setup]
      *  [Install_PreRequisites How to install pre-requisites]
