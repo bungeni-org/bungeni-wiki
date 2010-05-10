@@ -20,7 +20,7 @@
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
      * [HowTo_AddValidationToForms How to do add validation to Forms]
      * [AlchemistsUIElements How to tweak the layout of Bungeni Forms]
-     * [CustomSortForContainers How to do add validation to Forms]
+     * [CustomSortForContainers How to do change the sort order for Bungeni folderish containers]
      * [ChangingDBSchema How to add objects to the db schema]
      * [SetPermissionForWorkflows How to set permissions on a object on workflow transition]
      * [ParliamentaryGlossary Glossary of Parliamentary Terms]
