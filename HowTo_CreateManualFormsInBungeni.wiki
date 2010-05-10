@@ -1,4 +1,5 @@
 #summary Create Form manually and override the built in automatic form generation
+#sidebar TableOfContents
 #labels zope,sqlalchemy,forms
 = Introduction =
 

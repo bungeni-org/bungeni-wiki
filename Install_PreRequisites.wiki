@@ -1,4 +1,5 @@
 #summary How to install pre-requisites for Bungeni
+#sidebar TableOfContents
 #labels Phase-Implementation
 #sidebar TableOfContents
 

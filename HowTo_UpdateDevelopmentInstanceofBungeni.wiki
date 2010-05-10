@@ -1,4 +1,5 @@
 #summary How to update a development instance of bungeni
+#sidebar TableOfContents
 #labels Phase-Deploy,Phase-Implementation,How-To
 
 = Introduction =

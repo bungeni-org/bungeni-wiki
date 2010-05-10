@@ -1,4 +1,5 @@
 #summary Managing Bungeni Schema changes
+#sidebar TableOfContents
 #labels Phase-Implementation
 
 == Schema Changes == 

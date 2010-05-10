@@ -1,4 +1,5 @@
 #summary On a workflow transition the permissions for an object have to be changed
+#sidebar TableOfContents
 #labels zope,security,workflow,alchemist
 
 = Introduction =

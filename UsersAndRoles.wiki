@@ -1,4 +1,5 @@
 #summary User, Group and Role definition
+#sidebar TableOfContents
 
 = Introduction =
 

@@ -1,4 +1,5 @@
 #summary Use the descriptor to define your UI.
+#sidebar TableOfContents
 #labels zope,sqlalchemy
 
 = Introduction =

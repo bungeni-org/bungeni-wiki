@@ -1,4 +1,5 @@
 #summary How to install mod-annodex on Ubuntu 9.04
+#sidebar TableOfContents
 
 === Introduction ===
 

@@ -1,4 +1,5 @@
 #summary Typical Build Problems & Resolutions
+#sidebar TableOfContents
 #labels Phase-Implementation,Phase-Deploy
 
 = Primary Checklist =

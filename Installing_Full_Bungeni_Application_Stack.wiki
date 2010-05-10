@@ -1,4 +1,5 @@
 #summary Installing the complete bungeni application stack
+#sidebar TableOfContents
 #labels Deprecated
 
 =This page is deprecated please refer to [http://code.google.com/p/bungeni-portal/wiki/Install_BungeniApplicationStack  this page] instead=

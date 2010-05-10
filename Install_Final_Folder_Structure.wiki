@@ -1,4 +1,5 @@
 #summary Folder structure for bungeni installation
+#sidebar TableOfContents
 #labels Phase-Implementation
 
 =Bungeni Installation Folder Structure=

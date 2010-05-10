@@ -1,4 +1,5 @@
 #summary System Functional Requirements
+#sidebar TableOfContents
 #labels Phase-Requirements
 
 = System Requirements / Invariants / Functionality =

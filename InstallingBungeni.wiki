@@ -1,4 +1,5 @@
 #summary How to install a development instance of Bungeni
+#sidebar TableOfContents
 #labels Phase-Implementation
 
 *Note* : An easier way to setup bungeni on Ubuntu 8.04 is to use a capistrano recipe. For details click here SettingUpBungeniInstallationEnvironment and DeployingBungeniBuildoutWithCapistrano. This page documents the manual steps required to install Bungeni

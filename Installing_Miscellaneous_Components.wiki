@@ -1,4 +1,5 @@
 #summary Installing misc. components
+#sidebar TableOfContents
 #labels Phase-Implementation
 
  * [http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_perl.odt How to install Perl]

@@ -1,4 +1,5 @@
 #summary Setting up a Bungeni installation environment using capistrano.
+#sidebar TableOfContents
 #labels Phase-Implementation,installation,Deprecated
 
 = Introduction =

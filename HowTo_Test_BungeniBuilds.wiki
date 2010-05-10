@@ -1,4 +1,5 @@
 #summary Setting up a Bungeni Build Monitor with Hudson and Selenium
+#sidebar TableOfContents
 #labels Phase-QA
 
 

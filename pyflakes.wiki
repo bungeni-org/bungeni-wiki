@@ -1,4 +1,5 @@
 #summary use pyflakes to test
+#sidebar TableOfContents
 
 = Introduction =
 
