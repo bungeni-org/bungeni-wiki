@@ -1,3 +1,8 @@
 #summary Table of Contents for the wiki
 
  *  [Install_BungeniApplicationStack How to install a full Bungeni setup]
+     *  [Install_PreRequisites How to install pre-requisites]
+     *  [Install_Bungeni How to install Bungeni]
+     *  [Install_Plone How to install Plone]
+     *  [Install_DeliverancePortal How to install Deliverance]
+     *  [How_To_Use_Supervisor_Service_Manager How to use the supervisor service manager]
