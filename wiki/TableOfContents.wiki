@@ -11,6 +11,7 @@
      * [HowTo_Test_BungeniBuilds How to do automated functional and integration tests]
      * [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
  * Developer Guide
+     * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
      * [HowTo_AddValidationToForms How to do add validation to Forms]
      * [CustomSortForContainers How to do add validation to Forms]
