@@ -1,5 +1,6 @@
 #summary How to install pre-requisites for Bungeni
 #labels Phase-Implementation
+#sidebar TableOfContents
 
 <wiki:toc max_depth="3" />
 
