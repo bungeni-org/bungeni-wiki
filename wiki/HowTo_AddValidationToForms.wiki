@@ -1,4 +1,5 @@
 #summary How to add validation to the add/edit forms
+#sidebar TableOfContents
 #labels zope,sqlalchemy
 
 = Validate Input =

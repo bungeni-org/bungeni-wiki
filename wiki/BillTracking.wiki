@@ -1,4 +1,5 @@
 #summary Keeping track of the parliamentary activities related to the life of a bill
+#sidebar TableOfContents
 
 The legislative activity of Parliaments is one of its fundamental
 activities. Keeping track of the parliamentary activities related to the

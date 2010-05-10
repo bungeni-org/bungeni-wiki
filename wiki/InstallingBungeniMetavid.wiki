@@ -1,4 +1,5 @@
 #summary How to install Metavid with Bungeni customizations on Ubuntu / Debian
+#sidebar TableOfContents
 #labels Phase-Deploy,Bungeni-Metavid
 
 This page contains instructions for installing Bungeni Metavid on Linux. It may be possible to install Bungeni Metavid on other platforms but this has not been tested.

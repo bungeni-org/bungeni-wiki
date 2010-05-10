@@ -1,4 +1,5 @@
 #summary what BUNGENI's Parliamentary Registry is meant do do and what data it should store.
+#sidebar TableOfContents
 #labels Phase-Design
 
 = Introduction =

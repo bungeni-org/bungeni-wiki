@@ -1,4 +1,5 @@
 #summary how to install a root certificate authority for svn+ssh googlecode access
+#sidebar TableOfContents
 #labels Phase-Implementation,Phase-Support
 
 = Introduction =

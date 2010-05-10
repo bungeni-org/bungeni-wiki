@@ -1,4 +1,5 @@
 #summary Assign a sort order to the items in a container
+#sidebar TableOfContents
 #labels zope,sqlalchemy
 
 = Introduction =

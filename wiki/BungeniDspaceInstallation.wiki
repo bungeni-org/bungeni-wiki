@@ -1,4 +1,5 @@
 #labels BungeniDspace
+#sidebar TableOfContents
 == Setup PostGresQL ==
 
  * Add a database called 'dspace' to Postgres

@@ -1,4 +1,5 @@
 #summary How to Generate i18n catalogs.
+#sidebar TableOfContents
 #labels zope,Phase-Implementation
 
 = How to setup i18n scripts =

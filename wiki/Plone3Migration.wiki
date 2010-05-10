@@ -1,4 +1,5 @@
 #summary Roadmap of migration of Bungeni from Plone 2.5.3 to Plone 3.0.1
+#sidebar TableOfContents
 #labels Deprecated
 
 == Introduction ==

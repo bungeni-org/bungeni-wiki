@@ -1,4 +1,5 @@
 #summary Installing Bungeni Metavid on CentOS 5
+#sidebar TableOfContents
 = Introduction =
 
 Bungeni Metavid is a PHP application for the transcription of parliamentary records and is built on [http://metavid.ucsc.edu/ Metavid]

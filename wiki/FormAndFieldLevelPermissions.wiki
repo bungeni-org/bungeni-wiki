@@ -1,4 +1,5 @@
 #summary Form and Field level permissions in Bungeni
+#sidebar TableOfContents
 #labels bungeni-portal
 
 =Form and Field Level Permissions=

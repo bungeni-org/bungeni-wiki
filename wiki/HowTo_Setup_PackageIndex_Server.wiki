@@ -1,4 +1,5 @@
 #summary How to build an index from a directory containing tarballs, eggs, zip files and any other packaged files.
+#sidebar TableOfContents
 #labels Phase-Implementation,installation,packageindex
 
 = Introduction =
