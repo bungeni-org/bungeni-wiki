@@ -1,6 +1,6 @@
 #summary Managing Bungeni Schema changes
-#sidebar TableOfContents
 #labels Phase-Implementation
+#sidebar TableOfContents
 
 == Schema Changes == 
 
@@ -8,9 +8,15 @@ Bungeni runs on Postgresql, a relational database. Occasionally due to new requi
 
 == Bungeni Schema == 
 
-The Bungeni Schema is documented in schema.py as a SQLAlchemy schema (See here [http://bungeni-portal.googlecode.com/svn/bungeni.models/trunk/bungeni/models/schema.py schema.py] ). Occasionally the schema changes, this can be tracked via the change tracker on googlecode (See here [http://code.google.com/p/bungeni-portal/source/browse/bungeni.models/trunk/bungeni/models/schema.py schema.py change tracker]. On the right hand side of the page you can view the revision history and diff the changes between versions.
+The Bungeni Schema is documented in schema.py as a SQLAlchemy schema (See here [http://bungeni-portal.googlecode.com/svn/bungeni.models/trunk/bungeni/models/schema.py schema.py] ). Occasionally the schema changes, this can be tracked via the change tracker on googlecode (See here [http://code.google.com/p/bungeni-portal/source/list?path=/bungeni.models/trunk/bungeni/models/schema.py change tracker]. 
+
+== Upgrade scripts ==
+
+An upgrade script needs to be provided when schema.py changes - since schema.py does not handle upgrades by itself. The upgrade script can be a PostgreSQL sql script that alters tables/ alters columns / removes columns etc in a safe manner.
 
 == Use cases for Schema Change == 
+
+For running any schema change upgrades - the bungeni service must be shutdown to ensure that no user is logged on.
 
 === Schema change on a blank table === 
 
