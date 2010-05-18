@@ -1,0 +1,34 @@
+#summary Guidelines on setting up a live bungeni system
+#labels Phase-Deploy
+
+= Introduction =
+
+A live system is one which will be used by end users on an ongoing basis. There are many things to be aware of when setting up such a system. This page aims to document some of these steps
+
+= Version Control =
+
+Bungeni is setup by checking out code from the trunk branch of the bungeni svn repository.
+For live installations it is desirable to not to run code from trunk - but to run the system on specific tagged versions of the source code. This ensures stability and predictability - and also allows rolling back or forward to downgrade or upgrade a change.
+
+Tagged release of bungeni are listed in [https://spreadsheets.google.com/pub?key=0ApKt_FmivEH8dF9ITXRqMFNKRDNQZlJBbGtZcnVwRUE&hl=en&gid=0 this RELEASES document].
+
+Running a svn up to the tagged revision and running a buildout effectively reverts the source code to the specific revision
+
+= Schema Changes = 
+
+Managing schema changes has been documented here : Managing_Bungeni_Schema_Upgrades
+
+= Backups =
+
+ * Any local patches to source code need to be backed up and documented, preferably via the issue tracker.
+ * The live database needs to be incrementally backed up at regular intervals (e.g. hourly)
+
+= Installation Administration = 
+
+== Minimal metadata == 
+
+
+== Users == 
+
+== Reversing incorrect data entry == 
+
