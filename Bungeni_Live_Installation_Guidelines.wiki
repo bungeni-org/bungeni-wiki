@@ -1,5 +1,5 @@
 #summary Guidelines on setting up a live bungeni system
-#labels Phase-Deploy
+#sidebar TableOfContents
 
 = Introduction =
 
@@ -12,7 +12,7 @@ For live installations it is desirable to not to run code from trunk - but to ru
 
 Tagged release of bungeni are listed in [https://spreadsheets.google.com/pub?key=0ApKt_FmivEH8dF9ITXRqMFNKRDNQZlJBbGtZcnVwRUE&hl=en&gid=0 this RELEASES document].
 
-Running a svn up to the tagged revision and running a buildout effectively reverts the source code to the specific revision
+Running a svn up to the tagged revision and running a buildout effectively reverts the source code to the specific revision. If there was a schema change between revisions - please see the issue below.
 
 = Schema Changes = 
 
@@ -27,8 +27,25 @@ Managing schema changes has been documented here : Managing_Bungeni_Schema_Upgra
 
 == Minimal metadata == 
 
+To commence data-entry - you need to start with a clean system without any parliaments or users. However, the system requires some minimal metadata to get started with -- these include : 
+  * country codes
+  * language codes
+  * committee types
+  * parliamentary office types
+  * sitting types
+  * address types 
+  * user role types 
+  * venues / meeting rooms within parliament
+
+The minimal metadata does not have a user interface for adding it to the system - this is loaded via a sql script : 
+{{{
+./bin/reset-db
+./bin/psql bungeni < ./testdatadmp/dumpmin-undesa.txt
+}}}
+The script is called dumpmin-undesa.txt and can be found in the `testdatadmp` folder of the bungeni buildout installation.
+
 
 == Users == 
 
-== Reversing incorrect data entry == 
 
+== Reversing incorrect data entry == 
