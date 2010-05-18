@@ -12,6 +12,7 @@
      * [HowTo_Setup_PackageIndex_Server How to setup a package index server]
      * [HowTo_Test_BungeniBuilds How to do automated functional and integration tests]
      * [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
+     * [Bungeni_Live_Installation_Guidelines Live installation guidelines]
      * [Managing_Bungeni_Schema_Upgrades Managing schema upgrades]
      * [BeautifyGraphvizWorkflows How to export Bungeni workflows to Graphviz]
  * Developer Guide
