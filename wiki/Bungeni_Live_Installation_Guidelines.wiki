@@ -31,6 +31,10 @@ kernel.shmmax = 67108864
 
 As a rough measure 15% of system memory can be set to the shared memory max variable.
 
+Set shared buffers for postgres (in postgresql.conf) to 96 mb :
+{{{
+shared_buffers=96mb
+}}}
 
 
 = Schema Changes = 
@@ -40,7 +44,29 @@ Managing schema changes has been documented here : Managing_Bungeni_Schema_Upgra
 = Backups =
 
  * Any local patches to source code need to be backed up and documented, preferably via the issue tracker.
- * The live database needs to be incrementally backed up at regular intervals (e.g. hourly)
+ * The live database needs to be incrementally backed up at regular intervals (e.g. hourly) {{{ 
+## example backup script :
+file_name=`date +%Y-%m-%d-%H%M%S`.txt
+pg_dump bungeni -U undesa  > $file_name
+./ftpfile.sh $file_name
+### ftpfile.sh 
+#!/bin/bash
+echo on
+HOST='192.168.0.48'
+USER='undesa'
+PASSWD='undesa'
+FILE=$1
+
+ftp -n 192.168.0.48 <<END_SCRIPT
+user $USER $PASSWD
+binary
+cd live_backup
+put $FILE
+quit
+END_SCRIPT
+exit 0
+}}}
+
 
 = Installation Administration = 
 
