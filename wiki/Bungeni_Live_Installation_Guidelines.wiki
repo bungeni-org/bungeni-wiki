@@ -44,7 +44,8 @@ Managing schema changes has been documented here : Managing_Bungeni_Schema_Upgra
 = Backups =
 
  * Any local patches to source code need to be backed up and documented, preferably via the issue tracker.
- * The live database needs to be incrementally backed up at regular intervals (e.g. hourly) {{{ 
+ * The live database needs to be incrementally backed up at regular intervals (e.g. hourly) 
+{{{ 
 ## example backup script :
 file_name=`date +%Y-%m-%d-%H%M%S`.txt
 pg_dump bungeni -U undesa  > $file_name
