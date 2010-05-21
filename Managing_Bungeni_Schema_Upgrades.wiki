@@ -46,6 +46,61 @@ select col1,col2, .... , 'default value for new col'
 from backup_main;
 }}}
 
+In some cases you can use a column default to set a non-null value - and update that to the correct value using a second sql query :
+e.g.  this is the bill table schema 
+{{{
+CREATE TABLE bills
+(
+  bill_id integer NOT NULL,
+  bill_type_id integer NOT NULL,
+  ministry_id integer,
+  identifier integer,
+  publication_date date,
+  CONSTRAINT bills_pkey PRIMARY KEY (bill_id),
+  CONSTRAINT bills_bill_id_fkey FOREIGN KEY (bill_id)
+      REFERENCES parliamentary_items (parliamentary_item_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT bills_bill_type_id_fkey FOREIGN KEY (bill_type_id)
+      REFERENCES bill_types (bill_type_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT bills_ministry_id_fkey FOREIGN KEY (ministry_id)
+      REFERENCES groups (group_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (OIDS=FALSE);
+}}}
+
+if we want to add a non null column called bill_approval_date : 
+{{{
+alter table bills add column bill_approval_date date not null;
+}}}
+
+we get an error message : 
+
+{{{
+ERROR:  column "bill_approval_date" contains null values
+
+********** Error **********
+
+ERROR: column "bill_approval_date" contains null values
+SQL state: 23502
+}}}
+
+Instead if we run :
+{{{
+alter table bills add column bill_approval_date date default now();
+}}}
+
+it successfully adds the column with the current date set as the default, you can now update the column to the correct date using an update query :
+{{{
+update bills set bill_approval_date = x.date 
+from bills, x
+where bills.y = x. z 
+.......
+}}}
+
+
+
 === An existing column is made non-null for a table with data == 
 
 The use case is similar to the above, except for the last step where we need a default only for the rows where the existing column appeared as null. So we reload the data with 2 queries.
