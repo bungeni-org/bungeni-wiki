@@ -2,6 +2,8 @@
 #labels Phase-Implementation
 #sidebar TableOfContents
 
+<wiki:toc max_depth="4" />
+
 == Schema Changes == 
 
 Bungeni runs on Postgresql, a relational database. Occasionally due to new requirements or because of a defect fix, the schema of an existing table changes. There are various use cases here which need to be handled with care while upgrading the schema.
@@ -115,6 +117,21 @@ select col1,col2, .... , colX
 from backup_main where colX is not null;
 }}}
 
-== Example == 
+== Examples with some guidelines  == 
 
-TO DO 
+=== Adding a new column === 
+
+TODO
+
+=== Converting a 1-to-1 relation ship to a 1-to-many relationship ===
+
+TODO
+
+=== Converting a 1-to-many relationship to a many-to-many relationship ===
+
+TODO
+
+=== Converting a non-nullable field to a nullable field ===
+
+TODO
+
