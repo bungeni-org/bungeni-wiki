@@ -26,5 +26,6 @@
      * [ChangingDBSchema How to add objects to the db schema]
      * [SetPermissionForWorkflows How to set permissions on a object on workflow transition]
      * [ParliamentaryGlossary Glossary of Parliamentary Terms]
+     * [How to generate translation catalogs]
 
      
