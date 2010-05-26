@@ -1,0 +1,80 @@
+#summary How to generate and merge translation catalogs
+
+= How to setup i18n scripts =
+
+due to a minor issue in one of the recipes used in buildout, we need to modify the generated i18n scripts to include the path to our xapian library.
+
+so after running buildout you'll need to add an additional 
+
+ '$buildout_directory/parts/xapian/lib/python' 
+
+to the list at the top of the bin/i18nextract script, substituting the full path for $buildout_directory. after which you can use the i18nextract script to generate a message catalog (pot file) for translation.
+
+
+replace the lines 
+{{{
+import lovely.recipe.i18n.i18nextract
+
+if __name__ == '__main__':
+    lovely.recipe.i18n.i18nextract.main(['i18nextract', '-d', 'bungeni', '-s', '/home/undesa/devel/svn/bungeni-portal/parts/i18n/configure.zcml', '-p', 'src/bungeni.core', '-o', 'locales'])
+}}}
+
+with
+{{{
+
+import lovely.recipe.i18n.i18nextract
+import getopt
+
+argv = sys.argv[1:]
+
+try:                                
+    opts, args = getopt.getopt(argv, "p:d:", ["path=", "domain="])
+except getopt.GetoptError:          
+    usage()                         
+    sys.exit(2)       
+
+domain = 'bungeni'
+path = 'src/bungeni.core'
+for opt, arg in opts:                
+    if opt in ("-p", "--path"):      
+        path = arg
+    if opt in ("-d", "--domain"):      
+        domain = arg
+
+print 'generate locales for domain: ', domain, ' in: ', path
+print  
+      
+if __name__ == '__main__':
+    lovely.recipe.i18n.i18nextract.main(['i18nextract', 
+        '-d', domain, 
+        '-s', '/home/undesa/devel/svn/test-bungeni-portal/parts/i18n/configure.zcml', 
+        '-p', path, 
+        '-o', 'locales'])
+
+}}}
+
+= Generate i18n catalogs =
+
+To generate the POT files run the following commands
+
+{{{
+./bin/i18nextract -d bungeni -p src/bungeni.ui/bungeni/ui/
+./bin/i18nextract -d bungeni -p src/bungeni.models/bungeni/models/
+./bin/i18nextract -d bungeni -p src/bungeni.core/bungeni/core/
+}}}
+
+The POT files will be created in locales directory in the package eg. for bungeni.ui the POT file will be in src/bungeni.ui/bungeni/ui/locales
+
+= Merge old catalogs with new ones =
+
+To merge old translation catalogs with new ones, one needs have gettext installed
+{{{
+   sudo apt-get install gettext
+}}}
+
+use the msgmerge tool to merge the old translations with the new ones for each PO files eg. for the en translation catalog for bungeni.ui 
+
+{{{
+cd src/bungeni.ui/bungeni/ui/locales/
+msgmerge -U en/LC_MESSAGES/bungeni.ui.po bungeni.pot
+}}}
