@@ -65,6 +65,20 @@ To generate the POT files run the following commands
 
 The POT files will be created in locales directory in the package eg. for bungeni.ui the POT file will be in src/bungeni.ui/bungeni/ui/locales
 
+You may get errors like the ones below but the catalogs are still generated
+
+{{{
+/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/src/ore.alchemist/src/ore/alchemist/introspector.py:22: SADeprecationWarning: the information_schema module is deprecated.
+  from sqlalchemy.databases import information_schema
+Exception in thread Thread-1 (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/home/bungeni/cap_installs/python25/lib/python2.5/threading.py", line 486, in __bootstrap_inner
+  File "/home/bungeni/cap_installs/python25/lib/python2.5/threading.py", line 446, in run
+  File "/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/eggs/ore.xapian-0.5.0-py2.5.egg/ore/xapian/queue.py", line 64, in __call__
+  File "/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/eggs/ore.xapian-0.5.0-py2.5.egg/ore/xapian/queue.py", line 54, in operations
+<type 'exceptions.AttributeError'>: 'NoneType' object has no attribute 'Empty'
+}}}
+
 = Merge old catalogs with new ones =
 
 To merge old translation catalogs with new ones, one needs have gettext installed
