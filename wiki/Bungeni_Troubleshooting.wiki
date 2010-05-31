@@ -1,0 +1,12 @@
+#summary Troubleshooting typical Bungeni problems
+
+= Introduction =
+
+This page documents typical problems in Bungeni - and suggests resolutions to these issues.
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
