@@ -1,7 +1,7 @@
 #summary Table of Contents for the wiki
 #labels Featured
 
- *  [Install_BungeniApplicationStack How to install a full Bungeni setup]
+ *  [Install_BungeniApplicationStack How to setup Bungeni]
      *  [Install_PreRequisites How to install pre-requisites]
      *  [Install_Bungeni How to install Bungeni]
      *  [Install_Plone How to install Plone]
@@ -9,6 +9,7 @@
      *  [How_To_Use_Supervisor_Service_Manager How to use the supervisor service manager]
      *  [Bungeni_Build_Problems Common Build issues and how to resolve them]
  * Deployment and Testing 
+     * [Bungeni_Troubleshooting Troubleshoooting]
      * [HowTo_Setup_PackageIndex_Server How to setup a package index server]
      * [HowTo_Test_BungeniBuilds How to do automated functional and integration tests]
      * [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
