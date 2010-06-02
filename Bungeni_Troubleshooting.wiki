@@ -1,12 +1,31 @@
 #summary Troubleshooting typical Bungeni problems
+#labels Phase-Implementation
 
 = Introduction =
 
 This page documents typical problems in Bungeni - and suggests resolutions to these issues.
 
-= Details =
+== Bungeni Starts up but unable to browse to the service ==
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Bungeni can be browsed on port 8081 but the portal interface (8080) cannot be accessed even though the portal service is running -- 
+
+* check the host and port entries in the deploy.ini file for the portal - If they are bound to a specific IP then you must browse Bungeni using that IP.
+
+
+== PDF conversion does not work in Bungeni ==
+
+PDF conversion does not work in Bungeni
+ * Check if the OpenOffice service is started in the background : 
+{{{
+ $ps aux | grep soffice
+ /usr/bin/soffice -accept=socket,port=2002;urp; -nologo -nofirststartwizard -headless
+}}}
+
+ * Check if supporting software for pdf conversion is installed - e.g libtidy :
+{{{
+sudo apt-get install libtidy-dev
+}}}
+
+ * PDF conversion will not work with custom installed openoffice installations -e.g. if you install the version of OOo from the openoffice.org website. You must use the Openoffice installation packaged with Ubuntu. 
+
+
