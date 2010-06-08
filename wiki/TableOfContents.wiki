@@ -18,7 +18,7 @@
      * [HowTo_Control_Bungeni_Log_Output How to control bungeni logging]
      * [Managing_Bungeni_Schema_Upgrades Managing schema upgrades]
      * [BeautifyGraphvizWorkflows How to export Bungeni workflows to Graphviz]
-     * [HOWTO_VirtualBox How-To / FAQ for virtualbox configuration issues ]
+     * [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues ]
  * Developer Guide
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
