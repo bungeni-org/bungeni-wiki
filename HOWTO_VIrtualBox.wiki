@@ -1,0 +1,41 @@
+#summary Basic set of how-tos for virtualbox
+#labels Phase-Implementation
+
+== Enumerate Customizations on VirtualBox guest == 
+
+{{{
+~$ VBoxManage getextradata <guest-name> enumerate
+}}}
+
+== SSH access to VirtualBox guest == 
+
+If the VirtualBox guest is running on a bridged network connection - ssh access is via the IP address assigned to the guest.
+
+If the VirtualBox guest is running on a NAT network connection - ssh access is via tcp tunneling, to set this up do the following :
+All of the commands have to be run on the host computer.
+
+First set the forwarding port (e.g. 2345) on the host computer :
+{{{
+$ VBoxManage setextradata <guest-name> "VBoxInternal/Devices/pcnet/0/LUN#0/Config/ssh/HostPort" 2345
+}}}
+
+Next the port to forward to on the guest computer :
+{{{
+$ VBoxManage setextradata <guest-name> "VBoxInternal/Devices/pcnet/0/LUN#0/Config/ssh/GuestPort" 22
+}}}
+
+Finally specify the protocol :
+{{{
+$ VBoxManage setextradata <guest-name> "VBoxInternal/Devices/pcnet/0/LUN#0/Config/ssh/Protocol" TCP
+}}}
+
+Restart the guest, and ssh from the host into the guest :
+{{{
+ssh -l <user-on-guest> -p 2345 localhost
+
+}}}
+
+To unset a customization , run it without any parameters :
+{{{
+$ VBoxManage setextradata <guest-name> "VBoxInternal/Devices/pcnet/0/LUN#0/Config/ssh/GuestPort"
+}}}
