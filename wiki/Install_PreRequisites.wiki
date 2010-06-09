@@ -1,5 +1,4 @@
 #summary How to install pre-requisites for Bungeni
-#sidebar TableOfContents
 #labels Phase-Implementation
 #sidebar TableOfContents
 
@@ -20,7 +19,7 @@ The following scripts have been tested on Ubuntu Linux
 8.04.
 
 
-= Installing Capistrano =
+= Installing Capistrano (Ubuntu 8.04) =
 
 Capistrano is based on [http://en.wikipedia.org/wiki/Ruby_programming_language Ruby] and is installed via the [http://en.wikipedia.org/wiki/RubyGems RubyGems] package management system.
 
@@ -53,6 +52,28 @@ sudo gem install capistrano -y
 
 For common errors encountered during Capistrano setup [#Common_problems_while_setting_up_capistrano see here]
 
+= Installing Capistrano (Ubuntu 10.04) =
+
+Capistrano is based on [http://en.wikipedia.org/wiki/Ruby_programming_language Ruby] and is installed via the [http://en.wikipedia.org/wiki/RubyGems RubyGems] package management system.
+
+The following commands run in a terminal window sets up the basic components for setting up Capistrano, which we will then use to install Bungeni as a capistrano recipe.
+
+{{{
+# first update ubuntu 
+sudo apt-get update
+sudo apt-get upgrade
+
+# install ruby, ruby gems and other required software 
+sudo apt-get install ruby build-essential rubygems ssh subversion -y
+
+## now install rake and capistrano
+sudo gem install rake -y 
+sudo gem install capistrano -y
+}}}
+
+For common errors encountered during Capistrano setup [#Common_problems_while_setting_up_capistrano see here]
+
+
 
 = Setup the Bungeni Pre-Requisites =
 
@@ -82,9 +103,6 @@ set :python_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1
 ### python24_download_url is the url to python 2.4 source ###
 set :python24_download_url, "/home/#{bungeni_username}/cache/Python-2.4.4.tgz" # http://www.python.org/ftp/python/2.5.4/Python-2.5.4.tgz
 set :python24_imaging_download_url, "http://effbot.org/media/downloads/Imaging-1.1.7.tar.gz"
-
-### subversion source ###
-set :svn_download_url,  "/home/undesa/cache/subversion-1.5.4.tar.gz" #"http://subversion.tigris.org/downloads/subversion-1.5.4.tar.gz"
 
 ### varnish source ###
 set :varnish_download_url, "/home/undesa/cache/varnish-2.0.6.tar.gz"
