@@ -64,7 +64,7 @@ sudo apt-get update
 sudo apt-get upgrade
 
 # install ruby, ruby gems and other required software 
-sudo apt-get install ruby build-essential rubygems ssh subversion -y
+sudo apt-get install ruby libopenssl-dev libopenssl-ruby build-essential rubygems ssh subversion -y
 
 ## now install rake and capistrano
 sudo gem install rake -y 
