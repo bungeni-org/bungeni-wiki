@@ -12,6 +12,7 @@
      * [Bungeni_Troubleshooting Troubleshoooting]
      * [APIDOC_Capistrano_Bungeni_Installation Capistrano Command documentation for Bungeni]   
      * [HowTo_Setup_PackageIndex_Server How to setup a package index server]
+     * [HOWTO_RunBungeniUnitTests   How to run Bungeni unit tests]
      * [HowTo_Test_BungeniBuilds How to do automated functional and integration tests]
      * [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
      * [Bungeni_Live_Installation_Guidelines Live installation guidelines]
