@@ -1,0 +1,9 @@
+#summary Categorized listing of bungeni issues
+#labels Phase-QA
+
+  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-Listing Content Listings] - Issues related to listings in Bungeni
+  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-Versioning Versioning] - Issues related to Versioning content in Bungeni
+  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-Workspace Workspace] - Issues related to the user workspace
+  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-PortalAccess Portal Access] - Issues related to accessing Bungeni via the Deliverance Portal
+  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-CalendarAndScheduling Calendar and Scheduling] - Issues related to Calendar / Sittings and Scheduling
+  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-SectionImprovements Section Improvements] - Enhancement Issues specifically related to improving and enhancing existing functionality in a specific section (not for generic functionality improvements)
