@@ -8,6 +8,7 @@
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-PortalAccess Portal Access] - Issues related to accessing Bungeni via the Deliverance Portal
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-CalendarAndScheduling Calendar and Scheduling] - Issues related to Calendar / Sittings and Scheduling
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-FormFunctionality Form Functionality] - Issues affecting the data entry / content edit Forms in Bungeni
+	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-Workflow Workflow] - Issues related to the Workflow functionality in Bungeni
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-SectionImprovements Section Improvements] - Enhancement Issues specifically related to improving and enhancing existing functionality in a specific section (not for generic functionality improvements)
   * *Issues by Priority*
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DPriority-Critical Critical ]
