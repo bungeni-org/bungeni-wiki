@@ -18,6 +18,7 @@
   * *Issues by Milestones*
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DMilestone-Alpha1 Alpha1]
   * *Grid Views*
+          * [http://code.google.com/p/bungeni-portal/issues/list?can=2&q=&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary+Opened+Closed+Verified+Fixed&sort=&mode=grid&y=Category&x=&cells=tiles&nobtn=Update Categories]
           * [http://tinyurl.com/bungeni-owner-x-category  Owners X Categories]
           * [http://tinyurl.com/bungeni-priority-x-category  Priority X Categories]
 
