@@ -69,6 +69,11 @@ sudo apt-get install ruby libssl-dev libopenssl-ruby build-essential rubygems ss
 ## now install rake and capistrano
 sudo gem install rake -y 
 sudo gem install capistrano -y
+## put symlinks in /usr/local/bin otherwise cap and rake are 
+## not found in the system path
+sudo ln -s /var/lib/gems/1.8/bin/cap /usr/local/bin/cap
+sudo ln -s /var/lib/gems/1.8/bin/rake /usr/local/bin/rake
+
 }}}
 
 For common errors encountered during Capistrano setup [#Common_problems_while_setting_up_capistrano see here]
