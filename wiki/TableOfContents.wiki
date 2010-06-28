@@ -24,7 +24,9 @@
  * Developer Guide
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
+     * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
+     * [HowTo_FormActionsAndMenus Form actions and menus]
      * [HowTo_AddValidationToForms How to do add validation to Forms]
      * [AlchemistsUIElements How to tweak the layout of Bungeni Forms]
      * [CustomSortForContainers How to do change the sort order for Bungeni folderish containers]
