@@ -1,4 +1,8 @@
-#summary About form actions and menus
+#summary About form actions ,menus, workflows
+
+<wiki:toc max_depth="4" />
+
+== Menus and Actions ==
 
 General documentation: [http://books.google.co.uk/books?id=RT7EiQ5ISI4C&pg=PA242 From : Zope 3 Web component development]
 
@@ -62,3 +66,12 @@ To generate menu items the code call getMenu then getMenuItems, this one do the
 filtering work. In bungeni 'getMenuItems' are defined in bungeni/ui/menu.py, in
 this module there are four BrowserMenu re-defining this method, the only one
 using workflow is WorkflowMenu that is registered as 'context_workflow'.
+
+
+== Workflows ==
+
+There is no direct relation between forms and workflows.
+
+The relation is between permissions and fields. In bungeni/ui/forms/fields.py there is the method 'filterFields' filtering the fields based on the user permissions on the context (of course the permissions are assigned to roles through the workflows).
+
+The forms using AddForm? and EditForm? (in bungeni/ui/forms/common.py) as base class have an attribute 'form_fields' results of 'filterFields'. The attribute 'form_fields' is used in BungeniAttributeDisplay? "setUpWidgets" that is the method called when a form based on zope.formlib library is rendered.

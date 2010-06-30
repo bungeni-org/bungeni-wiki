@@ -8,6 +8,24 @@
      *  [Install_DeliverancePortal How to install Deliverance]
      *  [How_To_Use_Supervisor_Service_Manager How to use the supervisor service manager]
      *  [Bungeni_Build_Problems Common Build issues and how to resolve them]
+ * Architecture 
+     * [Architecture_Overview Overview of Bungeni Architecture]
+     * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
+ * Developer Guide
+     * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
+     * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
+     * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
+     * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
+     * [HowTo_FormActionsAndMenus Form actions and menus]
+     * [HowTo_ViewletManagers Viewlet Managers in Bungeni]
+     * [HowTo_PermissionsRolesAndDefinitions Permissions Roles and Definitions]
+     * [HowTo_AddValidationToForms How to do add validation to Forms]
+     * [AlchemistsUIElements How to tweak the layout of Bungeni Forms]
+     * [CustomSortForContainers How to do change the sort order for Bungeni folderish containers]
+     * [ChangingDBSchema How to add objects to the db schema]
+     * [SetPermissionForWorkflows How to set permissions on a object on workflow transition]
+     * [ParliamentaryGlossary Glossary of Parliamentary Terms]
+     * [How_to_translations How to generate translation catalogs]
  * Deployment and Testing 
      * [ISSUES_Categorized Issue Tracker Categorized Listing]
      * [Bungeni_Troubleshooting Troubleshoooting]
@@ -21,18 +39,5 @@
      * [Managing_Bungeni_Schema_Upgrades Managing schema upgrades]
      * [BeautifyGraphvizWorkflows How to export Bungeni workflows to Graphviz]
      * [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues ]
- * Developer Guide
-     * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
-     * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
-     * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
-     * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
-     * [HowTo_FormActionsAndMenus Form actions and menus]
-     * [HowTo_AddValidationToForms How to do add validation to Forms]
-     * [AlchemistsUIElements How to tweak the layout of Bungeni Forms]
-     * [CustomSortForContainers How to do change the sort order for Bungeni folderish containers]
-     * [ChangingDBSchema How to add objects to the db schema]
-     * [SetPermissionForWorkflows How to set permissions on a object on workflow transition]
-     * [ParliamentaryGlossary Glossary of Parliamentary Terms]
-     * [How_to_translations How to generate translation catalogs]
 
      
