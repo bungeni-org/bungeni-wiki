@@ -11,6 +11,7 @@
  * Architecture 
      * [Architecture_Overview Overview of Bungeni Architecture]
      * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
+     * [Architecture_References References]
  * Developer Guide
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
