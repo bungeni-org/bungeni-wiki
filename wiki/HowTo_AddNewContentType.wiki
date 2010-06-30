@@ -1,5 +1,7 @@
 #summary How to setup a new content type in Bungeni
 
+<wiki:toc max_depth="5" />
+
 == Create a new content type ==
 
 To add a new content type you need to set up DB tables , classes and mappers. All these classes go in bungeni.models packages:
