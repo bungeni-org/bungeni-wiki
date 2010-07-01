@@ -16,13 +16,18 @@
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-SectionImprovements Section Improvements] - Enhancement Issues specifically related to improving and enhancing existing functionality in a specific section (not for generic functionality improvements)
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-InstallationAndSetup Installation and Setup] - Issues related to installation / setup and maintenance
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-SearchAndAccessibility Search and accessibility] - Issues related to Search and Accessiblity
+	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-UserDelegationAndRoleBasedSecurity User delegation and role based security] 
+	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-ContentTypeReorganization Content Type reorganization] 
+	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DCategory-Internationalization Internationalization] 
+
+
   * *Issues by Priority*
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DPriority-Critical Critical ]
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DPriority-High High ]
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DPriority-Medium Medium ]
 	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DPriority-Low Low ]
   * *Issues by Milestones*
-	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DMilestone-Alpha1 Alpha1]
+	  * [http://code.google.com/p/bungeni-portal/issues/list?q=label%3DMilestone-beta beta]
 
 
 
