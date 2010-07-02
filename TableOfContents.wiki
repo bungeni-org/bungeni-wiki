@@ -38,7 +38,7 @@
      * [Bungeni_Live_Installation_Guidelines Live installation guidelines]
      * [HowTo_Control_Bungeni_Log_Output How to control bungeni logging]
      * [Managing_Bungeni_Schema_Upgrades Managing schema upgrades]
-     * [DocumentingWorklows How to generate documentation for Bungeni Workflows]
+     * [DocumentingWorkflows How to generate documentation for Bungeni Workflows]
      * [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues ]
 
      
