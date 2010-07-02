@@ -1,18 +1,45 @@
-#summary The Workflows can be exported to GraphViz for visualisation.
+#summary How to automatically generate diagrams and tabular documentation for the workflows
 #labels workflow
 #sidebar TableOfContents
 
 = Introduction =
 
-To make the resulting output more readable you can cluster the states.
+Using helper scripts it is possible to generate helpful documentation for the workflows in Bungeni.
+As a pre-requisite you need to have a working bungeni buildout - also you need to have graphviz :
+{{{
+sudo apt-get install graphviz
+}}}
+and a java runtime engine installed :
+{{{
+sudo apt-get install sun-java-jre
+}}}
+
+= Generating the Documentation =
+
+To generate the documentation, from the buildout folder run :
+{{{
+./bin/diagrammer
+}}}
+
+This will generate the document in the `./docs` folder within the buildout.
 
 
-= Details =
+= Internal Details =
 
+== Tabular Documentation == 
+
+The tabular documentation is generated using an XSLT template (located in `./templates/docgen`) which is applied to the workflow XML configuration files located in `src/bungeni.main/bungeni/core/workflows`. 
+
+The XSLT transformer used for this is saxon9 (located in `./templates/docgen/saxon9.jar`)
+
+
+== Graphs == 
+
+The graphs are generated from `.dot` files created using graphviz. 
 To generate updated dot files (the buildout does it,but if you have to run it manually do the following :
 
 {{{
-$ cd buildout-folder/src/bungeni.main/bungeni/core/workflows/docs
+$ cd <buildout-folder>/src/bungeni.main/bungeni/core/workflows/docs
 $ <bungeni-python> ../dia.py
 }}}
 
