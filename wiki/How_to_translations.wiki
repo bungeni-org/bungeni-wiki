@@ -58,9 +58,9 @@ if __name__ == '__main__':
 To generate the POT files run the following commands
 
 {{{
-./bin/i18nextract -d bungeni -p src/bungeni.ui/bungeni/ui/
-./bin/i18nextract -d bungeni -p src/bungeni.models/bungeni/models/
-./bin/i18nextract -d bungeni -p src/bungeni.core/bungeni/core/
+./bin/i18nextract -d bungeni.ui -p src/bungeni.ui/bungeni/ui/
+./bin/i18nextract -d bungeni.models -p src/bungeni.models/bungeni/models/
+./bin/i18nextract -d bungeni.core -p src/bungeni.core/bungeni/core/
 }}}
 
 The POT files will be created in locales directory in the package eg. for bungeni.ui the POT file will be in src/bungeni.ui/bungeni/ui/locales
