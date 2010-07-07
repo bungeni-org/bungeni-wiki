@@ -1,5 +1,6 @@
 #summary How to generate and merge translation catalogs
 
+
 = How to setup i18n scripts =
 
 due to a minor issue in one of the recipes used in buildout, we need to modify the generated i18n scripts to include the path to our xapian library.
@@ -55,7 +56,11 @@ if __name__ == '__main__':
 
 = Generate i18n catalogs =
 
-To generate the POT files run the following commands
+First, extract the msg strings of workflow states run (WHY!!!!! This needs to be fixed)
+
+{{{ ./bin/python src/bungeni.main/bungeni/core/workflows/exctractwfi18n.py }}}
+
+Then, to generate the POT files run the following commands
 
 {{{
 ./bin/i18nextract -d bungeni.ui -p src/bungeni.main/bungeni/ui/
