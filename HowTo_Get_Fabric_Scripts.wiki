@@ -1,0 +1,19 @@
+#summary How to Install Fabric
+#sidebar TableOfContents
+
+<wiki:toc max_depth="3" />
+
+== Introduction == 
+
+This page explains how to install the fabric installation scripts onto your computer.
+The assumption here is that you have already [http://code.google.com/p/bungeni-portal/wiki/HowTo_InstallFabric installed fabric]
+
+== Setup == 
+
+Checkout the fabric scripts into a folder called `fabric` or any name of your choice
+
+{{{
+svn co http://bungeni-portal.googlecode.com/svn/capistrano/fabric ./fabric
+}}}
+
+

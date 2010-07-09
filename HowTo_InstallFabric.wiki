@@ -1,0 +1,26 @@
+#summary How to Install Fabric
+#sidebar TableOfContents
+
+<wiki:toc max_depth="3" />
+
+== Introduction == 
+
+Fabric ([http://www.fabfiles.org http://www.fabfiles.org ]) is a python deployment tool to automate builds.
+
+== Setup == 
+
+You need to have at least python 2.5 installed in your system
+
+First install subversion,python-dev headers and setuptools
+
+{{{
+sudo apt-get install subversion python-dev python-setuptools
+}}}
+
+Now easy_install fabric
+
+{{{
+sudo easy_install fabric
+}}}
+
+
