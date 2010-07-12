@@ -1,6 +1,17 @@
 #summary Basic set of how-tos for virtualbox
 #labels Phase-Implementation
 
+<wiki:toc max_depth="4" />
+
+
+== Shrink VDI disk == 
+
+{{{
+cd <folder containing virtual disk>
+VboxManage modifyvdi `pwd`/disk.vdi compact
+}}}
+
+
 == Enumerate Customizations on VirtualBox guest == 
 
 {{{
