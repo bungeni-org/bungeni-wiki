@@ -18,6 +18,29 @@ VboxManage modifyvdi `pwd`/disk.vdi compact
 ~$ VBoxManage getextradata <guest-name> enumerate
 }}}
 
+
+== HTTP port forwarding ==
+
+If you have a VirtualBox guest running on  a NAT connection -- and you want to provide access to some http services on the VBox guest via the host computer, do the following :
+
+e.g. Your virtual box guest has a http server running on port 5000, and you want to make this accessible on port 5000 of the host.
+
+{{{
+VBoxManage modifyvm <guest name> --natpf1 "any-name, tcp,,5000,,5000"
+}}}
+
+To make this available on a specific IP interfaces of the host :
+
+{{{
+VBoxManage modifyvm <guest name> --natpf1 "any-name, tcp,<this.is.an.ip>,5000,,5000"
+}}}
+
+
+
+This will forward all requests on localhost of the host on port 5000  to port 5000 of the guest.
+
+
+
 == SSH access to VirtualBox guest == 
 
 If the VirtualBox guest is running on a bridged network connection - ssh access is via the IP address assigned to the guest.
