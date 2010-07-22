@@ -13,6 +13,7 @@
      * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
      * [Architecture_References References]
  * Developer Guide
+     * [DevCodeStyleGuide Bungeni Source Code Style Guide]
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
@@ -41,4 +42,4 @@
      * [DocumentingWorkflows How to generate documentation for Bungeni Workflows]
      * [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues ]
 
-     
+
