@@ -6,22 +6,30 @@
 
 Recommendations for Bungeni source code style, 
 with the aim of enhancing source code *read*-ability, *grep*-ability and *print*-ability 
--- and, as a consequence, _understand_-ability, _debug_-ability, _test_-ability and _maintain_-ability.
+and consequently, _understand_-ability, _debug_-ability, _test_-ability, _maintain_-ability, etc.
 
 However, if conforming to these source style recommendations 
 reduces any of the above code qualities in any way then conformance 
 *should not* be adhered to -- use your good judgement instead.
 
 
+----
 == Python ==
 
 All Bungeni python source code should follow these style rules. 
 
-For any styling issue not explicitly specified here,
-[http://www.python.org/dev/peps/pep-0008/ PEP 8 - Style Guide for Python Code]
-should be applied. You may find the following tools useufl:
- * [http://pypi.python.org/pypi/pep8/ pep8 checker tool] 
- * [http://pypi.python.org/pypi/PythonTidy/ PythonTidy] 
+For any styling issue not explicitly specified here, heed the recommendations 
+of the following Python Style Guides: 
+
+ * [http://www.python.org/dev/peps/pep-0008/ PEP 8 - Style Guide for Python Code]<br/>Regarding this one you may find the following tools useful:
+   * [http://pypi.python.org/pypi/pep8/ pep8 checker tool] 
+   * [http://pypi.python.org/pypi/PythonTidy/ PythonTidy] 
+
+ * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html Google Python Style Guide]<br/>In particualr, the recommendations for:
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Imports Imports]
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Packages Packages]
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Nested/Local/Inner_Classes_and_Functions Nested/Local/Inner Classes and Functions]
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#TODO_Comments TODO_Comments]
 
 
 === Quote characters ===
@@ -91,24 +99,30 @@ For example:
 Always use `!=` and not `<>` (that is equivalent). 
 
 
-
+----
 == XML/ZCML==
 
 Use 4 spaces per indentation level.
 
 Limit all lines to a maximum of 79 characters. 
 
+No blank lines -- only use blank lines between elements when those elements are completely unrelated to each other.
+
 
 === Multi-line elements ===
 
 Empty elements -- ended with `/>` -- are:
  * either on same single line as the opening tag
- * or at exaclty same indent as opening tag
+ * or at exactly same indent as opening tag
 For example:
 {{{
-    <browser:menu id="reporting_actions"
-        title="The 'Reports' menu - provides reporting actions"
-        class="ploned.ui.menu.PloneBrowserMenu"
+    <browser:menu id="admin_navigation" title="Actions Admin" />
+    <browser:menuItem menu="admin_navigation"
+        for="bungeni.models.interfaces.IBungeniApplication"
+        title="Application Settings"
+        action="settings"
+        layer=".interfaces.IAdministratorWorkspace"
+        permission="zope.ManageSite"
     />
 }}}
 
@@ -133,5 +147,3 @@ Workflow state/transition names:
  * Transition names should be lowercase _verbs_.
  * Note that given that all names are specified as XML @id attributes, state and transition names must be unique for the XML document.
  * All multiple word names are joined using an `_` (underscore) character.
-
-
