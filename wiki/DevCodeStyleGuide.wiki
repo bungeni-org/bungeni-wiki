@@ -1,0 +1,133 @@
+#summary Bungeni Source Code Style Guide
+#labels Phase-Implementation
+#sidebar TableOfContents
+
+= Bungeni Source Code Style Guide =
+
+Recommendations for Bungeni source code style, 
+with the aim of enhancing source code *read*-ability, *grep*-ability and *print*-ability 
+-- and, as a consequence, _understand_-ability, _debug_-ability, _test_-ability and _maintain_-ability.
+
+However, if conforming to these source style recommendations 
+reduces any of the above code qualities in any way then conformance 
+*should not* be adhered to.
+
+
+== Python ==
+
+All Bungeni python source code should follow these style rules. 
+For any styling issue not explicitly specified here,
+[http://www.python.org/dev/peps/pep-0008/ PEP 8 - Style Guide for Python Code]
+should be applied -- for this reason you may find the 
+[http://pypi.python.org/pypi/pep8/ pep8 checker tool] 
+useful.
+
+=== Quote characters ===
+
+Prefer using single double-quote `"` instead of single-quote `'` characters.
+
+Always use a single double-quote char `"` to delineate a short literal string. 
+Only use single-quote `'` when the literal string itself contains *double-quote*
+characters that would otherwise require explicit escaping. 
+
+Always use triple double-quote chars `"""` to delineate a multi-line string.
+Only use triple single-quotes `'''` when the literal string contains itself 
+*triple double-quote* characters that would otherwise require explicit escaping. 
+
+The use of triple single-quotes `'''` should be reserved only to 
+*temporarily comment out* entire code sections.
+
+For long string that should not include any additional whitespace as a result 
+of pretty source formatting should use the auto-concatenation feature of 
+adjacent strings e.g. (preferably):
+{{{
+    long_string = "some text as part of a sible line string " \
+                  "more text for the same string "
+}}}
+or:
+{{{
+    long_string = ("some text as part of a sible line string "
+                  "more text for the same string")
+}}}
+but not:
+{{{
+    long_string = ("some text as part of a sible line string " +
+                  "more text for the same string")
+}}}
+
+==== Quoting _inlined source code_ strings ====
+
+Always delineate with triple double-quote chars `"""` e.g.
+{{{
+        rdb.CheckConstraint("""active_p in ('A', 'I', 'D')"""),
+}}}
+
+=== Multi-line parameter lists, literal lists and obejcts ===
+
+ * The closing parenthesis, brace or bracket should be directly below the beginning of the opening symbol. 
+ * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
+ * Always inlcude the most _key_ of parameters on the opening line.
+
+For example: 
+{{{
+    columns = [
+        rdb.Column("version_id", rdb.Integer, primary_key=True),
+        rdb.Column("content_id", rdb.Integer, rdb.ForeignKey(table.c[fk_id])),
+        rdb.Column("change_id", rdb.Integer, 
+            rdb.ForeignKey("%s_changes.change_id" % entity_name)
+        ),
+        rdb.Column("manual", rdb.Boolean, nullable=False, default=False),
+    ]
+}}}
+
+
+
+=== Multiple forms for same -- adopt and use one ===
+
+==== Comparison operators ====
+
+Always use `!=` and not `<>` (that is equivalent). 
+
+
+
+== XML/ZCML==
+
+Use 4 spaces per indentation level.
+
+Limit all lines to a maximum of 79 characters. 
+
+
+=== Multi-line elements ===
+
+Empty elements -- ended with `/>` -- are:
+ * either on same single line as the opening tag
+ * or at exacly same indent as opening tag
+For example:
+{{{
+    <browser:menu id="reporting_actions"
+        title="The 'Reports' menu - provides reporting actions"
+        class="ploned.ui.menu.PloneBrowserMenu"
+    />
+}}}
+
+When an element has a clear _key_ attribute -- 
+i.e. the one most obvious attribute by which the element could be identified 
+or grouped e.g. `id` or `name`, `menu` for `<menuItem>` elements, etc. 
+-- it should be specified first and on same line as opening tag.
+For example:
+{{{
+    <adapter factory=".workspace.WorkspaceContainerTraverser"
+        permission="zope.Public"
+        trusted="true"
+    />
+}}}
+
+
+=== Naming === 
+
+Workflow state/transition names:
+ * State names should be lowercase _adjectives_.
+ * Transition names should be lowercase _verbs_.
+ * Note that given that all names are specified as XML @id attributes,
+   state and transition names must be unique for the XML document.
+ * All multiple word names are joined using an `_` (underscore) character.
