@@ -12,8 +12,75 @@ However, if conforming to these source style recommendations
 reduces any of the above code qualities in any way then conformance 
 *should not* be adhered to -- use your good judgement instead.
 
+----
+
+== General - All Formats ==
+
+Applies to all project source code, irrespective of format.
+
+=== Quote characters ===
+
+Prefer the double-quote `"` instead of the single-quote `'` character, whenever you have the choice.
+
+
+=== _Revisit_ Comments ===
+
+Use _Revisit_ comments for code that is temporary, a short-term solution to be reworked , or for code on which there is still questions to be resolved or understood.
+
+A _Revisit_ comments should have a: 
+ * `!+` : must explicitly start with these characters
+ * _label_ : for easier grepping, and to be able to relate multiple comments in different parts (by giving them the same label)
+ * _author_ identifier : so others know who to follow-up with if needed
+ * _date_ : so it is easier to jusdge relevance and status at a later time
+ * _description_ : should also indicate what conditions/events would render the comment obsolete.
+ 
+These pieces of information should be formatted in the following way:
+{{{
+# !+LABEL(author, date) description...
+}}}
+Same should of course also be applied to other source formats e.g. XML, doctest text files, HTML templates, css, js, etc. 
+
+Authoring a _revisit_ comment is *not* a commitment to revisit it yourself. 
+
+Example, 2 related _revisit_ comments in 2 ZCML files:
+
+`models/configure.zcml`
+{{{
+<!-- !+CONSTITUENCY-Issue666(mr, 23-Jul-2010)
+why is the include="domain.zcml" above commented?
+-->
+}}}
+`models/permissions.zcml`
+{{{
+<!-- !+CONSTITUENCY-Issue666(mr, 23-Jul-2010)
+The grant below is a temporary workaround to the problem that,
+when NOT logged in, clicking on a consituency (below archive/ )
+to view it would result in the following error:
+
+<class 'zope.security.interfaces.Unauthorized'>:
+(<zope.app.publisher.browser.viewmeta.DisplayForm object at 0xb717c8c>, 'browserDefault', 'zope.View')
+
+For some reason, this is not needed for any other object -:- this should
+be removed when it is understood why bungeni.Anybody does not get
+zope.View on domain.Constituency type, as for other anonymously visible
+domain types.
+-->
+<grant permission="bungeni.constituency.View" role="bungeni.Anybody" />
+}}}
+
+
+=== Naming ===
+
+==== Workflow States and Transitions ====
+
+Workflow state/transition names:
+ * State names should be lowercase _adjectives_.
+ * Transition names should be lowercase _verbs_.
+ * Given that all workflow names are specified as XML @id attributes, state and transition names must be unique for the XML document.
+ * All multiple word names are joined using an `_` (underscore) character.
 
 ----
+
 == Python ==
 
 All Bungeni python source code should follow these style rules. 
@@ -29,12 +96,9 @@ of the following Python Style Guides:
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Imports Imports]
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Packages Packages]
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Nested/Local/Inner_Classes_and_Functions Nested/Local/Inner Classes and Functions]
-   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#TODO_Comments TODO_Comments]
-
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Comments Comments]
 
 === Quote characters ===
-
-Prefer using single double-quote `"` instead of single-quote `'` characters.
 
 Always use a single double-quote char `"` to delineate a short literal string. 
 Only use single-quote `'` when the literal string itself contains *double-quote*
@@ -57,17 +121,17 @@ adjacent strings e.g. (preferably):
 or:
 {{{
     long_string = ("some text as part of a sible line string "
-                  "more text for the same string")
+                   "more text for the same string")
 }}}
 but not:
 {{{
     long_string = ("some text as part of a sible line string " +
-                  "more text for the same string")
+                   "more text for the same string")
 }}}
 
 ==== Quoting _inlined source code_ strings ====
 
-Always delineate with triple double-quote chars `"""` e.g.
+Always delineate embedded code with triple double-quote chars `"""` -- even if the string is not multi-line. Example, here's a snippet of inlined SQL:
 {{{
         rdb.CheckConstraint("""active_p in ('A', 'I', 'D')"""),
 }}}
@@ -76,7 +140,7 @@ Always delineate with triple double-quote chars `"""` e.g.
 
  * The closing parenthesis, brace or bracket should be directly below the beginning of the opening symbol. 
  * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
- * Always inlcude the most _key_ of parameters on the opening line.
+ * Always include the most _key_ of parameters on the opening line.
 
 For example: 
 {{{
@@ -91,27 +155,26 @@ For example:
 }}}
 
 
-
 === Multiple forms for same -- adopt and use one ===
 
 ==== Comparison operators ====
 
 Always use `!=` and not `<>` (that is equivalent). 
 
-
 ----
-== XML/ZCML==
+
+== XML / ZCML ==
 
 Use 4 spaces per indentation level.
 
 Limit all lines to a maximum of 79 characters. 
 
-No blank lines -- only use blank lines between elements when those elements are completely unrelated to each other.
+No blank lines -- only use a single blank line between elements on the uncommon occasion when those elements are completely unrelated to each other.
 
 
 === Multi-line elements ===
 
-Empty elements -- ended with `/>` -- are:
+Empty XML elements should have the `/>` ending:
  * either on same single line as the opening tag
  * or at exactly same indent as opening tag
 For example:
@@ -140,10 +203,3 @@ For example:
 }}}
 
 
-=== Naming === 
-
-Workflow state/transition names:
- * State names should be lowercase _adjectives_.
- * Transition names should be lowercase _verbs_.
- * Note that given that all names are specified as XML @id attributes, state and transition names must be unique for the XML document.
- * All multiple word names are joined using an `_` (underscore) character.
