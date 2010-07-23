@@ -5,8 +5,7 @@
 = Bungeni Source Code Style Guide =
 
 Recommendations for Bungeni source code style, 
-with the aim of enhancing source code *read*-ability, *grep*-ability and *print*-ability 
-and consequently, _understand_-ability, _debug_-ability, _test_-ability, _maintain_-ability, etc.
+with the aim of enhancing source code *read*-ability, *grep*-ability and *print*-ability and consequently, _understand_-ability, _debug_-ability, _test_-ability, _maintain_-ability, etc.
 
 However, if conforming to these source style recommendations 
 reduces any of the above code qualities in any way then conformance 
@@ -25,24 +24,24 @@ Prefer the double-quote `"` instead of the single-quote `'` character, whenever 
 
 === _Revisit_ Comments ===
 
-Use _Revisit_ comments for code that is temporary, a short-term solution to be reworked , or for code on which there is still questions to be resolved or understood.
+Use _Revisit_ comments for code that is temporary, a short-term solution to be reworked, or for code on which there is still questions to be resolved or understood.
 
 A _Revisit_ comments should have a: 
- * `!+` : must explicitly start with these characters
- * _label_ : for easier grepping, and to be able to relate multiple comments in different parts (by giving them the same label)
- * _author_ identifier : so others know who to follow-up with if needed
+ * `!+` : must explicitly start with these 2 characters
+ * _label_ : for easier grepping, and to be able to relate multiple comments in different places (by giving them the same label)
+ * _author identifier_ : so others know who to follow-up with if needed
  * _date_ : so it is easier to jusdge relevance and status at a later time
  * _description_ : should also indicate what conditions/events would render the comment obsolete.
  
-These pieces of information should be formatted in the following way:
-{{{
-# !+LABEL(author, date) description...
-}}}
-Same should of course also be applied to other source formats e.g. XML, doctest text files, HTML templates, css, js, etc. 
-
 Authoring a _revisit_ comment is *not* a commitment to revisit it yourself. 
 
-Example, 2 related _revisit_ comments in 2 ZCML files:
+These pieces of information should be formatted in the following way:
+{{{
+    !+LABEL(author, date) description...
+}}}
+And should be specified in a comment as per the source format i.e. any of python, XML, doctest text files, HTML templates, css, js, etc. 
+
+As example, here are 2 related _revisit_ comments in different ZCML files:
 
 `models/configure.zcml`
 {{{
@@ -203,3 +202,15 @@ For example:
 }}}
 
 
+
+<wiki:comment>
+
+formatting multi-line pre-block statements e.g:
+
+            if (IChoice.providedBy(field) and field.required and
+                field.default is None
+                ):
+
+style for multi-line def paremeter declarations
+
+</wiki:comment>
