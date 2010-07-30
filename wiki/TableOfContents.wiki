@@ -14,7 +14,7 @@
      * [Architecture_References References]
  * Developer Guide
      * [DevCodeStyleGuide Bungeni Source Code Style Guide]
-     * [Framewor_Internals Framework Internals]
+     * [Framework_Internals Framework Internals]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
@@ -42,5 +42,3 @@
      * [Managing_Bungeni_Schema_Upgrades Managing schema upgrades]
      * [DocumentingWorkflows How to generate documentation for Bungeni Workflows]
      * [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues ]
-
-
