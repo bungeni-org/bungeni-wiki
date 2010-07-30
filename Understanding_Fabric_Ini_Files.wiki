@@ -65,7 +65,7 @@ When set to `False` - fabric does anonymous checkouts from subversion.
 When set to `True` - fabric checks out source based on the user and password set in the `[scm]` section.
 
 
-== local_cache == 
+=== local_cache ===
 
 Indicates whether the build must make use of a local package index and archive cache.
 
@@ -80,7 +80,7 @@ If you have a package index for bungeni in your network, you can set this parame
  * local_index in `[bungeni]`, `[portal]` and `[plone]`
  * local_url in `[postgresql]`, `[xapian]` and `[xapian-bindings]`
 
-== app_host == 
+=== app_host === 
 
 Specifies the IP address or domain name of the host on which you are deploying.
 
@@ -92,7 +92,7 @@ app_host = 92.243.15.192
 
 If you are deploying only onto the local computer and not accessing the installation from another computer, you can set this to `localhost`.
 
-== distro_override == 
+=== distro_override === 
 
 Specify a distro package list.
 

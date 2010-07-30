@@ -14,7 +14,7 @@
      * [Architecture_References References]
  * Developer Guide
      * [DevCodeStyleGuide Bungeni Source Code Style Guide]
-     * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
+     * [Framewor_Internals Framework Internals]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
@@ -28,6 +28,7 @@
      * [SetPermissionForWorkflows How to set permissions on a object on workflow transition]
      * [ParliamentaryGlossary Glossary of Parliamentary Terms]
      * [How_to_translations How to generate translation catalogs]
+     * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
  * Deployment and Testing 
      * [ISSUES_Categorized Issue Tracker Categorized Listing]
      * [Bungeni_Troubleshooting Troubleshoooting]
