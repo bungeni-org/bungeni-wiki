@@ -14,13 +14,19 @@ You need to have at least python 2.5 installed in your system
 First install subversion,python-dev headers and setuptools
 
 {{{
-sudo apt-get install subversion python-dev python-setuptools
+sudo apt-get install build-essential subversion python-dev python-setuptools
 }}}
 
 Now easy_install fabric
 
 {{{
 sudo easy_install fabric
+}}}
+
+If you are on python 2.6 you will need to update the Paramiko package used by Fabric :
+
+{{{
+sudo easy_install paramiko
 }}}
 
 
