@@ -152,7 +152,6 @@ Permission checkers are constructed from class zcml directives,  which allow for
 
 the view / edit attributes for the ore.alchemist.model.Field class :
 
-{{{
 
 {{{
 class Field( object ):
@@ -165,7 +164,7 @@ class Field( object ):
     ......
 }}}
 
-Field level permissions and view level filtering of fields is done via alchemist.catalyst.domain (which sets up the checkers according to the model descriptor settings -- see the ApplySecurity API ) and alchemist.ui.core for filtering fields based on permissions -- take a look at the ApplySecurity.
+Field level permissions and view level filtering of fields is done via alchemist.catalyst.domain (which sets up the checkers according to the model descriptor settings -- see the ApplySecurity API ) and alchemist.ui.core for filtering fields based on permissions.
 
 *NOTE* - presently field level view and edit permissions are not being used -- it isnt clear why -- perhaps the implementation does not work ?
 There is one context where it is being used -- a permission called bungeni.edit.historical is set on certains field in the bungeni model descriptor but never referred to either in the code -- and never appears in the zope_role_permission_map. This permission implementation of bungeni.edit.historical needs to be removed -- and impact tested.
