@@ -1,0 +1,56 @@
+#labels Phase-Implementation
+
+#summary Framework Internals 
+#sidebar TableOfContents
+
+= Introduction = 
+
+In the Bungeni zope3 system a lot of the boiler plate code is generated at runtime from the python representation of the data model, which can be interacted with outside of Zope.
+
+The data model is defined in bungeni.core/bungeni/schema.py
+The domain model is defined in bungeni.core/bungeni/domain.py
+The domain model is mapped to the database schema by the orm model in bungeni.core/bungeni/orm.py
+
+This provides a functional API which can be interacted from a python interpreter. An example of this is provided in the doc test.
+
+`bungeni.main/trunk/bungeni/core/readme.txt`
+
+The doctests can be run via 
+
+`./bin/test -s bungeni.core`
+
+
+= Auto generation using catalyst = 
+
+The user interface and the portal builds on top of this core data model. 
+Runtime auto-generation facilities (alchemist.catalyst) are used to create much of the system.  To achieve this auto generation the core data model is annotated with additional metadata (e.g. what sort of widgets to use in forms what kind of fields in a listing, which permissions to use on a field, i18n labels , form help).
+These metadata components called 'model descriptors' are similar to archetype schemas or django models. The model descriptors are defined in `bungeni.core/descriptor.py`
+
+
+Additonal behaviors like versioning, relation ui, workflow security, audit are also driven by the same model descriptors.
+
+There are many examples of descriptors in the descriptor model -- it is essentially a sub-class with a list of dictionaries. Based on the schema for the domain object in question there is an appropriate field descriptor. The order of the fields in the descriptor defines the order of appearance on the form. If no field is specified explicitly for listing model, all fields are used. 
+
+To know what can be set on a descriptor -- refer to ore.alchemist.model.Field which provides a full set of things that can be set on a descriptor.
+
+The file `catalyst.zcml` specifies the declaration which explicitly applies the generation components to the domain model using the descriptor definition. 
+An optional debugging attribute is provided here -- setting `echo="True"`  on the db:catalyst declaration will log to standard output all catalyst.zcml processing.
+
+= Putting it all together = 
+
+At this point you would have the forms, container, interface
+views of the content type from the generation but isn't yet wired into the site
+layout/hierarchy. 
+
+To do that look at  `bungeni.main/trunk/bungeni/core/app.py` the app object is basically the root of the site, this includes an `appsetup` adapter which setups the application structure when the app server is started. you can adjust this to add a container for a new content type.
+
+Parliamentary content types get auditing, indexing, and versioning behavior and ui applied,  via marker interfaces on the domain class, which triggers event subscribers, views, and adapters to integrate those features with the content classes.
+
+
+= Permission Setting =
+
+Permission checkers are constructed from class zcml directives,  which allow for permissions definition for read / edit access for a set of fields or interfaces. This is done by the catalyst process. The  setup in the descriptor on a field level basis, also allows setting view_permission and edit_permission. 
+
+Field level permissions and view level filtering of fields is done via catalyst.domain (which sets up the checkers according to the model descriptor settings) and alchemist.ui.core for filtering fields based on permissions.
+
+In general we try to minimize the number of distinct permissions we have whenever possible, as we need to roundtrip to the db for each distinct permission checked ( a permission decision is cached on the proxy for the lifetime of the request).
