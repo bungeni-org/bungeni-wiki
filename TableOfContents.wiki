@@ -11,10 +11,10 @@
  * Architecture 
      * [Architecture_Overview Overview of Bungeni Architecture]
      * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
+     * [Framework_Internals Framework Internals]
      * [Architecture_References References]
  * Developer Guide
      * [DevCodeStyleGuide Bungeni Source Code Style Guide]
-     * [Framework_Internals Framework Internals]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni ]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
