@@ -166,7 +166,7 @@ class Field( object ):
 
 Field level permissions and view level filtering of fields is done via alchemist.catalyst.domain (which sets up the checkers according to the model descriptor settings -- see the ApplySecurity API ) and alchemist.ui.core for filtering fields based on permissions.
 
-*NOTE* - presently field level view and edit permissions are not being used -- it isnt clear why -- perhaps the implementation does not work ?
+*DEVELOPER NOTE* - presently field level view and edit permissions are not being used -- it isnt clear why. It is not clear if the implementation actually works -- to also note that the default permission (zope.Public and zope.ManageContent) set on the fields appears to be significant as removing it appears to break the forms.
 There is one context where it is being used -- a permission called bungeni.edit.historical is set on certains field in the bungeni model descriptor but never referred to either in the code -- and never appears in the zope_role_permission_map. This permission implementation of bungeni.edit.historical needs to be removed -- and impact tested.
 
 In general we try to minimize the number of distinct permissions we have whenever possible, as we need to roundtrip to the db for each distinct permission checked ( a permission decision is cached on the proxy for the lifetime of the request).
