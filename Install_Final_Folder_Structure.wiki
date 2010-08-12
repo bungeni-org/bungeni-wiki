@@ -1,53 +1,40 @@
 #summary Folder structure for bungeni installation
-#sidebar TableOfContents
 #labels Phase-Implementation
+#sidebar TableOfContents
 
 =Bungeni Installation Folder Structure=
 
 {{{
-|-- bungeni_install
-|   `-- bungeni
-|       |-- current -> /home/undesa/bungeni_instance/cap_installs/bungeni_install/bungeni/releases/20100315100156
-|       |   |-- bin
-|       |   |-- buildconf
-|       |   |-- cache
-|       |   |-- data
-|       |   |-- develop-eggs
-|       |   |-- downloads
-|       |   |-- eggs
-|       |   |-- locales
-|       |   |-- log -> ../../shared/log
-|       |   |-- logs
-|       |   |-- parts
-|       |   |-- plone
-|       |   |-- portal
-|       |   |-- public
-|       |   |-- src
-|       |   |-- templates
-|       |   |-- tmp
-|       |   `-- wiki
-|       |-- releases
-|       |   `-- 20100315100156
-|       `-- shared
-|           |-- log
-|           |-- pids
-|           `-- system
+./cinst
+|-- bungeni
+|   |-- bin
+|   |-- buildconf
+|   |-- cache
+|   |-- data
+|   |-- develop-eggs
+|   |-- eggs
+|   |-- locales
+|   |-- logs
+|   |-- parts
+|   |-- patch
+|   |-- plone
+|   |-- portal
+|   |-- src
+|   |-- templates
+|   `-- testdatadmp
+|-- config
+|-- logs
+|-- pid
 |-- python24
 |   |-- bin
 |   |-- include
-|   |   `-- python2.4
 |   |-- lib
-|   |   `-- python2.4
 |   `-- man
-|       `-- man1
 `-- python25
     |-- bin
     |-- include
-    |   `-- python2.5
     |-- lib
-    |   `-- python2.5
     `-- share
-        `-- man
-            `-- man1
+
 
 }}}
