@@ -1,4 +1,5 @@
 #summary How to Install Fabric
+#labels bungeni-wiki
 #sidebar TableOfContents
 
 <wiki:toc max_depth="3" />
@@ -11,7 +12,14 @@ Fabric ([http://www.fabfiles.org http://www.fabfiles.org ]) is a python deployme
 
 You need to have at least python 2.5 installed in your system
 
-First install subversion,python-dev headers and setuptools
+First update your operating system -- 
+
+{{{
+sudo apt-get update 
+sudo apt-get upgrade
+}}}
+
+Then install subversion,python-dev headers and setuptools -- 
 
 {{{
 sudo apt-get install build-essential subversion python-dev python-setuptools
@@ -29,4 +37,27 @@ If you are on python 2.6 you will need to update the Paramiko package used by Fa
 sudo easy_install paramiko
 }}}
 
+You can check your python version by running :
 
+{{{
+python -V
+}}}
+
+
+== Quick Guide == 
+
+All of the commands listed above are presented in a sequence (for easy copy and paste into a terminal window ) :
+
+First switch to the root user
+{{{
+sudo -s
+}}}
+
+Then paste these commands and enter -- 
+{{{
+apt-get update 
+apt-get upgrade -y
+apt-get install build-essential subversion python-dev python-setuptools -y
+easy_install fabric paramiko
+
+}}}
