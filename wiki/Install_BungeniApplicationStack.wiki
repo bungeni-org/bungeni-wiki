@@ -1,20 +1,29 @@
 #summary How to install all the bungeni components
 #sidebar TableOfContents
-#labels Phase-Implementation,Featured
 
 The Bungeni Application is composed of 3 different applications --
- * Bungeni Parliamentary Information System
- * Plone Content Management System
- * Deliverance application proxy (this is used to present a unified interface into both the Bungeni PIS and Plone to the user )
+ * Bungeni Parliamentary Information System - Core Legislative Management
+ * Plone Content Management System - Web Content Management
+ * Deliverance application proxy - To present a unified interface for the Legislative and Web Content management systems - and also for application level theming.
 
 [http://bungeni-portal.googlecode.com/files/bungeni_diagram.png]
 
 The installation instructions here describe how to install all three. Certain pre-requisites need to be set-up for installing all three. 
 
-The recommended way to install the full application stack is to use the capistrano installation scripts.
+*NOTE* (fabric is intended to replace the older capistrano method of installation):
+The recommended way to install the full application stack is to use the fabric installation scripts.
  
- * *[http://code.google.com/p/bungeni-portal/wiki/Install_PreRequisites How to setup the Pre-requisites]* 
- * *[http://code.google.com/p/bungeni-portal/wiki/Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
- * *[http://code.google.com/p/bungeni-portal/wiki/Install_Plone How to setup Plone Content Management System]* 
- * *[http://code.google.com/p/bungeni-portal/wiki/Install_DeliverancePortal How to setup Deliverance Portal]* 
- * *[http://code.google.com/p/bungeni-portal/wiki/How_To_Use_Supervisor_Service_Manager How to use the Supervisor Service Manager]* 
+ * *[Install_PreRequisites_Fabric How to setup the Pre-requisites]* 
+ * *[Install_Bungeni_Fabric How to setup Bungeni Parliamentary Information System]* 
+ * *[Install_Plone_Fabric How to setup Plone Content Management System]* _presently this step is optional_
+ * *[Install_DeliverancePortal_Fabric How to setup Deliverance Portal]* 
+ * *[HowTo_SupervisorServiceManager How to use the Supervisor Service Manager]*  
+ * *[HowTo_MaintainAndUpdateInstallation How to maintain and update a Bungeni installation]*
+
+
+Older deprecated instructions - for installing using capistrano -- these are still provided for installations made using the capistrano scripts.
+ 
+ * *[Install_PreRequisites How to setup the Pre-requisites]* 
+ * *[Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
+ * *[Install_Plone How to setup Plone Content Management System]* 
+ * *[Install_DeliverancePortal How to setup Deliverance Portal]* 
