@@ -2,11 +2,11 @@
 #labels Featured
 
  *  [Install_BungeniApplicationStack How to setup Bungeni]
-     *  [Install_PreRequisites How to install pre-requisites]
-     *  [Install_Bungeni How to install Bungeni]
-     *  [Install_Plone How to install Plone]
-     *  [Install_DeliverancePortal How to install Deliverance]
-     *  [How_To_Use_Supervisor_Service_Manager How to use the supervisor service manager]
+     *  [Install_PreRequisites_Fabric How to install pre-requisites]
+     *  [Install_Bungeni_Fabric How to install Bungeni]
+     *  [Install_Plone_Fabric How to install Plone]
+     *  [Install_DeliverancePortal_Fabric How to install Deliverance]
+     *  [HowTo_SupervisorServiceManager How to use the supervisor service manager]
      *  [Bungeni_Build_Problems Common Build issues and how to resolve them]
  * Architecture 
      * [Architecture_Overview Overview of Bungeni Architecture]
