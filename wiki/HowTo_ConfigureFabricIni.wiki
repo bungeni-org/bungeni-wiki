@@ -66,6 +66,7 @@ development_build = True
 
 When set to `False` - fabric does anonymous checkouts from subversion. 
 When set to `True` - fabric checks out source based on the user and password set in the `[scm]` section.
+See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Configuring Configuring a Fabric build]
 
 
 === local_cache ===
