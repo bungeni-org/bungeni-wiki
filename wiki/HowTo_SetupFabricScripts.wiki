@@ -28,7 +28,7 @@ Most importantly you need to set the *`system_root`* and *`app_host`* parameters
 
 For example - 
 
- * if you wanted to install Bungeni in the `/home/undesa/testing` folder of your computer - and you wanted to install it as a development build, you would edit the following parameters in your  bungeni.ini file :
+ * if you wanted to install Bungeni in the `/home/undesa/testing` folder of your computer - and you wanted to install it as a development build -- by default fabric checks out the source anonymously (over http:// ) when `development_build` is set to true it checks out the source using the user name and password provided in the `[scm]` section -- the checkout is a `https://` checkout. You would edit the following parameters in your  bungeni.ini file :
 {{{
 [global]
 system_root = /home/undesa/testing
