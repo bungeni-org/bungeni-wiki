@@ -174,15 +174,20 @@ download_url = http://www.python.org/ftp/python/2.5.5/Python-2.5.5.tgz
 
 == The bungeni, plone and portal sections == 
 
+bungeni, plone and portal have similar configuration parameters.
+
 {{{
 [bungeni]
 local_index=http://192.168.0.14:6543/bungeni
 repo=bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk
 dump_file=dmp_undesa.txt
+http_port=8081
 }}}
 
 `local_index` is the address of the local package index. This is used only when `local_cache` is set to `True` in `[global]`.
 `repo` is the address of the bungeni subversion repository minus the protocol part of the URL. Fabric sets it appropriately depending upon whether you use `development_mode` or not.
+`http_port` is the port on which the bungeni http service runs.
+
 
 == The postgresql, xapian, xapian-bindings and exist sections == 
 
