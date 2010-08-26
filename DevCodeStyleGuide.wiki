@@ -15,7 +15,8 @@ reduces any of the above code qualities in any way then conformance
 
 == General - All Formats ==
 
-Applies to all project source code, irrespective of format.
+Applies to all project source code, irrespective of format e.g.
+`.py`, `.xml`, `.zcml`, `.js`, `.css`, etc. 
 
 === Quote characters ===
 
@@ -30,7 +31,7 @@ A _Revisit_ comments should have a:
  * `!+` : must explicitly start with these 2 characters
  * _label_ : for easier grepping, and to be able to relate multiple comments in different places (by giving them the same label)
  * _author identifier_ : so others know who to follow-up with if needed
- * _date_ : so it is easier to jusdge relevance and status at a later time
+ * _date_ : so it is easier to judge relevance and status at a later time
  * _description_ : should also indicate what conditions/events would render the comment obsolete.
  
 Authoring a _revisit_ comment is *not* a commitment to revisit it yourself. 
@@ -75,7 +76,7 @@ domain types.
 Workflow state/transition names:
  * State names should be lowercase _adjectives_.
  * Transition names should be lowercase _verbs_.
- * Given that all workflow names are specified as XML @id attributes, state and transition names must be unique for the XML document.
+ * Given that each workflow is specified in an XML file, and the state and transition names specified as values of an `id` attribute in that same file, state and transition names must be unique for the XML file -- in other words, a state and a transaition may not have the same name.
  * All multiple word names are joined using an `_` (underscore) character.
 
 ----
@@ -137,11 +138,12 @@ Always delineate embedded code with triple double-quote chars `"""` -- even if t
 
 === Multi-line parameter lists, literal lists and objects ===
 
- * The closing parenthesis, brace or bracket should be directly below the beginning of the opening symbol. 
+ * The closing parenthesis, brace or bracket should be directly below the beginning of the opening symbol.
+ * Continuation lines should be indented as per their nesting level i.e. 4 spaces per open _parenthesis_, _braces_, _brackets_, or any _block_ implied by any other way.
  * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
  * Always include the most _key_ of parameters on the opening line.
 
-For example: 
+Some examples: 
 {{{
     columns = [
         rdb.Column("version_id", rdb.Integer, primary_key=True),
@@ -153,6 +155,32 @@ For example:
     ]
 }}}
 
+{{{
+mapper(domain.User, schema.users,
+    properties={"user_addresses": relation(domain.UserAddress)}
+)
+}}}
+
+{{{
+mapper(domain.GroupSitting, schema.sittings,
+    properties={
+        "sitting_type": relation(domain.SittingType, uselist=False),
+        "group": relation(domain.Group,
+            primaryjoin=schema.sittings.c.group_id == schema.groups.c.group_id,
+            uselist=False,
+            lazy=True
+        ),
+        "start_date": column_property(
+            schema.sittings.c.start_date.label("start_date")
+        ),
+        "end_date": column_property(
+            schema.sittings.c.end_date.label("end_date")),
+        "item_schedule": relation(domain.ItemSchedule,
+            order_by=schema.items_schedule.c.planned_order),
+        "venue": relation(domain.Venue)
+    }
+)
+}}}
 
 === Multiple forms for same -- adopt and use one ===
 
