@@ -15,8 +15,16 @@ reduces any of the above code qualities in any way then conformance
 
 == General - All Formats ==
 
-Applies to all project source code, irrespective of format e.g.
+Guidelines that apply to all project source code, irrespective of format e.g.
 `.py`, `.xml`, `.zcml`, `.js`, `.css`, etc. 
+
+
+=== Indentation and line length ===
+
+Use 4 spaces per indentation level.
+
+Limit all lines to a maximum of 79 characters. 
+
 
 === Quote characters ===
 
@@ -76,7 +84,7 @@ domain types.
 Workflow state/transition names:
  * State names should be lowercase _adjectives_.
  * Transition names should be lowercase _verbs_.
- * Given that each workflow is specified in an XML file, and the state and transition names specified as values of an `id` attribute in that same file, state and transition names must be unique for the XML file -- in other words, a state and a transaition may not have the same name.
+ * Given that each workflow is defined via an XML file, and the state and transition names are values of an `id` attribute in that same XML file (that must be unique for the XML file) it follows that a state and a transition may not have the same name.
  * All multiple word names are joined using an `_` (underscore) character.
 
 ----
@@ -139,7 +147,7 @@ Always delineate embedded code with triple double-quote chars `"""` -- even if t
 === Multi-line parameter lists, literal lists and objects ===
 
  * The closing parenthesis, brace or bracket should be directly below the beginning of the opening symbol.
- * Continuation lines should be indented as per their nesting level i.e. 4 spaces per open _parenthesis_, _braces_, _brackets_, or any _block_ implied by any other way.
+ * Continuation lines should be indented as per their nesting level i.e. 4 spaces per depth level implied by an open parenthesis, brace, bracket or any other way.
  * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
  * Always include the most _key_ of parameters on the opening line.
 
@@ -162,22 +170,21 @@ mapper(domain.User, schema.users,
 }}}
 
 {{{
-mapper(domain.GroupSitting, schema.sittings,
+mapper(domain.QuestionVersion, schema.question_versions,
     properties={
-        "sitting_type": relation(domain.SittingType, uselist=False),
-        "group": relation(domain.Group,
-            primaryjoin=schema.sittings.c.group_id == schema.groups.c.group_id,
-            uselist=False,
-            lazy=True
+        "change": relation(domain.QuestionChange, uselist=False),
+        "head": relation(domain.Question, uselist=False),
+        "attached_files": relation(domain.AttachedFileVersion,
+            primaryjoin=rdb.and_(
+                schema.question_versions.c.content_id ==
+                    schema.attached_file_versions.c.item_id,
+                schema.question_versions.c.version_id ==
+                    schema.attached_file_versions.c.file_version_id
+            ),
+            foreign_keys=[schema.attached_file_versions.c.item_id,
+                schema.attached_file_versions.c.file_version_id
+            ]
         ),
-        "start_date": column_property(
-            schema.sittings.c.start_date.label("start_date")
-        ),
-        "end_date": column_property(
-            schema.sittings.c.end_date.label("end_date")),
-        "item_schedule": relation(domain.ItemSchedule,
-            order_by=schema.items_schedule.c.planned_order),
-        "venue": relation(domain.Venue)
     }
 )
 }}}
@@ -192,9 +199,8 @@ Always use `!=` and not `<>` (that is equivalent).
 
 == XML / ZCML ==
 
-Use 4 spaces per indentation level.
 
-Limit all lines to a maximum of 79 characters. 
+=== Blank lines ===
 
 No blank lines -- only use a single blank line between elements on the uncommon occasion when those elements are completely unrelated to each other.
 
