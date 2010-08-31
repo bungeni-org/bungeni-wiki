@@ -119,6 +119,11 @@ from backup_main where colX is not null;
 
 == Examples with some guidelines  == 
 
+== Schema upgrades across release versions == 
+
+A documented example is provided here [SchemaUpgradesAcrossRevisions schema upgrades across revisions]
+
+
 === Adding a new column === 
 
 TODO
@@ -134,4 +139,3 @@ TODO
 === Converting a non-nullable field to a nullable field ===
 
 TODO
-
