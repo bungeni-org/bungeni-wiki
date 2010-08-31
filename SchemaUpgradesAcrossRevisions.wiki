@@ -1,4 +1,4 @@
-# an example of schema upgrades across revisions
+#summary an example of schema upgrades across revisions
 == Introduction == 
 
 This page documents a schema upgrade of a running bungeni instance.
