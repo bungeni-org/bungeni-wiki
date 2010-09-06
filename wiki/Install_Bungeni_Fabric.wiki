@@ -90,7 +90,9 @@ Enter password:
 Re-enter password:
 }}}
 
-Alternatively if you don't have apache installed on the deployment machine - you can generate the `passwd` file and copy it into the buildout folder.
+Alternatively if you don't have apache installed on the deployment machine - you can generate the `passwd` file on a computer with apache and copy it into the buildout folder.
+
+Yet another way is to use this [http://trac.edgewall.org/browser/trunk/contrib/htpasswd.py python script]
 
 
 = Next Steps =
