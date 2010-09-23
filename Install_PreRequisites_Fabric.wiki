@@ -15,7 +15,7 @@ The Bungeni Application system has the following pre-requisites :
 All of these pre-requisites can be automatically installed via a fabric setup script.
 So, first we install Fabric - and run the pre-requisite setup scripts which installs all the required pre-requisites.
 
-The following scripts have been tested on Ubuntu Linux 8.04 / 10.04
+The following scripts have been tested on Ubuntu Linux 8.04 and 10.04 (32bit release)
 
 = Installing Fabric = 
 
