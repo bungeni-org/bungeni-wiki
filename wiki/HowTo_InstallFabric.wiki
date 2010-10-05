@@ -6,7 +6,7 @@
 
 == Introduction == 
 
-Fabric ([http://www.fabfiles.org http://www.fabfiles.org ]) is a python deployment tool to automate builds.
+Fabric ([http://www.fabfile.org http://www.fabfile.org ]) is a python deployment tool to automate builds.
 
 == Setup == 
 
