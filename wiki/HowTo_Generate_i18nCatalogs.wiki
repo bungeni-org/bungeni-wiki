@@ -23,8 +23,9 @@ if __name__ == '__main__':
 
 with
 {{{
-
 import lovely.recipe.i18n.i18nextract
+import sys, os
+
 import getopt
 
 argv = sys.argv[1:]
@@ -35,8 +36,9 @@ except getopt.GetoptError:
     usage()                         
     sys.exit(2)       
 
-domain = 'bungeni'
-path = 'src/bungeni.core'
+os.environ["zope_i18n_allowed_languages"] = "en fr pt sw en-ke it"
+domain = 'bungeni.core' # can be bungeni.ui or bungeni.models
+path = 'src/bungeni.main'
 for opt, arg in opts:                
     if opt in ("-p", "--path"):      
         path = arg
@@ -49,10 +51,9 @@ print
 if __name__ == '__main__':
     lovely.recipe.i18n.i18nextract.main(['i18nextract', 
         '-d', domain, 
-        '-s', '/home/undesa/devel/svn/test-bungeni-portal/parts/i18n/configure.zcml', 
+        '-s', '/home/undesa/cinst/bungeni/parts/i18n/configure.zcml', 
         '-p', path, 
         '-o', 'locales'])
-
 }}}
 
 = Manually regenerating .mo files = 
