@@ -2,6 +2,8 @@
 #labels zope,Phase-Implementation
 #sidebar TableOfContents
 
+<wiki:toc max_depth="4" />
+
 = Introduction = 
 
 Bungeni specific i18n catalogs are used by the following packages within the bungeni egg :
@@ -80,7 +82,7 @@ if __name__ == '__main__':
 the `-d` option specifies the package domain (bungeni.core, bungeni.models or bungeni.ui) -- the pot files are generated in the src/bungeni.main/locales folder -- you will need to copy them to the locales folder of the specific package
 
 
-= How to generate a PO files =
+= How to generate PO files =
 
 PO files are generated using the i18nmergeall script in the buildout bin folder.
 
