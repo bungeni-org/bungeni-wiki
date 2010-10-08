@@ -1,6 +1,6 @@
 #summary How to Generate i18n catalogs.
-#sidebar TableOfContents
 #labels zope,Phase-Implementation
+#sidebar TableOfContents
 
 = How to setup i18n scripts =
 
@@ -53,4 +53,16 @@ if __name__ == '__main__':
         '-p', path, 
         '-o', 'locales'])
 
+}}}
+
+= Manually regenerating .mo files = 
+
+You can manually compile .mo files using `gettext` :
+{{{
+# install gettext 
+sudo apt-get install gettext 
+
+# generate the mo files
+cd ./cinst/bungeni/src/bungeni.main/bungeni
+for po in `find . -name "*.po"` ; do msgfmt -o `dirname $po`/`basename $po .po`.mo $po; done
 }}}
