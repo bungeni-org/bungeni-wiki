@@ -22,7 +22,7 @@ sudo apt-get upgrade
 Then install subversion,python-dev headers and setuptools -- 
 
 {{{
-sudo apt-get install build-essential subversion python-dev python-setuptools
+sudo apt-get install build-essential ssh subversion python-dev python-setuptools
 }}}
 
 Now easy_install fabric
