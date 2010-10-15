@@ -35,24 +35,33 @@ fab -H <host-name-or-ip> plone_install config_ini:plone
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
 == Configure the Installation == 
-
 Log in as the admin user into plone. The default password is 'admin'
 
-In the Zope ZMI create a new plone site called "site"
+=== Create a plone site === 
+
+In the Zope ZMI create a new plone site called "plone"
 
 Select the following in the installation profiles for the plone site:
  * Bungeni CMS Policy
  * Bungeni CMS Theme
 
-Now log in to the newly created plone site as admin.
-
 Click on site-setup -> Add on products.
 
  * Bungeni CMS Policy & Bungeni CMS theme, and click install.
- * select 'GroupWorkspace Profile' in the same page and click 'install'.
- * do the same for "BungeniHelpCenter", ContentWellPortlets", plonegalleryview, iqpp.plone.commenting and FCKeditor.
- * Adjust the commenting options: These are found on the Plone Control Panel under Add-on Product Configuration, the button named 'Commenting'.
-  * Enable the following settings: Comments, Moderation and Show Preview.
+ * do the same for "BungeniHelpCenter",plonegalleryview, Plone second level navbar and TinyMCE .
+
+=== Create a cynin site === 
+
+In the Zope ZMI create a new plone site called "cynin"
+
+Select the following in the installation profiles for the cynin site:
+ * Bungeni CMS Policy
+
+Click on site-setup -> Add on products.
+
+ * Bungeni CMS Policy.
+ * Ubify Site policy.
+ * Bungeni Cynin theme.
 
 == Import demo structure ==
 
