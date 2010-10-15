@@ -117,7 +117,7 @@ This documents manual installation of plone without using assistive scripts like
 ==Pre-requisites==
 
   * Build environment (on ubunutu do a `sudo apt-get install build-essentials` )
-  * user Python 2.4 built from source. (on ubuntu /debian you will need to install development libaries/headers for imaging (libjpeg62-dev, libfreetype6-dev, libpng12-dev)  and bz2 (libbz2-dev) libraries) and for ssl support openssl and libssl (openssl, libssl-dev)
+  * user Python 2.4 built from source. (on ubuntu /debian you will need to install development libaries/headers for imaging (libjpeg62-dev, libfreetype6-dev, libpng12-dev)  and bz2 (libbz2-dev) libraries) and for ssl support openssl and libssl (openssl, libssl-dev) *(Oct 15 2010 build : libldap2-dev libsasl2-dev libssl-dev )*
   * A working bungeni parlimentary information system installation
    
 ==SSL support for Python==
