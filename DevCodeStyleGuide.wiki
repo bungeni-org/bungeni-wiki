@@ -100,7 +100,7 @@ of the following Python Style Guides:
    * [http://pypi.python.org/pypi/pep8/ pep8 checker tool] 
    * [http://pypi.python.org/pypi/PythonTidy/ PythonTidy] 
 
- * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html Google Python Style Guide]<br/>In particualr, the recommendations for:
+ * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html Google Python Style Guide]<br/>In particular, the recommendations pertaining to:
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Imports Imports]
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Packages Packages]
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Nested/Local/Inner_Classes_and_Functions Nested/Local/Inner Classes and Functions]
