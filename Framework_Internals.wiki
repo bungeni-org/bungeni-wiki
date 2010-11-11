@@ -36,37 +36,39 @@ class QuestionDescriptor(ParliamentaryItemDescriptor):
     
     fields = deepcopy(ParliamentaryItemDescriptor.fields)
     fields.extend([
-        dict(name="question_id", omit=True),
-        dict(name="question_number", 
+        Field(name="question_id", modes=""),
+        Field(name="question_number",
+            modes="edit|view|listing",
             property=schema.Int(title=_(u"Question Number"), required=False),
-            listing=True, add=False, edit=True),
-        dict(name="short_name", omit=True),
-        dict(name="supplement_parent_id",
-            label=_(u"Initial/supplementary question"), 
+        ),
+        Field(name="supplement_parent_id",
+            label=_(u"Initial/supplementary question"),
+            modes="",
             view_widget=SupplementaryQuestionDisplay,
-            add=False, edit=False, view=False),
-        dict(name="ministry_id", 
-                property = schema.Choice(title=_(u"Ministry"), 
-                 source=vocabulary.MinistrySource("ministry_id"),
-                 required=True),
-                listing_column=ministry_column("ministry_id" , _(u'Ministry')),
-                listing=True,
+        ),
+        Field(name="ministry_id",
+            modes="view|edit|add|listing",
+            property=schema.Choice(title=_(u"Ministry"),
+                source=vocabulary.MinistrySource("ministry_id"),
             ),
-        dict(name="approval_date", 
+            listing_column=ministry_column("ministry_id" , _(u"Ministry")),
+        ),
+        Field(name="approval_date",
+            modes="edit|view",
             property=schema.Date(title=_(u"Date approved"), required=False),
-            edit_widget=DateWidget, 
+            edit_widget=DateWidget,
             add_widget=DateWidget,
-            listing=False, 
-            add=False),
-        dict(name="ministry_submit_date", 
-            property=schema.Date(title=_(u"Submitted to ministry"), required=False),
-            edit_widget=DateWidget, 
+        ),
+        Field(name="ministry_submit_date",
+            modes="edit|view",
+            property=schema.Date(title=_(u"Submitted to ministry"), 
+                required=False
+            ),
+            edit_widget=DateWidget,
             add_widget=DateWidget,
-            listing=False, 
-            add=False),
-	..............
-	..............   
- ])
+        ),
+	    ...
+    ])
     public_wfstates = get_states("question", tagged=["public"])
 
 class QuestionVersionDescriptor(VersionDescriptor):
@@ -77,61 +79,53 @@ class QuestionVersionDescriptor(VersionDescriptor):
 }}}
 
 
-There are many examples of descriptors in the descriptor model -- it is essentially a sub-class with a list of dictionaries. Based on the schema for the domain object in question there is an appropriate field descriptor. The order of the fields in the descriptor defines the order of appearance on the form. If no field is specified explicitly for listing model, all fields are used. 
+There are many examples of descriptors in the descriptor model -- it is essentially a sub-class with a list of bungeni.alchemist.model.Field descriptor instances. Based on the schema for the domain object in question there is an appropriate field descriptor. The order of the fields in the descriptor defines the order of appearance on the form. If no field is specified explicitly for listing model, all fields are used.
 
-To know what can be set on a descriptor -- refer to ore.alchemist.model.Field which provides a full set of things that can be set on a descriptor.
+To know what can be set on a descriptor -- refer to bungeni.alchemist.model.Field for reference information about all things that can be set on a Field descriptor.
 
-Here is an extract of the Field class from ore.alchemist.model :
+Here is an extract of bungeni.alchemist.model.Field: 
 {{{
-class Field( object ):
+class Field(object):
+    interface.implements(IModelDescriptorField)
+    
+    # INIT Parameter (and Defaults)
+    
+    # CONVENTION: the default value for each init parameter is the value 
+    # assigned to the corresponding class attribute - reasons for this are:
+    # a) makes it easier to override init param default values by trivial 
+    # subclassing.
+    # b) no need to set an instance attribute for init parameters that are 
+    # not set, simply let the lookup pick the (default) value off the class.
+    
+    name = None      # str : field name
+    label = ""       # str: title for field
+    description = "" # str : description for field
+    
+    modes = "view|edit|add" # str : see _valid_modes for allows values
+    
+    property = None # zope.schema.interfaces.IField
+    
+    listing_column = None   # zc.table.interfaces.IColumn
+    
+    view_widget = None      # zope.app.form.interaces.IDisplayWidget
+    edit_widget = None      # zope.app.form.interfaces.IInputWidget
+    add_widget = None       # zope.app.form.interfaces.IInputWidget
+    search_widget = None    # zope.app.form.interfaces.IInputWidget
 
-    interface.implements( IModelDescriptorField )
-
-    name = ""        # field name
-    label = ""       # title for field
-    description = "" # description for field
-    fieldset = "default"    
-    modes = "edit|view|add" # see _valid modes for allows values, also can be done as bool keyword args
-    omit = False
-    required = False  # required flag can only be used if the field is not required by the database.
-    property = None
-    
-    view_permission = "zope.Public"
-    edit_permission = "zope.ManageContent"
-    
-    view_widget = None    # zope.app.form.interaces.IDisplayWidget
-    edit_widget = None    # zope.app.form.interfaces.IInputWidget
-    listing_column = None # zc.table.interfaces.IColumn object
-    add_widget     = None # zope.app.form.interfaces.IInputWidget object
-    search_widget  = None # zope.app.form.interfaces.IInputWidget object
-    differ = None         # z3c.schemadiff.interfaces.IFieldDiff
-    
-    # for relations, we want to enable grouping them together based on
-    # model, this attribute specifies a group. the relation name will be
-    # used on a vocabulary. perhaps an example is cleaner, so say we
-    # have a movie object with separate relations to directors and actors
-    # if we specify both as group 'People', we inform the view machinery
-    # to create a single relation viewlet, that displays and edits
-    # via a single provider with a vocabulary for the relation.
-    group = None
-    
-    _valid_modes = ('edit', 'view', 'read', 'add', 'listing', 'search')
-    
-
+    _valid_modes = ("view", "edit", "add", "listing", "search")    
 }}}
 
-The file `catalyst.zcml` specifies the declaration which explicitly applies the generation components to the domain model using the descriptor definition. 
+The file `ui/catalyst.zcml` specifies the declaration which explicitly applies the generation components to the domain model using the descriptor definition. 
 An optional debugging attribute is provided here -- setting `echo="True"`  on the db:catalyst declaration will log to standard output all catalyst.zcml processing.
 
 e.g. catalyst.zcml entry for Question :
 
 {{{
-  <db:catalyst
-    class="bungeni.models.domain.Question"
-    descriptor=".descriptor.QuestionDescriptor"
-    interface_module="bungeni.models.interfaces"
-    ui_module="bungeni.ui.content" 
-    echo="False"
+    <db:catalyst class="bungeni.models.domain.Question"
+        descriptor=".descriptor.QuestionDescriptor"
+        interface_module="bungeni.models.interfaces"
+        ui_module="bungeni.ui.content" 
+        echo="False"
     />
 }}}
 
@@ -148,25 +142,10 @@ Parliamentary content types get auditing, indexing, and versioning behavior and 
 
 = Permission Setting =
 
-Permission checkers are constructed from class zcml directives,  which allow for permissions definition for read / edit access for a set of fields or interfaces. This is done by the catalyst process. The  setup in the descriptor on a field level basis, also allows setting view_permission and edit_permission. 
+Permission checkers are constructed from class zcml directives, in `models/domain.zcml`, which allow for permissions definition for read / edit access for a set of fields or interfaces. This is done by the catalyst process. 
 
-the view / edit attributes for the ore.alchemist.model.Field class :
+*DEVELOPER NOTE* - 
+Field level permissions and view level filtering of fields is done via alchemist.catalyst.domain (which sets up the checkers according to the model descriptor settings -- see the ApplySecurity API) and alchemist.ui.core for filtering fields based on permissions. But, presently field level view_permission and edit_permission are deprecated, as they are always overriden by what is declared for the corresponding attribute in domain.zcml. However, alchemist.catalyst.model.ApplySecurity API needs to have these attributes available on Field descriptor instances. 
 
+In general we try to minimize the number of distinct permissions we have whenever possible, as we need to roundtrip to the db for each distinct permission checked (a permission decision is cached on the proxy for the lifetime of the request).
 
-{{{
-class Field( object ):
-
-    interface.implements( IModelDescriptorField )
-    ......
-    ......
-    view_permission = "zope.Public"
-    edit_permission = "zope.ManageContent"
-    ......
-}}}
-
-Field level permissions and view level filtering of fields is done via alchemist.catalyst.domain (which sets up the checkers according to the model descriptor settings -- see the ApplySecurity API ) and alchemist.ui.core for filtering fields based on permissions.
-
-*DEVELOPER NOTE* - presently field level view and edit permissions are not being used -- it isnt clear why. It is not clear if the implementation actually works -- to also note that the default permission (zope.Public and zope.ManageContent) set on the fields appears to be significant as removing it appears to break the forms.
-There is one context where it is being used -- a permission called bungeni.edit.historical is set on certains field in the bungeni model descriptor but never referred to either in the code -- and never appears in the zope_role_permission_map. This permission implementation of bungeni.edit.historical needs to be removed -- and impact tested.
-
-In general we try to minimize the number of distinct permissions we have whenever possible, as we need to roundtrip to the db for each distinct permission checked ( a permission decision is cached on the proxy for the lifetime of the request).
