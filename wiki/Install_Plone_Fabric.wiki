@@ -12,6 +12,9 @@ You should have completed the following steps :
  * *[Install_PreRequisites_Fabric How to setup the Pre-requisites]* 
  * *[Install_Bungeni_Fabric How to setup Bungeni Parliamentary Information System]* 
 
+ # *The Plone build is NOT REQUIRED for Bungeni feature development -- This is a   deployment configuration which adds a content management system into Bungeni.*
+ # *The Plone build currently does not work on Ubuntu 8.04 - we recommend deploying only on Ubuntu 10.04*
+
 = Build & Setup =
 
 == Option 1: Installing using the online package index ==
