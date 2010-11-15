@@ -12,8 +12,8 @@ You should have completed the following steps :
  * *[Install_PreRequisites_Fabric How to setup the Pre-requisites]* 
  * *[Install_Bungeni_Fabric How to setup Bungeni Parliamentary Information System]* 
 
- # *The Plone build is NOT REQUIRED for Bungeni feature development -- This is a   deployment configuration which adds a content management system into Bungeni.*
- # *The Plone build currently does not work on Ubuntu 8.04 - we recommend deploying only on Ubuntu 10.04*
+ # *The Plone build is an optional deployment configuration which adds a content management system into Bungeni.*
+ # *The Plone build currently works only on Ubuntu 10.04*
 
 = Build & Setup =
 
@@ -44,35 +44,30 @@ Log in as the admin user into plone. The default password is 'admin'
 
 In the Zope ZMI create a new plone site called "plone"
 
-Select the following in the installation profiles for the plone site:
- * Bungeni CMS Policy
- * Bungeni CMS Theme
-
 Click on site-setup -> Add on products.
-
- * Bungeni CMS Policy & Bungeni CMS theme, and click install.
- * do the same for "BungeniHelpCenter",plonegalleryview, Plone second level navbar and TinyMCE .
+ 
+ * Bungeni CMS Policy and click install.
+ * Bungeni CMS theme, and click install.
+ * do the same for BungeniHelpCenter, plonegalleryview, Plone second level navbar and TinyMCE .
 
 === Create a cynin site === 
 
 In the Zope ZMI create a new plone site called "cynin"
 
-Select the following in the installation profiles for the cynin site:
- * Bungeni CMS Policy
+Click on site-setup -> Install the following add on products.
 
-Click on site-setup -> Add on products.
-
- * Bungeni CMS Policy.
- * Ubify Site policy.
- * Bungeni Cynin theme.
+ * Bungeni CMS Policy;
+ * Ubify Site policy;
+ * Bungeni Cynin theme;
+ * workspaces profile;
 
 == Import demo structure ==
 
- * On the filesystem create an import folder in the root plone directory (the buildout foldr for plone) .The folder should be called import.
+ * Once the buildout is complete there will be an 'import' folder on the filesystem found in the '/parts/instance/' folder (relative to the root of the plone directory).
 
  * Copy and unzip the contents of [http://dist.bungeni.org/plone/import/import-0.1.tar.gz http://dist.bungeni.org/plone/import/import-0.1.tar.gz] into that folder
 
- * Run the python script 'import_data' in the /etc folder (using the plone python). Before running the script, edit the file appropriately and put in the necessary values for username, password (admin, admin) and the plone site that you want to import to.
+ * Run the python script 'import_data' in the root plone directory (using the plone python). Before running the script, edit the file appropriately and put in the necessary values for username, password (admin, admin) and the plone site that you want to import to.
 
 
 == Updating a Plone installation ==
