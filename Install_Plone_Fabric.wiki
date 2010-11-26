@@ -48,7 +48,7 @@ Click on site-setup -> Add on products.
  
  * Bungeni CMS Policy and click install.
  * Bungeni CMS theme, and click install.
- * do the same for BungeniHelpCenter, plonegalleryview, Plone second level navbar and TinyMCE .
+ * do the same for BungeniHelpCenter, plonegalleryview, Plone second level navbar,TinyMCE, Collage, collective.collage.easyslider, collective.collage.portlets and RSS Dynamic document.
 
 === Create a cynin site === 
 
