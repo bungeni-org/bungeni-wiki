@@ -22,6 +22,7 @@
      * [HowTo_FormActionsAndMenus Form actions and menus]
      * [HowTo_ViewletManagers Viewlet Managers in Bungeni]
      * [HowTo_PermissionsRolesAndDefinitions Permissions Roles and Definitions]
+     * [HowTo_AddNewOfficeToBungeni How to add a new office to Bungeni]
      * [HowTo_AddValidationToForms How to do add validation to Forms]
      * [AlchemistsUIElements How to tweak the layout of Bungeni Forms]
      * [CustomSortForContainers How to do change the sort order for Bungeni folderish containers]
