@@ -216,7 +216,7 @@ The declaration structure follows the same lines as descriptor's Field.localizab
         <field name="owner_id">
             <show modes="view" roles="bungeni.Clerk bungeni.Speaker" />
             <hide modes="listing" roles="bungeni.Anybody" />
-        /field>
+        </field>
         <field name="language" />
         <field name="body_text" />
         <field name="submission_date" />
