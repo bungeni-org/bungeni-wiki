@@ -13,7 +13,7 @@ We accept the following assumptions to set the scope and limits of what to allow
 
 *`[A0]`* All statements here are _Field_-oriented i.e. everything stated is within the context of a specific Field (within a UI Descriptor).
 
-*`[A1]`* Every localizable mode has a default localization i.e. for each localizable mode there is a bungeni defined default set of roles for whom the field is to be shown. OTOH, every non-localizable mode may NOT be associated to a set of roles for visibility (the related security declarations in domain.zcml must prevail). 
+*`[A1]`* Every localizable mode has a default localization i.e. for each localizable mode there is a bungeni defined default set of roles for whom the field is to be shown. OTOH, every non-localizable mode may *not* be associated to a set of roles for visibility (the related security declarations in domain.zcml must prevail). 
 
  * Besides the obvious scenario (of declaring a mode localizable and specifying the roles the Field is to be shown for) this also enables the possibility to declare a mode to be localizable while by default keeping it not visible to any role (an example of this case is the `ParliamentaryItemDescriptor.full_name` field, that is declared but made non-visible for all roles, leaving it up to a parliament to enable it if so desired).
 
@@ -23,7 +23,7 @@ We accept the following assumptions to set the scope and limits of what to allow
 
 *`[A4]`* If a mode is declared to be localizable, then it is localizable for all roles.
 
-*`[A5]`* Visibility of a field in any mode, localizable or not, is always *subject to* the privileges that the user has on the domain object's attribute that the field corresponds to. (This is the general case, but is not necessarily *always* the case; what should the behaviour be in the few such cases?).
+*`[A5]`* Visibility of a field in any mode, localizable or not, is always *subject to* the privileges that the user has on the domain object's attribute that the field corresponds to. (Thes general case is that a field is bound to a model object's attribute, but this is not necessarily *always* the case; what should the behaviour be in such cases?).
 
 === Extension of Bungeni UI Descriptor API ===
 
@@ -51,9 +51,9 @@ To support localization of a deployment's form views the following is required:
 
 *`[C2]`* To be able to adjust, per localizable mode, the roles for which the field is to be displayed for.
 
- * It is an error to attempt to localize a non-localizable *decriptor*.
- * Contrarily, it is perfectly OK for a localization to to omit entirely a localizable *descriptor* (implying that the omitted descriptor is simply not being localized in this deployment).
- * It is an error to attempt to adjust a *field*'s the roles for a non-localizable mode.
+ * It is an error to attempt to localize a non-localizable *descriptor*.
+ * Contrarily, it is perfectly OK for a localization to omit entirely a localizable *descriptor* (implying that the omitted descriptor is simply not being localized in this deployment).
+ * It is an error to attempt to adjust a *field*'s roles for a non-localizable mode.
  * For a *field* in a localizable mode, if the bungeni-specified list of roles is to be adjusted then the list of roles must be entirely restated i.e. the entire desired list of a mode's roles must be explicitly specified, either via explicit inclusion (show) or as the complement of explicit exclusion (hide).
 
 
@@ -70,9 +70,11 @@ To support localization of a deployment's form views the following is required:
 
 === Descriptor API ===
 
-==== `bungeni.alchemist.model.ModelDescriptor.localizablebool = False` ====
+==== `bungeni.alchemist.model.ModelDescriptor` ====
 
-As not every descriptor corresponds to a actual set of form views, content-type descriptors must explicitly be declared as localizable. 
+===== `ModelDescriptor.localizable:bool = False` =====
+
+As not every descriptor corresponds to a actual set of UI form views, content-type descriptors must explicitly be declared as localizable. 
 
 Example is the base descriptors that are used for programmatic convenience to define other real descriptors e.g. `ParliamentaryItemDescriptor` does not directly correspond to a set of views.
 
@@ -89,13 +91,13 @@ Note that localization of individual Fields is completely independent of localiz
 
 The meaning of the current `modes` class attribute stays unchanged.
 
-===== `bungeni.alchemist.model.Field._roles` =====
+===== `Field._roles` =====
 
 We first need to state precisely what roles may be targetted by localization--by adding 
-a following class attribute:
+the following attribute on the Field class:
 
 {{{
-    _roles = (
+    _roles = set([
         "bungeni.Admin", # parliament, has all privileges
         "bungeni.Clerk", "bungeni.Speaker", "bungeni.MP", # parliament 
         "bungeni.Minister", # ministry 
@@ -103,14 +105,14 @@ a following class attribute:
         #"bungeni.Translator", # parliament
         #"bungeni.Everybody", # all authenticated users, all above roles
         "bungeni.Anybody" # unauthenticated user, anonymous
-    )
+    ])
 }}}
 
 This set of (uncommented) roles is thus an *explicit subset* of all `bungeni.*` roles defined within the system (that typically are defined in `models/roles.zcml`). 
 
 This list of roles is also what is to be used as the fallback default value whenever a list of roles is expected and not specified.
 
-===== `bungeni.alchemist.model.Field.localizable:sequence = []` =====
+===== `Field.localizable:sequence = []` =====
 
 We then need to conveniently state which modes the field is localizable in, and what is the default list of roles it is to be shown to -- we add a `localizable` parameter on the Field class, with the allowed value being:
 {{{
@@ -118,9 +120,9 @@ We then need to conveniently state which modes the field is localizable in, and 
 }}}
 i.e. a list of either `show(modes, roles)` or `hide(modes, roles)` declarations, where the modes/roles keyword parameters are each a list of parameters, with the following constraints:
 
- * the field is localizable for a given mode if (and only if) that mode appears in one (and only one) of these show/hide declarations--this also implies that a mode may appear only once in a field's show/hide directives.
+ * the field is localizable for a given mode if (and only if) that mode appears in one (and only one) show/hide declaration--this also implies that a mode may appear only once in a field's show/hide directives.
 
- * not specifying either of the `modes` or `roles` parameter (or specifying None as their value) is equivalent to respectively specifying all modes or roles. A corollary of this is that an additional `show()` declaration (with the modes parameter omitted) *must* generate an error (as this means at least one mode is included more than once in the show/hide declarations). 
+ * in a show/hide directive, not specifying either of the `modes` or `roles` parameter (or specifying None as their value) is, respectively, equivalent to specifying (modes=None) all the displayable modes specified by the field instance or (roles=None) all the roles targetted by the Field class. A corollary of this is that an additional `show()` declaration (with the modes parameter omitted) *must* generate an error (as this means at least a mode is included more than once in the show/hide declarations). 
 
  * directives `show` or `hide` are _roles-complement_ of each other i.e. the following are two equivalent statements of the same rule (for each case, convenience and improved clarity would inform which to prefer):
 {{{
@@ -129,7 +131,7 @@ i.e. a list of either `show(modes, roles)` or `hide(modes, roles)` declarations,
         bungeni.Minister bungeni.Anybody""")
 }}}
 
- * the implementation of `show` and `hide` consists of a couple of factory utilities  supporting the bungeni descriptor API, each having the 2 keyword parameters, `modes` and `roles`.
+ * the implementation of `show` and `hide` consists of a couple of factory utilities each having the 2 keyword parameters, `modes` and `roles`.
 
  * the default value (i.e. an empty list) of the `localizable` Field attribute implies that the field is not localizable in any mode and to be localizable a Field instance must explictly reset the value of its `localizable` parameter.
 
@@ -178,27 +180,35 @@ The above code declares the following:
 
 Note the following is an equivalent way to express the `moved_by` field `localizable` init parameter as the one in the example above:
 {{{
+            Field(name="owner_id",
+                modes="view edit add listing",
                 localizable=[
                     hide(modes="view", roles="bungeni.Anybody"),
                     hide(modes="listing", roles="bungeni.Anybody"),
                 ],
+                ...
+            ),
 }}}
 but the following would be an error (because `listing` mode appears more than once in the fields's localizable directives):
 {{{
+            Field(name="owner_id",
+                modes="view edit add listing",
                 localizable=[
                     show(modes="listing", roles="bungeni.MP bungeni.Clerk"),
                     hide(modes="view listing", roles="bungeni.Anybody"),
                 ],
+                ...
+            ),
 }}}
 
 
-In the below example, specifiying `None` as the parameter for `show()` will enable it for all roles -- and not specifying the mode parameter to `show()` enables it for the list of modes applicable to the field (in the below case 'view' and 'edit') :
+In the example below, omitting the `roles` parameter (or equivalently specifiying `roles=None`) in the call to `show()` will enable it for all roles -- while not specifying the mode parameter to `show()` enables it for the filed's list of displayable modes (in the case below `view` and `edit`):
 {{{
-           ...,
             Field(name="ministry_submit_date",
                 modes="view edit",
                 localizable=[ show() ],
                 ...
+            ),
 }}}
 
 === Localization API ===
@@ -238,8 +248,8 @@ The declaration structure follows the same lines as descriptor's Field.localizab
 The above localization code is:
 
  * setting the field order.
- * stating that the `moved_by` field (+!`owner_id`--the human field name should be used not the underlying attribute name) is being localized to be display for Clerk/Speaker in view mode, and to be shown to all except for Anybody in listing mode. 
- * localizing the `ministry_submit_date` Field in in `view` mode to not be shown to any role.
+ * stating that the `moved_by` field (+!`owner_id`--the human field name should be used not the underlying attribute name) is being localized to be displayed for Clerk/Speaker in view mode, and to be shown to all except for Anybody in listing mode. 
+ * localizing the `ministry_submit_date` Field in `view` mode to not be shown to any role.
 
 Note we specify *all* the fields (those defined in `QuestionDescriptor` as well as those copied off from `ParliamentaryItemDescriptor`)--to change the order we simply... change the order.
 
@@ -247,4 +257,5 @@ The show and hide directives follow exactly the same logic as in bungeni descrip
 
 As suggested in the requirements, a localization file with all localizable descriptors and their default settings should be automatically generated by bungeni.
 
-Should it ever become necessary, it is forseeable, using this syntax, that the `<show>` and `<hide>` directives here may gain further modifier attributes, such as one to state additional conditions e.g. an object's workflow states.
+Should it ever become necessary, it is forseeable, using this syntax, that the `<show>` and `<hide>` directives here could gain further modifier attributes, such as one to state additional conditions e.g. an object's workflow states.
+
