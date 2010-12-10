@@ -122,7 +122,7 @@ i.e. a list of either `show(modes, roles)` or `hide(modes, roles)` declarations,
 
  * the field is localizable for a given mode if (and only if) that mode appears in one (and only one) show/hide declaration--this also implies that a mode may appear only once in a field's show/hide directives.
 
- * in a show/hide directive, not specifying either of the `modes` or `roles` parameter (or specifying None as their value) is, respectively, equivalent to specifying (modes=None) all the displayable modes specified by the field instance or (roles=None) all the roles targetted by the Field class. A corollary of this is that an additional `show()` declaration (with the modes parameter omitted) *must* generate an error (as this means at least a mode is included more than once in the show/hide declarations). 
+ * in a show/hide directive, not specifying either of the `modes` or `roles` parameter is equivalent to specifying, for `modes=None`, all the displayable modes specified by the field instance and, for `roles=None` all the roles supported by the Field class i.e. what is set in `Field._roles`. A corollary of this is that an additional `show()` declaration (with the modes parameter omitted) *must* generate an error (as this means at least a mode is included more than once in the show/hide declarations). 
 
  * directives `show` or `hide` are _roles-complement_ of each other i.e. the following are two equivalent statements of the same rule (for each case, convenience and improved clarity would inform which to prefer):
 {{{
@@ -173,7 +173,7 @@ Example:
 The above code declares the following:
 
  * `QuestionDescriptor` as localizable.
- * The `moved by` question field to be localizable in the `view` and `listing` modes (and only those modes), while the `ministry_submit_date` question field to be localizable in the `view` and `edit` modes (and only those modes).
+ * The `moved_by` question field to be localizable in the `view` and `listing` modes (and only those modes), while the `ministry_submit_date` question field to be localizable in the `view` and `edit` modes (and only those modes).
  * For `moved_by`: for the 2 modes, it sets the default lists of roles that this field is to be shown for to be all roles except for `bungeni.Anybody`.
  * For `ministry_submit_date`: it states that in `view` mode the field is to be shown for all roles.
 
@@ -202,7 +202,7 @@ but the following would be an error (because `listing` mode appears more than on
 }}}
 
 
-In the example below, omitting the `roles` parameter (or equivalently specifiying `roles=None`) in the call to `show()` will enable it for all roles -- while not specifying the mode parameter to `show()` enables it for the filed's list of displayable modes (in the case below `view` and `edit`):
+In the example below, omitting both the `modes` and the `roles` parameters (or equivalently specifiying them as `None`) in the call to `show()` will (a) enable the field for the field's list of displayable modes i.e. for `view` and `edit` in this case, and (b) enable the field for all roles:
 {{{
             Field(name="ministry_submit_date",
                 modes="view edit",
@@ -248,7 +248,7 @@ The declaration structure follows the same lines as descriptor's Field.localizab
 The above localization code is:
 
  * setting the field order.
- * stating that the `moved_by` field (+!`owner_id`--the human field name should be used not the underlying attribute name) is being localized to be displayed for Clerk/Speaker in view mode, and to be shown to all except for Anybody in listing mode. 
+ * stating that the `moved_by` field (+!`owner_id`--the human field name should be used not the underlying attribute name) is being localized to be displayed for Clerk/Speaker in view mode, and to be shown to all except for `bungeni.Anybody` in listing mode. 
  * localizing the `ministry_submit_date` Field in `view` mode to not be shown to any role.
 
 Note we specify *all* the fields (those defined in `QuestionDescriptor` as well as those copied off from `ParliamentaryItemDescriptor`)--to change the order we simply... change the order.
