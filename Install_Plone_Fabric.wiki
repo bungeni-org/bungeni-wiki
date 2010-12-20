@@ -48,7 +48,14 @@ Click on site-setup -> Add on products.
  
  * Bungeni CMS Policy and click install.
  * Bungeni CMS theme, and click install.
- * do the same for BungeniHelpCenter, plonegalleryview, Plone second level navbar,TinyMCE, Collage, collective.collage.easyslider, collective.collage.portlets and RSS Dynamic document.
+ * do the same for BungeniHelpCenter, plonegalleryview, Plone second level navbar,TinyMCE, Collage, collective.collage.easyslider, collective.collage.portlets,RSS Dynamic document and LinguaPlone.
+
+Click on site-setup -> Language.
+
+ * Select a default site language - This is usually english.
+ * Under the section "Available languages" select any other languages you wish to use in your Plone site.
+
+
 
 === Create a cynin site === 
 
