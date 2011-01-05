@@ -32,6 +32,7 @@
      * [ParliamentaryGlossary Glossary of Parliamentary Terms]
      * [How_to_translations How to generate translation catalogs]
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
+     * [UpdatingOreYUI Updating ore.yui]
  * Deployment and Testing 
      * [ISSUES_Categorized Issue Tracker Categorized Listing]
      * [Bungeni_Troubleshooting Troubleshoooting]
