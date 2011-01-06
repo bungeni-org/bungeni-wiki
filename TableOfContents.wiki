@@ -8,6 +8,7 @@
      *  [Install_DeliverancePortal_Fabric How to install Deliverance]
      *  [HowTo_SupervisorServiceManager How to use the supervisor service manager]
      *  [HowTo_MaintainAndUpdateInstallation How to maintain and update an installation]
+     *  [HowTo_ProxyBungeniBehindWebServer How to proxy Bungeni behind a web server]
      *  [Bungeni_Build_Problems Common Build issues and how to resolve them]
  * Architecture 
      * [Architecture_Overview Overview of Bungeni Architecture]
