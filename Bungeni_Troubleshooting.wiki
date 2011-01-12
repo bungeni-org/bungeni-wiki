@@ -1,6 +1,8 @@
 #summary Troubleshooting typical Bungeni problems
 #labels Phase-Implementation
 
+<wiki:toc max_depth="4" />
+
 = Introduction =
 
 This page documents typical problems in Bungeni - and suggests resolutions to these issues.
@@ -28,4 +30,25 @@ sudo apt-get install libtidy-dev
 
  * PDF conversion will not work with custom installed openoffice installations -e.g. if you install the version of OOo from the openoffice.org website. You must use the Openoffice installation packaged with Ubuntu. 
 
+== Locale Error on startup == 
 
+If you get a error like this on startup : 
+
+{{{
+ File "/home/undesa/disk1/bungeni/cap_installs/python25/lib/python2.5/locale.py",
+line 514, in getpreferredencoding
+   setlocale(LC_CTYPE, "")
+ File "/home/undesa/disk1/bungeni/cap_installs/python25/lib/python2.5/locale.py",
+line 478, in setlocale
+   return _setlocale(category, locale)
+Error: unsupported locale setting
+}}}
+
+You need to configure locales on your operating system. On Desktop installations of linux this comes configured out of the box ; this error is usually encountered on headless linux installations.
+
+To resolve this problem, setup and configure a default locale :
+
+{{{
+sudo apt-get install language-pack-en
+sudo dpkg-reconfigure locales
+}}}
