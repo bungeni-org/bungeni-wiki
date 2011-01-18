@@ -79,13 +79,31 @@ domain types.
 
 === Naming ===
 
-==== Workflow States and Transitions ====
+==== Permissions ====
+
+All permission names should have the form:
+{{{
+    bungeni.{object[ .subobject ]}.{Action}
+}}}
+where :
+ # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated, subtypes).
+ # _Action_ is a *verb* indicating the the target action (capitalized). 
+
+==== Workflows: States and Transitions ====
 
 Workflow state/transition names:
- * State names should be lowercase _adjectives_.
- * Transition names should be lowercase _verbs_.
- * Given that each workflow is defined via an XML file, and the state and transition names are values of an `id` attribute in that same XML file (that must be unique for the XML file) it follows that a state and a transition may not have the same name.
- * All multiple word names are joined using an `_` (underscore) character.
+ # State name should be a lowercase *adverb* (more or less) that describes the _condition_ an object is in after given the workflow transition trail of the object.
+ # Transition name should be a lowercase *verb*.
+ # State/Transition multiple-word names are `_` (underscore) separated--in particular the `-` (hyphen) should *not* be used as separator as this character, besides being an invalid as part of a python name, has special meaning within `ore.workflow`.
+ # A bungeni _role_ name should *never* be part of a state/transition name.
+ # A state and a transition within a same workflow should never have a same name--because in an XML file all element IDs must be unique, and Bungeni defines each workflow as one XML file (containing `<state>` and `<transition>` elements where the `id` attribute of each is respectively the state and transition name). 
+ 
+Additionally, each individual workflow transition (except for the _Create_ and _Add_ transition actions) must have a *dedicated* permission, that is named as follows:
+{{{
+    bungeni.{object}.wf.{transition}
+}}}
+
+
 
 ----
 
@@ -245,6 +263,7 @@ formatting multi-line pre-block statements e.g:
                 field.default is None
                 ):
 
-style for multi-line def paremeter declarations
+style for multi-line def parameter declarations
 
 </wiki:comment>
+
