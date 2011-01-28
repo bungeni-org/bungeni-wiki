@@ -18,6 +18,12 @@ reduces any of the above code qualities in any way then conformance
 Guidelines that apply to all project source code, irrespective of format e.g.
 `.py`, `.xml`, `.zcml`, `.js`, `.css`, etc. 
 
+=== Editing tools ===
+
+Only tools that do *not automatically modify* source code format in any way may be used! 
+
+This means you *may not* use any tool that does _any kind of source reformatting_. As an example, you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace as well may change the order of an XML element's attributes. In general, what you want to have is a good text editor.
+
 
 === Indentation and line length ===
 
@@ -29,6 +35,13 @@ Limit all lines to a maximum of 79 characters.
 === Quote characters ===
 
 Prefer the double-quote `"` instead of the single-quote `'` character, whenever you have the choice.
+
+
+=== Consistence of attribute/parameter order ===
+
+In some languages the order or parameters is (sometimes) relevant e.g. in python, but in other languages such an order is not relevant e.g. attributes in XML. Whenever an equivalent list of attributes or parameters are present (be it as a list of XML attributes, or as the signature of a python callable) then the order should be consistent between the two languages. 
+
+For the cases when there is such an order to respect, the order should be clearly commented in appropriate places in the source itself.
 
 
 === _Revisit_ Comments ===
@@ -86,23 +99,23 @@ All permission names should have the form:
     bungeni.{object[ .subobject ]}.{Action}
 }}}
 where :
- # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated, subtypes).
+ # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated subtypes).
  # _Action_ is a *verb* indicating the the target action (capitalized). 
 
 ==== Workflows: States and Transitions ====
 
 Workflow state/transition names:
- # State name should be a lowercase *adverb* (more or less) that describes the _condition_ an object is in after given the workflow transition trail of the object.
+ # State name should be a lowercase *adverb* (more or less) that describes the _condition_ an object is in, given the transition trail of the object.
  # Transition name should be a lowercase *verb*.
- # State/Transition multiple-word names are `_` (underscore) separated--in particular the `-` (hyphen) should *not* be used as separator as this character, besides being an invalid as part of a python name, has special meaning within `ore.workflow`.
+ # State/Transition multiple-word names are `_` (underscore) separated--in particular the `-` (hyphen) should *not* be used as separator as this character, besides being invalid as part of a python name, has special meaning within `ore.workflow`.
  # A bungeni _role_ name should *never* be part of a state/transition name.
  # A state and a transition within a same workflow should never have a same name--because in an XML file all element IDs must be unique, and Bungeni defines each workflow as one XML file (containing `<state>` and `<transition>` elements where the `id` attribute of each is respectively the state and transition name). 
  
-Additionally, each individual workflow transition (except for the _Create_ and _Add_ transition actions) must have a *dedicated* permission, that is named as follows:
+Additionally, each individual workflow transition (*except* for _Create_ transition actions) must have a *dedicated* permission, that is named as follows:
 {{{
     bungeni.{object}.wf.{transition}
 }}}
-
+The _Create_ class of transitions is an exception to this rule because such transitions have an _automatic_ trigger resulting from the act of creating the object, that presumably is already access-controlled with a `bungeni.{object}.Add` type permission. Because of this, all _Create_ transitions must have *no permission specified*.
 
 
 ----
