@@ -22,6 +22,7 @@
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
      * [HowTo_FormActionsAndMenus Form actions and menus]
      * [HowTo_ViewletManagers Viewlet Managers in Bungeni]
+     * [Authentication_in_Bungeni How the authentication stack in bungeni works]
      * [HowTo_PermissionsRolesAndDefinitions Permissions Roles and Definitions]
      * [HowTo_AddNewOfficeToBungeni How to add a new office to Bungeni]
      * [DevFormLocalization Localization of Bungeni Forms]
