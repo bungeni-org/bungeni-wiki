@@ -1,7 +1,7 @@
 #summary how authentication works with zope principals and groups
 #labels Phase-Design
 
-= Details =
+= Authentication Stack =
 
 The repoze.whooze packages handles identification and authentication, it gets identity and authentication information via repoze.who. 
 
@@ -14,3 +14,22 @@ When a group is created, it is granted the permissions defined for that group in
 When a user is added to the group, they get the permissions defined for that group since they are "group aware" as stated above, in addition to permissions that may have been granted explicitly to that principal. 
 
 Groups are added to a principal by the repoze.who authenticator bungeni.portal.auth.AlchemistWhoPlugin. 
+
+
+= System setup admin = 
+
+During system setup the admin user is identified and behaves differently than in a fully setup system.
+
+for instance the following api in bungeni.ui.common -- will not work in a freshly setup system:
+{{{
+def is_admin(context):
+    """Check if current interaction has admin privileges on specified context
+
+    """
+    return zope.security.management.getInteraction().checkPermission(
+        "zope.ManageSite", context)
+}}}
+
+During setup -- the admin user has to be identified explicitly and is done via a script described below.
+
+This is because in a new installation there are no groups and no permission assignments as yet. The admin user is added using the admin-password.py script in the data/scripts folder.
