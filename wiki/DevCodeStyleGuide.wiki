@@ -109,7 +109,7 @@ Workflow state/transition names:
  # Transition name should be a lowercase *verb*.
  # State/Transition multiple-word names are `_` (underscore) separated--in particular the `-` (hyphen) should *not* be used as separator as this character, besides being invalid as part of a python name, has special meaning within `ore.workflow`.
  # A bungeni _role_ name should *never* be part of a state/transition name.
- # A state and a transition within a same workflow should never have a same name--because in an XML file all element IDs must be unique, and Bungeni defines each workflow as one XML file (containing `<state>` and `<transition>` elements where the `id` attribute of each is respectively the state and transition name). 
+ # A state and a transition within a same workflow should never have a same name--because in an XML document all element IDs should be unique, and Bungeni defines each workflow as one XML document (containing `<state>` and `<transition>` elements where the `id` attribute of each is respectively the state and transition name). 
  
 Additionally, each individual workflow transition (*except* for _Create_ transition actions) must have a *dedicated* permission, that is named as follows:
 {{{
