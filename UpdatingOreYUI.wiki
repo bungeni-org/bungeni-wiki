@@ -10,13 +10,13 @@ ore.yui is a Zope 3 packaging of YUI and is extensively used in Bungeni. The ins
 {{{
 svn checkout https://svn.objectrealms.net/svn/public/ore.yui/trunk .
 }}}
-  * edit rname and version variables at the top of setup.py to the version of YUI and the version number of the egg that you are creating respectively. 
-  * create the egg. setup.py downloads the version of YUI specified above and unpacks it
-{{{
-python ./setup.py bdist_egg
-}}}
-  * due to a "bug" in setup_tools, the YUI resources will not be included if bdist or sdist commands are issued in the line above. This is explained in this [http://osdir.com/ml/python.distutils.devel/2007-02/msg00024.html thread]. To generate a source or binary distribution, a MANIFEST.in file must be created within the src folder with the following lines
+  * Edit rname and version variables at the top of setup.py to the version of YUI and the version number of the egg that you are creating respectively. 
+ * A MANIFEST.in file must be created within the src folder with the following lines
 {{{
 include *.py *.zcml *.txt
 recursive-include src/ore/yui/resources *.*
 }}} 
+ * Create the egg. setup.py downloads the version of YUI specified above and unpacks it
+{{{
+python ./setup.py bdist_egg
+}}}
