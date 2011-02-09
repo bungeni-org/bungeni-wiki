@@ -28,7 +28,21 @@ PDF conversion does not work in Bungeni
 sudo apt-get install libtidy-dev
 }}}
 
- * PDF conversion will not work with custom installed openoffice installations -e.g. if you install the version of OOo from the openoffice.org website. You must use the Openoffice installation packaged with Ubuntu. 
+ * PDF conversion will not work out of the box with custom installed openoffice installations -e.g. if you install the version of OOo from the openoffice.org website. To fix this -- edit `openoffice.zcml` in the buildout root folder  -- and edit the openofficepath to the appropriate location of the openoffice-uno-python on your system : 
+
+{{{
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:meta="http://namespaces.zope.org/meta"
+           xmlns:files="http://sample.namespaces.zope.org/files"
+           >
+    <include package="bungeni.ui" file="meta.zcml" />
+    
+    <!-- Set the location of a UNO enabled python on the line below -->
+    <files:openofficepath path="/opt/openoffice.org3/program/python"/>
+
+</configure>
+
+}}}
 
 == Locale Error on startup == 
 
