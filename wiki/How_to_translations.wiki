@@ -24,7 +24,8 @@ with
 {{{
 
 import lovely.recipe.i18n.i18nextract
-import getopt
+import getopt, os, bungeni_custom
+os.environ["zope_i18n_allowed_languages"] = bungeni_custom.zope_i18n_allowed_languages
 
 argv = sys.argv[1:]
 
@@ -48,7 +49,7 @@ print
 if __name__ == '__main__':
     lovely.recipe.i18n.i18nextract.main(['i18nextract', 
         '-d', domain, 
-        '-s', '/home/undesa/devel/svn/test-bungeni-portal/parts/i18n/configure.zcml', 
+        '-s', 'parts/i18n/configure.zcml', 
         '-p', path, 
         '-o', 'locales'])
 
@@ -91,7 +92,57 @@ To merge old translation catalogs with new ones, one needs have gettext installe
    sudo apt-get install gettext
 }}}
 
-use the msgmerge tool to merge the old translations with the new ones for each PO files eg. for the en translation catalog for bungeni.ui 
+Use the 'i18nmergeall' script in bin directory of the bungeni buildout.
+First add the xapian python library path to the script as above. Then replace all the text after
+{{{
+import lovely.recipe.i18n.i18nmergeall
+}}}
+with
+{{{
+import lovely.recipe.i18n.i18nmergeall
+import getopt, os, bungeni_custom
+os.environ["zope_i18n_allowed_languages"] = bungeni_custom.zope_i18n_allowed_languages
+
+argv = sys.argv[1:]
+apps_to_merge = ['core','models','ui']
+
+try:                                
+    opts, args = getopt.getopt(argv, "p:", ["path=",])
+except getopt.GetoptError:          
+    usage()                         
+    sys.exit(2)       
+
+path = ''
+for opt, arg in opts:
+    if opt in ("-p", "--path"):      
+        path = arg
+
+if not path:
+    print 'No path provided call with "-p <<locales_path_to_merge>>" or with "-p all" to merge all'
+    sys.exit(2)
+
+if __name__ == '__main__':
+    if path == 'all':
+        for app_name in apps_to_merge:
+            app_path = 'src/bungeni.main/bungeni/%s/locales' \
+            %(app_name)
+            lovely.recipe.i18n.i18nmergeall.main(['i18nmergeall', '-l', 
+            app_path])
+    else:
+        lovely.recipe.i18n.i18nmergeall.main(['i18nmergeall', '-l', path])
+}}}
+
+Then run this command to merge the pot file with the po files for all languages
+{{{
+   ./bin/i18nmergeall -p all
+}}}
+
+or merge a particular package this way (for the core package)
+{{{
+   ./bin/i18nmergeall -p src/bungeni.main/bungeni/core/locales/
+}}}
+
+Alternatively, use the msgmerge tool directly to merge the old translations with the new ones for each PO files e.g. for the en translation catalog for bungeni.ui 
 
 {{{
 cd src/bungeni.ui/bungeni/ui/locales/
