@@ -1,5 +1,5 @@
 #summary how authentication works with zope principals and groups
-#labels Phase-Design
+#labels Phase-Deploy,Phase-Implementation
 
 = Authentication Stack =
 
@@ -7,7 +7,7 @@ The repoze.whooze packages handles identification and authentication, it gets id
 
 All bungeni principals are repoze.whooze.auth.WhoPrincipal objects which implement the zope.security.interfaces.IGroupAwarePrincipal interface.
 
-Groups are principals and can be assigned permissions as well(that is why groups have a group_principal_id attribute in the schema). 
+Groups are principals and can be assigned permissions as well(that is why groups have a group_principal_id attribute in the orm). 
 
 When a group is created, it is granted the permissions defined for that group in the zcml files eg. the clerks office gets bungeni.Clerk permission ( See [http://bungeni-portal.googlecode.com/svn/bungeni.main/trunk/bungeni/core/workflows/groups.py bungeni.core/workflows.groups.py] and [http://bungeni-portal.googlecode.com/svn/bungeni.main/trunk/bungeni/core/workflows/utils.py bungeni.core/workflows/utils.py] and [http://bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk/security.zcml bungeni.buildout/security.zcml] ) . 
 
@@ -18,18 +18,4 @@ Groups are added to a principal by the repoze.who authenticator bungeni.portal.a
 
 = System setup admin = 
 
-During system setup the admin user is identified and behaves differently than in a fully setup system.
-
-for instance the following api in bungeni.ui.common -- will not work in a freshly setup system:
-{{{
-def is_admin(context):
-    """Check if current interaction has admin privileges on specified context
-
-    """
-    return zope.security.management.getInteraction().checkPermission(
-        "zope.ManageSite", context)
-}}}
-
-During setup -- the admin user has to be identified explicitly and is done via a script described below.
-
-This is because in a new installation there are no groups and no permission assignments as yet. The admin user is added using the admin-password.py script in the data/scripts folder.
+In a new installation there are no groups and no permission assignments as yet. The admin user is added using the admin-password.py script in the data/scripts folder.
