@@ -18,7 +18,7 @@ Bungeni can be installed and deployed over the internet -- or locally if you hav
 Build & deploy bungeni using the online package index using the following command :
 
 {{{
-fab bungeni_install config_ini:bungeni config_supervisord
+fab -H <host-name> bungeni_install config_ini:bungeni config_supervisord
 }}}
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
@@ -32,7 +32,7 @@ Set the fabric parameters for the cached buildout by setting the `local_cache` p
 Once the parameter has been set correctly the installation command is the same :
 
 {{{
-fab bungeni_install config_ini:bungeni config_supervisord
+fab -H <host-name> bungeni_install config_ini:bungeni config_supervisord
 }}}
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
@@ -103,6 +103,7 @@ You need to have postgres running for this:
 fab -H localhost start_monitor start_service:postgres
 }}}
 
+  _You can use the short-hand script ./fl <action name> which prefixes `fab -H localhost ` to any action_
 
 = Next Steps =
 
