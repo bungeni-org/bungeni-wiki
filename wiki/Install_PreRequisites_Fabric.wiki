@@ -7,9 +7,9 @@
 = Pre-Requisites for Bungeni =
 
 The Bungeni Application system has the following pre-requisites :
- * User installed Python 2.5
+ * User installed Python 2.6
  * User installed Python 2.4
- * SSL, Imaging, bz2 extensions for Python 2.4 & 2.5
+ * SSL, Imaging, bz2 extensions for Python 2.4 & 2.6
  * System libraries required for building  PostgreSQL from source
 
 All of these pre-requisites can be automatically installed via a fabric setup script.
@@ -44,7 +44,7 @@ At the completion of this step you should have a folder structure in your home d
 |   |-- include
 |   |-- lib
 |   `-- man
-`-- python25
+`-- python26
     |-- bin
     |-- include
     |-- lib
