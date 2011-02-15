@@ -106,6 +106,12 @@ You need to have postgres running for this:
 fab -H localhost start_monitor start_service:postgres
 }}}
 
+= Testing the installation = 
+
+After this you can run the unit tests provided in the system to check if you have installed correctly [HOWTO_RunBungeniUnitTests Run Bungeni Unit Tests].
+
+You can also install some demo data which you can use to test-drive the system : [HowTo_MaintainAndUpdateInstallation#Load_Demo_Data Install demo data sets]
+
 = Next Steps =
 
  * *[Install_Plone_Fabric How to setup Plone Content Management System]* 
