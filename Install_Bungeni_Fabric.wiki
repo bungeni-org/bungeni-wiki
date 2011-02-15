@@ -79,20 +79,29 @@ At the end of this step your folder structure should look like this :
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager#bungeni using supervisor to start / stop Bungeni]
 
 
-= Changing the admin password = 
+= Setting up the admin password = 
 
-The default admin password for the system is 'admin' .
-The system uses the file called `passwd` in the buildout root folder to store the admin user & password.  You can change the admin password using htpasswd utility. `htpasswd` is the utility provided with apache to generate .htaccess passwords - running it in the buildout folder as follows will allow changing the admin password.
+There are 2 parameters in the Fabric `setup.ini` :
 
 {{{
-htpasswd -c passwd admin
-Enter password:
-Re-enter password:
+[bungeni]
+...
+admin_user = admin
+admin_password = admin
+...
 }}}
 
-Alternatively if you don't have apache installed on the deployment machine - you can generate the `passwd` file on a computer with apache and copy it into the buildout folder.
+Set this appropriately and run :
 
-Yet another way is to use this [http://trac.edgewall.org/browser/trunk/contrib/htpasswd.py python script]
+{{{
+fab -H localhost setup_bungeni_admin 
+}}}
+
+You need to have postgres running for this:
+
+{{{
+fab -H localhost start_monitor start_service:postgres
+}}}
 
 
 = Next Steps =
