@@ -69,7 +69,7 @@ At the end of this step your folder structure should look like this :
 |   |-- include
 |   |-- lib
 |   `-- man
-`-- python25
+`-- python26
     |-- bin
     |-- include
     |-- lib
