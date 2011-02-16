@@ -98,10 +98,11 @@ the following attribute on the Field class:
 
 {{{
     _roles = set([
-        "bungeni.Admin", # parliament, has all privileges
-        "bungeni.Clerk", "bungeni.Speaker", "bungeni.MP", # parliament 
-        "bungeni.Minister", # ministry 
+        #"bungeni.Admin", # parliament, has all privileges
+        "bungeni.Clerk", "bungeni.Speaker", # parliament
         #"bungeni.Owner", # instance
+        "bungeni.MP", # parliament 
+        "bungeni.Minister", # ministry 
         #"bungeni.Translator", # parliament
         #"bungeni.Everybody", # all authenticated users, all above roles
         "bungeni.Anybody" # unauthenticated user, anonymous
@@ -127,7 +128,7 @@ i.e. a list of either `show(modes, roles)` or `hide(modes, roles)` declarations,
  * directives `show` or `hide` are _roles-complement_ of each other i.e. the following are two equivalent statements of the same rule (for each case, convenience and improved clarity would inform which to prefer):
 {{{
     hide(roles="bungeni.Anybody")
-    show(roles="""bungeni.Admin bungeni.Clerk bungeni.Speaker bungeni.MP 
+    show(roles="""bungeni.Clerk bungeni.Speaker bungeni.MP 
         bungeni.Minister bungeni.Anybody""")
 }}}
 
