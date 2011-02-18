@@ -228,7 +228,8 @@ The declaration structure follows the same lines as descriptor's Field.localizab
         <field name="full_name" modes="view edit add" localizable="view edit add" />
         <field name="registry_number" modes="view edit" localizable="view" />
         <field name="owner_id" modes="view edit add listing" localizable="view listing">
-            <hide modes="view listing" roles="bungeni.Anybody" />
+            <show modes="view" roles="bungeni.Clerk bungeni.Speaker" />
+            <hide modes="listing" roles="bungeni.Anybody" />
         <field>
         <field name="language" modes="view edit add" localizable="view" />
         <field name="body_text" modes="view edit add" localizable="view" />
