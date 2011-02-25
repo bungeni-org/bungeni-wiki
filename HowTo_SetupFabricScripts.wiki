@@ -28,7 +28,7 @@ Most importantly you need to set the *`system_root`* and *`app_host`* parameters
 
 For example - 
 
- * if you wanted to install Bungeni in the `/home/undesa/testing` folder of your computer - and you wanted to install it as a development build -- by default fabric checks out the source anonymously (over http:// ) when `development_build` is set to true it checks out the source using the user name and password provided in the `[scm]` section -- the checkout is a `https://` checkout. You would edit the following parameters in your  bungeni.ini file :
+ * if you wanted to install Bungeni in the `/home/undesa/testing` folder of your computer - and you wanted to install it as a development build -- by default fabric checks out the source anonymously (over http:// ) when `development_build` is set to true it checks out the source using the user name and password provided in the `[scm]` section -- the checkout is a `https://` checkout. You would edit the following parameters in your  setup.ini file :
 {{{
 [global]
 system_root = /home/undesa/testing
@@ -53,6 +53,15 @@ app_host = localhost
 [scm]
 user=
 pass=
+}}}
+
+ * To configure translations for your instance set *enabled_translations* under *custom*
+   The enabled languages should be colon separated language codes e.g. `en:en_KE:fr_RW`
+{{{
+[custom]
+folder = deploy_custom
+enabled_translations = en
+translatable_packages = core:ui:models
 }}}
 
  * If you had a linux distro with a non-standard list of required packages :
