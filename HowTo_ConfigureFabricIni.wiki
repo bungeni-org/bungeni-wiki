@@ -96,29 +96,6 @@ If you are deploying only onto the local computer and not accessing the installa
 If you are deploying it in a LAN for test purposes you can set it to the IP address of the computer on which you have installed it.
 If you are deploying bungeni on the internet hosted on a domain -- you can set this to `localhost` to proxy it behind a domain name. See [#portal_deployment_configuration Portal Deployment Configuration]
 
-=== supervisor_host , supervisor_port ===
-
-These parameters specify the public host and port name on which the supervisor http server starts up.
-
-For most situations `supervisor_host` can be left as `0.0.0.0` which indicates all public interfaces 
-
-{{{
-[global]
-.....
-supervisor_host = 0.0.0.0
-}}}
-
-The `supervisor_port` parameter provides the access port for the http monitor interface :
-
-{{{
-[global]
-......
-supervisor_port = 8888
-}}}
-
-setting the above makes the supervisor interface accessible on http://localhost:8888.
-Note that setting the supervisor host to `0.0.0.0` makes it listen on all network interfaces. This may not always be desirable, in such instances set it to a specific IP.
-
 
 === verbose ===
 
