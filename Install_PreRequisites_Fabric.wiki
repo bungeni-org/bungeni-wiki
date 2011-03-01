@@ -23,7 +23,7 @@ See [HowTo_InstallFabric How to Install Fabric]
 
 = Setup the Fabric Scripts = 
 
-See [HowTo_SetupFabricScripts How to setup the Bungeni Fabric Scripts]
+See [HowTo_SetupFabricScripts How to setup the Bungeni Fabric Scripts] , also see [HowTo_ConfigureFabricIni How to configure the fabric setup.ini file]
 
 = Install the pre-requisites = 
 
