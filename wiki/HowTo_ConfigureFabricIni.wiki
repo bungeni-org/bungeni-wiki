@@ -20,8 +20,7 @@ development_build = True
 local_cache = False
 app_host = 92.243.15.192
 distro_override = Ubuntu.10.04-gandi
-supervisor_host = 0.0.0.0
-supervisor_port = 8888
+verbose = true
 }}}
 
 
@@ -121,6 +120,11 @@ setting the above makes the supervisor interface accessible on http://localhost:
 Note that setting the supervisor host to `0.0.0.0` makes it listen on all network interfaces. This may not always be desirable, in such instances set it to a specific IP.
 
 
+=== verbose ===
+
+Setting `verbose=true` runs the build in verbose mode i.e. with a much richer set of output messages (useful for debugging)
+
+
 === distro_override === 
 
 Specify a distro package list.
@@ -151,28 +155,50 @@ In the example above `distro_override` has been specified as `Ubuntu:10.04-gandi
 	package-two
 }}}
 
+== The supervisor section == 
+
+{{{
+[supervisor]
+host=localhost
+port=8888
+python=2.5
+}}}
+
+These parameters specify the public host and port name on which the supervisor http server starts up.
+
+For most situations `host` can be left as `0.0.0.0` which indicates all public interfaces 
+
+{{{
+[supervisor]
+.....
+host = 0.0.0.0
+}}}
+
+The `port` parameter provides the access port for the http monitor interface :
+
+{{{
+[supervisor]
+......
+supervisor_port = 8888
+}}}
+
+setting the above makes the supervisor interface accessible on http://localhost:8888.
+Note that setting the supervisor host to `0.0.0.0` makes it listen on all network interfaces. This may not always be desirable, in such instances set it to a specific IP.
+
+The last parameter `python` specifies the python installation where the supervisor daemon will install into.
+
 == The scm section == 
 
 This section has 2 parameters - the first is the svn user name , and the second is the password :
 
 {{{
 [scm]
-user=ashok.hariharan
+user=my.svn.user.name
 pass=azo28nd8
 }}}
 
 Note that the user and pass parameters are used only when the `development_build` parameter is set to `True` in `[global]`
 
-== The python24, python25, imaging sections == 
-
-These sections take a single parameter :
-
-{{{
-[python25]
-download_url = http://www.python.org/ftp/python/2.5.5/Python-2.5.5.tgz
-}}}
-
-`download_url` can either be a http / ftp URL or a file system path (/home/files/file.tar.gz) to the python source archive.
 
 == The bungeni, plone and portal sections == 
 
@@ -181,14 +207,23 @@ bungeni, plone and portal have similar configuration parameters.
 {{{
 [bungeni]
 local_index=http://192.168.0.14:6543/bungeni
+python=2.5
 repo=bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk
 dump_file=dmp_undesa.txt
-http_port=8081
+http_port = 8081
+admin_user=admin
+admin_password=password
+attachments_folder=fs
+attachments_archive=fs.tar.gz
 }}}
 
-`local_index` is the address of the local package index. This is used only when `local_cache` is set to `True` in `[global]`.
-`repo` is the address of the bungeni subversion repository minus the protocol part of the URL. Fabric sets it appropriately depending upon whether you use `development_mode` or not.
-`http_port` is the port on which the http service for the application listens on.
+ * `local_index` is the address of the local package index. This is used only when `local_cache` is set to `True` in `[global]`.
+ * `python` is the version of python to use for bungeni (2.4,2.5 or 2.6). Specifying a python version here will cause a custom built python of that version to be built during the `presetup` action. e.g. if you specify 2.6 for `python` in the `[bungeni]` section, and 2.5 for `python` in the `[portal]` section both python 2.5 and 2.6 will be built by fabric during `presetup`.
+ * `repo` is the address of the bungeni subversion repository minus the protocol part of the URL. Fabric sets it appropriately depending upon whether you use `development_mode` or not.
+ * `dump_file` the name of the database dump file. this is expected to be in the `testdatadmp` folder
+ * `attachments_folder` and `attachments_archive`  the name of the folder where attachments are stored. the archive contains attachment documents part of test data.
+ * `http_port` is the port on which the http service for the application listens on.
+
 
 === portal deployment configuration ===
 
@@ -236,6 +271,19 @@ web_server_port = 80
 }}}
 
 For example nginx and apache configurations see [HowTo_ProxyBungeniBehindWebServer How to proxy Bungeni behind a web server]
+
+
+== The python24, python25, python26, imaging sections == 
+
+These sections take a single parameter :
+
+{{{
+[python25]
+download_url = http://www.python.org/ftp/python/2.5.5/Python-2.5.5.tgz
+}}}
+
+`download_url` can either be a http / ftp URL or a file system path (/home/files/file.tar.gz) to the python source archive.
+
 
 == The postgresql, xapian, xapian-bindings and exist sections == 
 
