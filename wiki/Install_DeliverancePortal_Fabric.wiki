@@ -31,6 +31,24 @@ fab -H <host-or-ip>  portal_install config_ini:portal
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
+== Enable country theme == 
+
+The deliverance portal is installed with a default theme. To install a country theme, there is a paramater in the Fabric `setup.ini` :
+
+{{{
+[custom]
+...
+country_theme = default
+}}}
+
+Set this parameter to the appropriate value (_It is recommended to use the ISO 3166-1 alpha-2 codes_) and run :
+
+{{{
+fab -H localhost enable_country_theme config_ini:portal 
+}}}
+
+
+
 == Configure the Installation == 
 
 The deliverance portal gets installed within the Bungeni installation folder in a folder called portal. See [Install_Final_Folder_Structure Bungeni Installation folder structure].
