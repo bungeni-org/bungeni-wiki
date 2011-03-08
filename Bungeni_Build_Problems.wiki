@@ -1,6 +1,6 @@
 #summary Typical Build Problems & Resolutions
-#sidebar TableOfContents
 #labels Phase-Implementation,Phase-Deploy
+#sidebar TableOfContents
 
 = Primary Checklist =
 
@@ -24,7 +24,7 @@
 /home/undesa/demo_instance/cap_installs/bungeni_install/bungeni/releases/20091207124245/parts/xapian/lib/python/xapian/_xapian.so:
 undefined symbol: PyUnicodeUCS4_EncodeUTF8
 }}}  
-      - This usually indicates that the python used by the buildout is out of date / corrupted because of some change in the operating system (or some other reason). The solution in these cases is to backup your db - run the bungeni_presetup steps again, bootstrap and run a full buildout.
+      - This usually indicates that the python used by the buildout is out of date / corrupted because of some change in the operating system (or some other reason). The solution in these cases is to backup your db - run the bungeni_presetup steps again, bootstrap and run a full buildout after deleting the `parts/xapian` folder.
   # Plone buildout fails while installing psycopg2 with the following error :
     {{{
         NameError: global name 'w' is not defined
