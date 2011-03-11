@@ -1,13 +1,20 @@
 #summary GSoC 2011 Ideas
 
+ *This page is a work in progess*
+
 = Introduction =
 
-Add your content here.
+
+= XML Node level diff and merge  =
+
+A critical requirement when dealing with legislative documents is managing different versions and consolidating changes into a master document. The project has developed and backed a legislative XML document standard called [http://www.akomantoso.org Akoma Ntoso]
 
 
-= Details =
+= Online petitioning system =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+TO DO 
+
+
+= Social Media Integration = 
+
+Integration of Bungeni with Facebook and Twitter.
