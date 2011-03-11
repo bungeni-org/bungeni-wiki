@@ -2,10 +2,11 @@
 
 *This page is a work in progess*
 
-= Introduction =
+= GSoC 2011 Project Ideas =
 
+<wiki:toc max_depth="4" />
 
-= XML Node level diff and merge  =
+== XML Node level diff and merge  ==
 
 A critical requirement when dealing with legislative documents is managing different versions and consolidating changes into a master document. The project has developed  a legislative XML document standard called [http://www.akomantoso.org Akoma Ntoso] (also see [http://akomantoso.googlecode.com] ).
 
@@ -21,13 +22,15 @@ Also see :
 [http://www.scribd.com/doc/14482474/XML-diff-survey XML diff survey]
 
 
-
-
 = Online petitioning system =
 
-TO DO 
+The Bungeni legislative information system provides a workflow driven environment for managing typical parliamentary processes like : questions,motions and bills involving  different kinds of actors like : the member of parliament, the clerk and the speaker.
+
+An "online petitioning system" is intended to make the general public also an involved actor in the processes of the system.
+
+Using this public facing module - the general public can propose and submit petitions on issues of public / private importance. The petition submission to parliament will involve a workflow where the petition will be channeled for approval via a specific committee or office in the parliament - to be directed appropriately to other bodies (e.g. a member or a committee ) within the parliament to address the content of the petition.
 
 
 = Social Media Integration = 
 
-Integration of Bungeni with Facebook and Twitter.
+TO DO
