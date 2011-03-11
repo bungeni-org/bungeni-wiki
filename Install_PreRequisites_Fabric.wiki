@@ -7,10 +7,11 @@
 = Pre-Requisites for Bungeni =
 
 The Bungeni Application system has the following pre-requisites :
- * User installed Python 2.6
+ * User installed Python 2.6 / 2.5
  * User installed Python 2.4
- * SSL, Imaging, bz2 extensions for Python 2.4 & 2.6
+ * SSL, Imaging, bz2 extensions for Python 2.4 & 2.6 (or 2.5)
  * System libraries required for building  PostgreSQL from source
+ * OpenOffice.org -- this is used for PDF conversion
 
 All of these pre-requisites can be automatically installed via a fabric setup script.
 So, first we install Fabric - and run the pre-requisite setup scripts which installs all the required pre-requisites.
