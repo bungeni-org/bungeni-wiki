@@ -14,7 +14,7 @@ If you have existing project experience in the following areas, this can constit
   * Python and WSGI development
   * XML Processing using parsers 
   * OpenOffice.org extension development with Java
-  * Legislative informatics 
+
 
 = Project = 
   
