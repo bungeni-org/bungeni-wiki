@@ -1,13 +1,26 @@
 #summary GSoC 2011 Ideas
 
- *This page is a work in progess*
+*This page is a work in progess*
 
 = Introduction =
 
 
 = XML Node level diff and merge  =
 
-A critical requirement when dealing with legislative documents is managing different versions and consolidating changes into a master document. The project has developed and backed a legislative XML document standard called [http://www.akomantoso.org Akoma Ntoso]
+A critical requirement when dealing with legislative documents is managing different versions and consolidating changes into a master document. The project has developed  a legislative XML document standard called [http://www.akomantoso.org Akoma Ntoso] (also see [http://akomantoso.googlecode.com] ).
+
+A typical use case is a legislative bill --  this is drafted by a member of parliament and then changes are submitted on this document by different members. These submitted changes are triaged and discussed and go  through a voting process before selected changes are approved as amendments.
+These approved amendments are "merged" (consolidated) back into the original bill document.
+
+In Bungeni the bill document will be an XML document (either ODF or Akoma Ntoso). The changes are submitted on copies of this document -- and finally, approved amendments from different users are merged into the master.
+
+A XML aware diff-merge module is required for Bungeni.
+One of the projects identified as a feasible candidate is the JNDiff project [http://jndiff.sourceforge.net/]. This needs to be taken from a proof of concept application to something practically usable with Akoma Ntoso documents.
+
+Also see :
+[http://www.scribd.com/doc/14482474/XML-diff-survey XML diff survey]
+
+
 
 
 = Online petitioning system =
