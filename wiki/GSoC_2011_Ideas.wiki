@@ -22,15 +22,17 @@ Also see :
 [http://www.scribd.com/doc/14482474/XML-diff-survey XML diff survey]
 
 
-= Online petitioning system =
+== Online petitioning system ==
 
 The Bungeni legislative information system provides a workflow driven environment for managing typical parliamentary processes like : questions,motions and bills involving  different kinds of actors like : the member of parliament, the clerk and the speaker.
 
 An "online petitioning system" is intended to make the general public also an involved actor in the processes of the system.
 
-Using this public facing module - the general public can propose and submit petitions on issues of public / private importance. The petition submission to parliament will involve a workflow where the petition will be channeled for approval via a specific committee or office in the parliament - to be directed appropriately to other bodies (e.g. a member or a committee ) within the parliament to address the content of the petition.
+Using this public facing module - the general public can propose and submit petitions on issues of public / private importance. The petition submission to parliament will involve a workflow where the petition will be channeled for approval via a specific committee or office in the parliament - to be directed appropriately to other bodies (e.g. a member or a committee ) within the parliament to address the content of the petition. To this effect the "Petition" content type must be developed in Bungeni with the appropriate workflows using the Bungeni workflow engine.
 
 
-= Social Media Integration = 
+== Social Media Integration == 
 
-TO DO
+The Bungeni legislative information system publishes different kinds of parliamentary content like Questions, Bills and Motions. Items like these, once published, go through various public phases which may be of interest to the public. For e.g. in the case of a Bill, it goes through different readings in the parliamentary chambers, and stages like "publishing to the gazette". 
+
+A "social media" integration module will allow Bungeni content to be selectively published onto different social media outlets. For example - a parliament may have a page on facebook or a twitter feed. The "social media" integration module will push Bungeni content onto such outlets from within the Bungeni content publishing interface.
