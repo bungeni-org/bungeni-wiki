@@ -37,6 +37,8 @@ An "online petitioning system" is intended to make the general public also an in
 
 Using this public facing module - the general public can propose and submit petitions on issues of public / private importance. The petition submission to parliament will involve a workflow where the petition will be channeled for approval via a specific committee or office in the parliament - to be directed appropriately to other bodies (e.g. a member or a committee ) within the parliament to address the content of the petition. To this effect the "Petition" content type must be developed in Bungeni with the appropriate workflows using the Bungeni workflow engine.
 
+Also see :
+ * [http://petitions.number10.gov.uk/]
 
 == Social Media Integration == 
 
