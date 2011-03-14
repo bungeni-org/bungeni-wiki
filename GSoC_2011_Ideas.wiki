@@ -8,6 +8,8 @@
 
 == XML Node level diff and merge  ==
 
+*Technical Knowledge* : Java XML processing, good knowledge of XML concepts and technologies.
+
 A critical requirement when dealing with legislative documents is managing different versions and consolidating changes into a master document. The project has developed  a legislative XML document standard called [http://www.akomantoso.org Akoma Ntoso] (also see [http://akomantoso.googlecode.com] ).
 
 A typical use case is a legislative bill --  this is drafted by a member of parliament and then changes are submitted on this document by different members. These submitted changes are triaged and discussed and go  through a voting process before selected changes are approved as amendments.
@@ -19,10 +21,15 @@ A XML aware diff-merge module is required for Bungeni.
 One of the projects identified as a feasible candidate is the JNDiff project [http://jndiff.sourceforge.net/]. This needs to be taken from a proof of concept application to something practically usable with Akoma Ntoso documents.
 
 Also see :
-[http://www.scribd.com/doc/14482474/XML-diff-survey XML diff survey]
+ * [http://www.scribd.com/doc/14482474/XML-diff-survey XML diff survey]
+ * [http://twprojects.cs.unibo.it:8080/taf-en/]
+ * [http://goo.gl/OzNXb Detecting changes on semi structured data]
+ 
 
 
 == Online petitioning system ==
+
+*Technical Knowledge* : Python and WSGI
 
 The Bungeni legislative information system provides a workflow driven environment for managing typical parliamentary processes like : questions,motions and bills involving  different kinds of actors like : the member of parliament, the clerk and the speaker.
 
@@ -33,11 +40,14 @@ Using this public facing module - the general public can propose and submit peti
 
 == Social Media Integration == 
 
+*Technical Knowledge* : Python and WSGI
+
 The Bungeni legislative information system publishes different kinds of parliamentary content like Questions, Bills and Motions. Items like these, once published, go through various public phases which may be of interest to the public. For e.g. in the case of a Bill, it goes through different readings in the parliamentary chambers, and stages like "publishing to the gazette". 
 
 A "social media" integration module will allow Bungeni content to be selectively published onto different social media outlets. For example - a parliament may have a page on facebook or a twitter feed. The "social media" integration module will push Bungeni content onto such outlets from within the Bungeni content publishing interface.
 
 == Federated URI Rewriters Based on Ontologies (FURBO) ==
+
 
 URL shortening services (http://en.wikipedia.org/wiki/URL_shortening) and Apache's mod_rewrite (http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html) are different solutions for the same need: accessing a web resource by also using a URI that is, for a number of reasons, different from its physical URL. Despite their differences, both approaches enrich the namespace of the World Wide Web, and add a whole layer of names that are meant to be useful to the final user rather than representing any physical characterization of data on the servers.
 
