@@ -1,31 +1,7 @@
-#summary How to Generate i18n catalogs.
-#labels zope,Phase-Implementation
-#sidebar TableOfContents
-
-<wiki:toc max_depth="4" />
-
-= Introduction = 
-
-Bungeni specific i18n catalogs are used by the following packages within the bungeni egg :
-
- * bungeni.core
- * bungeni.ui
- * bungeni.core 
-
-The paths for the message files within the bungeni egg are as follows 
-
- * bungeni/core/locales 
- * bungeni/ui/locales
- * bungeni/models/locales
-
-Within the locales folder there is a .pot (a message template) file for the specific page named using the package name : bungeni.core.pot, bungeni.ui.pot, bungeni.models.pot as the case may be.
-
-Message files (.po files) for specific languages are stored within the locales/LC_MESSAGES folder for each package. 
+#summary How to generate and merge translation catalogs
 
 
-= How to generate a POT file =
-
-POT files are generated using the i18nextract script in the buildout bin folder.
+= How to setup i18n scripts =
 
 due to a minor issue in one of the recipes used in buildout, we need to modify the generated i18n scripts to include the path to our xapian library.
 
@@ -46,10 +22,10 @@ if __name__ == '__main__':
 
 with
 {{{
-import lovely.recipe.i18n.i18nextract
-import sys, os
 
-import getopt
+import lovely.recipe.i18n.i18nextract
+import getopt, os, bungeni_custom
+os.environ["zope_i18n_allowed_languages"] = bungeni_custom.zope_i18n_allowed_languages
 
 argv = sys.argv[1:]
 
@@ -59,9 +35,8 @@ except getopt.GetoptError:
     usage()                         
     sys.exit(2)       
 
-os.environ["zope_i18n_allowed_languages"] = "en fr pt sw en-ke it"
-domain = 'bungeni.core' # can be bungeni.ui or bungeni.models
-path = 'src/bungeni.main'
+domain = 'bungeni'
+path = 'src/bungeni.core'
 for opt, arg in opts:                
     if opt in ("-p", "--path"):      
         path = arg
@@ -74,55 +49,102 @@ print
 if __name__ == '__main__':
     lovely.recipe.i18n.i18nextract.main(['i18nextract', 
         '-d', domain, 
-        '-s', '/home/undesa/cinst/bungeni/parts/i18n/configure.zcml', 
+        '-s', 'parts/i18n/configure.zcml', 
         '-p', path, 
         '-o', 'locales'])
+
 }}}
 
-the `-d` option specifies the package domain (bungeni.core, bungeni.models or bungeni.ui) -- the pot files are generated in the src/bungeni.main/locales folder -- you will need to copy them to the locales folder of the specific package
+= Generate i18n catalogs =
 
+First, extract the msg strings of workflow states run (WHY!!!!! This needs to be fixed)
 
-= How to generate PO files =
+{{{ ./bin/python src/bungeni.main/bungeni/core/workflows/exctractwfi18n.py }}}
 
-PO files are generated using the i18nmergeall script in the buildout bin folder.
+Then, to generate the POT files run the following commands
 
-The default version of this script is defective and the following changes need to be made to it :
+{{{
+./bin/i18nextract -d bungeni.ui -p src/bungeni.main/bungeni/ui/
+./bin/i18nextract -d bungeni.models -p src/bungeni.main/bungeni/models/
+./bin/i18nextract -d bungeni.core -p src/bungeni.main/bungeni/core/
+}}}
 
-Right at the bottom of the script -- replace the part after the import with the following 
+The POT files will be created in locales directory in the package eg. for bungeni.ui the POT file will be in src/bungeni.ui/bungeni/ui/locales
+
+You may get errors like the ones below but the catalogs are still generated
+
+{{{
+/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/src/ore.alchemist/src/ore/alchemist/introspector.py:22: SADeprecationWarning: the information_schema module is deprecated.
+  from sqlalchemy.databases import information_schema
+Exception in thread Thread-1 (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/home/bungeni/cap_installs/python25/lib/python2.5/threading.py", line 486, in __bootstrap_inner
+  File "/home/bungeni/cap_installs/python25/lib/python2.5/threading.py", line 446, in run
+  File "/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/eggs/ore.xapian-0.5.0-py2.5.egg/ore/xapian/queue.py", line 64, in __call__
+  File "/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/eggs/ore.xapian-0.5.0-py2.5.egg/ore/xapian/queue.py", line 54, in operations
+<type 'exceptions.AttributeError'>: 'NoneType' object has no attribute 'Empty'
+}}}
+
+= Merge old catalogs with new ones =
+
+To merge old translation catalogs with new ones, one needs have gettext installed
+{{{
+   sudo apt-get install gettext
+}}}
+
+Use the 'i18nmergeall' script in bin directory of the bungeni buildout.
+First add the xapian python library path to the script as above. Then replace all the text after
 {{{
 import lovely.recipe.i18n.i18nmergeall
-import sys, os
+}}}
+with
+{{{
+import lovely.recipe.i18n.i18nmergeall
+import getopt, os, bungeni_custom
+os.environ["zope_i18n_allowed_languages"] = bungeni_custom.zope_i18n_allowed_languages
 
-os.environ["zope_i18n_allowed_languages"] = "en fr pt sw en-ke it"
+argv = sys.argv[1:]
+apps_to_merge = ['core','models','ui']
 
+try:                                
+    opts, args = getopt.getopt(argv, "p:", ["path=",])
+except getopt.GetoptError:          
+    usage()                         
+    sys.exit(2)       
+
+path = ''
+for opt, arg in opts:
+    if opt in ("-p", "--path"):      
+        path = arg
+
+if not path:
+    print 'No path provided call with "-p <<locales_path_to_merge>>" or with "-p all" to merge all'
+    sys.exit(2)
 
 if __name__ == '__main__':
-    lovely.recipe.i18n.i18nmergeall.main(['i18nmergeall', '-l', 'src/bungeni.main/bungeni/models/locales'])
-
-}}}
-The `-l` parameter needs to be set to the appropriate package to generate the PO files.
-
-The following script is useful for merging generated .po files into a svn checkout hierarchy of the bungeni.main source 
-
-{{{
- cd checkout_folder_for_bungeni.main
- cd bungeni/models/locales
- ## we want to get the newly generated PO files from the bungeni installation under the cinst folder
- for po in `find . -name '*.po'`;  do cp `echo /home/undesa/cinst/bungeni/src/bungeni.main/bungeni/models/locales${po:1}` $po ; done
-
+    if path == 'all':
+        for app_name in apps_to_merge:
+            app_path = 'src/bungeni.main/bungeni/%s/locales' \
+            %(app_name)
+            lovely.recipe.i18n.i18nmergeall.main(['i18nmergeall', '-l', 
+            app_path])
+    else:
+        lovely.recipe.i18n.i18nmergeall.main(['i18nmergeall', '-l', path])
 }}}
 
-= Manually regenerating .mo files = 
-
-.MO files are generated by the buildout and are indexed message files used by the system for faster retrieval of message strings.
-Sometimes you may want to generate and update these manually as it is faster than running the buildout.
-
-You can manually compile .mo files using `gettext` :
+Then run this command to merge the pot file with the po files for all languages
 {{{
-# install gettext 
-sudo apt-get install gettext 
+   ./bin/i18nmergeall -p all
+}}}
 
-# generate the mo files
-cd ./cinst/bungeni/src/bungeni.main/bungeni
-for po in `find . -name "*.po"` ; do msgfmt -o `dirname $po`/`basename $po .po`.mo $po; done
+or merge a particular package this way (for the core package)
+{{{
+   ./bin/i18nmergeall -p src/bungeni.main/bungeni/core/locales/
+}}}
+
+Alternatively, use the msgmerge tool directly to merge the old translations with the new ones for each PO files e.g. for the en translation catalog for bungeni.ui 
+
+{{{
+cd src/bungeni.ui/bungeni/ui/locales/
+msgmerge -U en/LC_MESSAGES/bungeni.ui.po bungeni.pot
 }}}
