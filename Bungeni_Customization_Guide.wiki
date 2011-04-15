@@ -19,7 +19,7 @@
    * Use of roles in Forms
 
  * Workflow Customization
-   * Using the workflow documentation generator
+   * [DocumentingWorkflows Using the workflow documentation generator]
    * Workflow terms explained -
       * grants
          * global grants
@@ -52,7 +52,7 @@
        * best practices
    * Setup configurations
      * change deployment ports for bungeni,portal, postgres
-   * Using supervisor
+   * [HowTo_SupervisorServiceManager Using Supervisor]
      * accessing supervisor
      * managing services
      * getting logging output
