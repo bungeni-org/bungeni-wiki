@@ -64,6 +64,8 @@ easy_install fabric paramiko
 
 For Redhat/Fedora or rpm-based distributions. 
 
-{{{yum groupinstall "Development Tools" "Legacy Software Development"}}}
+{{{
+yum groupinstall "Development Tools" "Legacy Software Development"
+}}}
 
 should suffice to setup build-essentials on the machine.
