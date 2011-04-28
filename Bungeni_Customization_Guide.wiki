@@ -1,5 +1,45 @@
 #summary Bungeni Customization Guide
 
+ * Customization guide for admins
+   * Bungeni customization folder structures
+     * What is where ?
+     * Using the customization folder
+       * making a private customization folder
+       * testing customizations
+       * best practices
+   * Setup configurations
+     * change deployment ports for bungeni,portal, postgres
+   * [HowTo_SupervisorServiceManager Using Supervisor]
+     * accessing supervisor
+     * managing services
+     * getting logging output
+   
+ * Setup customization parameters
+  * Default language for the system
+    * Enabling other languages
+    * Managing message strings in bungeni
+  * Database connection
+  * OpenOffice configuration
+  * Notification configuration
+  * Configuring Bungeni system vocabularies  
+  * Configuring Subject term vocabularies
+
+ * Workflow Customization
+   * [DocumentingWorkflows Using the workflow documentation generator]
+   * Workflow terms explained -
+      * grants
+         * global grants
+         * grants within states
+      * states
+      * transitions
+   * How states and transitions appear in the user interface
+   * How roles are used in workflows
+   * Using transitions to connect states
+     * dos and donts
+   * Using notifications 
+   * Changing transition labels on the user interface 
+
+
  * Look and Feel
    * Theming Bungeni using Skins
    * Changing the Menu Order and Structure
@@ -18,43 +58,3 @@
    * Show/Hide fields on a Form per mode
    * Use of roles in Forms
 
- * Workflow Customization
-   * [DocumentingWorkflows Using the workflow documentation generator]
-   * Workflow terms explained -
-      * grants
-         * global grants
-         * grants within states
-      * states
-      * transitions
-   * How states and transitions appear in the user interface
-   * How roles are used in workflows
-   * Using transitions to connect states
-     * dos and donts
-   * Using notifications 
-   * Changing transition labels on the user interface 
-
- * Other customization parameters
-  * Default language for the system
-    * Enabling other languages
-    * Managing message strings in bungeni
-  * Database connection
-  * OpenOffice configuration
-  * Notification configuration
-  * Configuring Bungeni system vocabularies  
-  * Configuring Subject term vocabularies
-
-  * Customization guide for admins
-   * Bungeni customization folder structures
-     * What is where ?
-     * Using the customization folder
-       * making a private customization folder
-       * testing customizations
-       * best practices
-   * Setup configurations
-     * change deployment ports for bungeni,portal, postgres
-   * [HowTo_SupervisorServiceManager Using Supervisor]
-     * accessing supervisor
-     * managing services
-     * getting logging output
-   
-      
