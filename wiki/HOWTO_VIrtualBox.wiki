@@ -73,3 +73,13 @@ To unset a customization , run it without any parameters :
 {{{
 $ VBoxManage setextradata <guest-name> "VBoxInternal/Devices/pcnet/0/LUN#0/Config/ssh/GuestPort"
 }}}
+
+== Using Snapshots == 
+
+[http://blogs.sitepoint.com/virtualbox-branched-snapshots-tutorial/ Using Snapshots]
+
+== Moving Snapshotted VMs to Another computer == 
+
+[http://srackham.wordpress.com/cloning-and-copying-virtualbox-virtual-machines/ Cloning and copying VMs]
+
+You can also use the "Export Appliance" action in virtualbox to create an installation appliance for transporting to another computer (remember to merge your snapshots before doing so )
