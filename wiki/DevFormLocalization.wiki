@@ -97,15 +97,16 @@ We first need to state precisely what roles may be targetted by localization--by
 the following attribute on the Field class:
 
 {{{
+    # The list of roles exposed to localization
     _roles = [
         #"bungeni.Admin", # parliament, has all privileges
-        "bungeni.Clerk", "bungeni.Speaker", # parliament
+        "bungeni.Clerk", "bungeni.Speaker", 
         #"bungeni.Owner", # instance
         "bungeni.MP", # parliament 
         "bungeni.Minister", # ministry 
         #"bungeni.Translator", # parliament
-        #"bungeni.Everybody", # all authenticated users, all above roles
-        "bungeni.Anybody" # unauthenticated user, anonymous
+        #"bungeni.Authenticated", # all authenticated users, all above roles
+        "bungeni.Anonymous" # unauthenticated user, anonymous
     ]
 }}}
 
@@ -125,11 +126,10 @@ i.e. a list of either `show(modes, roles)` or `hide(modes, roles)` declarations,
 
  * in a show/hide directive, not specifying either of the `modes` or `roles` parameter is equivalent to specifying, for `modes=None`, all the displayable modes specified by the field instance and, for `roles=None` all the roles supported by the Field class i.e. what is set in `Field._roles`. A corollary of this is that an additional `show()` declaration (with the modes parameter omitted) *must* generate an error (as this means at least a mode is included more than once in the show/hide declarations). 
 
- * directives `show` or `hide` are _roles-complement_ of each other i.e. the following are two equivalent statements of the same rule (for each case, convenience and improved clarity would inform which to prefer):
+ * directives `show` or `hide` are _roles-complement_ of each other i.e. assuming the same list of roles exposed to localization as above, the following are two equivalent statements of the same rule (for each case, convenience and improved clarity would inform which to prefer):
 {{{
-    hide(roles="bungeni.Anybody")
-    show(roles="""bungeni.Clerk bungeni.Speaker bungeni.MP 
-        bungeni.Minister bungeni.Anybody""")
+    hide(roles="bungeni.Anonymous")
+    show(roles="""bungeni.Clerk bungeni.Speaker bungeni.MP bungeni.Minister""")
 }}}
 
  * the implementation of `show` and `hide` consists of a couple of factory utilities each having the 2 keyword parameters, `modes` and `roles`.
@@ -148,7 +148,7 @@ Example:
             Field(name="owner_id",
                 modes="view edit add listing",
                 localizable=[
-                    hide("view listing", "bungeni.Anybody"),
+                    hide("view listing", "bungeni.Anonymous"),
                 ],
                 property=schema.Choice(title=_(u"Moved by"),
                     description=_(u"Select the user who moved the document"),
@@ -175,7 +175,7 @@ The above code declares the following:
 
  * `QuestionDescriptor` as localizable.
  * The `moved_by` question field to be localizable in the `view` and `listing` modes (and only those modes), while the `ministry_submit_date` question field to be localizable in the `view` and `edit` modes (and only those modes).
- * For `moved_by`: for the 2 modes, it sets the default lists of roles that this field is to be shown for to be all roles except for `bungeni.Anybody`.
+ * For `moved_by`: for the 2 modes, it sets the default lists of roles that this field is to be shown for to be all roles except for `bungeni.Anonymous`.
  * For `ministry_submit_date`: it states that in `view` mode the field is to be shown for all roles.
 
 
@@ -184,8 +184,8 @@ Note the following is an equivalent way to express the `moved_by` field `localiz
             Field(name="owner_id",
                 modes="view edit add listing",
                 localizable=[
-                    hide(modes="view", roles="bungeni.Anybody"),
-                    hide(modes="listing", roles="bungeni.Anybody"),
+                    hide(modes="view", roles="bungeni.Anonymous"),
+                    hide(modes="listing", roles="bungeni.Anonymous"),
                 ],
                 ...
             ),
@@ -196,7 +196,7 @@ but the following would be an error (because `listing` mode appears more than on
                 modes="view edit add listing",
                 localizable=[
                     show(modes="listing", roles="bungeni.MP bungeni.Clerk"),
-                    hide(modes="view listing", roles="bungeni.Anybody"),
+                    hide(modes="view listing", roles="bungeni.Anonymous"),
                 ],
                 ...
             ),
@@ -220,33 +220,33 @@ To continue with the example above, let's look at what a localized Question desc
 
 The declaration structure follows the same lines as descriptor's Field.localizable. Let's assume that the only localizable (and localized) Fields in this descriptor are the `moved_by` in `view` and `listing` modes and `ministry_submit_date` in `view` mode:
 {{{
-<ui roles="bungeni.Clerk bungeni.Speaker bungeni.MP bungeni.Minister bungeni.Anybody">
+<ui roles="bungeni.Clerk bungeni.Speaker bungeni.MP bungeni.Minister bungeni.Anonymous">
     ...
     <descriptor name="Question">
-        <field name="parliament_id" modes="view edit" localizable="view" />
-        <field name="short_name" modes="view edit add listing" localizable="view listing" />
-        <field name="full_name" modes="view edit add" localizable="view edit add" />
-        <field name="registry_number" modes="view edit" localizable="view" />
-        <field name="owner_id" modes="view edit add listing" localizable="view listing">
+        <field name="parliament_id" displayable="view edit" localizable="view" />
+        <field name="short_name" displayable="view edit add listing" localizable="view listing" />
+        <field name="full_name" displayable="view edit add" localizable="view edit add" />
+        <field name="registry_number" displayable="view edit" localizable="view" />
+        <field name="owner_id" displayable="view edit add listing" localizable="view listing">
             <show modes="view" roles="bungeni.Clerk bungeni.Speaker" />
-            <hide modes="listing" roles="bungeni.Anybody" />
+            <hide modes="listing" roles="bungeni.Anonymous" />
         </field>
-        <field name="language" modes="view edit add" localizable="view" />
-        <field name="body_text" modes="view edit add" localizable="view" />
-        <field name="submission_date" modes="view listing" localizable="view listing" />
-        <field name="status" modes="view edit listing" />
-        <field name="status_date" modes="view listing" localizable="view listing" />
-        <field name="note" modes="edit add" localizable="" />
-        <field name="receive_notification" modes="view edit add" />
-        <field name="question_number" modes="view listing" />
-        <field name="ministry_id" modes="view edit add listing" />
-        <field name="admissible_date" modes="view listing" localizable="view listing" />
-        <field name="ministry_submit_date" modes="view edit" localizable="view">
+        <field name="language" displayable="view edit add" localizable="view" />
+        <field name="body_text" displayable="view edit add" localizable="view" />
+        <field name="submission_date" displayable="view listing" localizable="view listing" />
+        <field name="status" displayable="view edit listing" />
+        <field name="status_date" displayable="view listing" localizable="view listing" />
+        <field name="note" displayable="edit add" localizable="" />
+        <field name="receive_notification" displayable="view edit add" />
+        <field name="question_number" displayable="view listing" />
+        <field name="ministry_id" displayable="view edit add listing" />
+        <field name="admissible_date" displayable="view listing" localizable="view listing" />
+        <field name="ministry_submit_date" displayable="view edit" localizable="view">
             <show modes="view" />
         </field>
-        <field name="question_type" modes="view edit add" />
-        <field name="response_type" modes="view edit add" />
-        <field name="response_text" modes="edit" />
+        <field name="question_type" displayable="view edit add" />
+        <field name="response_type" displayable="view edit add" />
+        <field name="response_text" displayable="edit" />
     </descriptor>
     ...
 </ui>
@@ -254,7 +254,7 @@ The declaration structure follows the same lines as descriptor's Field.localizab
 The above localization code is:
 
  * setting the field order.
- * stating that the `owner_id` field (+!`Moved by`--the (untranslated) human property title (i18n text id) should probably be used instead of the underlying attribute name) is being localized to be displayed for Clerk/Speaker in view mode, and to be shown to all except for `bungeni.Anybody` in listing mode. 
+ * stating that the `owner_id` field (+!`Moved by`--the (untranslated) human property title (i18n text id) should probably be used instead of the underlying attribute name) is being localized to be displayed for Clerk/Speaker in view mode, and to be shown to all except for `bungeni.Anonymous` in listing mode. 
  * localizing the `ministry_submit_date` Field in `view` mode to not be shown to any role.
 
 Other remarks about the above localization code sample:
