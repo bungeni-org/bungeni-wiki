@@ -47,14 +47,11 @@
      * Styling with CSS
      * Using Form customization (see "Changing order of fields" )
  
- * Form Customization  
+ * [HowTo_Customize_Forms_and_Listings Form Customization]
    * Bungeni Content Types 
      * Parliamentary metadata
      * Parliamentary document content
    * Disabling a Content type 
      * TO DO -- how to disable a content type entirely
-   * Form modes explained
-   * Changing display order of fields
-   * Show/Hide fields on a Form per mode
-   * Use of roles in Forms
+
 
