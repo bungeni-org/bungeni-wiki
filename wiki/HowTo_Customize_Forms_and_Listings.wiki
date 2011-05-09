@@ -203,6 +203,53 @@ The following hides the `owner_id` field in "listing" mode for the "bungeni.Anon
         </field>
 }}}
 
+== Field order Customization ==
+
+The order in which the fields are presented on a form can be customized by changing the order of fields within a descriptor. Changing the order of fields will be applicable to all modes.
+
+For example, the `registry_number` below appears after the `short_name` :
+
+{{{
+  <descriptor name="Question">
+        <field name="parliament_id" displayable="view listing" localizable="view listing">
+            <hide modes="view listing" />
+        </field>
+        <field name="short_name" displayable="view edit add listing" localizable="view edit listing">
+            <show modes="view edit listing" />
+        </field>
+        <field name="full_name" displayable="view edit add" localizable="view edit add">
+            <show modes="view edit add" />
+        </field>
+        <field name="registry_number" displayable="view edit listing" localizable="view edit listing">
+            <show modes="view" />
+            <hide modes="edit listing" />
+        </field>
+     .....
+  </descriptor>
+}}}
+
+The registry_number field was moved up to be the first field on the form -- 
+{{{
+  <descriptor name="Question">
+       <!-- registry_number below was moved up to be the first field -->
+        <field name="registry_number" displayable="view edit listing" localizable="view edit listing">
+            <show modes="view" />
+            <hide modes="edit listing" />
+        </field>
+        <field name="parliament_id" displayable="view listing" localizable="view listing">
+            <hide modes="view listing" />
+        </field>
+        <field name="short_name" displayable="view edit add listing" localizable="view edit listing">
+            <show modes="view edit listing" />
+        </field>
+        <field name="full_name" displayable="view edit add" localizable="view edit add">
+            <show modes="view edit add" />
+        </field>
+     .....
+  </descriptor>
+}}}
+
+Henceforth, the `registry_number` field is always displayed first on the form.
 
 
 
