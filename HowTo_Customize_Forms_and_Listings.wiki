@@ -154,7 +154,7 @@ The following states that the `registry_number` field *MAY* be localized in "vie
 Fields are customized using `<show>` and `<hide>` specifed within a `<field>` element.
 These are the *ONLY* part of the Forms xml configuration which is editable by the user.
 
-`<show>` and `<hide>` do exactly what they are named as, '<show>' shows the field for the listed modes and roles , and '<hide>' hides the field for the listed modes and roles.
+`<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles , and `<hide>` hides the field for the listed modes and roles.
 
 Both these elements have the following attributes that allow customization of the field behavior :
 
