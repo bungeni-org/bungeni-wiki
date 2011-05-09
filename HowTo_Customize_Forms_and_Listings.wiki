@@ -124,8 +124,8 @@ The `<field>` element has the following attributes :
            ..
            <field name="parliament_id" ... 
           }}}
- * _displayable_ - the `field/@displayable` attribute identifies in which [#Form_modes modes] the field *MAY* be localizable. *You are not allowed to change the values in  displayable*
- * _localizable_ - the `field/@localizable` attribute identifies the actual modes in which [#Form_modes modes] the field *CAN* be localizable. This is always a sub-set of modes listed in `field/@displayable`. *You are allowed to change the modes listed as `localizable`.* You are allowed to remove modes listed here, but you can only add modes that appear in the *field/@displayable` attribute.
+ * _displayable_ - the `field/@displayable` attribute identifies in which [#Form_modes modes] the field *MAY* be localizable. *You are NOT allowed to change the values in  displayable*
+ * _localizable_ - the `field/@localizable` attribute identifies the actual modes in which [#Form_modes modes] the field *CAN* be localizable. This is always a sub-set of modes listed in `field/@displayable`. *You are NOT allowed to change the modes listed as `localizable`.* 
  
 Let us explain the difference between `field/@displayable` and `field/@localizable` using an example :
 
@@ -147,14 +147,62 @@ The following states that the `registry_number` field *MAY* be localized in "vie
             >
 }}}
 
-The following usage is *incorrect* . Why ? because "add" mode is not in the list of `displayable` modes.
+
+
+== Field Customization == 
+
+Fields are customized using `<show>` and `<hide>` specifed within a `<field>` element.
+These are the *ONLY* part of the Forms xml configuration which is editable by the user.
+
+`<show>` and `<hide>` do exactly what they are named as, '<show>' shows the field for the listed modes and roles , and '<hide>' hides the field for the listed modes and roles.
+
+Both these elements have the following attributes that allow customization of the field behavior :
+
+ * *modes* - lists the modes that are to be shown or hidden. The only modes allowed here are the ones listed in the `field/@localizable` attribute.
+ * *roles* - lists the roles for which the modes are to be shown or hidden. The only roles allowed here are the ones listed in the `ui/@roles` attribute.
+
+There are some simple rules to follow while using `<show>` and `<hide>` :
+ * The only modes available for use are the ones provided by the `field/@localizable` attribute.
+ * A mode appearing in `<show>` cannot also appear in `<hide>` and vice versa
+
+The usage of `<show>` and `<hide>` is explained below, via examples -- 
+
+The following hides the `owner_id` field in "view listing" modes for the "bungeni.Anonymous" user.
 
 {{{
-        <field name="registry_number" 
-            displayable="view edit listing" <<-- modes that MAY be localized
-            localizable="view add"          <<-- INCORRECT; "add" mode is not specified as 'displayable'
-            >
+        <field name="owner_id" displayable="view edit add listing" localizable="view listing">
+            <hide modes="view listing" roles="bungeni.Anonymous" />
+        </field>
 }}}
+
+
+The following hides the `owner_id` field in "listing" mode for the "bungeni.Anonymous" user ; and makes the field available in "view" mode for all users (including "bungeni.Anonymous" ).
+
+{{{
+        <field name="owner_id" displayable="view edit add listing" localizable="view listing">
+            <hide modes="listing" roles="bungeni.Anonymous" />
+            <show modes="view" />
+        </field>
+}}}
+
+The following is incorrect, because "listing" appears in both the `<show>` and `<hide>` modes.
+
+{{{
+        <field name="owner_id" displayable="view edit add listing" localizable="view listing">
+            <hide modes="listing" roles="bungeni.Anonymous" />
+            <show modes="view listing" />
+        </field>
+}}}
+
+The following hides the `owner_id` field in "listing" mode for the "bungeni.Anonymous" user ; and makes it visible in "view" mode *only* for users with the "bungeni.Clerk" role.
+
+{{{
+        <field name="owner_id" displayable="view edit add listing" localizable="view listing">
+            <hide modes="listing" roles="bungeni.Anonymous" />
+            <show modes="view" roles="bungeni.Clerk" />
+        </field>
+}}}
+
 
 
 
