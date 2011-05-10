@@ -15,6 +15,7 @@
      * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
      * [Framework_Internals Framework Internals]
      * [Architecture_References References]
+ * [Bungeni_Customization_Guide Customization Guide]
  * Developer Guide
      * [DevCodeStyleGuide Bungeni Source Code Style Guide]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
