@@ -20,17 +20,28 @@ The following scripts have been tested on Ubuntu Linux 8.04 and 10.04 (32bit rel
 
 = Installing Fabric = 
 
+You will need to first install Fabric.
+
 See [HowTo_InstallFabric How to Install Fabric]
 
 = Setup the Fabric Scripts = 
+
+After installing Fabric, you will need to configure a few parameters to decide where you want to setup Bungeni.
 
 See [HowTo_SetupFabricScripts How to setup the Bungeni Fabric Scripts] , also see [HowTo_ConfigureFabricIni How to configure the fabric setup.ini file]
 
 = Install the pre-requisites = 
 
+After setting up the Fabric scripts, you can install the pre-requisites using Fabric.
+
 From the fabric folder run : 
 {{{
 fab -H <host-name-or-ip> presetup
+}}}
+
+or if you are installing it on `localhost` you can simply run :
+{{{
+./fl presetup
 }}}
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_RunFabricCommands#Running_Individual_Commands Running fabric commands]
@@ -40,11 +51,6 @@ See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_RunFabricCommands#R
 At the completion of this step you should have a folder structure in your home directory that looks like this :
 {{{
 ./cinst
-|-- python24
-|   |-- bin
-|   |-- include
-|   |-- lib
-|   `-- man
 `-- python26
     |-- bin
     |-- include
