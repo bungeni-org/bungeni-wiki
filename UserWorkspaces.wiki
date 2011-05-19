@@ -1,0 +1,48 @@
+#summary Proposed implementation of user workspaces in Bungeni
+
+= Introduction =
+
+This document contains a description of workspaces and a proposed scheme of implementing them. 
+
+A workspace is a section of Bungeni where authenticated users see the progress of their parliamentary documents.
+
+
+= Problem Description =
+
+Every logged in user shall get a workspace with 4 tabs
+  # drafts - items that the user is currently working on
+  # inbox - items that require the users immediate attention
+  # sent - items that the user previously worked on and that no longer require the users attention
+  # archive - all other items in the current parliament that the user has permission to access
+
+In addition to this, a user shall be able to create and save custom filters.
+
+= Proposed Solution =
+
+While a scheme that infers the tab a document goes into based on the information given in the roles attribute of the transition tag of the workflows was explored, it was decided that the more explicit method below was better.
+
+== Main tabs ==
+
+Ever state in the workflow of every document will specify which tab the document should be displayed in that state. A new tag `<workspace>` will be used for this purpose. For example
+
+{{{
+<state id="first_reading_adjourned" title="First Reading Adjourned" like_state="gazetted">
+    <workspace>
+          <draft roles=""/>
+          <inbox roles="bungeni.Clerk bungeni.Speaker"/>
+          <sent roles="bungeni.Owner"/>
+          <archived roles=""/>
+    </workspace>
+</state>
+}}}
+
+In the above example `<draft/>` and `<archived/>` may be left out since they do not apply for that state.
+
+A role may only appear once in the whole workspace definition ie. the same document may not be appear in more than one tab. An exception shall be raised if this happens.
+
+Having the workspace tag in the workflow definitions reduces the chances of the admin denying a role a permission to view a document while specifying a tab for the document to appear in. An exception shall be raised if this happens.
+
+== Filters ==
+
+Users will have the oppurtunity to add new tabs that will essentially be saved xapian searches.
+TODO : EXPAND
