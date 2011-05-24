@@ -251,6 +251,60 @@ The registry_number field was moved up to be the first field on the form --
 
 Henceforth, the `registry_number` field is always displayed first on the form.
 
+== Examples of show/hide combinations == 
+
+For a field described like this :
+
+{{{
+     <field name="owner_id" displayable="view edit add listing" localizable="view listing">
+            <hide modes="listing" roles="bungeni.Anonymous" />
+            <show modes="view" roles="bungeni.Clerk" />
+        </field>
+}}}
+
+The following are some examples of show/hide combinations :
+
+ * Hide in listing mode for anonymous ; Show in view mode for Clerk :
+{{{
+    <hide modes="listing" roles="bungeni.Anonymous" />
+    <show modes="view" roles="bungeni.Clerk" />
+}}}
+
+ * Hide in ALL modes for anonymous ; Show in view mode for Clerk :
+{{{
+    <hide roles="bungeni.Anonymous" />
+    <show modes="view" roles="bungeni.Clerk" />
+}}}
+
+ * Hide in ALL modes for anonymous ; Show in view mode for Clerk :
+{{{
+    <hide roles="bungeni.Anonymous" />
+    <show modes="view" roles="bungeni.Clerk" />
+}}}
+
+ * This is INCORRECT - it states hide in ALL modes for MP, but show in Edit for all Roles :
+{{{
+    <hide roles="bungeni.MP" />
+    <show modes="edit" />
+}}} 
+This is like stating :
+{{{
+    <hide modes="view edit add listing" roles="bungeni.MP" />
+    <show modes="edit" />
+}}} 
+
+ * This is INCORRECT - it states hide in ALL modes for MP, but show in Edit for all Roles :
+{{{
+    <hide roles="bungeni.MP" />
+    <show roles="bungeni.Clerk" />
+}}}
+This is like stating :
+{{{
+    <hide modes="view edit add listing" roles="bungeni.MP" />
+    <show modes="view edit add listing" roles="bungeni.Clerk" />
+}}} 
+
+
 == Restoring ui.xml == 
 
 It is good practice to make a backup copy of ui.xml whenever you edit it.
@@ -262,4 +316,3 @@ However, you can also regenerate ui.xml to its original state by running :
 }}}
 
 from the buildout folder. This will regenerate the ui.xml from the source code definition of the forms.
-
