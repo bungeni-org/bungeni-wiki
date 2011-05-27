@@ -13,18 +13,18 @@ Currently workspaces are hard-wired to user roles. There are IXXXWOrkspace inter
 
 This is clumsy because when you add a new role, it requires adding all the IXXXWorskpace interface machinery into the code and also requires setting all the mappings in python code.
 
-A workspace system that does not require editing source code whenever a new workspace is required to be added is neccessary.
+A workspace system that does not require editing source code whenever a new role is required to be added is neccessary.
 
 = Proposed Solution =
 
-Every logged in user shall get a workspace with 4 tabs
+Every logged in user shall get a workspace with 5 tabs
   # drafts - items that the user is currently working on
   # inbox - items that require the users immediate attention
   # sent - items that the user previously worked on and that no longer require the users attention
   # archive - the documents that the user was directly involved in the workflow for, but which have now reached the end of life-cycle
   # all documents -- the documents that may be assigned to the user role directly, but the user may not be involved in their workflow.
 
-It should be easy to additional tabs via configuration.
+Every possible document state is covered by the tabs above, any other tabs will be searches.
 In addition to this, a user shall be able to create and save custom filters by creating search based tags.
 
 == Main tabs ==
@@ -64,12 +64,12 @@ The following rules apply to the use of roles in the workspace definition :
    }}}
 
 Notes 
-  * for point 4 above, perhaps its good to check permissions in the workspace listings.
+  * The listings will check that the user has zope.View permission on an item
   * where are the available tabs themselves defined in the system ?
 
 == Multiple Workspaces == 
 
-Some users like ministers may have both the MP role and the Minister role. Will they get multiple workspaces ?
+Some users like ministers may have both the MP role and the Minister role. Will they get multiple workspaces ? Miano: No, They will get one workspace and all the documents they have access to will appear there
 
 == Filters ==
 
