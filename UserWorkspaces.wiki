@@ -1,48 +1,102 @@
 #summary Proposed implementation of user workspaces in Bungeni
 
+<wiki:toc max_depth="4" />
+
 = Introduction =
 
 This document contains a description of workspaces and a proposed scheme of implementing them. 
-
 A workspace is a section of Bungeni where authenticated users see the progress of their parliamentary documents.
 
-
 = Problem Description =
+
+Currently workspaces are hard-wired to user roles. There are IXXXWOrkspace interfaces mapped to specific roles in the system, and then documents are mapped to the the workspace tabs via the tag->state mapping mechanism.
+
+This is clumsy because when you add a new role, it requires adding all the IXXXWorskpace interface machinery into the code and also requires setting all the mappings in python code.
+
+A workspace system that does not require editing source code whenever a new workspace is required to be added is neccessary.
+
+= Proposed Solution =
 
 Every logged in user shall get a workspace with 4 tabs
   # drafts - items that the user is currently working on
   # inbox - items that require the users immediate attention
   # sent - items that the user previously worked on and that no longer require the users attention
-  # archive - all other items in the current parliament that the user has permission to access
+  # archive - the documents that the user was directly involved in the workflow for, but which have now reached the end of life-cycle
+  # all documents -- the documents that may be assigned to the user role directly, but the user may not be involved in their workflow.
 
-In addition to this, a user shall be able to create and save custom filters.
-
-= Proposed Solution =
-
-While a scheme that infers the tab a document goes into based on the information given in the roles attribute of the transition tag of the workflows was explored, it was decided that the more explicit method below was better.
+It should be easy to additional tabs via configuration.
+In addition to this, a user shall be able to create and save custom filters by creating search based tags.
 
 == Main tabs ==
 
-Ever state in the workflow of every document will specify which tab the document should be displayed in that state. A new tag `<workspace>` will be used for this purpose. For example
+Ever state in the workflow of every document will need to specify which tab the document should be displayed in that state. 
+
+A new tag `<workspace>` will be used for this purpose. For example
 
 {{{
 <state id="first_reading_adjourned" title="First Reading Adjourned" like_state="gazetted">
     <workspace>
-          <draft roles=""/>
-          <inbox roles="bungeni.Clerk bungeni.Speaker"/>
-          <sent roles="bungeni.Owner"/>
-          <archived roles=""/>
+          <tab name="inbox" roles="..."/>
+          <tab name="sent" roles="bungeni.Clerk bungeni.Speaker"/>
+          <tab name="draft" roles="bungeni.Owner"/>
+          <tab name="...." roles="..."/>
     </workspace>
 </state>
 }}}
 
-In the above example `<draft/>` and `<archived/>` may be left out since they do not apply for that state.
+In the above example `tab/@name=draft` and `tab/@name=sent` may be left out since they may not apply for that state.
 
-A role may only appear once in the whole workspace definition ie. the same document may not be appear in more than one tab. An exception shall be raised if this happens.
+The following rules apply to the use of roles in the workspace definition :
 
-Having the workspace tag in the workflow definitions reduces the chances of the admin denying a role a permission to view a document while specifying a tab for the document to appear in. An exception shall be raised if this happens.
+ # A role may only appear once in the whole workspace definition ie. the same document  cannot appear in more than one tab. 
+ # An exception shall be raised if this happens.
+ # the `@like_state` attribute inherits only `grant` and `deny`, not workspace definitions
+ # if a role is denied permission to view a document while being specified in a tab for the document to appear in, An exception shall be raised -e.g.:
+   {{{
+    <state ...>
+       <workspace>
+         ...
+         <tab name="inbox" roles="bungeni.Clerk" />
+       </workspace>
+    
+       <deny permission="zope.View" role="bungeni.Clerk" />
+    </state>
+   }}}
+
+Notes 
+  * for point 4 above, perhaps its good to check permissions in the workspace listings.
+  * where are the available tabs themselves defined in the system ?
+
+== Multiple Workspaces == 
+
+Some users like ministers may have both the MP role and the Minister role. Will they get multiple workspaces ?
 
 == Filters ==
 
 Users will have the oppurtunity to add new tabs that will essentially be saved xapian searches.
 TODO : EXPAND
+
+== Alternate Syntax == 
+
+Alternative syntax suggestions proposed were to define the workspace within the workflow root element rather than individually within every state.
+Same rules as described above would apply.
+{{{
+<workflow....>
+<workspace role="bungeni.Clerk" >
+  <tab name="draft" states="draft working_draft ..." />
+  <tab name="inbox" states="recieved require_response ..." />
+   .....
+</workspace>
+
+<workspace role="bungeni.MP" >
+   ...
+</workspace>
+
+<state id="draft" ...>
+</state>
+...
+
+<transition ...>
+
+</transition>
+}}}
