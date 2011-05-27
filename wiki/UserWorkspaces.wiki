@@ -69,7 +69,9 @@ Notes
 
 == Multiple Workspaces == 
 
-Some users like ministers may have both the MP role and the Minister role. Will they get multiple workspaces ? Miano: No, They will get one workspace and all the documents they have access to will appear there
+Some users like ministers may have both the MP role and the Minister role. In the current way - the system presents 2 workspaces - however, this is done because the tabs shown to the 2 roles were varying. 
+
+With the proposed solution -- only 1 workspace will be shown -- with the documents in the tabs appearing on the basis of them satisfying the rules for  *either* role.
 
 == Filters ==
 
