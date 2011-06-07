@@ -38,50 +38,39 @@ fab -H <host-name-or-ip> plone_install config_ini:plone
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
 == Configure the Installation == 
-Log in as the admin user into plone. The default password is 'admin'
+Log in as the admin user into plone. The default username and password is 'ploneadmin'
 
 === Create a plone site === 
 
-In the Zope ZMI create a new plone site called "plone"
+In the Zope ZMI create a new plone site.
+Enter "plone" as the value of the path identifier and the title of the site.
+
+Under the add ons section select the following products:
+ * Bungeni CMS Workspaces
+ * Bungeni CMS policy
+ * Bungeni CMS theme
+ * BungeniHelpCenter
+ * PloneHelpCenter
 
 Click on site-setup -> Add on products.
  
- * Bungeni CMS Policy and click install.
- * Bungeni CMS theme, and click install.
- * do the same for BungeniHelpCenter, plonegalleryview, Plone second level navbar,TinyMCE, Collage, collective.collage.easyslider, collective.collage.portlets,RSS Dynamic document, RSS Listing and LinguaPlone.
+ * LinguaPlone and click activate.
 
-Click on site-setup -> Language.
-
- * Select a default site language - This is usually english.
- * Under the section "Available languages" select any other languages you wish to use in your Plone site.
-
-
-
-=== Create a cynin site === 
-
-In the Zope ZMI create a new plone site called "cynin"
-
-Click on site-setup -> Install the following add on products.
-
- * Bungeni CMS Policy;
- * Ubify Site policy;
- * Bungeni Cynin theme;
- * workspaces profile;
 
 == Import demo structure ==
 
- * Once the buildout is complete there will be an 'import' folder on the filesystem found in the '/parts/instance/' folder (relative to the root of the plone directory).
+ * Once the buildout is complete there will be an 'import' folder on the filesystem found in the root plone folder.
 
  * Copy and unzip the contents of [http://dist.bungeni.org/plone/import/import-0.1.tar.gz http://dist.bungeni.org/plone/import/import-0.1.tar.gz] into that folder
 
- * Run the python script 'import_data' in the root plone directory (using the plone python). Before running the script, edit the file appropriately and put in the necessary values for username, password (admin, admin) and the plone site that you want to import to.
+ * Run the python script 'import_data' in the root plone directory (using the plone python). Before running the script, edit the file appropriately and put in the necessary values for username, password (ploneadmin, ploneadmin) and the plone site that you want to import to.
 
 
 == Updating a Plone installation ==
 
 It is standard procedure to re-install a product when any changes have been made to it.
 This done in the zmi->portal_setup. Import the profile of the product that has changed.
-Or alternativley use the zmi-portal_quickinstaller to reinstall said product.
+Or alternatively use the zmi-portal_quickinstaller to reinstall said product.
 
 
 == Folder Structure == 
@@ -106,8 +95,9 @@ Plone gets installed within the Bungeni folder
 |   |-- develop-eggs
 |   |-- downloads
 |   |-- eggs
-|   |-- etc
+|   |-- import
 |   |-- parts
+|   |-- Products
 |   |-- src
 |   `-- var
 |-- src
