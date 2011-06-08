@@ -9,27 +9,32 @@ with the aim of enhancing source code *read*-ability, *grep*-ability and *print*
 
 However, if conforming to these source style recommendations 
 reduces any of the above code qualities in any way then conformance 
-*should not* be adhered to -- use your good judgement instead.
+*should not* be adhered to -- use your own good judgement instead.
 
 ----
 
-== General - All Formats ==
+
+== All Formats ==
 
 Guidelines that apply to all project source code, irrespective of format e.g.
 `.py`, `.xml`, `.zcml`, `.js`, `.css`, etc. 
+
 
 === Editing tools ===
 
 Only tools that do *not automatically modify* source code format in any way may be used! 
 
-This means you *may not* use any tool that does _any kind of source reformatting_. As an example, you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace as well may change the order of an XML element's attributes. In general, what you want to have is a good text editor.
+This means you *may not* use any tool that does _any kind of source reformatting_. As an example, you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace or even change the order of an XML element's attributes. In general, what you want to have is a *good text editor* that respects your text source.
 
 
-=== Indentation and line length ===
+=== Line length, indentation, continuation lines ===
 
-Use 4 spaces per indentation level.
-
-Limit all lines to a maximum of 79 characters. 
+ * Limit all lines to a maximum of 79 characters. 
+ * Use *4 spaces* per _indentation level_, and  *1 indentation level* per _logical depth level_.
+ * Continuation lines should be indented as per their nesting level i.e. 4 spaces per depth level implied by an open parenthesis, brace, bracket or any other way.
+ * The closing parenthesis, brace or bracket of a continuation line should be directly below the beginning of the opening symbol.
+ * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
+ * Always specify the most _key_ of parameters on the opening line.
 
 
 === Quote characters ===
@@ -37,20 +42,22 @@ Limit all lines to a maximum of 79 characters.
 Prefer the double-quote `"` instead of the single-quote `'` character, whenever you have the choice.
 
 
-=== Consistence of attribute/parameter order ===
+=== Consistency across languages, order of attributes/parameters ===
 
-In some languages the order or parameters is (sometimes) relevant e.g. in python, but in other languages such an order is not relevant e.g. attributes in XML. Whenever an equivalent list of attributes or parameters are present (be it as a list of XML attributes, or as the signature of a python callable) then the order should be consistent between the two languages. 
+It is very common for a project to may make use of more than one language, and in many cases there are clear references of for constructs of one language from an other e.g. an XML definition of a python construct.
+
+In some languages the order or parameters is (sometimes) relevant e.g. in python, but in other languages such an order is not relevant e.g. attributes in XML. Whenever an equivalent list of attributes or parameters are present (be it as a list of XML attributes, or as the signature of a python callable) then the order should be consistent between the two languages.
 
 For the cases when there is such an order to respect, the order should be clearly commented in appropriate places in the source itself.
 
 
 === _Revisit_ Comments ===
 
-Use _Revisit_ comments for code that is temporary, a short-term solution to be reworked, or for code on which there is still questions to be resolved or understood.
+Use _Revisit_ comments for code that is temporary, a short-term solution to be reworked, or for code on which there is still questions to be resolved or understood. Multiple related _Revisit_ comments (that use same _label_) may be used across the project source, and across different languages.
 
 A _Revisit_ comments should have a: 
  * `!+` : must explicitly start with these 2 characters
- * _label_ : for easier grepping, and to be able to relate multiple comments in different places (by giving them the same label)
+ * _label_ : for easier grepping, and to be able to relate multiple comments across the project source (even in different languages)
  * _author identifier_ : so others know who to follow-up with if needed
  * _date_ : so it is easier to judge relevance and status at a later time
  * _description_ : should also indicate what conditions/events would render the comment obsolete.
@@ -61,32 +68,34 @@ These pieces of information should be formatted in the following way:
 {{{
     !+LABEL(author, date) description...
 }}}
-And should be specified in a comment as per the source format i.e. any of python, XML, doctest text files, HTML templates, css, js, etc. 
+and should be specified in a comment as per the source format i.e. any of python, XML, doctest text files, HTML templates, css, js, etc. 
 
-As example, here are 2 related _revisit_ comments in different ZCML files:
+As example, here are 2 related _revisit_ comments in different files:
 
+`models/interfaces.py`
+{{{
+''' !+DATERANGEFILTER(mr, dec-2010) disabled until intention is understood
+class IDateRangeFilter(interface.Interface):
+    """Adapts a model container instance and a SQLAlchemy query
+    object, applies a date range filter and returns a query.
+
+    Parameters: ``start_date``, ``end_date``.
+
+    These must be bound before the query is executed.
+    """
+'''
+}}}
 `models/configure.zcml`
 {{{
-<!-- !+CONSTITUENCY-Issue666(mr, 23-Jul-2010)
-why is the include="domain.zcml" above commented?
--->
-}}}
-`models/permissions.zcml`
-{{{
-<!-- !+CONSTITUENCY-Issue666(mr, 23-Jul-2010)
-The grant below is a temporary workaround to the problem that,
-when NOT logged in, clicking on a consituency (below archive/ )
-to view it would result in the following error:
-
-<class 'zope.security.interfaces.Unauthorized'>:
-(<zope.app.publisher.browser.viewmeta.DisplayForm object at 0xb717c8c>, 'browserDefault', 'zope.View')
-
-For some reason, this is not needed for any other object -:- this should
-be removed when it is understood why bungeni.Anybody does not get
-zope.View on domain.Constituency type, as for other anonymously visible
-domain types.
--->
-<grant permission="bungeni.constituency.View" role="bungeni.Anybody" />
+    <!-- !+DATERANGEFILTER(mr, dec-2010)
+    <adapter for=".domain.Bill"
+        provides=".interfaces.IDateRangeFilter"
+        factory=".daterange.bill_filter" 
+    />
+    
+    ...
+    
+    -->
 }}}
 
 
@@ -102,27 +111,12 @@ where :
  # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated subtypes).
  # _Action_ is a *verb* indicating the the target action (capitalized). 
 
-==== Workflows: States and Transitions ====
-
-Workflow state/transition names:
- # State name should be a lowercase *adverb* (more or less) that describes the _condition_ an object is in, given the transition trail of the object.
- # Transition name should be a lowercase *verb*.
- # State/Transition multiple-word names are `_` (underscore) separated--in particular the `-` (hyphen) should *not* be used as separator as this character, besides being invalid as part of a python name, has special meaning within `ore.workflow`.
- # A bungeni _role_ name should *never* be part of a state/transition name.
- # A state and a transition within a same workflow should never have a same name--because in an XML document all element IDs should be unique, and Bungeni defines each workflow as one XML document (containing `<state>` and `<transition>` elements where the `id` attribute of each is respectively the state and transition name). 
- 
-Additionally, each individual workflow transition (*except* for _Create_ transition actions) must have a *dedicated* permission, that is named as follows:
-{{{
-    bungeni.{object}.wf.{transition}
-}}}
-The _Create_ class of transitions is an exception to this rule because such transitions have an _automatic_ trigger resulting from the act of creating the object, that presumably is already access-controlled with a `bungeni.{object}.Add` type permission. Because of this, all _Create_ transitions must have *no permission specified*.
-
 
 ----
 
 == Python ==
 
-All Bungeni python source code should follow these style rules. 
+In addition to style guidelines for _All Formats_ above, all Bungeni python source code should also follow additional python-specific style rules. 
 
 For any styling issue not explicitly specified here, heed the recommendations 
 of the following Python Style Guides: 
@@ -177,12 +171,10 @@ Always delineate embedded code with triple double-quote chars `"""` -- even if t
 
 === Multi-line parameter lists, literal lists and objects ===
 
- * The closing parenthesis, brace or bracket should be directly below the beginning of the opening symbol.
- * Continuation lines should be indented as per their nesting level i.e. 4 spaces per depth level implied by an open parenthesis, brace, bracket or any other way.
- * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
- * Always include the most _key_ of parameters on the opening line.
+The exact same _Line length, indentation, continuation lines_ style rules for all formats, above, are the rules to apply here, with the one essential rule to always remember is that of *one indentation level per logical nesting level*. 
 
-Some examples: 
+Some examples:
+
 {{{
     columns = [
         rdb.Column("version_id", rdb.Integer, primary_key=True),
@@ -220,6 +212,34 @@ mapper(domain.QuestionVersion, schema.question_versions,
 )
 }}}
 
+Same rules apply for multi-line block-opening statements:
+
+{{{
+    def __init__(self,
+            # resolvable python callable
+            condition="owner_receive_notification",
+            # i18n, template source
+            subject="${item.class_name} ${item.status}: ${item.short_name}", 
+            # template source 
+            from_="${site.clerk_email}",
+            # template source 
+            to="${item.owner_email}",
+            # i18n, template source
+            body="${item.class_name} ${item.status}: ${item.short_name}",
+            # documentational note
+            note=None
+        ):
+}}}
+
+{{{
+    if (IAlchemistContent.providedBy(context) and
+            IDCDescriptiveProperties.providedBy(context) and
+            ILocation.providedBy(context)
+        ):
+        title = context.title
+}}}
+
+
 === Multiple forms for same -- adopt and use one ===
 
 ==== Comparison operators ====
@@ -233,10 +253,12 @@ Always use `!=` and not `<>` (that is equivalent).
 
 === Blank lines ===
 
-No blank lines -- only use a single blank line between elements on the uncommon occasion when those elements are completely unrelated to each other.
+No blank lines -- only use a single blank line between elements on the infrequent occasion when those elements are completely unrelated to each other.
 
 
 === Multi-line elements ===
+
+Again, the same _Line length, indentation, continuation lines_ style rules for all formats, above, are the rules to apply here.
 
 Empty XML elements should have the `/>` ending:
  * either on same single line as the opening tag
