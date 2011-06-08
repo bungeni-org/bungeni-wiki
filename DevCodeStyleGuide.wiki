@@ -19,12 +19,7 @@ reduces any of the above code qualities in any way then conformance
 Guidelines that apply to all project source code, irrespective of format e.g.
 `.py`, `.xml`, `.zcml`, `.js`, `.css`, etc. 
 
-
-=== Editing tools ===
-
-Only tools that do *not automatically modify* source code format in any way may be used! 
-
-This means you *may not* use any tool that does _any kind of source reformatting_. As an example, you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace or even change the order of an XML element's attributes. In general, what you want to have is a *good text editor* that respects your text source.
+Only use *editing tools* that do *not automatically modify* source code format in any way! This means you *may not* use any tool that does _any kind of source reformatting_ e.g. you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace or even change the order of an XML element's attributes. In general, what you want to have is a *good text editor* that respects your text source.
 
 
 === Line length, indentation, continuation lines ===
@@ -55,6 +50,8 @@ For the cases when there is such an order to respect, the order should be clearl
 
 Use _Revisit_ comments for code that is temporary, a short-term solution to be reworked, or for code on which there is still questions to be resolved or understood. Multiple related _Revisit_ comments (that use same _label_) may be used across the project source, and across different languages.
 
+Note that authoring a _revisit_ comment is *not* a commitment to revisit it yourself. 
+
 A _Revisit_ comments should have a: 
  * `!+` : must explicitly start with these 2 characters
  * _label_ : for easier grepping, and to be able to relate multiple comments across the project source (even in different languages)
@@ -62,8 +59,6 @@ A _Revisit_ comments should have a:
  * _date_ : so it is easier to judge relevance and status at a later time
  * _description_ : should also indicate what conditions/events would render the comment obsolete.
  
-Authoring a _revisit_ comment is *not* a commitment to revisit it yourself. 
-
 These pieces of information should be formatted in the following way:
 {{{
     !+LABEL(author, date) description...
@@ -116,7 +111,7 @@ where :
 
 == Python ==
 
-In addition to style guidelines for _All Formats_ above, all Bungeni python source code should also follow additional python-specific style rules. 
+In addition to style guidelines for _[#All_Formats All Formats]_ above, all Bungeni python source code should also follow additional python-specific style rules.
 
 For any styling issue not explicitly specified here, heed the recommendations 
 of the following Python Style Guides: 
@@ -171,7 +166,7 @@ Always delineate embedded code with triple double-quote chars `"""` -- even if t
 
 === Multi-line parameter lists, literal lists and objects ===
 
-The exact same _Line length, indentation, continuation lines_ style rules for all formats, above, are the rules to apply here, with the one essential rule to always remember is that of *one indentation level per logical nesting level*. 
+The exact same _[#Line_length,_indentation,_continuation_lines Line length, indentation, continuation lines]_ style rules for all formats, above, are the rules to apply here, with the one essential rule to always remember is that of *one indentation level per logical nesting level*. 
 
 Some examples:
 
@@ -229,6 +224,8 @@ Same rules apply for multi-line block-opening statements:
             # documentational note
             note=None
         ):
+        self.condition = capi.get_workflow_condition(condition)
+        ...
 }}}
 
 {{{
@@ -258,7 +255,7 @@ No blank lines -- only use a single blank line between elements on the infrequen
 
 === Multi-line elements ===
 
-Again, the same _Line length, indentation, continuation lines_ style rules for all formats, above, are the rules to apply here.
+Again, the same _[#Line_length,_indentation,_continuation_lines Line length, indentation, continuation lines]_ style rules for all formats, above, are the rules to apply here.
 
 Empty XML elements should have the `/>` ending:
  * either on same single line as the opening tag
