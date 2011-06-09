@@ -5,7 +5,7 @@
 
 = Introduction =
 
-Bungeni forms and listings can be customized using an xml configuration file. This page documents how to customize the listings
+Bungeni forms and listings can be customized using an xml configuration file, and this page documents how to do precisely this.
 
 = forms/ui.xml =
 
@@ -22,7 +22,7 @@ All the information in ui.xml is contained within the `<ui>` element.
 </ui>
 }}}
 
-The `<ui>` element specifies an `@roles` attribute that defines the list of roles that may participate in the localization. The value of `ui/@roles` may be modified as needed e.g. to add other roles that you may have defined in yor deployment. An additional function of `ui/@roles` is that it also serves as the default value for all unspecified `@roles` attributes on other elements in the same XML document--those that support a `@roles` attribute of course e.g. the `<show>` and `<hide>` elements.
+The `<ui>` element specifies an `@roles` attribute that defines the list of roles that may participate in the localization. The value of `ui/@roles` may be modified as needed e.g. to add other roles that you may have defined in your deployment. An additional function of `ui/@roles` is that it also serves as the default value for all unspecified `@roles` attributes on other elements in the same XML document--those that support a `@roles` attribute of course i.e.. the `<show>` and `<hide>` elements.
 
 
 == Forms == 
@@ -31,7 +31,7 @@ Forms in Bungeni are used to add, view, edit or list Bungeni content. In `ui.xml
 
 {{{
 <ui roles="bungeni.Clerk bungeni.Speaker bungeni.MP bungeni.Minister bungeni.Anonymous">
-
+    ...
     <descriptor name="AgendaItem">
         <field name="parliament_id" displayable="view listing" localizable="view listing">
             <hide modes="view listing" />
@@ -45,13 +45,12 @@ Forms in Bungeni are used to add, view, edit or list Bungeni content. In `ui.xml
         </field>
         ...
     </descriptor>
-
+    ...
 </ui>
 
 }}}
 
-A Form specification in bungeni is called a *descriptor*, and is defined as a `<descriptor>` element.
-The `descriptor/@name` attribute identifies the name of the Form.
+A Form specification in bungeni is called a *descriptor*, and its localization is specified via a `<descriptor>` element. The `descriptor/@name` attribute identifies the name of the Form.
 
 
 == Form Modes == 
@@ -105,28 +104,28 @@ The behavior of form fields is controllable via a combination of roles and [#For
 
 The `<field>` element has the following *information-only* attributes i.e. *you are NOT allowed to change the values of these attributes*:
 
- * *name* - the `field/@name' attribute identifies the name of the field. *You are not allowed to change the name of the field*:
+ * *name* - the `field/@name' attribute identifies the name of the field:
 {{{
         <field name="short_name" ... />
 }}}
- * *displayable* - the `field/@displayable` attribute identifies in which [#Form_Modes modes] the field *MAY* be displayable i.e. the internal Bungeni system logic may display this field in this mode.
- * *localizable* - the `field/@localizable` attribute identifies the actual modes in which [#Form_Modes modes] the field *CAN* be localizable i.e. you may control for whom this field should be made to appear in this mode. The list of localizable modes is necessarily always a sub-set of modes listed in `field/@displayable`. 
+ * *displayable* - the `field/@displayable` attribute identifies in which [#Form_Modes modes] the field *may* be displayed i.e. subject to internal Bungeni system logic (e.g. user has the required permission, the field is validly set, etc) this field may be displayed in this mode.
+ * *localizable* - the `field/@localizable` attribute identifies the actual modes in which [#Form_Modes modes] the (displayable) field *may* be localizable i.e. you may control for whom this field should be made to appear in this mode. The list of localizable modes is necessarily always a sub-set of those listed in `field/@displayable`. 
 
 Let us explain the difference between `field/@displayable` and `field/@localizable` using an example:
 
-The following states that the `registry_number` field *MAY* appear in "view edit listing" modes; and it *CAN* be localized also in "view edit listing" modes.
+The following states that the `registry_number` field *may* appear in "view edit listing" modes; and additionally it *can* also be localized in "view edit listing" modes.
 {{{
         <field name="registry_number" 
-            displayable="view edit listing"  <<-- modes that MAY be localized
-            localizable="view edit listing"  <<-- modes that CAN be localized
+            displayable="view edit listing"  <<-- modes in which field MAY be displayed
+            localizable="view edit listing"  <<-- modes in which displayable field CAN be localized
         >
 }}}
 
-The following states that the `registry_number` field *MAY* appear in "view edit listing" modes; but it *CAN* be localized *only* in "view" mode.
+The following states that the `registry_number` field *may* appear in "view edit listing" modes; but additionally it *can* pnly be localized in "view" mode.
 {{{
         <field name="registry_number" 
-            displayable="view edit listing" <<-- modes that MAY be localized
-            localizable="view"              <<-- modes that CAN be localized
+            displayable="view edit listing" <<-- modes in which field MAY be displayed
+            localizable="view"              <<-- modes in which displayable field CAN be localized
         >
 }}}
 
@@ -136,7 +135,7 @@ The following states that the `registry_number` field *MAY* appear in "view edit
 Fields are customized using `<show>` and `<hide>` specified within a `<field>` element.
 These (in addition to field _order_) are the *ONLY* part of the Forms xml configuration which is editable by the user.
 
-`<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles, and `<hide>` hides the field for the listed modes and roles.
+`<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles, and `<hide>` hides the field for the listed modes and roles. A field may specify as many `<show>` and/or `<hide>` directives as it needs.
 
 Both these elements have the following attributes that allow customization of the field behavior:
 
@@ -165,7 +164,7 @@ The following hides the `owner_id` field in "listing" mode for the "bungeni.Anon
         </field>
 }}}
 
-The following is incorrect, because "listing" appears in more than one `<show>` or `<hide>` directives.
+The following is *incorrect*, because "listing" appears in more than one `<show>` or `<hide>` directives.
 {{{
         <field name="owner_id" displayable="view edit add listing" localizable="view listing">
             <hide modes="listing" roles="bungeni.Anonymous" />
@@ -230,7 +229,7 @@ The registry_number field was moved up to be the first field on the form --
 
 Henceforth, the `registry_number` field (if at all displayed) is always displayed first on the form.
 
-== Examples of show/hide combinations == 
+== More examples of show/hide combinations == 
 
 For a field described like this:
 
@@ -249,19 +248,19 @@ The following are some examples of show/hide combinations for the above field:
     <show modes="view" roles="bungeni.Clerk" />
 }}}
 
- * This is INCORRECT and will trigger a `BungeniCustomError` - it states to show in `edit` mode to the Clerk, but that mode is not localizable here:
+ * This is *incorrect* and will trigger a `BungeniCustomError` - it states to show in `edit` mode to the Clerk, but that mode is not localizable here:
 {{{
     <hide modes="listing" roles="bungeni.Anonymous" />
     <show modes="view edit" roles="bungeni.Clerk" />
 }}}
 
- * This is INCORRECT and will trigger a `BungeniCustomError` - it states hide in ALL modes (inlcuding `view`) for Anonymous, but it also states to show in `view` mode (thus, repeats this mode that is not allowed) for the Clerk:
+ * This is *incorrect* and will trigger a `BungeniCustomError` - it states hide in ALL modes (inlcuding `view`) for Anonymous, but it also states to show in `view` mode (thus, repeats this mode that is not allowed) for the Clerk:
 {{{
     <hide roles="bungeni.Anonymous" />
     <show modes="view" roles="bungeni.Clerk" />
 }}}
 
- * This is INCORRECT and will trigger a `BungeniCustomError` - it states hide in ALL modes (here `view listing`) for the MP, but show in `listing` mode (thus, repeats this mode that is not allowed) for all Roles:
+ * This is *incorrect* and will trigger a `BungeniCustomError` - it states hide in ALL modes (here `view listing`) for the MP, but show in `listing` mode (thus, repeats this mode that is not allowed) for all Roles:
    {{{
     <hide roles="bungeni.MP" />
     <show modes="listing" />
@@ -272,7 +271,7 @@ The following are some examples of show/hide combinations for the above field:
     <show modes="listing" roles="bungeni.Clerk bungeni.Speaker bungeni.MP bungeni.Minister bungeni.Anonymous" />
    }}} 
 
- * This is INCORRECT - it states hide in ALL modes for MP (here `view listing`), but also show in ALL modes (thus, repeated modes) for all Roles:
+ * This is *incorrect* - it states hide in ALL modes for MP (here `view listing`), but also show in ALL modes (thus, repeated modes) for all Roles:
    {{{
     <hide roles="bungeni.MP" />
     <show roles="bungeni.Clerk" />

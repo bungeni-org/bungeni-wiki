@@ -17,7 +17,8 @@ reduces any of the above code qualities in any way then conformance
 == All Formats ==
 
 Guidelines that apply to all project source code, irrespective of format e.g.
-`.py`, `.xml`, `.zcml`, `.js`, `.css`, etc. 
+`.py`, `.xml`, `.zcml`, `.js`, `.css`, etc, 
+even if focus here is primarily on python and XML. 
 
 Only use *editing tools* that do *not automatically modify* source code format in any way! This means you *may not* use any tool that does _any kind of source reformatting_ e.g. you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace or even change the order of an XML element's attributes. In general, what you want to have is a *good text editor* that respects your text source.
 
@@ -27,9 +28,9 @@ Only use *editing tools* that do *not automatically modify* source code format i
  * Limit all lines to a maximum of 79 characters. 
  * Use *4 spaces* per _indentation level_, and  *1 indentation level* per _logical depth level_.
  * Continuation lines should be indented as per their nesting level i.e. 4 spaces per depth level implied by an open parenthesis, brace, bracket or any other way.
- * The closing parenthesis, brace or bracket of a continuation line should be directly below the beginning of the opening symbol.
+ * The closing _thingy_ (e.g. parenthesis, brace, bracket, tag) of a continuation line should be directly below the beginning of the opening symbol.
  * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
- * Always specify the most _key_ of parameters on the opening line.
+ * Always specify the most _key_ of parameters on the opening line (for long collection-like code segments).
 
 
 === Quote characters ===
@@ -39,7 +40,7 @@ Prefer the double-quote `"` instead of the single-quote `'` character, whenever 
 
 === Consistency across languages, order of attributes/parameters ===
 
-It is very common for a project to may make use of more than one language, and in many cases there are clear references of for constructs of one language from an other e.g. an XML definition of a python construct.
+It is very common for a project to make use of more than one language, and in many cases there are clear references to constructs of one language from an other e.g. an XML definition of a python construct.
 
 In some languages the order or parameters is (sometimes) relevant e.g. in python, but in other languages such an order is not relevant e.g. attributes in XML. Whenever an equivalent list of attributes or parameters are present (be it as a list of XML attributes, or as the signature of a python callable) then the order should be consistent between the two languages.
 
@@ -87,9 +88,7 @@ class IDateRangeFilter(interface.Interface):
         provides=".interfaces.IDateRangeFilter"
         factory=".daterange.bill_filter" 
     />
-    
     ...
-    
     -->
 }}}
 
@@ -104,7 +103,7 @@ All permission names should have the form:
 }}}
 where :
  # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated subtypes).
- # _Action_ is a *verb* indicating the the target action (capitalized). 
+ # _Action_ is a *verb* indicating the permitted target action (capitalized). 
 
 
 ----
@@ -166,7 +165,7 @@ Always delineate embedded code with triple double-quote chars `"""` -- even if t
 
 === Multi-line parameter lists, literal lists and objects ===
 
-The exact same _[#Line_length,_indentation,_continuation_lines Line length, indentation, continuation lines]_ style rules for all formats, above, are the rules to apply here, with the one essential rule to always remember is that of *one indentation level per logical nesting level*. 
+The exact same _[#Line_length,_indentation,_continuation_lines Line length, indentation, continuation lines]_ style rules for all formats, above, are the rules to apply here, with the _one essential rule_ to always remember being *one indentation level per logical nesting level*. 
 
 Some examples:
 
@@ -250,7 +249,7 @@ Always use `!=` and not `<>` (that is equivalent).
 
 === Blank lines ===
 
-No blank lines -- only use a single blank line between elements on the infrequent occasion when those elements are completely unrelated to each other.
+If you must, use blank line *sparingly* -- only use a single blank line between elements on the infrequent occasion when those elements are completely unrelated to each other.
 
 
 === Multi-line elements ===
