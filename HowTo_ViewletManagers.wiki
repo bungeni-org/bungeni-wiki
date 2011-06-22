@@ -1,5 +1,7 @@
 #summary About viewlet managers
 
+!+OUTOFDATE(mr, jun-2011)
+
 The viewlet managers are:
 
  * version.manager in ui/version.zcml based on .version.VersionViewletManager
@@ -9,7 +11,7 @@ The viewlet managers are:
  * bungeni.workspace-archive in ui/viewlets/workspace.zcml based on zope.viewlet.manager.WeightOrderedViewletManager
 
 For 'version.manager' there is no 'version.py' module and it does not 
-include 'version.zcml' in any zcml file.
+include (the now deleted, circa r8360) 'version.zcml' in any zcml file.
 
 'bungeni.scheduling', 'bungeni.workspace, 'bungeni.workspace-archive' are based
 on standard viewlet manager.
