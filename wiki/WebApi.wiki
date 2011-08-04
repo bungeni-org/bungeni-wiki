@@ -1,0 +1,93 @@
+#summary Web API
+#sidebar TableOfContents
+
+= Web Application Programming Interface (API) for Bungeni =
+
+A web service to enable other applications to interface with Bungeni data and metadata in a formalized way.  The interface describes a collection of services (resources and corresponding methods) that are accessible over a network.
+
+Applications that can interface with the API:
+
+  * Third party applications that are customized and provided with Bungeni e.g the Plone CMS 
+  * Client third party applications - A client implementing Bungeni may want to integrate its own applications with Bungeni.
+  * Bungeni itself – New views could be developed based on the API services.
+
+The API will provide a unifying interaction model so that such application integration can be done with a common approach and using a common infrastructure. This will reduce tight coupling of Bungeni to other applications. 
+
+==Use Cases for the API==
+
+====User Profile Management====
+(see issue 690)
+A Bungeni user object has several attributes as stored in the users table object:
+
+Table "public.users"
+||         Column       ||          Type           || Modifiers||  
+|| user_id              || integer                 || not null ||
+|| login                || character varying(80)   ||          ||
+|| titles               || character varying(32)   ||          ||
+|| first_name           || character varying(256)  || not null ||
+|| last_name            || character varying(256)  || not null ||
+|| middle_name          || character varying(256)  ||          ||
+|| email                || character varying(512)  || not null ||
+|| gender               || character varying(1)    ||          || 
+|| date_of_birth        || date                    ||          || 
+|| birth_country        || character varying(2)    ||          || 
+|| birth_nationality    || character varying(2)    ||          || 
+|| current_nationality  || character varying(2)    ||          || 
+|| uri                  || character varying(1024) ||          || 
+|| date_of_death        || date                    ||          || 
+|| type_of_id           || character varying(1)    ||          || 
+|| national_id          || character varying(256)  ||          || 
+|| password             || character varying(36)   ||          || 
+|| salt                 || character varying(24)   ||          || 
+|| description          || text                    ||          || 
+|| image                || bytea                   ||          || 
+|| active_p             || character varying(1)    ||          || 
+|| receive_notification || boolean                 ||          ||
+|| language             || character varying(5)    || not null ||
+
+A subset of these attributes make up the user profile and the user is able to modify some aspects of his/her user profile. e.g. current_nationality, password, description, image. 
+
+Actions that a user can take in relation to his/her profile include:
+  * request login reminder;
+  * request password reset;
+  * update profile;
+  * view profile
+
+The API will facilitate the ability of external applications to perform these actions by exposing the user object as a resource as well as methods to retrieve, update (modify or delete where applicable) these user attributes.
+
+==Conceptual Requirements==
+
+The API will expose a set of services (resources and their representations as well as the methods available on each resource). Resources may map to objects or object collections in the Bungeni system. Internal implementation details of the Bungeni application should not leak into the API so as to decouple as much as possible the resource representations from the Bungeni application.
+
+==Design constraints==
+
+===Response Data Formats===
+Each call to the API will result in a response containing data. The data response format should standardize to either json or xml output.This does not constrain from the service providing both or more data formats. Standard HTTP response codes must also be used with each response.
+
+===Inputs and Outputs===
+The API will allow reading and posting of data. This will be determined on a case-by-case review of each service developed for the API. 
+Explicit input/output limitations should be imposed - messages going in or out of the API should be explicitly capped.
+
+=== Service Contract ===
+This will document with examples the different services provided by the API and how to access them. This will include:
+    * The different services and their names;
+    * How each service is invoked;
+    * The signature for each method in a service;
+    * Description of the parameters in a method.
+
+=== Versioning and Deprecation ===
+
+The API may change as new features and services are added to Bungeni. To prevent breakages occurring for clients already using the API and to cater for the addition of new features the API needs to be versioned. 
+
+A deprecation mechanism will be necessary to act as guide for migrating between different versions.
+
+
+=== Authentication ===
+Access to the API will need to be controlled, only authenticated users should be able to request services. A validation mechanism will need to implemented.
+
+
+=== Documentation ===
+Should cover the following:
+  * Definition of all resources, methods and their parameters
+  * Sample request/response data formats for each action in the service
+  * Documentation of error scenarios along with Server side status codes
