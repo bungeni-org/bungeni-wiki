@@ -20,11 +20,4 @@ The recommended way to install the full application stack is to use the fabric i
  * *[HowTo_SupervisorServiceManager How to use the Supervisor Service Manager]*  
  * *[HowTo_MaintainAndUpdateInstallation How to maintain and update a Bungeni installation]*
 
-<font color="red">
-The following are older deprecated instructions - for installing using capistrano -- these are still provided for installations made using the capistrano scripts.
-</font>
- 
- * *[Install_PreRequisites How to setup the Pre-requisites]* 
- * *[Install_Bungeni How to setup Bungeni Parliamentary Information System]* 
- * *[Install_Plone How to setup Plone Content Management System]* 
- * *[Install_DeliverancePortal How to setup Deliverance Portal]* 
+
