@@ -2,6 +2,9 @@
 
 = Bungeni System Configuration, Management and Customization User Interface = 
 
+<wiki:toc max_depth="6" />
+
+
 = Introduction = 
 
 Bungeni provides various ways to configure, customize and manage the application. Presently there are user interfaces for some aspects, and none for others. The objective of this description is to identify the different points of configuration, management and customization of the system.
@@ -174,8 +177,6 @@ Single button to re-index db
 == Vocabularies == 
 
 Vocabularies for different item typologies in bungeni (bill type, question type etc.)
-
-
 
 
 
