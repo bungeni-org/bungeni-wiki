@@ -40,17 +40,6 @@ fab -H localhost bungeni_install config_ini:bungeni config_supervisord
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
-== Setting up translations ==
-Bungeni ships with no translations installed.
-To install languages based on your fabric configuration run this command:
-{{{
-fab -H localhost install_translations
-}}}
-This will will install translations shipped with bungeni sources. Otherwise, to map to translations in your custom folder run:
-{{{
-fab -H localhost install_translations:custom
-}}}
-This command can be run later to reconfigure translations based on new directives in `setup.ini`
 
 = Folder Structure = 
 
