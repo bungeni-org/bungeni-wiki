@@ -26,7 +26,7 @@ Only use *editing tools* that do *not automatically modify* source code format i
 === Line length, indentation, continuation lines ===
 
  * Limit all lines to a maximum of 79 characters. 
- * Use *4 spaces* per _indentation level_, and  *1 indentation level* per _logical depth level_.
+ * Use *4 spaces* per _indentation_ and  *1 indentation* per *logical depth level*.
  * Continuation lines should be indented as per their nesting level i.e. 4 spaces per depth level implied by an open parenthesis, brace, bracket or any other way.
  * The closing _thingy_ (e.g. parenthesis, brace, bracket, tag) of a continuation line should be directly below the beginning of the opening symbol.
  * Only use multiple lines when a single line (of max 79 chars) is not sufficient.
@@ -115,15 +115,15 @@ In addition to style guidelines for _[#All_Formats All Formats]_ above, all Bung
 For any styling issue not explicitly specified here, heed the recommendations 
 of the following Python Style Guides: 
 
- * [http://www.python.org/dev/peps/pep-0008/ PEP 8 - Style Guide for Python Code]<br/>Regarding this one you may find the following tools useful:
+ * [http://www.python.org/dev/peps/pep-0008/ PEP 8 - Style Guide for Python Code] in particular the guidelines concerning _blank lines_, _whitespace_, _comments_, _naming conventions_ and _programming recommendations_.<br/>Regarding this one you may find the following tools useful:
    * [http://pypi.python.org/pypi/pep8/ pep8 checker tool] 
    * [http://pypi.python.org/pypi/PythonTidy/ PythonTidy] 
 
  * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html Google Python Style Guide]<br/>In particular, the recommendations pertaining to:
-   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Imports Imports]
-   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Packages Packages]
-   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Nested/Local/Inner_Classes_and_Functions Nested/Local/Inner Classes and Functions]
-   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Comments Comments]
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Imports Imports]: _for packages and modules only_.
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Packages Packages]: _import each module using the full pathname location of the module_.
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Nested/Local/Inner_Classes_and_Functions Nested/Local/Inner Classes and Functions]: _nested/local/inner classes and functions are fine_.
+   * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Comments Comments]: _use the right style for module, function, method and in-line comments_.
 
 === Quote characters ===
 
@@ -142,18 +142,21 @@ For long string that should not include any additional whitespace as a result
 of pretty source formatting should use the auto-concatenation feature of 
 adjacent strings e.g. (preferably):
 {{{
-    long_string = "some text as part of a sible line string " \
-                  "more text for the same string "
+    long_string = "some initial text as part of a single long line string " \
+        "and some more text for the same string and some more text for the " \
+        "same string"
 }}}
 or:
 {{{
-    long_string = ("some text as part of a sible line string "
-                   "more text for the same string")
+    long_string = ("some initial text as part of a single long line string "
+        "and some more text for the same string and some more text for the "
+        "same string")
 }}}
 but not:
 {{{
-    long_string = ("some text as part of a sible line string " +
-                   "more text for the same string")
+    long_string = ("some initial text as part of a single long line string " +
+        "and some more text for the same string and some more text for the " +
+        "same string")
 }}}
 
 ==== Quoting _inlined source code_ strings ====
