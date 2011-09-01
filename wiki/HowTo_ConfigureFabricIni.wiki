@@ -132,6 +132,29 @@ In the example above `distro_override` has been specified as `Ubuntu:10.04-gandi
 	package-two
 }}}
 
+=== release === 
+
+This specifies the name of the release to use. The available releases are listed in `release.ini`, only an existing release can be specified here.
+
+e.g.
+
+setup.ini :
+{{{
+[global]
+....
+....
+release = 2011-12-26
+}}}
+
+corresponding listing of the release in `release.ini` :
+{{{
+[2011-12-26]
+bungeni=8327
+plone=8327
+portal=8123
+}}}
+
+
 == The supervisor section == 
 
 {{{
@@ -265,6 +288,33 @@ download_url = http://www.python.org/ftp/python/2.5.5/Python-2.5.5.tgz
 == The postgresql, xapian, xapian-bindings and exist sections == 
 
 These sections take a single parameter `local_url`. This parameter is used only when `local_cache` is set to `True`.
+
+
+= release.ini =
+
+This file lists available releases, the name of a section identifies the name of the release. 
+{{{
+[2011-12-26]
+bungeni=8327
+plone=8327
+portal=8123
+
+
+[2011-11-13_release_kenya]
+bungeni=8127
+plone=8117
+portal=8123
+}}}
+
+the above example lists 2 releases identified in `release.ini`.
+
+Every release section must list 3 properties : bungeni, plone and portal. 
+
+Each of these properties has a value corresponding to a revision number on svn.
+
+
+
+
 
 
 = distro.ini =
