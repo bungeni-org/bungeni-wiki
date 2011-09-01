@@ -125,6 +125,30 @@ of the following Python Style Guides:
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Nested/Local/Inner_Classes_and_Functions Nested/Local/Inner Classes and Functions]: _nested/local/inner classes and functions are fine_.
    * [http://google-styleguide.googlecode.com/svn/trunk/pyguide.html#Comments Comments]: _use the right style for module, function, method and in-line comments_.
 
+=== Whitespace ===
+
+Exactly as specified in [http://www.python.org/dev/peps/pep-0008/ PEP 8], but following cases are not explicitly covered there:
+
+Just as for other operators, there should be a space surrounding the % string formatting operator:
+{{{
+        assert len(states), "Workflow [%s] defines no states" % (self.name)
+}}}
+and not:
+{{{
+        assert len(states), "Workflow [%s] defines no states"%(self.name)
+}}}
+
+Contrary to the formatting of brackets and parenthesis for literal lists and tuples, there *should be* a space after the opening and before the closing of list comprehensions and tuple comprehensions (generators):
+{{{
+    set([ (p[1], p[2]) for p in states[0].permissions ])
+    ( (role, s) for s, p, role in self.permissions if p == permission )
+}}}
+and not:
+{{{
+    set([(p[1], p[2]) for p in states[0].permissions])
+    ((role, s) for s, p, role in self.permissions if p == permission)
+}}}
+
 === Quote characters ===
 
 Always use a single double-quote char `"` to delineate a short literal string. 
@@ -209,7 +233,7 @@ mapper(domain.QuestionVersion, schema.question_versions,
 )
 }}}
 
-Same rules apply for multi-line block-opening statements:
+Same rules apply for *multi-line block-opening statements*, giving the following results (with block opener implying 1 nesting level and the parameter continuation lines implying another):
 
 {{{
     def __init__(self,
@@ -259,10 +283,23 @@ If you must, use blank line *sparingly* -- only use a single blank line between 
 
 Again, the same _[#Line_length,_indentation,_continuation_lines Line length, indentation, continuation lines]_ style rules for all formats, above, are the rules to apply here.
 
-Empty XML elements should have the `/>` ending:
+Non-empty XML elements should have the closing tag:
  * either on same single line as the opening tag
  * or at exactly same indent as opening tag
-For example:
+
+Same goes for the ` />` ending of empty XML elements.
+
+There *should not be* any whitespace preceeding the closing `>` of a tag; but, to enhance the distinction between empty and non-empty elements, there *should be* a single space preceeding the ` />` ending of empty XML elements.
+
+Examples:
+{{{
+    <class class=".Ministry"><require like_class=".Group" /></class>
+}}}
+{{{
+    <class class="bungeni.models.domain.Ministry">
+        <require like_class="bungeni.models.domain.Group" />
+    </class>
+}}}
 {{{
     <browser:menu id="admin_navigation" title="Actions Admin" />
     <browser:menuItem menu="admin_navigation"
@@ -288,16 +325,6 @@ For example:
 }}}
 
 
-
 <wiki:comment>
-
-formatting multi-line pre-block statements e.g:
-
-            if (IChoice.providedBy(field) and field.required and
-                field.default is None
-                ):
-
-style for multi-line def parameter declarations
-
 </wiki:comment>
 
