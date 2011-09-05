@@ -13,10 +13,15 @@ The Bungeni Application system has the following pre-requisites :
  * System libraries required for building  PostgreSQL from source
  * OpenOffice.org -- this is used for PDF conversion
 
+Recommended Linux distribution :
+ * Ubuntu 10.04 (32 or 64 bit distro)
+
+The build process downloads various components from the internet - so it is *neccessary* for the computer to have access to the internet.
+
 All of these pre-requisites can be automatically installed via a fabric setup script.
+
 So, first we install Fabric - and run the pre-requisite setup scripts which installs all the required pre-requisites.
 
-The following scripts have been tested on Ubuntu Linux 8.04 and 10.04 (32bit release)
 
 = Installing Fabric = 
 
