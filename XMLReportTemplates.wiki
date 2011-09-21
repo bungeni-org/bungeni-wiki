@@ -79,7 +79,7 @@ from a provided starting date for a group. This would look like this:
     # *nd* evaluates to n days such that `5d` evaluates to five (2) days
     # *nw* evaluates to n weeks such that `4w` evaluates to four (4) weeks
     # We can also use combinations of _w_, _d_, _h_ depending on requirements
-  * See [XMLReportTemplates#Sample-report-timespans] for detailed samples
+  * See [XMLReportTemplates#Sample_report_timespans] for detailed samples
     
  * The *content* section is composed of the *heading* and the *body*
   * Both may contain *listing* and *text* nodes which are the primary structures for defining content
