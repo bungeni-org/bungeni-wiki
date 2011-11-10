@@ -37,7 +37,7 @@ system_root = /home/undesa/test
 }}}
 
 Within the root folder the following installation structure is used :
- * cinst
+ * bungeni_apps
    * bungeni - the bungeni installation
      * parts
        * postgresql - postgresql installation

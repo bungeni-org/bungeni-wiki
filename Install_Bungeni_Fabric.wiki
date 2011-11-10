@@ -46,7 +46,7 @@ See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#
 At the end of this step your folder structure should look like this :
 
 {{{
-./cinst
+./bungeni_apps
 |-- bungeni
 |   |-- bin
 |   |-- buildconf

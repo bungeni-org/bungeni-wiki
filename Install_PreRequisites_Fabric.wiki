@@ -55,7 +55,7 @@ See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_RunFabricCommands#R
 
 At the completion of this step you should have a folder structure in your home directory that looks like this :
 {{{
-./cinst
+./bungeni_apps
 `-- python26
     |-- bin
     |-- include
