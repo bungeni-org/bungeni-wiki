@@ -20,75 +20,75 @@ Usually either of these errors :
 
 {{{
 Failure in test
-/home/undesa/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.txt
+/home/undesa/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.txt
 Failed doctest test for downloaddocument.txt
- File "/home/undesa/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.txt",
+ File "/home/undesa/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.txt",
 line 0
 
 ----------------------------------------------------------------------
-File "/home/undesa/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.txt",
+File "/home/undesa/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.txt",
 line 71, in downloaddocument.txt
 Failed example:
    output = reportPDF()
 Exception raised:
    Traceback (most recent call last):
-     File "/home/undesa/cinst/bungeni/eggs/zope.testing-3.7.1-py2.6.egg/zope/testing/doctest.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.testing-3.7.1-py2.6.egg/zope/testing/doctest.py",
 line 1356, in __run
        compileflags, 1) in test.globs
      File "<doctest downloaddocument.txt[35]>", line 1, in <module>
        output = reportPDF()
-     File "/home/undesa/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py",
+     File "/home/undesa/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py",
 line 170, in __call__
        return self.documentData(cached=True)
-     File "/home/undesa/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py",
+     File "/home/undesa/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py",
 line 135, in documentData
        attached_file.file_data = self.generateDoc()
-     File "/home/undesa/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py",
+     File "/home/undesa/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py",
 line 103, in generateDoc
        return self.error_template()
-     File "/home/undesa/cinst/bungeni/eggs/zope.app.pagetemplate-3.6.0-py2.6.egg/zope/app/pagetemplate/viewpagetemplatefile.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.app.pagetemplate-3.6.0-py2.6.egg/zope/app/pagetemplate/viewpagetemplatefile.py",
 line 83, in __call__
        return self.im_func(im_self, *args, **kw)
-     File "/home/undesa/cinst/bungeni/eggs/zope.app.pagetemplate-3.6.0-py2.6.egg/zope/app/pagetemplate/viewpagetemplatefile.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.app.pagetemplate-3.6.0-py2.6.egg/zope/app/pagetemplate/viewpagetemplatefile.py",
 line 51, in __call__
        sourceAnnotations=getattr(debug_flags, 'sourceAnnotations', 0),
-     File "/home/undesa/cinst/bungeni/eggs/zope.pagetemplate-3.5.0-py2.6.egg/zope/pagetemplate/pagetemplate.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.pagetemplate-3.5.0-py2.6.egg/zope/pagetemplate/pagetemplate.py",
 line 115, in pt_render
        strictinsert=0, sourceAnnotations=sourceAnnotations)()
-     File "/home/undesa/cinst/bungeni/eggs/zope.tal-3.5.1-py2.6.egg/zope/tal/talinterpreter.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tal-3.5.1-py2.6.egg/zope/tal/talinterpreter.py",
 line 271, in __call__
        self.interpret(self.program)
-     File "/home/undesa/cinst/bungeni/eggs/zope.tal-3.5.1-py2.6.egg/zope/tal/talinterpreter.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tal-3.5.1-py2.6.egg/zope/tal/talinterpreter.py",
 line 343, in interpret
        handlers[opcode](self, args)
-     File "/home/undesa/cinst/bungeni/eggs/zope.tal-3.5.1-py2.6.egg/zope/tal/talinterpreter.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tal-3.5.1-py2.6.egg/zope/tal/talinterpreter.py",
 line 867, in do_useMacro
        macro = self.engine.evaluateMacro(macroExpr)
-     File "/home/undesa/cinst/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/tales.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/tales.py",
 line 696, in evaluate
        return expression(self)
-     File "/home/undesa/cinst/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/expressions.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/expressions.py",
 line 217, in __call__
        return self._eval(econtext)
-     File "/home/undesa/cinst/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/expressions.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/expressions.py",
 line 194, in _eval
        ob = self._subexprs[-1](econtext)
-     File "/home/undesa/cinst/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/expressions.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.tales-3.4.0-py2.6.egg/zope/tales/expressions.py",
 line 124, in _eval
        ob = self._traverser(ob, element, econtext)
-     File "/home/undesa/cinst/bungeni/eggs/zope.app.pagetemplate-3.6.0-py2.6.egg/zope/app/pagetemplate/engine.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.app.pagetemplate-3.6.0-py2.6.egg/zope/app/pagetemplate/engine.py",
 line 68, in __call__
        request=request)
-     File "/home/undesa/cinst/bungeni/eggs/zope.traversing-3.7.2-py2.6.egg/zope/traversing/adapters.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.traversing-3.7.2-py2.6.egg/zope/traversing/adapters.py",
 line 139, in traversePathElement
        return traversable.traverse(nm, further_path)
-     File "/home/undesa/cinst/bungeni/eggs/zope.traversing-3.7.2-py2.6.egg/zope/traversing/adapters.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.traversing-3.7.2-py2.6.egg/zope/traversing/adapters.py",
 line 50, in traverse
        return subject[name]
-     File "/home/undesa/cinst/bungeni/eggs/zope.app.basicskin-3.4.0-py2.6.egg/zope/app/basicskin/standardmacros.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.app.basicskin-3.4.0-py2.6.egg/zope/app/basicskin/standardmacros.py",
 line 41, in __getitem__
        page = getMultiAdapter((context, request), name=name)
-     File "/home/undesa/cinst/bungeni/eggs/zope.component-3.6.0-py2.6.egg/zope/component/_api.py",
+     File "/home/undesa/bungeni_apps/bungeni/eggs/zope.component-3.6.0-py2.6.egg/zope/component/_api.py",
 line 111, in getMultiAdapter
        raise ComponentLookupError(objects, interface, name)
    ComponentLookupError: ((<bungeni.models.domain.Report object at
@@ -103,13 +103,13 @@ and :
 {{{
 ERROR:bungeni.ui:An error occured during ODT/PDF generation
 Traceback (most recent call last):
-  File "/home/undesa/bungeni2.6/cinst/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py", line 100, in generateDoc
+  File "/home/undesa/bungeni2.6/bungeni_apps/bungeni/src/bungeni.main/bungeni/ui/downloaddocument.py", line 100, in generateDoc
     renderer.run()
-  File "/home/undesa/bungeni2.6/cinst/bungeni/eggs/appy-0.5.4-py2.6.egg/appy/pod/renderer.py", line 311, in run
+  File "/home/undesa/bungeni2.6/bungeni_apps/bungeni/eggs/appy-0.5.4-py2.6.egg/appy/pod/renderer.py", line 311, in run
     self.finalize()
-  File "/home/undesa/bungeni2.6/cinst/bungeni/eggs/appy-0.5.4-py2.6.egg/appy/pod/renderer.py", line 416, in finalize
+  File "/home/undesa/bungeni2.6/bungeni_apps/bungeni/eggs/appy-0.5.4-py2.6.egg/appy/pod/renderer.py", line 416, in finalize
     self.callOpenOffice(resultOdtName, resultType)
-  File "/home/undesa/bungeni2.6/cinst/bungeni/eggs/appy-0.5.4-py2.6.egg/appy/pod/renderer.py", line 384, in callOpenOffice
+  File "/home/undesa/bungeni2.6/bungeni_apps/bungeni/eggs/appy-0.5.4-py2.6.egg/appy/pod/renderer.py", line 384, in callOpenOffice
     raise pe
 PodError: An error occurred during the conversion. Could not connect to OpenOffice on port 2002. UNO (OpenOffice API) says: Connector : couldn't connect to socket (Success).
 
