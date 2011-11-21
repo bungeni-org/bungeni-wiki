@@ -1,57 +1,52 @@
 #summary Bungeni Customization Guide
 
- * Customization guide for admins
-   * Bungeni customization folder structures
-     * What is where ?
-     * Using the customization folder
-       * making a private customization folder
-       * testing customizations
-       * best practices
-   * Setup configurations
-     * change deployment ports for bungeni,portal, postgres
-   * [HowTo_SupervisorServiceManager Using Supervisor]
-     * accessing supervisor
-     * managing services
-     * getting logging output
-   
- * Setup customization parameters
-  * Default language for the system
-    * Enabling other languages
-    * Managing message strings in bungeni
-  * Database connection
-  * OpenOffice configuration
-  * Notification configuration
-  * Configuring Bungeni system vocabularies  
-  * Configuring Subject term vocabularies
-
- * Workflow Customization
-   * [DocumentingWorkflows Using the workflow documentation generator]
-   * Workflow terms explained -
-      * grants
-         * global grants
-         * grants within states
-      * states
-      * transitions
-   * How states and transitions appear in the user interface
-   * How roles are used in workflows
-   * Using transitions to connect states
-     * dos and donts
+ * Administrators Overview
+   * What is where ? 
+   * Using the customization folder 
+     * making a private customization folder 
+     * testing customizations 
+     * best practices 
+ * Vocabularies
+   * system vocabularies 
+   * subject term vocabularies 
+ * Languages
+   * Default language for the system 
+   * Enabling other languages 
+   * Managing message strings in bungeni 
+ * Content Types
+   * Disabling a content type
+ * Workflows
+   * Using the workflow documentation generator 
+   * Workflow terms explained - 
+     * grants 
+     * global grants 
+     * grants within states 
+   * states 
+   * transitions 
+   * How states and transitions appear in the user interface 
+   * How roles are used in workflows 
+   * Using transitions to connect states 
+     * dos and donts 
    * Using notifications 
    * Changing transition labels on the user interface 
-
-
- * Look and Feel
-   * Theming Bungeni using Skins
-   * Changing the Menu Order and Structure
-   * Changing page layout 
-     * Styling with CSS
-     * Using Form customization (see "Changing order of fields" )
- 
- * [HowTo_Customize_Forms_and_Listings Form Customization]
+ * Forms
    * Bungeni Content Types 
-     * Parliamentary metadata
-     * Parliamentary document content
-   * Disabling a Content type 
-     * TO DO -- how to disable a content type entirely
-
-
+        * Parliamentary metadata 
+        * Parliamentary document content 
+   * Form modes explained 
+   * Use of roles in Forms 
+   * How to localize forms:
+     * Form UI:
+       * Changing display order of fields
+       * Show/Hide fields on a Form per mode 
+   * XML configuration
+     * Changing display order of fields
+     * Show/Hide fields on a Form per mode 
+ * Workspaces
+   * How workflow states and roles are used to configure workspaces
+   * How to change workspace tab content for a document.
+ * Themes
+   * Theming Bungeni using Skins 
+   * Changing the Menu Order and Structure 
+   * Changing page layout 
+   * Styling with CSS
