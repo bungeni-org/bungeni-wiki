@@ -1,0 +1,116 @@
+#summary Bungeni Programming Guide
+#labels Phase-Implementation
+#sidebar TableOfContents
+
+= Bungeni Programming Guide =
+
+Rules, conventions, guidelines for programming bungeni, to increase consistency, efficiency and maintainability of the bungeni code base. 
+
+These rules are primarily concerned about design, architecture, adoption of selected "best practices". Souce code style guidelines are addressed in a separate document [DecCodeStyleGuide Bungeni Source Code Style Guide].
+
+----
+
+== Misc ==
+
+ * The bungeni python package is not a namespace package.
+
+
+== Security ==
+
+How roles and permissions should be defined and assigned: 
+a "programming security policy" that should be considered as an integral part of 
+the system design, and must be considered for, and may affect, any other design 
+choices to be made on an ongoing basis as the system evolves. 
+
+
+=== Security definitions (roles, permissions, grants) ===
+
+These are made in several places, namely: 
+
+{{{
+bungeni.main/bungeni/security.zcml
+bungeni.main/bungeni/models/roles.zcml
+bungeni.main/bungeni/models/permissions.zcml	
+bungeni.main/bungeni/core/workflows/permissions.zcml (automatically generated via bungeni_custom/workflows/...)
+
+bungeni_custom/workflows/...
+
+bungeni_custom/sys/acl/permissions.zcml
+bungeni_custom/sys/acl/roles.zcml
+bungeni_custom/sys/acl/meta/...
+bungeni_custom/sys/acl/content/...
+}}}
+
+ * A premise of Zope 3 security is that all access to an object is denied unless a permission is first granted. Bungeni should adopt a similar approach i.e. should not favour global grants to then deny as needed downstream, but prefer the general practice of simply granting as needed.
+ * For simplicity, all `bungeni.TYPE.View` permissions should always be redefined to `zope.View`, and this used generically thoughout.
+ 
+!+type-dependent permissions should be defined/granted along with type definitions themselves
+
+!+most of `sys/acl/...` should not be there; question.zcml is already "orphan code"; why both `/meta` and `/content` sub-folders?
+
+
+Where, what, and how to define roles/permssions/grants should be clarified...
+Some reflection as to support for:
+
+ # user-owned types (always workflowed), with dedicated permissions for various actions (each action possibly being dependent on a feature being enabled or not)
+ # system-owned types (may or may not be workflowed) with dedicated permissions, that are exposed "within limits" to some user customization
+ # or, system-owned types that are NOT at all exposed to user customization (completely internal to bungeni)
+ # support for user-defined roles, and for assigning permissions to them...
+ # should UI views have make use of same permissions as model-bound views?
+
+=== Permission *spaces* ===
+
+For clarity of intention, permission "scopes" should be kept as distinct as possible. Notably, the spaces implied by `bungeni.Authenticated` and those implied by other "custom" roles (all of which imply `bungeni.Authenticated`) are overlapping. 
+
+ * Debugging permission checking is made unnecessarily more difficult; indeed undestanding what a permission setting should be by reading the code becomes virtually impossible. 
+ * It just invites for developer inconsistency.
+ * It results in incorrect decisions in some cases e.g. a change record on on attahcment owned by a document may result in being granted Visibility to a member virtue of Authenticated having zope.View (globally or locally on the head instance). 
+
+I propose adoption of a constraint to mever mix applying permissions... where
+what not to mix would be similar to what has been implemented for workflow 
+permission assignments (from r8919 on).
+
+Summary of such a policy would be to adopt that for any given specific 
+permission, the "scope" for that permission is either limited to 
+`bungeni.Authenticated` OR ONLY to the set of other custom roles.
+I.e. if we consider two mutually exclusive sets of roles:
+{{{
+A: bungeni.Authenticated
+B: bungeni.Clerk bungeni.Speaker bungeni.Owner bungeni.Signatory bungeni.MP bungeni.Minister
+}}}
+then the "permission space" we can "assign" in would be:
+{{{
+{(permission, object), role, setting)}
+}}}
+where, for any (permission, object) pair, if a role from A is assigned ANYWHERE 
+in the application, then no role from B may be assigned ANYWHERE throughout the 
+application. Or vice-versa, obviously. 
+NOTE: a global grant/deny would be implied when object=None.
+
+
+
+=== Security requirement statements ===
+
+These are done in:
+
+{{{
+bungeni.main/bungeni/models/domain.zcml
+bungeni.main/bungeni/ui/configure.zcml
+...
+}}}
+
+!+identify a simple practice for this
+
+
+== Templates ==
+
+ * Templates should be as dumb as possible, concerning themselves with purely presentational logic; templates should need to have *no* "business" knowledge of data received for rendering.
+ 
+ * Localization of any data is done *outside* of templates. This to make it clear where data *should* be localized, avoiding the frequent occurrences of data either _not being localized_ at all or data _being localized twice_ (in application python code and in the templates). And, as localization cannot be guaranteed to *always* be performed within the templates, then it should *always* be done in application code, outside of the templates.
+
+
+
+<wiki:comment>
+!+ ZCML usage
+</wiki:comment>
+
