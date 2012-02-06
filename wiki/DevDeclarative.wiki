@@ -29,15 +29,11 @@ The relational db schema will be substantially simplified, having less tables, w
  * a single fixed table per archetype;
  * a single change table per (applicable) archetype (currently 8);
  * a single version table per (applicable) archetype (currently 6);
- * there should be a single vocabulary table (currently 12, !+ a couple of these may not fit a common definition);
+ * vocabularies should be moved out of the db (12 tables) and into configuration, in some unified way !+ a couple of these may not fit a common definition;
 
 Other tables may be required, depending on how extended attributes are implemented: if horizontal, simply add, on each archetype, a couple custom columns per foreseen datatype; if vertical, there would need to be a single extension table for *each* supported custom *attribute datatype* (per archetype, archetype_change, archetype_version?);
 
 Remarks: 
- * !+vocabularies: currently some (non-derived i.e. enumerations of explicit values) vocabularies are based in the db, some not. Vocabulary sources should be re-organized, into "system-owned" and "user-owned" enumerations; user-owned enumerations should be part of the customization. There should be a generic processor of these enumerations that automatically produces all vocabularies for use in the UI.
- * !+vocabularies: add a description property to all of them (as in committee_types).
- * !+committee_types: life_span, committee_type_status extra columns should NOT be on this vocabulary, but should be a property on the committee type itself!
- * !+group_sitting_types, title_types: need special attention... have other columns.
  * !+personal_annotations: personal annotations on any object in the system, only for own use, may be stored independently, to not clutter the main bungeni db needlessly.
  * !+dc_adapters: need to also express these for archetypes.
 
@@ -52,6 +48,7 @@ Legend for abbreviations used below:
 {{{
     Archetypes:
         D = Document
+        E = Event(Document)
         G = Group
         M = Membership
         U = User
@@ -75,9 +72,8 @@ Feature:        Applicable for:     Customizable in:
 ------------    ----------------    ------------
 Change:         D   G+? M+? U+?     OA  EA
 Version:        D   G+? M+? U+?     OA  EA
-Attachment:     D   G+? M+? U+?     OA  EA  WF-?
-Event:          D                   OA  EA  WF-?
-AssignedGroup:  D                   OA  EA
+Attachment:     D   G+? M+? U+?     OA  EA
+Event:          D                   OA  EA
 Address:            G       U       OA  EA  WF-?
 Signatory:      D       M+?         OA  EA  WF
 Sitting:            G               OA  EA  WF
@@ -94,7 +90,31 @@ Remarks:
  * Versionable must have auditable (but not vice-versa); there may be other feature inter-dependencies (but these should be kept to a minimum).
  * !+sitting, session, calendar, minutes, heading, agendaitem: are these the same "feature" i.e. they always exist together, whenever there is one there are the others?
  * !+versionability of some sub-items: some (namely, attachments) are versionable in and of themselves, as well as being snapshot-able/point-in-time-able along with the parent item when that is being versioned: versionable and point-in-time-able are distinct aspects... the first being a pnp feature on attachments, the second being an inherent characteristic of attachments (as a concrete support type).
- * !+references: should this be a PNP feature?
+ * !+references: is should this be a PNP feature? is this a kind of "attachment"?
+
+=== Event ===
+
+`Event` is both a concrete type (representing a document feature) as well 
+as an achetype in and of itself as users are able to define special events, 
+with specific attributes and workflow. 
+
+Expected usage of specialized events are as "outcome documents" 
+e.g. a motion's resolution or a question's response, as well as for the 
+concept of multiple "group assignment" that does not necessarily affect the 
+parent document's workflow.
+
+Here's a shortlist of foreseen sample custom "incantations" of events, 
+as "customized" features on Document:
+
+{{{
+------------        ------------
+Event:              Incantations are customizable in:
+------------        ------------
+MotionResolution    OA    EA    TS    WF    EF
+QuestionResponse    OA    EA    TS    WF    EF
+AssignedGroup:      OA    EA    TS    WF    EF
+------------        ----------------
+}}}
 
 
 == Archetypes ==
@@ -106,13 +126,12 @@ Archetype:      Incantations are customizable in:
 ------------    ------------
 Document:       OA    EA    TS    WF    EF
 Group:          OA    EA    TS    WF    EF
-Membership:     OA    EA    TS    WF+?  EF
+Membership:     OA    EA    TS    WF    EF
 User:           OA    EA    TS    WF    EF
 ------------    ------------
 }}}
 
 Remarks:
- * !+Membership is not yet workflowed.
  * !+core properties: each archetype elaboration below contains such sub-section...  until each is filled in, assume that all the current "core" features of each archetype will be included here e.g. 
  * a document supports possibility to be "minuted" (for if/when it is discussed in a sitting)
  * a group can have members and has a role associated with it, etc.
@@ -140,7 +159,7 @@ features: <workflow
     Attachments
     Signatories
     Events
-    AssignedGroups
+    Annotation
     
     References+? # to related docs: other Bungeni documents (a uri?), 
       # a digital doc, an external source, an arbitrary text reference 
@@ -175,7 +194,24 @@ Question
 TabledDocument
 }}}
 
-* !+Report should be part of the "sitting" feature bundle? Archetype?
+!+Report should be part of the "sitting" feature bundle? Archetype?
+
+
+=== EVENT ===
+
+Events are a special kind of Document, and inherit most of the features and 
+behavior from DOCUMENT, with the notable differences that Events have no 
+`outcome_document_type` (they may be themselves the outcome document), and 
+do not themselves support the Event feature (cannot have events on an event). 
+
+==== Sample Custom Event Types ====
+
+{{{
+Event (a base concrete Event type)
+MotionResolution
+QuestionResponse
+AssignGroup
+}}}
 
 
 === GROUP ===
@@ -265,7 +301,7 @@ In addition to adding types, a custom type may disable core *optional* attribute
 
 How extended attributes are declared, as well as how core optional attributes disabled, will probably be integrated into ui.xml... to be explored.
 
-=== implementation note: horizontal or vertcial ===
+=== implementation note: horizontal or vertical ===
 
 As mentioned above, extended attributes may be implemented *horizontally* or *vertically*; each approach is a tradeoff of priorities, with implications:
 
@@ -296,15 +332,41 @@ Need a syntax for incorporating this information in those customization files...
 
 This refactoring is elaborate and any opportunities for clear isolatable sub-tasks should be taken. Some sub-tasks that come to mind, that may be started on at any time:
 
- * debundle the "attachments" feature out of "versionable"
- * make membership workflowed
- * define UI / Workflow XML dialext extensions to support additional features here
- * migrate all user-owned vocabs to bungeni_custom xml
+ * design refactoring of event type as a "parliamentary item sub-archetype"
+ * remove heading as parliamnetary item
  * rename db schema tables from plural to singular
- * merge down to a single db table for documents, groups, memberships (this needs migration of auditing/versioning/attachments from working the various current tables to working with the one table per type).
- * merge parliamentary documents into single document archetype infrastructure, and remove all additional python descriptors
+ 
+ * merge down to a single db table for documents/events, groups, memberships (this needs migration of auditing/versioning/attachments from working the various current tables to working with the one table per type).
+ 
+ * review of how auditing/versioning/attachments are implemented, in particular their inter-dependencies, and the persistence pattern employed (see !+ATTACHED_FILE_VERSIONS in src relating to this). This refactoring may still be possible without first doing this though (to be seen on closer examination).
+
+ * merge parliamentary documents into single document archetype infrastructure, and remove all additional python descriptors, and for refactor each extended document feature to be plug'n'play-able. 
+ 
+ * merge parliamentary groups into single group archetype infrastructure, and remove all additional python descriptors, and for refactor each extended group feature to be plug'n'play-able. 
+
+ * preparation to facilitate enabling and disabling of features, bind each feature to a (single) dedicated interface, on which to generically register any necessary components.
+ 
+ * preparation to facilitate enabling and disabling of features, make all component registration to be done programmatically (not via ZCML). This includes all declarations for *views* (pages, viewlets) and *menu items*.
+ 
  * "open-up" the current more or less black box handling of auto-generation of UI forms (alchemist) to be able to modify it as necessary to support this refactoring.
  
-Also needed, although not hindering the general sense of the refactoring in any way: 
 
- * review of how auditing/versioning/attachments are implemented, in particular their inter-dependencies, and the persistence pattern employed (see !+ATTACHED_FILE_VERSIONS in src relating to this).
+*vocabularies*
+
+ * move vocabulary linkages to fk tables to literal string values `[done]` (but following "extended" vocabs may still need to be refactored: venues, countries, title_types, group_sitting_types)
+ * migrate all user-owned vocabs to bungeni_custom xml
+ * provide support for proper and manageable translation of vocabulary terms, both for objects that are translated and ones that are not
+
+ * !+vocabularies: currently some (non-derived i.e. enumerations of explicit values) vocabularies are based in the db, some not. Vocabulary sources should be re-organized, into "system-owned" and "user-owned" enumerations; user-owned enumerations should be part of the customization. There should be a generic processor of these enumerations that automatically produces all vocabularies for use in the UI.
+ * !+vocabularies: add a description property to all of them (as in committee_types).
+ * !+committee_types: life_span, committee_type_status extra columns should NOT be on this vocabulary, but should be a property on the committee type itself!
+ * !+group_sitting_types, title_types: need special attention... have other columns.
+
+
+=== other tasks, done ===
+
+ * debundle the "attachments" feature out of "versionable" `[done]`
+ * make membership workflowed `[done]`
+ * define UI / Workflow XML dialext extensions to support additional features here `[done]`
+
+
