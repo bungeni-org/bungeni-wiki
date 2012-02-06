@@ -114,7 +114,28 @@ bungeni.main/bungeni/ui/configure.zcml
  
  * Localization of any data is done *outside* of templates. This to make it clear where data *should* be localized, avoiding the frequent occurrences of data either _not being localized_ at all or data _being localized twice_ (in application python code and in the templates). And, as localization cannot be guaranteed to *always* be performed within the templates, then it should *always* be done in application code, outside of the templates.
 
+== i18n ==
 
+Localization of data should be done as late as possible. This is for two reasons:
+ # retain the data in its most semantic state as long as possible, to never lose for example teh option to do proper numeric or date artithmentic, or proper string interpolation.
+ # to ensure that the internalization takes into proper account the user's locale!
+ 
+Coding implications for this are that values MUST never be i18n'ed at *code load time* (when the containing module is loaded and so executed), but later when the instance/class/construct is created specifically for a given user request. Preferably, all i18n'ing of data is done just prior to rendering a template. 
+
+For example, taking a look at `ui/reports.py`, the first piece of 
+non-import code one sees is:
+
+{{{
+class TIME_SPAN:
+    daily = _(u"Daily")
+    weekly = _(u"Weekly")
+}}}
+
+This code is executed when bungeni is launched, and the class gets defined with 
+the attributes having i18n'ed values (without as yet knowing who the final user 
+and locale will be)! If, downstream, this class is used to generate user data, it 
+is likley that these translated values are re-translated... all such occurances 
+must be avoided (and current ones cleaned out).
 
 <wiki:comment>
 !+ ZCML usage

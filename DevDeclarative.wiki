@@ -49,6 +49,7 @@ Legend for abbreviations used below:
     Archetypes:
         D = Document
         E = Event(Document)
+        R = Report(Document)
         G = Group
         M = Membership
         U = User
@@ -67,21 +68,21 @@ Legend for abbreviations used below:
 
 The following concrete types (not including the archetypes to be used to define custom types) are defined by the core system as they embody available "features". Core optional attributes (ui.xml), extension attributes (ui.xml?) and workflow (for workflowed concrete types) are *always* customizable on all concrete types, as indicated below.
 {{{
-------------    ----------------    ------------
-Feature:        Applicable for:     Customizable in:
-------------    ----------------    ------------
-Change:         D   G+? M+? U+?     OA  EA
-Version:        D   G+? M+? U+?     OA  EA
-Attachment:     D   G+? M+? U+?     OA  EA
-Event:          D                   OA  EA
-Address:            G       U       OA  EA  WF-?
-Signatory:      D       M+?         OA  EA  WF
-Sitting:            G               OA  EA  WF
-Heading:                            OA  EA  WF-?
-AgendaItem:                         OA  EA  WF
-Reference+?:    D                   OA  EA  
-Notification+?: D                   OA  EA  WF+?
-------------    ----------------    ------------
+------------    ------------------------    ------------
+Feature:        Applicable for:             Customizable in:
+------------    ------------------------    ------------
+Change:         D   E+? R+? G+? M+? U+?     OA  EA
+Version:        D   E+? R+? G+? M+? U+?     OA  EA
+Attachment:     D   E+? R+? G+? M+? U+?     OA  EA
+Event:          D       R+? G+? M+? U+?     OA  EA
+Address:                    G   M+? U       OA  EA  WF-?
+Signatory:      D               M+?         OA  EA  WF
+Sitting:                    G               OA  EA  WF
+Heading:                                    OA  EA  WF-?
+AgendaItem:                                 OA  EA  WF
+Reference+?:    D                           OA  EA  
+Notification+?: D                           OA  EA  WF+?
+------------    ------------------------    ------------
 }}}
 
 Remarks:
@@ -119,12 +120,14 @@ AssignedGroup:      OA    EA    TS    WF    EF
 
 == Archetypes ==
 
-We identify 4 archetypes (as elaborated in the conceptual criteria above): Document, Group, Membership, User. Archetype incantations are customizable in all the ways concrete types are customizable, plus additionally in "Type-level settings", in "Extended PNP Features":
+We identify the archetypes (as elaborated in the conceptual criteria above): Document, Event, Report, Group, Membership, User. Archetype incantations are customizable in all the ways concrete types are customizable, plus additionally in "Type-level settings", in "Extended PNP Features":
 {{{
 ------------    ------------
 Archetype:      Incantations are customizable in:
 ------------    ------------
 Document:       OA    EA    TS    WF    EF
+    Event:      OA    EA    TS    WF    EF
+    Report:     OA    EA    TS    WF    EF
 Group:          OA    EA    TS    WF    EF
 Membership:     OA    EA    TS    WF    EF
 User:           OA    EA    TS    WF    EF
@@ -194,12 +197,11 @@ Question
 TabledDocument
 }}}
 
-!+Report should be part of the "sitting" feature bundle? Archetype?
-
 
 === EVENT ===
 
-Events are a special kind of Document, and inherit most of the features and 
+Events are a special kind of Document (but not a parliamentary document in the 
+procedural sense), and inherit most of the features and 
 behavior from DOCUMENT, with the notable differences that Events have no 
 `outcome_document_type` (they may be themselves the outcome document), and 
 do not themselves support the Event feature (cannot have events on an event). 
@@ -211,6 +213,21 @@ Event (a base concrete Event type)
 MotionResolution
 QuestionResponse
 AssignGroup
+}}}
+
+
+=== REPORT ===
+
+Reports are a special kind of Document and a parliamentary document in the 
+procedural sense, and inherit most of the features and 
+behavior from DOCUMENT, with the notable differences that Events have no 
+`outcome_document_type` (they may be themselves the outcome document).
+
+==== Sample Custom Report Types ====
+
+{{{
+Report (a base concrete Report type)
+SittingReport
 }}}
 
 
@@ -255,7 +272,7 @@ type-level settings:
 features: <workflow ... >
 }}}
 
-Membership to a group is currently not workflowed, and the implied conceptual workflow inherent to memberships should be exposed and accommodated via an explicit workflow. An additional aspect of why membership should be considered to be an archetype is that memberships have different characteristics, as dictated by their context e.g. an office membership may be for anyone, and not tied to a parliament, but a committee membership may be limited to a member of parliament as well as tied to the parliament (while the "conceptual" committee itself may not be bound to the parliament, but all its membership is!).
+The conceptual workflow inherent to memberships is exposed to customization and accommodated via an explicit workflow. An additional aspect of why MEMBERSHIP is an archetype is that memberships have different characteristics, as dictated by their context e.g. an office membership may be for anyone, and not tied to a parliament, but a committee membership may be limited to a member of parliament as well as tied to the parliament (while the "conceptual" committee itself may not be bound to the parliament, but all its membership is!).
 
 ==== Sample Custom Membership Types ====
 
@@ -333,7 +350,7 @@ Need a syntax for incorporating this information in those customization files...
 This refactoring is elaborate and any opportunities for clear isolatable sub-tasks should be taken. Some sub-tasks that come to mind, that may be started on at any time:
 
  * design refactoring of event type as a "parliamentary item sub-archetype"
- * remove heading as parliamnetary item
+ * remove heading as parliamnentary item
  * rename db schema tables from plural to singular
  
  * merge down to a single db table for documents/events, groups, memberships (this needs migration of auditing/versioning/attachments from working the various current tables to working with the one table per type).
