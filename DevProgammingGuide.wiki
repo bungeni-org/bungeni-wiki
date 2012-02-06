@@ -20,12 +20,12 @@ These rules are primarily concerned about design, architecture, adoption of sele
 
 How roles and permissions should be defined and assigned: 
 a "programming security policy" that should be considered as an integral part of 
-the system design, and must be considered for, and may affect, any other design 
-choices to be made on an ongoing basis as the system evolves. 
+the system design, and must be considered for, and may affect, any other ongoing 
+design choices to be made as the system evolves. 
 
 === General ===
 
- * Bungeni categorically grants/denies permissions only to *roles* i.e. never directly to a principal (or group). And, to reduce runtime overhead, the BungeniSecurityPolicy actually does not perform the check for any direct permission grants on principals and groups.
+ * Bungeni categorically grants/denies permissions only to *roles* i.e. never directly to a principal (or group). And, to reduce runtime overhead, the `BungeniSecurityPolicy` actually does not perform the check for any direct permission grants on principals and groups.
 
 
 === Security definitions (roles, permissions, grants) ===

@@ -19,6 +19,7 @@
  * Developer Guide
      * [DevCodeStyleGuide Bungeni Source Code Style Guide]
      * [DevProgammingGuide Bungeni Programming Guide]
+     * [DevDeclarative Declarative Bungeni]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
