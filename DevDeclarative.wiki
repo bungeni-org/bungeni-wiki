@@ -92,7 +92,9 @@ Remarks:
  * !+sitting, session, calendar, minutes, heading, agendaitem: are these the same "feature" i.e. they always exist together, whenever there is one there are the others?
  * !+versionability of some sub-items: some (namely, attachments) are versionable in and of themselves, as well as being snapshot-able/point-in-time-able along with the parent item when that is being versioned: versionable and point-in-time-able are distinct aspects... the first being a pnp feature on attachments, the second being an inherent characteristic of attachments (as a concrete support type).
  * !+references: is should this be a PNP feature? is this a kind of "attachment"?
-
+ * !+address: should memberships have the ability to have addresses? (Similar to the previous Title address.)
+ 
+ 
 === Event ===
 
 `Event` is both a concrete type (representing a document feature) as well 
