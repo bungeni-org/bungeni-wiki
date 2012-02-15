@@ -12,8 +12,8 @@ These rules are primarily concerned about design, architecture, adoption of sele
 
 == Misc ==
 
+ * Widely established conventions within the python world should be respected.
  * The bungeni python package is not a namespace package.
-
 
 ----
 == Security ==
@@ -108,36 +108,37 @@ bungeni.main/bungeni/ui/configure.zcml
 !+identify a simple practice for this
 
 ----
-== Templates ==
+== ZCML ==
+
+Given the liberal misuse and overuse of ZCML to date, rendering the code base a lot more opaque than necessary, increasing debugging overhead, increasing refactoring overhead, creating numerous cyclic but never executed interdependencies between code, and other code entropy, there should be no new ZCML declaration added to the bungeni code base.
+
+Other than purely security-related declarations (advantages of doing this inline are not as strong as fro other types of components), all registrations on the Zope Component Registry should be done in python.
+
+The decorator utilities available in the module `bungeni.ui.register` should be used to register all software components. If any functionality is missing in that module, it shoudl be added as needed.
+
+----
+== Views and Viewlets ==
+
+To promote consistency, faciltate debugging anmd management, all views and viewlet classes must inherit, respectively, from the bungeni base classes 
+{{{
+bungeni.ui.browser.BungeniBrowserView
+bungeni.ui.browser.BungeniViewlet
+}}}
+These base classes offer an easy hook for centrally adding handling of views and viewlets, such as special debug mode output, common names for common view attributes such as title, etc.
+
+
+=== Templates ===
 
  * Templates should be as dumb as possible, concerning themselves with purely presentational logic; templates should need to have *no* "business" knowledge of data received for rendering.
  
  * Localization of any data is done *outside* of templates. This to make it clear where data *should* be localized, avoiding the frequent occurrences of data either _not being localized_ at all or data _being localized twice_ (in application python code and in the templates). And, as localization cannot be guaranteed to *always* be performed within the templates, then it should *always* be done in application code, outside of the templates.
 
-== i18n ==
-
-Localization of data should be done as late as possible. This is for two reasons:
- # retain the data in its most semantic state as long as possible, to never lose for example teh option to do proper numeric or date artithmentic, or proper string interpolation.
- # to ensure that the internalization takes into proper account the user's locale!
+ * Localization of data should be done as late as possible. This is for two reasons:
+   # retain the data in its most semantic state as long as possible, to never lose for example the option to do proper numeric or date artithmentic, or proper string interpolation.
+   # to ensure that the internalization takes into proper account the user's locale!
  
-Coding implications for this are that values MUST never be i18n'ed at *code load time* (when the containing module is loaded and so executed), but later when the instance/class/construct is created specifically for a given user request. Preferably, all i18n'ing of data is done just prior to rendering a template. 
 
-For example, taking a look at `ui/reports.py`, the first piece of 
-non-import code one sees is:
-
-{{{
-class TIME_SPAN:
-    daily = _(u"Daily")
-    weekly = _(u"Weekly")
-}}}
-
-This code is executed when bungeni is launched, and the class gets defined with 
-the attributes having i18n'ed values (without as yet knowing who the final user 
-and locale will be)! If, downstream, this class is used to generate user data, it 
-is likley that these translated values are re-translated... all such occurances 
-must be avoided (and current ones cleaned out).
 
 <wiki:comment>
-!+ ZCML usage
 </wiki:comment>
 
