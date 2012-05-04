@@ -114,7 +114,7 @@ Given the liberal misuse and overuse of ZCML to date, rendering the code base a 
 
 Other than purely security-related declarations (advantages of doing this inline are not as strong as fro other types of components), all registrations on the Zope Component Registry should be done in python.
 
-The decorator utilities available in the module `bungeni.ui.register` should be used to register all software components. If any functionality is missing in that module, it shoudl be added as needed.
+The decorator utilities available in the module `bungeni.ui.register` should be used to register all software components. If any functionality is missing in that module, it should be added as needed.
 
 ----
 == Views and Viewlets ==
@@ -137,7 +137,6 @@ These base classes offer an easy hook for centrally adding handling of views and
    # retain the data in its most semantic state as long as possible, to never lose for example the option to do proper numeric or date artithmentic, or proper string interpolation.
    # to ensure that the internalization takes into proper account the user's locale!
  
-
 
 <wiki:comment>
 </wiki:comment>
