@@ -325,6 +325,16 @@ For example:
 }}}
 
 
+== Database ==
+
+ * Table names are singular.
+ * Table and column names should be in lowercase and composed of underscore-separated whole words.
+ * For the cases when a table has a single auto-generated surrogate PK column the name of the column should be: `"%s_id" % (table_name)`.
+ * Index names should be: `"%s_idx_%s" % (table_name, "_".join(column_names))`, where the ORDER of column names should follow the order of definition in the table. Plus, should there ever be the need to have multiple indices on same column set, an additional descriptive postfix e.g. `_unique`.
+ * Suffix both date and datetime type columns with `_date` !+?
+ * Prefix boolean-type columns with `is_` or `has_`.
+ 
+
 <wiki:comment>
 </wiki:comment>
 
