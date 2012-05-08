@@ -57,7 +57,7 @@ Then paste these commands and enter --
 {{{
 apt-get update 
 apt-get upgrade -y
-apt-get install build-essential subversion python-dev python-setuptools -y
+apt-get install build-essential ssh subversion python-dev python-setuptools -y
 easy_install fabric paramiko
 
 }}}
