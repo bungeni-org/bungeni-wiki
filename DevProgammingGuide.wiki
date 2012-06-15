@@ -18,24 +18,19 @@ These rules are primarily concerned about design, architecture, adoption of sele
 ----
 == Security ==
 
-How roles and permissions should be defined and assigned: 
-a "programming security policy" that should be considered as an integral part of 
-the system design, and must be considered for, and may affect, any other ongoing 
-design choices to be made as the system evolves. 
-
-=== General ===
-
- * Bungeni categorically grants/denies permissions only to *roles* i.e. never directly to a principal (or group). And, to reduce runtime overhead, the `BungeniSecurityPolicy` actually does not perform the check for any direct permission grants on principals and groups.
-
+Description of how roles and permissions should be defined and assigned: 
+a "programming security policy" that should be considered as an integral 
+part of the system design, and any other ongoing design choice *must* 
+consider how it interacts with or affects the "security policy" itself.
 
 === Security definitions (roles, permissions, grants) ===
 
-These are made in several places, namely: 
+These are (currently) made in several places, namely: 
 
 {{{
 bungeni.main/bungeni/security.zcml
 bungeni.main/bungeni/models/roles.zcml
-bungeni.main/bungeni/models/permissions.zcml	
+bungeni.main/bungeni/models/permissions.zcml
 bungeni.main/bungeni/core/workflows/permissions.zcml (automatically generated via bungeni_custom/workflows/...)
 
 bungeni_custom/workflows/...
@@ -46,30 +41,56 @@ bungeni_custom/sys/acl/meta/...
 bungeni_custom/sys/acl/content/...
 }}}
 
- * A premise of Zope 3 security is that all access to an object is denied unless a permission is first granted. Bungeni should adopt a similar approach i.e. should not favour global grants to then deny as needed downstream, but, whenever possible, to prefer the general practice of simply granting only when and as needed.
- * For simplicity, all `bungeni.TYPE.View` permissions should always be redefined to `zope.View`, and this used generically thoughout.
-
-
-
-!+type-dependent permissions should be defined/granted along with type definitions themselves
-
-!+most of `sys/acl/...` should not be there; question.zcml is already "orphan code"; why both `/meta` and `/content` sub-folders?
 
 
 Where, what, and how to define roles/permssions/grants should be clarified...
 Some reflection as to support for:
 
- # user-owned types (always workflowed), with dedicated permissions for various actions (each action possibly being dependent on a feature being enabled or not)
+ # user-owned types (always workflowed), with dedicated permissions for various actions (each action possibly being dependent on a feature being enabled or not); type-dependent permissions should be defined/granted along with type definitions themselves
  # system-owned types (may or may not be workflowed) with dedicated permissions, that are exposed "within limits" to some user customization
  # or, system-owned types that are NOT at all exposed to user customization (completely internal to bungeni)
  # support for user-defined roles, and for assigning permissions to them...
  # UI views (typically require globally granted permissions) should use dedicated permissions, and so different than any related model-bound permissions.
 
-=== Distinct permission _scopes_ ===
+!+most of `sys/acl/...` should not be there; question.zcml is already "orphan code"; why both `/meta` and `/content` sub-folders?
 
+==== Security requirement statements ====
+
+These are done in:
+
+{{{
+bungeni.main/bungeni/models/domain.zcml
+bungeni.main/bungeni/ui/configure.zcml
+...
+}}}
+
+!+identify a simple practice for this
+
+
+=== Security and permission guidelines ===
+
+==== Permissions are only granted to *roles* ====
+
+Bungeni categorically grants/denies permissions only to *roles* i.e. never directly to a principal (or group). And, to reduce runtime overhead, the `BungeniSecurityPolicy` actually does not perform the check for any direct permission grants on principals and groups.
+
+==== Grant a permission only when needed ====
+Grant a permission only when needed i.e. minimize global grants. A premise of Zope 3 security is that "Access is disallowed unless explicitly allowed" (see [http://wiki.zope.org/zope3/Zope3SecurityModel Zope3SecurityModel]). Bungeni should adopt a similarly-spirited approach--in particular, Bungeni should *disfavour global grants* to then deny as needed downstream (this would, as practice, actually translate to something like "Access is allowed unless explicitly disallowed"!). Instead, Bungnei should, whenever possible, prefer the general practice of simply granting only when needed.
+
+==== Redefine all TYPE.View permissions to a generic `bungeni.View` ====
+For convenience, all `bungeni.TYPE.View` permissions should always be redefined to `bungeni.View` _(!+zope.View currently)_ and then all "TYPE actions" requiring `bungeni.TYPE.View` can be simply always be checked against this one generic permission i.e. `bungeni.View`.
+
+But, only `TYPE.View` class of permissions should be redefined!
+
+And, a `TYPE.View` permissions (that is therefore redefined) *must never* be globally granted. In addition to the _minimize global grants_ rule above, to favour "granting only when needed", any redefined permission must *must never* be globally granted, as this can introduce unintentional grant of the generic redefined permission on other unrelated types.
+
+==== Distinct UI and Type permissions ====
+UI permissions are necessarily *always granted globally*, while `type` permissions _almost always_ need to be granted locally. There should be zero overlap between permissions used for UI elements and components, and permissions used for actions on domain data objects.
+
+
+==== Distinct permission _scopes_ ====
 For clarity of intention, permission _scopes_ should be kept as distinct as possible. Notably, the "permission scope spaces" implied by `bungeni.Authenticated` and those implied by other "custom" roles (all of which imply `bungeni.Authenticated`) overlap. Grants to roles from these two sets should not be mixed, as:
 
- * Debugging permission checking is made unnecessarily more difficult; indeed undestanding what a permission setting should be by reading the code becomes virtually impossible.
+ * Debugging permission checking is made unnecessarily more difficult; indeed understanding what a permission setting should be by reading the code becomes virtually impossible.
  * It just invites for developer inconsistency.
  * This inconsistency will result in incorrect decisions in some cases e.g. View on a change record of an attachment to a a document may be granted to a member virtue of Authenticated having zope.View (be it globally or locally on the attachment instance or on any other ancestor instance).
 
@@ -95,31 +116,19 @@ I propose adoption of the following policy to keep permission determination as s
     the following 4 combinations: `{global, local} x {A, B}`
 
 
-=== Security requirement statements ===
-
-These are done in:
-
-{{{
-bungeni.main/bungeni/models/domain.zcml
-bungeni.main/bungeni/ui/configure.zcml
-...
-}}}
-
-!+identify a simple practice for this
-
 ----
 == ZCML ==
 
 Given the liberal misuse and overuse of ZCML to date, rendering the code base a lot more opaque than necessary, increasing debugging overhead, increasing refactoring overhead, creating numerous cyclic but never executed interdependencies between code, and other code entropy, there should be no new ZCML declaration added to the bungeni code base.
 
-Other than purely security-related declarations (advantages of doing this inline are not as strong as fro other types of components), all registrations on the Zope Component Registry should be done in python.
+Other than purely security-related declarations (advantages of doing this inline are not as strong as for other types of components), all registrations on the Zope Component Registry should be done in python.
 
 The decorator utilities available in the module `bungeni.ui.register` should be used to register all software components. If any functionality is missing in that module, it should be added as needed.
 
 ----
 == Views and Viewlets ==
 
-To promote consistency, faciltate debugging anmd management, all views and viewlet classes must inherit, respectively, from the bungeni base classes 
+To promote consistency, facilitate debugging and management, all views and viewlet classes must inherit, respectively, from the bungeni base classes 
 {{{
 bungeni.ui.browser.BungeniBrowserView
 bungeni.ui.browser.BungeniViewlet
@@ -134,8 +143,8 @@ These base classes offer an easy hook for centrally adding handling of views and
  * Localization of any data is done *outside* of templates. This to make it clear where data *should* be localized, avoiding the frequent occurrences of data either _not being localized_ at all or data _being localized twice_ (in application python code and in the templates). And, as localization cannot be guaranteed to *always* be performed within the templates, then it should *always* be done in application code, outside of the templates.
 
  * Localization of data should be done as late as possible. This is for two reasons:
-   # retain the data in its most semantic state as long as possible, to never lose for example the option to do proper numeric or date artithmentic, or proper string interpolation.
-   # to ensure that the internalization takes into proper account the user's locale!
+   # retain the data in its most semantic state as long as possible, to never lose for example the option to do proper numeric or date arithmentic, or proper string interpolation.
+   # to ensure that the localization takes into proper account the user's current locale!
  
 
 <wiki:comment>
