@@ -1,0 +1,51 @@
+#summary How to install eXist-db
+#sidebar TableOfContents
+
+<wiki:toc max_depth="4" />
+
+
+= Pre-Requisites =
+
+You should have completed the following steps :
+ 
+ * *[Install_PreRequisites_Fabric How to setup the Pre-requisites]* 
+ * *[Install_Bungeni_Fabric How to setup Bungeni Parliamentary Information System]* 
+
+ # *The eXist-db build is an optional deployment configuration which adds an XML documents build repository and framework files into Bungeni.*
+ # *The eXist-db currently works on Ubuntu 10.04 + *
+
+= Download & Setup =
+
+See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
+
+== Installing eXist-db == 
+{{{
+fab -H <host-name-or-ip> exist_install
+}}}
+This installs the eXist-db build.
+
+== Installing the framework files == 
+{{{
+fab -H <host-name-or-ip> exist_fw_install
+}}}
+This installs the eXist framework files for browsing the Bungeni XML repository.
+
+== Installing demo data ==
+{{{
+fab -H <host-name-or-ip> exist_load_demodata
+}}}
+
+Alternatively, if you are running Bungeni on localhost, you can run:
+{{{
+./fl exist_install && ./fl exist_fw_install && ./fl exist_load_demodata
+}}}
+
+This will install eXist-db and load some demo data altogether.
+
+= Starting and Stopping exist = 
+
+See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager#exist using supervisor to start / stop eXist]
+
+= About BungeniXQFramework =
+
+see [http://code.google.com/p/bungeni-exist/wiki/BungeniXQFramework Bungeni XQ Framework Documentation]
