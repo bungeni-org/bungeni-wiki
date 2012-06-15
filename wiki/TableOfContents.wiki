@@ -5,6 +5,7 @@
      *  [Install_PreRequisites_Fabric How to install pre-requisites]
      *  [Install_Bungeni_Fabric How to install Bungeni]
      *  [Install_Plone_Fabric How to install Plone]
+     *  [Install_eXistdb_Fabric How to install eXist-db]
      *  [Install_DeliverancePortal_Fabric How to install Deliverance]
      *  [HowTo_SupervisorServiceManager How to use the supervisor service manager]
      *  [HowTo_MaintainAndUpdateInstallation How to maintain and update an installation]
