@@ -7,7 +7,7 @@ The supervisor service manager is used to start / stop the bungeni services.
 
 Supervisor can be accessed via a browser -- on the host, port specified [http://code.google.com/p/bungeni-portal/wiki/HowTo_ConfigureFabricIni#supervisor_host_,_supervisor_port in the fabric setup parameters]
 
-[http://bungeni-portal.googlecode.com/files/supervisor.png]
+[http://bungeni-portal.googlecode.com/files/supervisor-exist.png]
 
 This page documents controlling the supervisor monitor using fabric commands run on the command line.
 
@@ -68,6 +68,20 @@ Stopping :
 
 {{{
 fab stop_service:plone
+}}}
+
+== exist ==
+
+Starting : 
+
+{{{
+fab start_service:exist
+}}}
+
+Stopping : 
+
+{{{
+fab stop_service:exist
 }}}
 
 
