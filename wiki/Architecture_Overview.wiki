@@ -499,5 +499,5 @@ The following packages are providing the interface for various parts of the Bung
 
 ==== Bungeni CMS ====
 
-At the moment of writing this document it is a vanilla Plone with a minimal setup for the IA (Information Architecture). Some portal sections are folder but in the final integration with Deliverance they are mapped on BungeniPortal urls. Referrer to http://www.plone.org form more informations about Plone. The used version is 3.3.3
+It is a Plone installation with custom and external products installed to provide extended functionality. Some portal sections are folders but in the final integration with Deliverance they are mapped on to BungeniPortal urls. Refer to http://www.plone.org for more information about Plone. The used version is 4.1
 
