@@ -92,8 +92,12 @@ The configuration is a set of metadata associated with the current report type.
 ==== Configuration Options ====
 || *Option* || *Sample* || *Description* ||
 || title || `<title>All motions</title>` || This is the report title. It can be referenced within the body. ||
-|| length || `<length>1m</length>` || Period covered by the report starting from a selected date. In this case - One(1) month. *More on this belo*. ||
+|| length || `<length>1m</length>` || Period covered by the report starting from a selected date. In this case - One(1) month. *More on this below*. ||
 || language || `<language>fr</language>` || The language of the content in generated report ||
+|| doctypes || `<doctypes>question</doctypes>` || A space separated list of document types for which this template may generate reports. ||
+
+* A note on doctypes configuration *
+`Please note that the doctypes configuration parameter has meaning only in the context of document templates.`
 
 ===== Configuring Report Length =====
 This is the notation used to specify the period covered by a report (_*n*_ is a positive integer greater than _1_)
@@ -187,7 +191,26 @@ sample report template. The `br:source` value at that point is picked from the c
 http://bungeni-portal.googlecode.com/svn/wiki/annotated-report-contexts.png
 
 = What are the available context names =
-* This section is in development *
+The documentation for the names available for use in reports can generated from within Bungeni's home folder.
+Simply run this script:
+{{{
+    ./bin/reporting-documentation
+}}}
+This will generate a tree in HTML of these names indiside the {{{docs/reporting/}}} folder within Bungeni's home folder.
+You can open this file in any browser to see the tree of available names that can be incorporated in a report template.
+
+If you are running Bungeni in debug mode, the reporting documentation can also be accessed from this address in a default installation.
+
+{{{
+    http://localhost:8081/docs/reporting/
+}}}
+
+Below is an image showing the generated tree of names:
+
+http://bungeni-portal.googlecode.com/svn/wiki/reporting-sample-doctree.png
+
+`Note that in the case of document templates the names available are limited to the particular document section.`
+`For instance in the case of a bill only the names under `bills` in the above figure would be available to the report template.`
 
 = Notes =
 ^1^ Portable Document Format
