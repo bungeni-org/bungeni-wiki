@@ -31,6 +31,12 @@ Adding or deleting templates will determine the options provided to generate rep
 == Document Context ==
 This allows customization the structure and composition of parliamentary documents generated in external formats such as PDF and ODT
 
+Below is a sample of a document download session for a question. 
+Document templates registered for the question *document type* will direct the PDF/ODT output.
+See [XHTML_Report_Templates#Templates]
+
+http://bungeni-portal.googlecode.com/svn/wiki/images/reporting-documents-download.png
+
 = Templates =
 The templates are based on XHTML with an additional set of tags to support inclusion of bungeni content into the final document.
 Templates are stored in *bungeni_custom* under: */reporting/templates*
