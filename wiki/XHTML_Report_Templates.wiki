@@ -20,6 +20,14 @@ Within scheduling, the reporting infrastructure provides a facility to produce d
  * a report on business for the week
  * a report on motions and questions scheduled within the past six months
 
+==== Sample Report Generation Session (Scheduling) ====
+Below is a screenshot of a report generation session.
+The templates detailed below will appear as options on the report generation screen.
+
+http://bungeni-portal.googlecode.com/svn/wiki/images/reporting-scheduling-generation-session.png
+
+Adding or deleting templates will determine the options provided to generate reports within this context.
+
 == Document Context ==
 This allows customization the structure and composition of parliamentary documents generated in external formats such as PDF and ODT
 
@@ -188,7 +196,7 @@ As a result `dc:title` refers to the dublin core title of the current question.
 Below is an annotated image showing the context variables (in yellow) applicable in our
 sample report template. The `br:source` value at that point is picked from the context variable.
 
-http://bungeni-portal.googlecode.com/svn/wiki/annotated-report-contexts.png
+http://bungeni-portal.googlecode.com/svn/wiki/images/annotated-report-contexts.png
 
 = What are the available context names =
 The documentation for the names available for use in reports can generated from within Bungeni's home folder.
@@ -207,7 +215,7 @@ If you are running Bungeni in debug mode, the reporting documentation can also b
 
 Below is an image showing the generated tree of names:
 
-http://bungeni-portal.googlecode.com/svn/wiki/reporting-sample-doctree.png
+http://bungeni-portal.googlecode.com/svn/wiki/images/reporting-sample-doctree.png
 
 `Note that in the case of document templates the names available are limited to the particular document section.`
 `For instance in the case of a bill only the names under `bills` in the above figure would be available to the report template.`
