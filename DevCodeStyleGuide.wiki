@@ -33,7 +33,7 @@ Only use *editing tools* that do *not automatically modify* source code format i
  * Always specify the most _key_ of parameters on the opening line (for long collection-like code segments).
 
 
-=== Quote characters ===
+=== Quote character ===
 
 Prefer the double-quote `"` instead of the single-quote `'` character, whenever you have the choice.
 
@@ -149,6 +149,64 @@ and not:
     ((role, s) for s, p, role in self.permissions if p == permission)
 }}}
 
+
+=== Comments and Docstrings ===
+
+Exactly as specified in [http://www.python.org/dev/peps/pep-0008/ PEP 8], except for following clarifications/refinements:
+
+==== Block and Inline Comments ====
+
+Python supports single line comments only--anything on a line following an {{{#}}} is a comment. Block comments are a sequence of such 1-line comments (with no other code on the line) and are indented as per the code block. Inline comments share the line with some other code.
+
+In both cases, there should be a single space character between the {{{#}}} and the comment text i.e.
+{{{
+# data dict to be published
+data = {}
+}}}
+and *not*:
+{{{
+#data dict to be published
+data = {}
+}}}
+
+If the one-liner comments are just simple indicative phrases, as the sample above, then they should *not be punctuated* e.g. start with a capital or end with a period.
+
+But more elaborate comments should *use proper grammar and punctuation*. 
+
+==== Commented Code ====
+
+Contrary to _real_ comments, there should *not* be any additional whitespace characters added after the {{{#}}} comment marker i.e.:
+{{{
+# data dict to be published
+#data = {}
+}}}
+and *not*:
+{{{
+# data dict to be published
+# data = {}
+}}}
+
+But, whenever it is syntacticly possible, the more efficient and clear way to _disable_ (aka to _comment out_) code should be preferred--this is to turn the code into a multi-line string (see _[#Quote_characters Quote characters]_ section), and preferably accompanied with a _[#Revisit_Comments Revisit Comment]_ to indicate why, i.e.:
+{{{
+''' !+XYZ(mr, jul-2012) intended for when feature xyz is in place
+# data dict to be published
+data = {}
+'''
+}}}
+
+==== Docstrings ====
+
+As per [http://www.python.org/dev/peps/pep-0008/ PEP 8], with the recommendation to *not* precede the closing triple double-quote chars `"""` by a blank line, e.g.:
+{{{
+def complex(real=0.0, imag=0.0):
+    """Form a complex number.
+    
+    Keyword arguments:
+    real -- the real part (default 0.0)
+    imag -- the imaginary part (default 0.0)
+    """
+}}}
+
 === Quote characters ===
 
 Always use a single double-quote char `"` to delineate a short literal string. 
@@ -262,7 +320,9 @@ Same rules apply for *multi-line block-opening statements*, giving the following
         title = context.title
 }}}
 
-Chaining of expressions can sometimes result in code that is very awkward to format in a readable way. The recommendation here is to follow same guidelines as for all other cases described so far, plus limit to a _single sub-expression per line_. E.g.
+Chaining of expressions can sometimes result in code that is very awkward to format in a readable way. The recommendation here is to first limit to a _single but complete_ sub-expression per line i.e. each 1-line sub-expression may itself be composite as long as it fits in the line. Then, to mark the "closing-chained-continuation" just add an additional indentation (just one, relative to the statement/expression opening), with the closing parenthesis of each chained sub-expression on the next line as start of the next chained expression.
+
+For example, the {{{session.query(...)}}} below is an expression that does not fit on a single line, while the {{{.filter(...)}}}, {{{.order_by(...)}}} and {{{.options(...)}}} are single expressions that do:
 
 {{{
         query = session.query(domain.Sitting
@@ -271,13 +331,32 @@ Chaining of expressions can sometimes result in code that is very awkward to for
             ).options(eagerload("group"), eagerload("item_schedule"))
 }}}
 
-and *not*:
+The same above code should *not* be formatted something like:
 
 {{{
         query = session.query(domain.Sitting).filter(self.sitting_filter
             ).order_by(schema.sitting.c.start_date).options(
                 eagerload("group"), eagerload("item_schedule"))
 }}}
+
+
+<wiki:comment>
+indentation is not quite as other cases, as in theory each closing paren 
+could *end* the total expression, except that we "chain on"... 
+
+So, as rule for "close-continuations" is to add an indentation, then all else 
+should also follow suit, even any "long or multi parameters" of individual 
+sub-expressions:
+
+member_of_parliament = rdb.join(schema.user_group_memberships, 
+        schema.users,
+        schema.user_group_memberships.c.user_id == schema.users.c.user_id
+    ).join(schema.parliaments,
+        schema.user_group_memberships.c.group_id ==
+            schema.parliaments.c.parliament_id)
+mapper(MemberOfParliament, member_of_parliament)
+</wiki:comment>
+
 
 === Multiple forms for same -- adopt and use one ===
 
