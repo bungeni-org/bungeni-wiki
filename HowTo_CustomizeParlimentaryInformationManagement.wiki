@@ -1,0 +1,59 @@
+#summary How to customize parliamentary information management
+
+<wiki:toc max_depth="5" />
+
+== Overview ==
+=== Using the customization folder === 
+=== Making a private customization folder ===
+=== Testing customizations ===
+=== Best practices ===
+ 
+== Languages ==
+=== Setting the default language for the system ===
+=== Enabling other languages ===
+=== Managing message strings in Bungeni ===
+
+== Vocabularies == 
+=== Managing  vocabularies ===
+
+== Roles == 
+=== System roles - what they mean and default usage ===
+=== How to set up user defined roles ===
+
+== Parliamentary Metadata ==
+=== Adding a parliament ===
+=== Adding Parliamentary entities ===
+=== Committees ===
+=== Groups ===
+=== Government ===
+=== Users ===
+=== Offices ===
+
+== Documents ==
+=== Enabling and disabling custom document types === 
+
+== Forms ==
+=== How to localize forms === 
+=== Form UI (workspace) === 
+=== Changing display order of fields === 
+=== Show/Hide fields on a Form per mode ===  
+
+== Work-flow  ==
+=== How to map documents/groups/membership workflow === 
+=== How to configure documents/groups/membership workflow === 
+
+== Workspaces ==
+=== How to configure workspaces === 
+=== How to change workspace tab content for a document === 
+
+== Notification  ==
+=== How to set up notifications === 
+
+== Publications (agenda, minutes, reports) ==
+=== How to localise  agenda, minutes, reports === 
+
+== Layout, theme and formats == 
+=== Changing page layout ===   
+=== Changing the Menu Order and Structure ===   
+=== Theming Bungeni using Skins ===  
+=== Styling with CSS  ===  

@@ -1,0 +1,9 @@
+#summary How to customize the Institutional Repository
+
+<wiki:toc max_depth="5" />
+
+== Setting Date and Time formats ==
+== System Parameters ==
+== Customizing Menus and Navigation ==
+== Search and Listing filters customization ==
+== Modifying page layouts ==
