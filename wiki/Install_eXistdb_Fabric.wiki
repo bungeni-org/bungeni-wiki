@@ -24,20 +24,21 @@ fab -H <host-name-or-ip> exist_install
 }}}
 This installs the eXist-db build.
 
+== Installing demo data ==
+{{{
+fab -H <host-name-or-ip> exist_load_demodata
+}}}
+
 == Installing the framework files == 
 {{{
 fab -H <host-name-or-ip> exist_fw_install
 }}}
 This installs the eXist framework files for browsing the Bungeni XML repository.
 
-== Installing demo data ==
-{{{
-fab -H <host-name-or-ip> exist_load_demodata
-}}}
 
 Alternatively, if you are running Bungeni on localhost, you can run:
 {{{
-./fl exist_install && ./fl exist_fw_install && ./fl exist_load_demodata
+./fl exist_install && ./fl exist_load_demodata && ./fl exist_fw_install 
 }}}
 
 This will install eXist-db and load some demo data altogether.
