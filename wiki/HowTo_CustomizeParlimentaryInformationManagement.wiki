@@ -93,5 +93,59 @@ See [HowTo_Generate_i18nCatalogs How to generate I18N Catalogs]
 == Layout, theme and formats == 
 === Changing page layout ===   
 === Changing the Menu Order and Structure ===   
-=== Theming Bungeni using Skins ===  
+
 === Styling with CSS  ===  
+
+folder structure:
+
+{{{
+|-- css
+|-- images
+|-- js
+`-- themes
+    |-- layout.html
+    `-- rules.xml
+}}}
+
+The CSS files for styling Bungeni are broken down into two files.
+
+_reset.css_ and _skin.css_
+
+  * reset.css - Has styling properties that affect width, height and alignment of Bungeni.
+
+  * skin.css - Cosmetic changes such as text-color, background-color, border, typography are done here. 
+
+styling in both CSS files is split into four major sections:
+
+  * GENERAL - Applies site-wide
+  * TEMPLATE-PORTAL - Anonymous user-space or public view
+  * TEMPLATE-WORKSPACE - Logged in area
+  * TEMPLATE-PORTAL-EXIST - Public view from an XML repository
+
+Denoted at the start by a comment banner. e.g. for TEMPLATE-PORTAL
+
+{{{
+/* =============================================================================
+   TEMPLATE PORTAL - Styling applied on portal
+   ========================================================================== */
+}}}
+
+These are top-level class selector's found on the HTML `body` tag e.g. `<body class="template-portal">`
+
+To increase width of the portal from the default `960px`.
+
+_reset.css_ -> find `template-portal` top-level section and look under width sub-section
+
+Similar process for change background-color albeit under the _skin.css_ file
+
+=== Theming Bungeni using Skins ===  
+
+Bungeni skins are located under the custom folder:
+
+{{{
+{BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
+}}}
+
+!+TO DO
+
+enabling theme
