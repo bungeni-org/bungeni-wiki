@@ -50,7 +50,8 @@
 === How to set up notifications === 
 
 == Publications (agenda, minutes, reports) ==
-=== How to localise  agenda, minutes, reports === 
+=== How to localise  agenda, minutes, reports ===
+  * [XHTML_Report_Templates Writing Templates for Report Generation]
 
 == Layout, theme and formats == 
 === Changing page layout ===   
