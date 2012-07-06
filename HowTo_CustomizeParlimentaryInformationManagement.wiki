@@ -9,9 +9,42 @@
 === Best practices ===
  
 == Languages ==
+Bungeni language configuration is managed in this file:
+{{{
+{BUNGENI_INSTALL_PATH}/src/bungeni_custom/__init__.py. The location of this file may be different if you have a custom configuration location.
+See [HowTo_CustomizeParlimentaryInformationManagement#Using_the_customization_folder Using the customization folder]
+}}}
+These parameters determine how languages are handled in Bungeni and are discussed below.
+{{{
+# language ids, either as a space-separated string or as a list of strings
+zope_i18n_allowed_languages = "ar en es es-do fr it nl pt ru sw tk" 
+
+# boolean: True, False
+zope_i18n_compile_mo_files = True 
+
+# string, language identifier, must be one of zope_i18n_allowed_languages
+default_language = "en"
+
+# language ids for languages written right to left, as a space-separated string
+right_to_left_languages = "ar" 
+}}}
+
 === Setting the default language for the system ===
+The system's default language can be set via the parameter `default_language` which is one of the language codes in those listed in `zope_i18n_allowed_languages`.
+This language will be used in the Bungeni user interface if the user has not chosen another language from the language menu or the browser language is not one of `zope_i18n_allowed_languages`.
+
 === Enabling other languages ===
+To enable or disable languages, add or remove items from the list `zope_i18n_allowed_languages`. 
+Only enabled languages will show up in Bungeni's languages menu. With the settings above this will be the the language menu.
+
+http://bungeni-portal.googlecode.com/svn/wiki/images/languages-menu.png
+
+=== Other language settings ===
+The parameter `zope_i18n_compile_mo_files` determines if message catalogs are compiled to binary formats.
+To specify the languages for which the user interface should be rendered right-to-left, add or remove languages from `right_to_left_languages`.
+
 === Managing message strings in Bungeni ===
+See [HowTo_Generate_i18nCatalogs How to generate I18N Catalogs]
 
 == Vocabularies == 
 === Managing  vocabularies ===
