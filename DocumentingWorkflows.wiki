@@ -23,6 +23,12 @@ To generate the documentation, from the buildout folder run :
 
 This will generate the document in the `./docs` folder within the buildout.
 
+If you are running Bungeni in debug mode, the workflow documentation can also be accessed via any brwoser via this address in a default installation.
+
+{{{
+    http://localhost:8081/docs/
+}}}
+
 
 = Internal Details =
 
