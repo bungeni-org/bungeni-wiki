@@ -91,6 +91,35 @@ See [HowTo_Generate_i18nCatalogs How to generate I18N Catalogs]
   * [XHTML_Report_Templates Writing Templates for Report Generation]
 
 == Layout, theme and formats == 
+The layout, look and feel of the portal is controlled by a theme template in conjunction with a set of css styles and rule files. A default theme is enabled for each Bungeni installation.
+
+=== Enabling a country theme ===
+
+Sample country themes exist at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
+
+To enable a country theme, edit the country_theme parameter in the Fabric 'setup.ini' file. The default setting is as follows:
+
+{{{
+[custom]
+...
+country_theme = default
+}}}
+
+Set this parameter to the appropriate value (_It is recommended to use the ISO 3166-1 alpha-2 codes_) e.g. for the Kenya theme the setting would be as follows:
+
+{{{
+[custom]
+...
+country_theme = ke
+}}}
+
+then run the following command in fabric
+
+
+{{{
+fab -H localhost enable_country_theme config_ini:portal 
+}}}
+
 === Changing page layout ===   
 === Changing the Menu Order and Structure ===   
 
@@ -145,7 +174,3 @@ Bungeni skins are located under the custom folder:
 {{{
 {BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
 }}}
-
-!+TO DO
-
-enabling theme
