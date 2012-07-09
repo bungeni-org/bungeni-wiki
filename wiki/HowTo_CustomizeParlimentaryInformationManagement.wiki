@@ -80,8 +80,41 @@ See [HowTo_Generate_i18nCatalogs How to generate I18N Catalogs]
 === How to configure documents/groups/membership workflow === 
 
 == Workspaces ==
+Every user who logs on to Bungeni has a workspace, where they may view, add and edit documents. The workspace in Bungeni is very similar to the interface provided by email applications such as Gmail or Yahoo mail.
+
+
+The workspace has 3 main sections
+  # my documents - Here a user finds all the documents that he has created, edited or signed in the lifetime of the current parliament
+  # documents under consideration - This section contains all the documents currently going through the parliamentary document workflow that are viewable by other users ie. they are in states tagged "public" in the workflow configuration and are not tagged as being in terminal state.
+  # scheduling - The schedule of sittings of the plenary and committees is found here. See section on scheduling
+
+
+=== my documents section ===
+
+The "my documents" section has four tabs
+
+  * draft - This tab contains all the documents that the user is currently working on that have not been submitted to anyone else
+  * inbox - This tab contains all the documents that require attention from the user, eg. a bill that requires clarification from an MP
+  * sent - This tab contains documents that the user has worked on and submitted
+  * archive - Documents this user submitted that have reached their terminal state in the current parliament are found in this tab
+
+
 === How to configure workspaces === 
-=== How to change workspace tab content for a document === 
+
+Every document type has a workspace configuration file in the workspace folder of the bungeni_custom folder.
+
+The administrator needs to specify which workspace tabs a document in a certain state will appear in for the different users.
+
+For example
+
+{{{
+<state id="clarification_required">
+  <tab id="inbox" roles="bungeni.Owner"/>
+  <tab id="sent" roles="bungeni.Clerk"/>
+</state>
+}}}
+
+The above snippet specifies that a document in the state, "clarification_required" will appear in the inbox of the person who introduced it(bungeni.Owner) and in the sent folder of the clerk(bungeni.clerk)
 
 == Notification  ==
 === How to set up notifications === 
