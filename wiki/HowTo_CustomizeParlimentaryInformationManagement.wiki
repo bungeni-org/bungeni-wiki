@@ -54,8 +54,35 @@ See [HowTo_Generate_i18nCatalogs How to generate I18N Catalogs]
 === Managing  vocabularies ===
 
 == Roles == 
+
+Roles in Bungeni are used to specify who has permission to perform different tasks. Please have a look at this [http://wiki.zope.org/zope3/secureobjects.html page] for a full description of how security works in Bungeni
+
 === System roles - what they mean and default usage ===
+
+There are two main system roles that are essential to how Bungeni works, bungeni.Owner and bungeni.Signatory. This roles are used in Bungeni to assign permissions to the owner and signatory of a document respectively.
+
 === How to set up user defined roles ===
+
+A Bungeni administrator may define additional parliament specific roles in bungeni_custom/sys/acl/roles.zcml. A role added here may then be associated with an office while adding an office.
+
+<role title="Clerk" role="bungeni.Clerk"/>
+
+In the example above, a role is created called bungeni.Clerk. The title "Clerk" is what appears in the UI. This role may then be used anywhere else in the system where a role may be specified eg. the workspace configuration or the workflow configuration.
+
+To associate this role with an office, edit an office and select it in the "roles" select box.
+
+
+==== Sub Roles ====
+
+One may also add sub roles to Bungeni that may be used to grant finer grained permissions.
+
+{{{
+<bungeni:subrole id="bungeni.Clerk.QuestionClerk" title="Question Clerk" role="bungeni.Clerk"/>
+}}}
+
+In the above example, a new subrole is created to is subordinate to the bungeni.Clerk role. The title of the subrole is what appears in the UI and the ID is used elsewhere in the system.
+
+
 
 == Parliamentary Metadata ==
 === Adding a parliament ===
@@ -117,6 +144,10 @@ For example
 The above snippet specifies that a document in the state, "clarification_required" will appear in the inbox of the person who introduced it(bungeni.Owner) and in the sent folder of the clerk(bungeni.clerk)
 
 == Notification  ==
+
+
+
+
 === How to set up notifications === 
 
 == Publications (agenda, minutes, reports) ==
