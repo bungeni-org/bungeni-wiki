@@ -76,6 +76,16 @@ Bungeni categorically grants/denies permissions only to *roles* i.e. never direc
 ==== Grant a permission only when needed ====
 Grant a permission only when needed i.e. minimize global grants. A premise of Zope 3 security is that "Access is disallowed unless explicitly allowed" (see [http://wiki.zope.org/zope3/Zope3SecurityModel Zope3SecurityModel]). Bungeni should adopt a similarly-spirited approach--in particular, Bungeni should *disfavour global grants* to then deny as needed downstream (this would, as practice, actually translate to something like "Access is allowed unless explicitly disallowed"!). Instead, Bungnei should, whenever possible, prefer the general practice of simply granting only when needed.
 
+==== Permission Naming ====
+
+All permission names should have the form:
+{{{
+    bungeni.{object[ .subobject ]}.{Action}
+}}}
+where :
+ # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated subtypes).
+ # _Action_ is a *verb* indicating the permitted target action (capitalized). 
+
 ==== Redefine all TYPE.View permissions to a generic `bungeni.View` ====
 For convenience, all `bungeni.TYPE.View` permissions should always be redefined to `bungeni.View` _(!+zope.View currently)_ and then all "TYPE actions" requiring `bungeni.TYPE.View` can be simply always be checked against this one generic permission i.e. `bungeni.View`.
 

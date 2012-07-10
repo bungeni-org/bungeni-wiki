@@ -19,7 +19,7 @@ Bungeni language configuration is managed in this file:
 {{{
 {BUNGENI_INSTALL_PATH}/src/bungeni_custom/__init__.py. 
 }}}
-The location of this file may be different if you have a custom configuration location. (See [HowTo_CustomizeParlimentaryInformationManagement#Using_the_customization_folder Using the customization folder])
+The location of this file may be different if you have a custom configuration location. (See [HowTo_CustomizeParliamentaryInformationManagement#Using_the_customization_folder Using the customization folder])
 
 The parameters in the table below will be found in this file and determine how languages are handled in Bungeni.
 
@@ -87,7 +87,7 @@ In the above example, a new subrole is created to is subordinate to the bungeni.
 === Changing display order of fields === 
 === Show/Hide fields on a Form per mode ===  
 
-== Work-flow  ==
+== Workflow  ==
 === How to map documents/groups/membership workflow === 
 === How to configure documents/groups/membership workflow === 
 
