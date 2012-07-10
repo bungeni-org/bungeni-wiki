@@ -44,7 +44,7 @@
      * [Authentication_in_Bungeni How the authentication stack in bungeni works]
      * [HowTo_PermissionsRolesAndDefinitions Permissions Roles and Definitions]
      * [HowTo_AddNewOfficeToBungeni How to add a new office to Bungeni]
-     * [DevFormLocalization Localization of Bungeni Forms]
+     * [DevFormLocalization 2010 Redesign Rationale: Localization of Bungeni Forms]
      * [HowTo_AddValidationToForms How to do add validation to Forms]
      * [AlchemistsUIElements How to tweak the layout of Bungeni Forms]
      * [CustomSortForContainers How to do change the sort order for Bungeni folderish containers]

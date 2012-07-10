@@ -3,7 +3,7 @@
 
 <wiki:toc max_depth="4" />
 
-= Localization of Bungeni Forms = 
+= 2010 Redesign Rationale: Localization of Bungeni Forms = 
 
 == Requirements == 
 

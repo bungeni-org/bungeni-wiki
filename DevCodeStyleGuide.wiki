@@ -1,10 +1,10 @@
-#summary Bungeni Source Code Style Guide
+#summary Source Code Style Guide
 #labels Phase-Implementation
 #sidebar TableOfContents
 
-= Bungeni Source Code Style Guide =
+= Source Code Style Guide =
 
-Recommendations for Bungeni source code style, 
+Recommendations for project source code style, 
 with the aim of enhancing source code *read*-ability, *grep*-ability and *print*-ability and consequently, _understand_-ability, _debug_-ability, _test_-ability, _maintain_-ability, etc.
 
 However, if conforming to these source style recommendations 
@@ -20,7 +20,7 @@ Guidelines that apply to all project source code, irrespective of format e.g.
 `.py`, `.xml`, `.zcml`, `.js`, `.css`, etc, 
 even if focus here is primarily on python and XML. 
 
-Only use *editing tools* that do *not automatically modify* source code format in any way! This means you *may not* use any tool that does _any kind of source reformatting_ e.g. you *may not* use tools like _oXygen XML Editor_ that may auto-reformat whitespace or even change the order of an XML element's attributes. In general, what you want to have is a *good text editor* that respects your text source.
+Only use *editing tools* that do *not automatically modify* source code format in any way! This means you *should not* use any tool that does _any kind of source reformatting_ e.g. auto-reformat whitespace or even change the order of an XML element's attributes. In general, what you want to have is a *good text editor* that respects *your* text source.
 
 
 === Line length, indentation, continuation lines ===
@@ -93,19 +93,6 @@ class IDateRangeFilter(interface.Interface):
 }}}
 
 
-=== Naming ===
-
-==== Permissions ====
-
-All permission names should have the form:
-{{{
-    bungeni.{object[ .subobject ]}.{Action}
-}}}
-where :
- # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated subtypes).
- # _Action_ is a *verb* indicating the permitted target action (capitalized). 
-
-
 ----
 
 == Python ==
@@ -169,9 +156,7 @@ and *not*:
 data = {}
 }}}
 
-If the one-liner comments are just simple indicative phrases, as the sample above, then they should *not be punctuated* e.g. start with a capital or end with a period.
-
-But more elaborate comments should *use proper grammar and punctuation*. 
+If the one-liner comments are just simple indicative phrases, as the sample above, then they should *not be punctuated* e.g. start with a capital or end with a period. But more elaborate comments should *use proper grammar and punctuation*. 
 
 ==== Commented Code ====
 
@@ -220,9 +205,9 @@ Only use triple single-quotes `'''` when the literal string contains itself
 The use of triple single-quotes `'''` should be reserved only to 
 *temporarily comment out* entire code sections.
 
-For long string that should not include any additional whitespace as a result 
-of pretty source formatting should use the auto-concatenation feature of 
-adjacent strings e.g. (preferably):
+For a long string that should not include any additional whitespace as a result 
+of pretty source formatting the auto-concatenation feature of 
+adjacent strings should be used e.g. (preferably):
 {{{
     long_string = "some initial text as part of a single long line string " \
         "and some more text for the same string and some more text for the " \
@@ -320,7 +305,7 @@ Same rules apply for *multi-line block-opening statements*, giving the following
         title = context.title
 }}}
 
-Chaining of expressions can sometimes result in code that is very awkward to format in a readable way. The recommendation here is to first limit to a _single but complete_ sub-expression per line i.e. each 1-line sub-expression may itself be composite as long as it fits in the line. Then, to mark the "closing-chained-continuation" just add an additional indentation (just one, relative to the statement/expression opening), with the closing parenthesis of each chained sub-expression on the next line as start of the next chained expression.
+Chaining of expressions can sometimes result in code that is very awkward to format in a readable way. The recommendation here is to first limit to a _single but complete_ sub-expression per line i.e. each 1-line sub-expression may itself be composite as long as it fits in the line. Then, to mark the "closing-chained-continuation" just add one additional indentation (relative to the statement/expression opening) with the closing parenthesis of each chained sub-expression on the next line as start of the next chained expression.
 
 For example, the {{{session.query(...)}}} below is an expression that does not fit on a single line, while the {{{.filter(...)}}}, {{{.order_by(...)}}} and {{{.options(...)}}} are single expressions that do:
 
@@ -366,12 +351,12 @@ Always use `!=` and not `<>` (that is equivalent).
 
 ----
 
-== XML / ZCML ==
+== XML ==
 
 
 === Blank lines ===
 
-If you must, use blank line *sparingly* -- only use a single blank line between elements on the infrequent occasion when those elements are completely unrelated to each other.
+If you must, use blank lines *sparingly* -- only use a single blank line between elements on the infrequent occasion when those elements are completely unrelated to each other.
 
 
 === Multi-line elements ===
@@ -419,16 +404,17 @@ For example:
     />
 }}}
 
+----
 
-== Database ==
+== Relational Database ==
 
  * Table names are singular.
  * Table and column names should be in lowercase and composed of underscore-separated whole words.
  * For the cases when a table has a single auto-generated surrogate PK column the name of the column should be: `"%s_id" % (table_name)`.
  * Index names should be: `"%s_idx_%s" % (table_name, "_".join(column_names))`, where the ORDER of column names should follow the order of definition in the table. Plus, should there ever be the need to have multiple indices on same column set, an additional descriptive postfix e.g. `_unique`.
- * Suffix both date and datetime type columns with `_date` !+?
  * Prefix boolean-type columns with `is_` or `has_`.
- 
+ * Suffix both date and datetime type columns with `_date` !+?
+
 
 <wiki:comment>
 </wiki:comment>
