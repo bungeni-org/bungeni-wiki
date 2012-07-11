@@ -146,6 +146,15 @@ The layout, look and feel of the portal is controlled by a theme template in con
 
 Sample country themes exist at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
 
+
+Each country theme directory has a default structure:
+
+{{{
+|-- css
+|-- images
+`-- layout.html
+}}}
+
 To enable a country theme, edit the country_theme parameter in the Fabric 'setup.ini' file. The default setting is as follows:
 
 {{{
@@ -170,24 +179,48 @@ fab -H localhost enable_country_theme config_ini:portal
 }}}
 
 === Changing page layout ===   
+
+The `layout.html` is a standard HTML file which defines the arrangement of HTML elements on both Portal and Workspace. It contains the empty elements where to insert content from various Bungeni components. 
+
+The image below shows screenshots of both portal and workspace areas on Bungeni.
+
+http://bungeni-portal.googlecode.com/files/portal-and-workspace.png
+
+Think of `layout.html` as a template document that defines where to insert content, say the search-form or main-navigation bar. The HTML attributes _`id`_ and _`class`_ are used to identify the elements where you will insert content. In the snippet below, the `portal-search` _id_ denotes the container element where the search-form will be inserted. 
+
+{{{
+<html>
+  <head></head>
+  <body>
+   ...
+   <!-- search -->
+   <div id="portal-search"></div>
+   ...
+  </body>
+</html>
+}}}
+
+There are rules that match content elements with the corresponding layout's elements. The rule to insert content into the above element looks like this:
+
+{{{
+   <!-- search -->
+   <append content="children:#portal-search" theme="children:#portal-search" />
+}}}
+
+This will insert all elements *from* _`content`_ *into* _`theme`_ without copying the `#portal-search` element itself.
+The rules are defined in `rules.xml` file found in:
+
+{{{
+{BUNGENI_INSTALL_PATH}/portal/src/portal.theme/portal/theme/static/themes/
+}}}
+
+To apply CSS styling (See [HowTo_CustomizeParliamentaryInformationManagement#Styling_with_CSS])
+
 === Changing the Menu Order and Structure ===   
 
 === Styling with CSS  ===  
 
-folder structure:
-
-{{{
-|-- css
-|-- images
-|-- js
-`-- themes
-    |-- layout.html
-    `-- rules.xml
-}}}
-
-The CSS files for styling Bungeni are broken down into two files.
-
-_reset.css_ and _skin.css_
+The CSS files for styling Bungeni are broken down into two files:
 
   * reset.css - Has styling properties that affect width, height and alignment of Bungeni.
 
@@ -203,9 +236,22 @@ styling in both CSS files is split into four major sections:
 Denoted at the start by a comment banner. e.g. for TEMPLATE-PORTAL
 
 {{{
+...
+
 /* =============================================================================
    TEMPLATE PORTAL - Styling applied on portal
    ========================================================================== */
+
+.template-portal {
+    background: #eeeeee !important;
+}
+
+.template-portal #header-wrapper {
+    background: #434343;
+    border-bottom: 10px solid #c1c1c0;
+}
+
+...
 }}}
 
 These are top-level class selector's found on the HTML `body` tag e.g. `<body class="template-portal">`
