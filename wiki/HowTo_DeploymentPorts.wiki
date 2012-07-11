@@ -7,16 +7,18 @@
 
 The different components of Bungeni run over different HTTP ports.
 The defaults for these ports are listed below, and also the methodology for changing the deployment ports is provided.
+There can be various reasons to want to change default ports, the most common reason is usually security considerations.
+Note that all the services listed below, are by default mapped to the localhost. For security reasons we recommend not changing the default host configuration (e.g. changing the Bungeni service to listen on a public host name). This page discusses only the aspect of changing the default ports.
 
 = Default Ports = 
 
-||Component || Port ||
-||Bungeni || 8081 ||
-||Plone || 8082 ||
-||Deliverance Proxy || 8080 ||
-||Deliverance Static || 8083 ||
-||eXist XML DB || 8088 ||
-||Supervisor Process monitor || 8888 ||
+||Component || Port || Host ||
+||Bungeni || 8081 || localhost ||
+||Plone || 8082 || localhost ||
+||Deliverance Proxy || 8080 ||localhost ||
+||Deliverance Static || 8083 ||localhost ||
+||eXist XML DB || 8088 || localhost ||
+||Supervisor Process monitor || 8888 || localhost ||
 
 = Changing Default Ports = 
 
