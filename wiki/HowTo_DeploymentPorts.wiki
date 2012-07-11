@@ -67,14 +67,14 @@ for plone --
 {{{
 [portal]
 ....
-http_port = 8082
+http_port = 8080
 }}}
 
 To change the port of the _Deliverance Static_, change the `static_port` parameter in the `portal` section :
 {{{
 [portal]
 ....
-static_port = 8082
+static_port = 8083
 }}}
 
 After changing the ports you will need to regenerate the configuration :
@@ -125,8 +125,6 @@ port=8888
 }}}
 
 You will need to regenerate the supervisor configuration and restart supervisor as described in the previous section.
-
-
 
 
 
