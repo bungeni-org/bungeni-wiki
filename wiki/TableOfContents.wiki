@@ -21,7 +21,6 @@
      *  [HowTo_SetupConfigurations Setup configurations ]
           * [HowTo_DeploymentPorts deployment ports for Bungeni, Plone, eXist, portal ] 
           * [HowTo_DatabaseConnection database connection ]               
-     * [HowTo_OpenofficeConfiguration OpenOffice configuration ]
      * [HowTo_NotificationConfiguration Notification configuration ]  
  * Maintenance   
      *  [HowTo_MaintainAndUpdateInstallation How to maintain and update an installation]
