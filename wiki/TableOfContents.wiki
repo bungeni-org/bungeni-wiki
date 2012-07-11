@@ -29,7 +29,7 @@
      *  [HowTo_Setup_PackageIndex_Server How to setup a package index server]    
      *  [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues]          
  * [Bungeni_Customization_Guide Customization Guide]
-     * [HowTo_CustomizeParlimentaryInformationManagement Customizing Parliamentary Information Management]
+     * [HowTo_CustomizeParliamentaryInformationManagement Customizing Parliamentary Information Management]
      * [HowTo_CustomizeContentManagement Customizing Content Management]
      * [HowTo_CustomizeInstitutionalRepository Customizing Institutional Repository] 
  * Developer Guide
