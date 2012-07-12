@@ -146,15 +146,6 @@ The layout, look and feel of the portal is controlled by a theme template in con
 
 Sample country themes exist at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
 
-
-Each country theme directory has a default structure:
-
-{{{
-|-- css
-|-- images
-`-- layout.html
-}}}
-
 To enable a country theme, edit the country_theme parameter in the Fabric 'setup.ini' file. The default setting is as follows:
 
 {{{
@@ -163,7 +154,7 @@ To enable a country theme, edit the country_theme parameter in the Fabric 'setup
 country_theme = default
 }}}
 
-Set this parameter to the appropriate value (_It is recommended to use the ISO 3166-1 alpha-2 codes_) e.g. for the Kenya theme the setting would be as follows:
+Set this parameter to the appropriate value (_It is recommended to use the [http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2] codes_) e.g. for the Kenya theme the setting would be as follows:
 
 {{{
 [custom]
@@ -180,7 +171,15 @@ fab -H localhost enable_country_theme config_ini:portal
 
 === Changing page layout ===   
 
-The `layout.html` is a standard HTML file which defines the arrangement of HTML elements on both Portal and Workspace. It contains the empty elements where to insert content from various Bungeni components. 
+Each country theme directory has a default structure:
+
+{{{
+|-- css
+|-- images
+`-- layout.html
+}}}
+
+The `layout.html` is an HTML file which defines the arrangement of HTML elements on both Portal and Workspace. It contains place-holder elements where to insert content from various Bungeni components. 
 
 The image below shows screenshots of both portal and workspace areas on Bungeni.
 
@@ -214,7 +213,7 @@ The rules are defined in `rules.xml` file found in:
 {BUNGENI_INSTALL_PATH}/portal/src/portal.theme/portal/theme/static/themes/
 }}}
 
-To apply CSS styling (See [HowTo_CustomizeParliamentaryInformationManagement#Styling_with_CSS])
+To apply CSS styling, see *Styling with CSS* section below.
 
 === Changing the Menu Order and Structure ===   
 
