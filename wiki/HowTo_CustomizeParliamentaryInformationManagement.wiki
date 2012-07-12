@@ -213,8 +213,6 @@ The above snippet specifies that a document in the state, "clarification_require
 
 == Publications (agenda, agenda, minutes, reports) ==
 
-<wiki:toc max-depth="3"/>
-
 === Purpose ===
 Bungeni provides a facility to generate reports e.g. agenda, minutes, document reports e.t.c.
 This section will explain how you may customise the templates used to generate reports.
