@@ -43,7 +43,7 @@ http://localhost:8088/exist/apps/framework/bungeni/admin
 
 Enter the admin user name and password and you will get the preliminary screen of the Admin UI :
 
-[admin_ui_main.jpg]
+[http://code.google.com/p/bungeni-portal/images/admin_ui_main.jpg]
 
 There are various tabs allowing you to customize different aspects of the system.
 
@@ -52,12 +52,12 @@ There are various tabs allowing you to customize different aspects of the system
 Click on Navigation and a screen like the below appears :
 
 
-[xml_ui_nav_ui.jpg]
+[http://code.google.com/p/bungeni-portal/images/xml_ui_nav_ui.jpg]
 
 
-[admin_ui_edit_subnav.jpg]
+[http://code.google.com/p/bungeni-portal/images/admin_ui_edit_subnav.jpg]
 
-[admin_ui_edit_delete_subnav.jpg]
+[http://code.google.com/p/bungeni-portal/images/admin_ui_edit_delete_subnav.jpg]
 
 
 == Setting Date and Time formats ==
