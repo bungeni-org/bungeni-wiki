@@ -114,33 +114,59 @@ http://bungeni-portal.googlecode.com/svn/wiki/images/languages-menu.png
 
 == Roles == 
 
-Roles in Bungeni are used to specify who has permission to perform different tasks. Please have a look at this [http://wiki.zope.org/zope3/secureobjects.html page] for a full description of how security works in Bungeni
+Roles in Bungeni are used to specify who has permission to perform different tasks. Roles can be seen as a collection of permissions, e.g. a role could be “clerk office”. Permissions are like keys to doors that open to a particular functionality. For example, we might need the permission to view a document while another role may need permission also to edit it, etc.
+“Roles” are used to grant a specific set of permissions to group/s, that could be e.g. Member of Parliament, staff of the Clerk Office etc. User belonging to these groups will have the rights that that specific role has.
 
 === System roles - what they mean and default usage ===
 
-There are two main system roles that are essential to how Bungeni works, bungeni.Owner and bungeni.Signatory. This roles are used in Bungeni to assign permissions to the owner and signatory of a document respectively.
+There are a number of system roles that are defined in the system
+
+|| *Role ID* || *Use* ||
+|| bungeni.Owner || The owner of a document, ie. the person who creates/moves a document ||
+|| bungeni.Signatory || Signatory of a document ||
+|| bungeni.Admin || The bungeni administrator ||
+|| bungeni.Authenticated || All authenticated users ||
+|| bungeni.Anonymous || Bungeni Visitor ||
+|| bungeni.MP || Member of parliament ||
+|| bungeni.Minister || Minister ||
+|| bungeni.PoliticalGroupMember || Political Group Member ||
+|| bungeni.Government || Member of Government ||
+|| bungeni.CommitteeMember || Committee Member ||
 
 === How to set up user defined roles ===
 
 A Bungeni administrator may define additional parliament specific roles in bungeni_custom/sys/acl/roles.zcml. A role added here may then be associated with an office while adding an office.
 
-<role title="Clerk" role="bungeni.Clerk"/>
+|| *attribute* || *example* || *note* ||
+|| title || Legal Department || The title "Legal Department" is what appears in the user interface ||
+|| role || legalDepartment || This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. || 
 
-In the example above, a role is created called bungeni.Clerk. The title "Clerk" is what appears in the UI. This role may then be used anywhere else in the system where a role may be specified eg. the workspace configuration or the workflow configuration.
+Example
 
-To associate this role with an office, edit an office and select it in the "roles" select box.
+{{{
+<role title="Legal Department" role="legalDepartment">
+}}}
+
+To associate the role above with an office, in “administration” go to “offices” and add the “Legal Department”, then select it in the "roles select box” “Legal Department”. If the Department already exists, just edit and select the "roles" select box “Legal Department”.
 
 
 ==== Sub Roles ====
 
-One may also add sub roles to Bungeni that may be used to grant finer grained permissions.
+If you need to have finer grained roles you may use sub-roles e.g. If you want all staff in the Clerk Office to see all parliamentary documents, but only the “Question Office” staff to actually edit questions and move then in the workflow. Please note that with “sub role” you can only “add permission” not deny permission that have been granted in the “parent role”.
+
+|| *attribute* || *example* || *note* ||
+|| title || Bill Office || The title "Bill Office" is what appears in the UI ||
+|| id || legalDepartment_billOffice ||This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. ||
+|| role || legalDepartment || This is the ID parent role ||
+
+
+Example
 
 {{{
-<bungeni:subrole id="bungeni.Clerk.QuestionClerk" title="Question Clerk" role="bungeni.Clerk"/>
+<bungeni:subrole id="legalOffice_billOffice" title="Question Clerk" role="legalDepartment/>
 }}}
 
-In the above example, a new subrole is created to is subordinate to the bungeni.Clerk role. The title of the subrole is what appears in the UI and the ID is used elsewhere in the system.
-
+The above example sets a new sub-role within the legalDepartment role. To associate this role with an office, in “administration” go to “offices” open the “Legal Department” and add  the “Bill Office” and then in the "roles select box” " select  “Bill Office”. Please note that the “Bill Office” sub-role will be available only within the parent “office”, in this case the Legal Department.
 
 
 == Parliamentary Metadata ==
@@ -209,145 +235,9 @@ The above snippet specifies that a document in the state, "clarification_require
 
 === How to set up notifications === 
 
-#summary Template writing guide for report generation templates
-
-== Publications (agenda, agenda, minutes, reports) ==
-
-=== Purpose ===
-Bungeni provides a facility to generate reports e.g. agenda, minutes, document reports e.t.c.
-This section will explain how you may customise the templates used to generate reports.
-
-=== Scheduling (Calendar) Reports ===
-Within scheduling, the reporting infrastructure provides a facility to produce documents out of the sittings within a certain period. Some typical use-cases include:
- * agenda and minutes of a specific sitting
- * a report of bills/questions e.t.c to be discussed in the coming month or other time-frame
-
-Below is a screenshot of a report generation session.
-The templates detailed below will appear as options on the report generation screen.
-Adding or deleting templates (discussed below) will determine the options provided to generate reports within this context.
-
-http://bungeni-portal.googlecode.com/svn/wiki/images/reporting-scheduling-generation-session.png
-
-=== Document Reports ===
-The different documents in Bungeni e.g. bill, questions, e.t.c can also be download as PDF/ODT.
-Document templates for the particular *document type* will determine the formattting og the PDF/ODT output.
-Below is a sample of a document download session for a question: 
-
-http://bungeni-portal.googlecode.com/svn/wiki/images/reporting-documents-download.png
-
-=== How to customise templates ===
-The templates are based on XHTML with an additional set of tags to support inclusion of bungeni content into the final document.
-Templates are stored in *bungeni_custom* under: */reporting/templates*
-
-Those used in scheduling go into the *scheduling* directory whereas those used for document reports will be in *documents*.
-Once templates are added within these directories they become available as options when generating reports.
-
-=== Structure of Templates ===
-Each template is structurally composedof a configuration, head and body sections.
-
-Here is a simple sample of a structure for a template:
-
-{{{
-<html xml:lang="en" xmlns:br="http://bungeni.org/reports">
-  <br:config>
-    <title>One week of questions Questions</title>
-    <length>1w</length>
-    <language>en</language>
-  </br:config>
-  <head>
-    <title>Weekly Questions</title>
-  </head>
-  <body>
-    <p>A blank report</p>
-   </body>
-</html>
-}}}
-
-==== Configuration section ====
-The configuration section sets metadata associated with the current report type:
-{{{
-  <br:config>
-    <title>Questions of the Week</title>
-    <length>1w</length>
-    <language>en</language>
-  </br:config>
-}}}
-===== Configuration Options =====
-|| *Option* || *Sample* || *Description* ||
-|| title || `<title>Questions of the week</title>` || This is the report title. It can be referenced within the body. It is also displayed in menus within Bungeni ||
-|| length || `<length>1w/length>` || Period covered by the report starting from a selected date. In this case - One(1) week. *More on this below*. ||
-|| language || `<language>fr</language>` || The language of the content in generated report ||
-|| doctypes || `<doctypes>question</doctypes>` || A space separated list of document types for which this template may generate reports. ^a^ ||
-
-^a^ `Please note that the doctypes configuration parameter has meaning only in the context of document templates.`
-
-====== Configuring Report Length ======
-This is the notation used to specify the period covered by a report (_*n*_ is a positive integer greater than _1_)
-    # _n_*h* evaluates to n hours such that `1h` evaluates to one (1) hour
-    # _n_*d* evaluates to n days such that `5d` evaluates to five (2) days
-    # _n_*w* evaluates to n weeks such that `4w` evaluates to four (4) weeks
-    # We can also use combinations of _w_, _d_, _h_ depending on requirements
-
-Below are sample timespans that can be used to specify the period covered by a report.
-|| *Length* || *Evaluates to* || *Equivalent hours notation* ||
-|| 1h || 1 hour || _N/A_ ||
-|| 3d || 3 days || 72h ||
-|| 2d6h || 2 days and 6 hours || 54h ||
-|| 2w || 2 weeks || 336h ||
-
-==== Body Section ====
-Below you can see a sample of the body section of a report and customizable attributes.
-
-{{{
-  <body> 
-    <div id="report-content">
-        <h1 class="heading" br:type="text" br:source="title"/>
-        <div id="listing-body">
-            <div br:type="listing" br:source="sittings">
-                <h2 br:type="text" br:source="title"/>
-                <h3>Questions</h3>
-                <div class="questions">
-                    <ul br:type="listing" br:source="questions">
-                        <li br:type="text" br:source="title"/>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-   </body>
-}}}
-
-===== Configuration options ====
-
-|| *Tag* || *Value* || *Description* || *Example* ||
-|| br:type || text || Includes the specified context variable as text || Display the title of a document as plain text: <br/> `<div br:type="text" br:source="title"/>` || 
-|| || html || Includes the specified context variable as HTML || Display the body of a document as html: <br/> `<div br:type="html" br:source="body_text"/>` ||
-|| || link || Renders a link to with the link as the named *br:url* parameter || Display a link to a document uri with the dublin core title as link text: <br/> `<a br:type="link" br:url="uri" br:source="dc:title/>"` ||
-|| || listing || Generates a list of items || Display the list of titles of questions included in the template: <br/> `<ul br:type="listing" br:source="questions">`<br/>`    <li br:type="text" br:source="dc:title"/>` <br/> `</ul>` ||
-|| br:source || A named context variable || names of available context variables are determined from the object available to the current template tag || See [HowTo_CustomizeParliamentaryInformationManagement#Available_context_names] ||
-|| br:condition || A named context variable || This attribute determines if the current tag should be rendered.<br/> Checks existense of a value for the named context variable. || This tag will only be rendered if there is a title <br/> `<span br:source="title" br:condition="title"/>` ||
-
-===== Available context names =====
-The documentation for the names available for use in reports can generated from within Bungeni's home folder.
-Simply run this script:
-{{{
-    ./bin/reporting-documentation
-}}}
-This will generate a tree in HTML of these names indiside the {{{docs/reporting/}}} folder within Bungeni's home folder.
-You can open this file in any browser to see the tree of available names that can be incorporated in a report template.
-
-If you are running Bungeni in debug mode, the reporting documentation can also be accessed from this address in a default installation.
-
-{{{
-    http://localhost:8081/docs/reporting/
-}}}
-
-Below is an image showing the generated tree of names:
-
-http://bungeni-portal.googlecode.com/svn/wiki/images/reporting-sample-doctree.png
-
-`Note that in the case of document templates the names available are limited to the particular document section.`
-`For instance in the case of a bill only the names under `bills` in the above figure would be available to the report template.`
+== Publications (agenda, minutes, reports) ==
+=== How to localise  agenda, minutes, reports ===
+  * [XHTML_Report_Templates Writing Templates for Report Generation]
 
 == Layout, theme and formats == 
 The layout, look and feel of the portal is controlled by a theme template in conjunction with a set of css styles and rule files. A default theme is enabled for each Bungeni installation.
