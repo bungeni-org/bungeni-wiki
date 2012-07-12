@@ -3,10 +3,84 @@
 <wiki:toc max_depth="5" />
 
 == Overview ==
-=== Using the customization folder === 
+
+=== The customization folder === 
+
+Bungeni packages the customization aspects of the system in a specific folder. The default system comes packaged with a customization setup in 
+the `src/bungeni_custom` folder within the `bungeni_apps/bungeni` folder.
+
+The `bungeni_custom` looks like this :
+{{{
+bungeni_custom/
+├── forms
+├── __init__.py
+├── notifications
+├── registry
+├── reporting
+├── sys
+├── translations
+├── vocabularies
+├── workflows
+└── workspace
+}}}
+
+This structure provides points of access to different aspects of customization discussed later in this document.
+
+We don't recommend making customizations in the default customization folder, instead the system provides a mechanism to create and use your own customization folder. This kind of setup will allow you to test your customization against the reference customization implementation provided out of the box in Bungeni.
+
+=== How Bungeni knows which customization folder to use === 
+
+Bungeni determines the customization folder to use on the basis of a `bungeni_custom.pth` customization path file.
+
+This file can be found in the main bungeni installation folder `bungeni_apps/bungeni`.
+
+The contents of this file simply indicate a folder where the system should look for the `bungeni_custom` package :
+
+{{{
+/home/undesa/bungeni_apps/bungeni/src
+}}}
+
+Changing the path here will tell bungeni to look for the customization folder in a different location.
+
 === Making a private customization folder ===
+
+To create your own private customization folder do the following --
+
+ * Create a copy of the `src/bungeni_custom` folder, and put it under `bungeni_apps/bungeni`, call it with a different name e.g. `my_custom`.
+ * Edit the `bungeni_apps/bungeni/bungeni_custom.pth` file , and change the path in the file to :
+	{{{
+	/my/installation/path/bungeni_apps/bungeni
+	}}}
+    Where /my/installation/path is the folder under which the bungeni applications are installed.
+  * Restart Bungeni and do a small test to verify if everything is working properly (e.g. login as a member and publish a question) 
+
+Your customization folder tree should look like this under `/my/installation/path/bungeni_apps/bungeni`:
+{{{
+my_custom/
+├── forms
+├── __init__.py
+├── notifications
+├── registry
+├── reporting
+├── sys
+├── translations
+├── vocabularies
+├── workflows
+└── workspace
+}}}
+
+You can now start customizing workflows, vocabularies and workspaces in Bungeni in the `my_custom` folder.
+
 === Testing customizations ===
+
+
 === Best practices ===
+
+ * You need to back up or better version control your customization folder since it isn't part of shipped bungeni source code. Which means if your server crashes for whatever reason and you have to reinstall and re-setup Bungeni, you will be able to restore the system and the default customisation since they are version controlled - but you won't be able to restore your own customizations unless you have your own backup.
+
+ * Do Not make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will recieve updates. Always use a private customization folder as specified aove.
+
+
  
 == How to configure languages ==
 === Purpose ===
