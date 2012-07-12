@@ -1,6 +1,64 @@
 #summary How to customize the Institutional Repository
 
 <wiki:toc max_depth="5" />
+= Customizing the Institutional Portal =
+
+== Institutional Portal==
+
+The Bungeni Institutional portal runs on top of an eXist XML Database. To customize the aspects of the institutional portal an admin user interface is provided.
+
+==Accessing the Institutional Portal==
+
+For developer and admin purposes you will need to access the institutional portal directly. By default it runs on port 8088 - to access the institutional portal interface directly use the URL :
+
+{{{
+http://localhost:8088/exist/apps/framework/bungeni
+}}}
+
+You will see a screen like the below - 
+
+[xml_ui_main.jpg]
+
+
+If you browse the business and members section you will see the content from the publicly accessible *business* and *members* section of Bungeni.
+
+e.g. - the following is the business section :
+
+[xml_ui_business.jpg]
+
+The admin ui for the Bungeni reposiory portal allows customizing this user interface.
+
+
+==Security Considerations==
+
+The customization Admin UI is accessed using a web browser. The repository portal by default listens only on the localhost. It is very important for security reasons that you do not provide direct public access to the repository portal. It is good practice to provide only 'localhost' access and proxy the content. For admin purposes you may open access to a specific IP directly to the system - most firewalls support local proxying for specific IPs, so you can access a local service remotely.
+
+==Accessing the Admin/Customization UI==
+
+The Admin UI is accessed over the web browser :
+
+{{{
+http://localhost:8088/exist/apps/framework/bungeni/admin
+}}}
+
+Enter the admin user name and password and you will get the preliminary screen of the Admin UI :
+
+[admin_ui_main.jpg]
+
+There are various tabs allowing you to customize different aspects of the system.
+
+== Customizing top level Menu and Navigation == 
+
+Click on Navigation and a screen like the below appears :
+
+
+[xml_ui_nav_ui.jpg]
+
+
+[admin_ui_edit_subnav.jpg]
+
+[admin_ui_edit_delete_subnav.jpg]
+
 
 == Setting Date and Time formats ==
 == System Parameters ==
