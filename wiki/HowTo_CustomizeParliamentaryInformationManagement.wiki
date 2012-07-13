@@ -2,6 +2,8 @@
 
 <wiki:toc max_depth="5" />
 
+
+----
 == Overview ==
 
 === The customization folder === 
@@ -81,7 +83,9 @@ You can now start customizing workflows, vocabularies and workspaces in Bungeni 
  * Do Not make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will recieve updates. Always use a private customization folder as specified aove.
 
 
- 
+
+
+----
 == How to configure languages ==
 === Purpose ===
 Here you can set the default launguage used in the Bungeni user interface as well as enable alternative languages.
@@ -109,10 +113,12 @@ Only enabled languages will show up in Bungeni's language menu. With the `zope_i
 http://bungeni-portal.googlecode.com/svn/wiki/images/languages-menu.png
 
 
-== Vocabularies == 
+----
+== Vocabularies ==
 === Managing  vocabularies ===
 
-== Roles == 
+----
+== Roles ==
 
 Roles in Bungeni are used to specify who has permission to perform different tasks. Roles can be seen as a collection of permissions, e.g. a role could be “clerk office”. Permissions are like keys to doors that open to a particular functionality. For example, we might need the permission to view a document while another role may need permission also to edit it, etc.
 “Roles” are used to grant a specific set of permissions to group/s, that could be e.g. Member of Parliament, staff of the Clerk Office etc. User belonging to these groups will have the rights that that specific role has.
@@ -169,6 +175,8 @@ Example
 The above example sets a new sub-role within the legalDepartment role. To associate this role with an office, in “administration” go to “offices” open the “Legal Department” and add  the “Bill Office” and then in the "roles select box” " select  “Bill Office”. Please note that the “Bill Office” sub-role will be available only within the parent “office”, in this case the Legal Department.
 
 
+
+----
 == Parliamentary Metadata ==
 === Adding a parliament ===
 === Adding Parliamentary entities ===
@@ -178,19 +186,96 @@ The above example sets a new sub-role within the legalDepartment role. To associ
 === Users ===
 === Offices ===
 
-== Documents ==
-=== Enabling and disabling custom document types === 
 
+
+----
+== Documents ==
+
+=== Parliamentary document types ===
+
+Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Items_, _Bill_, _Motions_, _Questions_, _Tabled Documents_, with any number of other types being easily added.
+
+All parliamentary document types are *workflowed*--with the workflow definition for any type being entirely customizable. Most other aspects of a document type definition are also customizable e.g. the various *user interface views* for the type, or what *features* does the type support. 
+
+Note that, because all object types, parliamentary documents or not, supported by Bungeni are customizable in a consistent way, the explanations below will sometimes also mention or refer to other types than just the *parliamentary document types* listed above, for exmaple:
+ # other _support_ document types e.g. _Events_ or _Attachments_;
+ # other types that are _not_ parliamentary documents e.g. _Groups_ or _Sittings_.
+
+
+=== Document _features_ ===
+
+A document type may enable or disable a variety of *features*. When enabled for the document type, the feature is available for _each_ document of that type.
+
+In each case, when a feature is enabled for a type, the system will also provide the necessary User Interface views for the feature e.g. if _audit_ is enabled for a type, then the UI will provide various ways to view the audit log of the document.
+
+Here's a summary supported features for parliamentary documents:
+
+ * *audit*: all changes on a document are _audited_.
+ * *version*: a document may be _versioned_.
+ * *attachment*: _attachments_ may be added to the document.
+ * *event*: _events_ (a special kind of support document) may be added to the document.
+ * *signatory*: the document life-cycle, defined by its workflow, requires that other members of parliament _sign_ the document.
+ * *schedule*: the document may be included in _sitting agenda_.
+ * *workspace*: the document is to be included in the private user's _workspace_.
+ * *notification*: user may subscribe and receive a variety of _notifications_ as the document changes.
+ * *download*: the document may be available for _download_ e.g. in PDF.
+
+Enabling or disabling, and in some cases parametrizing, a feature for a type is part of the workflow definition for the _enabled_ type.
+
+=== Enabling and disabling custom document types ===
+
+The entry point to all type customization is the file:
+{{{
+    {BUNGENI_CUSTOM}/types.xml
+}}}
+
+A document type is simply enabled simply by including a {{{<doc>}}} element with the type name, and setting the attribute {{{@enabled="true"}}}. To disable, set the attribute {{{@enabled="false"}}} (or just remove the {{{<doc>}}} element): 
+
+{{{
+<types>
+    <doc name="agenda_item" enabled="true" />
+    <doc name="bill" enabled="true" />
+    <doc name="motion" enabled="true" />
+    <doc name="question" enabled="true" />
+    <doc name="tabled_document" enabled="true" />
+    ...
+</types>
+}}}
+
+All custom document types must specify a name, that will be the _key_ used throughout the system to identify this type. 
+
+As previously mentioned, all types are _workflowed_. By default, the workflow definition file for a type is expected to be at: 
+{{{
+    {BUNGENI_CUSTOM}/workflows/{TYPE_NAME}.xml
+}}}
+Similarly for other configuration aspects that have dedicated configuration files, namely {{{workspace}}} and {{{notification}}}.
+
+Disabling a type means the type will *not* be registered (so will be _unknown_ to Bungeni), and all associated configuration e.g. workflow, descriptor, workspace, etc, will also not be loaded.
+
+Group types and their memberships types are also set in a similar way. See the {{{{BUNGENI_CUSTOM}/types.xml}}} itself for further explanations and sample settings of these.
+
+----
 == Forms ==
 === How to localize forms === 
 === Form UI (workspace) === 
 === Changing display order of fields === 
 === Show/Hide fields on a Form per mode ===  
 
+
+----
 == Workflow  ==
 === How to map documents/groups/membership workflow === 
 === How to configure documents/groups/membership workflow === 
 
+
+
+
+
+
+
+
+
+----
 == Workspaces ==
 
 Every user who logs in to Bungeni has a workspace, where they may view, add and edit documents. In order to provide the user with a familiar environment, the workspace in Bungeni has been modeled to the interface provided by very much used email applications (e.g Gmail or Yahoo mail).
@@ -236,6 +321,8 @@ Example
 
 The example above specifies that a document in the state "clarification_required" will appear in the inbox of the person who introduced it (bungeni.Owner) and in the sent folder of the clerk (bungeni.clerk).
 
+
+----
 == Notification  ==
 
 
@@ -243,10 +330,16 @@ The example above specifies that a document in the state "clarification_required
 
 === How to set up notifications === 
 
+
+
+----
 == Publications (agenda, minutes, reports) ==
 === How to localise  agenda, minutes, reports ===
   * [XHTML_Report_Templates Writing Templates for Report Generation]
 
+
+
+----
 == Layout, theme and formats == 
 The layout, look and feel of the portal is controlled by a theme template in conjunction with a set of css styles and rule files. A default theme is enabled for each Bungeni installation.
 
@@ -376,3 +469,5 @@ Bungeni skins are located under the custom folder:
 {{{
 {BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
 }}}
+
+
