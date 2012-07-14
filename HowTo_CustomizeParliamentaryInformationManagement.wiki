@@ -271,22 +271,122 @@ Disabling a type means the type will *not* be registered (so will be _unknown_ t
 
 Group types and their memberships types are also set in a similar way. See the `{MY_CUSTOM}/types.xml` itself for further explanations and sample settings of these.
 
+
+
 ----
 == Forms ==
-=== How to localize forms === 
-=== Form UI (workspace) === 
+
+The Bungeni User Interface allows a number of interactions or manipulations for instances of any given type. These include creating, viewing, modifying an instance or even listing multiple instances. The various UI views required for these interactions are all highly customizable, both in terms of appearance as well as in terms of who can do what on an instance of the type. We use:
+
+ * the term *forms* as a more general term for the UI views for a type; 
+ * the term *modes* to distinguish between the various interactions i.e. the above mentioned interactions correspond to the modes *add*, *view*, *edit* and *listing*.
+ * *roles* to manage who may do what.
+
+We use a _descriptor_ to describe all the above for each type in Bungeni. 
+
+*All types* in Bungeni are customizable, some to a larger degree than others. For example custom types are (will be ;-) of course completely customizable (so, as an example, we may even disable them completely). But we may also quite extensively customize other system-required _support_ types (but not completely--as an example, we may not disable them).
+
+=== Form field _descriptors_ === 
+
+We customize the form views per type in Bungeni by means of a _descriptor_ per type, conatined the the file:
+{{{
+    {MY_CUSTOM}/forms/ui.xml
+}}}
+This file simply contains a UI _descriptor_ per type, and it looks something like this:
+{{{
+<ui roles="bungeni.Clerk bungeni.Speaker bungeni.Owner bungeni.Signatory ... bungeni.Anonymous">
+    ...
+    <descriptor name="question" order="13">
+        ...
+        <field name="title" displayable="view edit add listing" localizable="view edit listing">
+            <show modes="view edit listing" />
+        </field>
+        <field name="type_number" displayable="view listing" localizable="view listing">
+            <show modes="view listing" />
+        </field>
+        <field name="acronym" displayable="view edit add listing" localizable="view edit add listing">
+            <show modes="view edit add" />
+            <hide modes="listing" />
+        </field>
+        <field name="description" displayable="view edit add listing" localizable="view edit add listing">
+            <show modes="view edit add" />
+            <hide modes="listing" />
+        </field>
+        <field name="response_type" displayable="view edit add listing" localizable="view edit listing">
+            <show modes="view edit" />
+            <show modes="listing" />
+        </field>
+        ...
+    </descriptor>
+    ...
+</ui>
+}}}
+
+Each type _descriptor_ here controls the following aspects of the UI for the type:
+ * the list of named UI fields for the type
+ * the appearance _order_ of the UI fields for the type
+ * the _modes_ in which the system may show/hide the field--the `@displayable` attribute (this is for convenience, provided for _information only_, may not modify)
+ * the _modes_ for which each field *may be* customized--the `@localizable` attribute (this is for convenience, provided for _information only_, may not modify); all modes here are a sub-set of those in @displayable
+ * the _modes_ that each *is* customized in--the sum value of the `@modes` attribute of all the `<show>` and `<hide>` elements on the field; all modes in @localizable *must* also be set here, once and once only
+ * for each _mode_, the _roles_ for whom the field is shown or not--the sum value of the _optional_ `@roles` attribute of all the `<show>` and `<hide>` elements on the field
+
+The `descriptor/@order` attribute provides a hint to how references to descriptors themselves may be ordered e.g. for when generating navigation menus for browsing content such as the tree menu under the `admin` section.
+
+The above extract describes some fields for a _question_. Here, as an example, is what the UI view will look like when we are logged in as the _Clerk_ and in *add* mode:
+
+http://bungeni-portal.googlecode.com/svn/wiki/images/add-question.png
+
+
 === Changing display order of fields === 
+
+The is simply a matter of re-ordering the `<field>` elements. So, for example if we would like to make `type_number` (in this case this is the number of the question) field appear after `acronym`, we simply move the field down i.e.
+{{{
+        ...
+        <field name="acronym" displayable="view edit add listing" localizable="view edit add listing">
+            <show modes="view edit add" />
+            <hide modes="listing" />
+        </field>
+        <field name="type_number" displayable="view listing" localizable="view listing">
+            <show modes="view listing" />
+        </field>
+        ...
+}}}
+Then, whenever both fields are shown, the `acronym` field will appear above the `type_number` field. But note that this will have no visible affect in `listing` mode as `acronym` is not set to be displayed there.
+
 === Show/Hide fields on a Form per mode ===  
+
+Fields are customized using any number of `<show>` and `<hide>` elements, within the `<field>` element. Both the `<show>` and `<hide>` elements have the following attributes that allow customization of the field behavior:
+
+ * _@modes_ - lists the modes that are to be shown or hidden. The only modes allowed here are the ones listed in the `field/@localizable` attribute.
+ * _@roles_ - lists the roles for which the modes are to be shown or hidden. The only roles allowed here are the ones listed in the `ui/@roles` attribute. This is optional, and when not set all the roles listed in `ui/@roles` are implied.
+
+`<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles, and `<hide>` hides the field for the listed modes and roles. A field may specify as many `<show>` and/or `<hide>` directives as it needs.
+
+There are some simple rules to follow while using `<show>` and `<hide>`:
+ * The only modes available for use are the ones provided by the `field/@localizable` attribute.
+ * May have as many `<show>` or `<hide>` elemenets as we need, but any given _mode_ may appear *only once* i.e. in only one of the `<show>` or `<hide>` elements.
+ * The action of the `show` or `hide` directive is applied to the list of roles specified in _@roles_--meaning also that the _opposite_ action is applied to the _complement_ of the set of roles specified in _@roles i.e. the difference with the list in ui/@roles. Thus, `show` and `hide` are really complementary ways to state the same thing, but one may at times be more conveninet to use than the other.
+
+==== Show/Hide example ====
+
+Above, the question _acronym_ field is shown to all in _view edit add_ modes, and hidden from all in _listing_ mode. Let's say we would like to adjust the _acronym_ field such that:
+ # only the _Clerk_ and the _Owner_ may _set or change_ it;
+ # we would like that in `listing` mode _all logged in users_ can see it;
+ # but for _view_ mode we keep it as it is i.e. it is shown to all.
+To achieve this, we could modify the field descriptor as follows: 
+{{{
+        <field name="acronym" displayable="view edit add listing" localizable="view edit add listing">
+            <show modes="view" />
+            <show modes="edit add" roles="bungeni.Clerk bungeni.Owner" />
+            <hide modes="listing" roles="bungeni.Anonymous" />
+        </field>
+}}}
 
 
 ----
 == Workflow  ==
 === How to map documents/groups/membership workflow === 
 === How to configure documents/groups/membership workflow === 
-
-
-
-
 
 
 
