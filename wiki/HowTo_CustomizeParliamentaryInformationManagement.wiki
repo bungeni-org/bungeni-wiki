@@ -341,12 +341,41 @@ The example above specifies that a document in the state "clarification_required
 ----
 == Notification  ==
 
+Bungeni has a notifications system that can be configured to send out notifications to users on document workflow transitions. It is flexible, allowing for different methods to be used to send out notifications for example email or SMS.
 
+The notifications system uses a message queue system called RabbitMQ to route and queue messages. When an event occurs in Bungeni that requires that someone be notified, a message is sent to the queue. Services such as email or SMS can then retrieve the message from the queue and send it to the intended recipient. Parliaments can build other applications that make use of the messages from the message queue such as Instant Messaging notifications e.g. Jabber, Social Media sites such as Facebook and Twitter and so on.
 
 
 === How to set up notifications === 
 
+Every document type has a notifications configuration file in the notifications folder
 
+{{{
+    {BUNGENI_CUSTOM}/notifications/{TYPE_NAME}.xml
+}}}
+
+|| attribute || example || note ||
+|| roles || bungeni.Clerk || All users with this role on the object will be notified ||
+|| onstate || submitted || When the document reaches the states defined here, the users with the roles specified above will be notified ||
+
+For example
+
+{{{
+    <notify roles="bungeni.Clerk " onstate="submitted"/>
+    <notify roles="bungeni.Owner" onstate="received"/>
+}}}
+
+In the above example, members of the clerks office will be notified when the document is submitted and the person who owns the document will be notified once it is received by the Clerk's office
+
+The email machinery in Bungeni uses the notifications system described above. 
+
+The templates used for each document type are found in
+
+{{{
+    {BUNGENI_CUSTOM}/email/templates/{TYPE_NAME}.xml
+}}}
+
+The email subject and body templates are defined using ZPT, the template system used in Bungeni.
 
 ----
 == Publications (agenda, minutes, reports) ==
@@ -485,5 +514,3 @@ Bungeni skins are located under the custom folder:
 {{{
 {BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
 }}}
-
-
