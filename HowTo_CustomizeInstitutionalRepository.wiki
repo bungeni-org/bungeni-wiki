@@ -1,13 +1,18 @@
-#summary How to customize the Institutional Repository
+#summary How to customize the Public Portal
 
 <wiki:toc max_depth="5" />
-= Customizing the Institutional Portal =
+= Customizing the Portal Portal =
 
-== Institutional Portal==
+== Public Portal==
 
-The Bungeni Institutional portal runs on top of an eXist XML Database. To customize the aspects of the institutional portal an admin user interface is provided.
+The Public Portal of Bungeni provides a long term archive of publicly accessible Parliamentary documents.
 
-==Accessing the Institutional Portal==
+The Public Portal is the final resting place of all Documents produced in the Bungeni system and also archives information from past parliaments. 
+
+Additionally there is a need to maintain a separation of systems and data between what is running inside Parliament and what is accessed by the general public over the internet. The public portal provides this separation by maintaining a distinct archive of published parliamentary documents and parliamentary metadata.
+
+
+==Accessing the Public Portal==
 
 For developer and admin purposes you will need to access the institutional portal directly. By default it runs on port 8088 - to access the institutional portal interface directly use the URL :
 
@@ -26,14 +31,24 @@ e.g. - the following is the business section :
 
 [http://code.google.com/p/bungeni-portal/imagxml_ui_business.jpg]
 
-The admin ui for the Bungeni reposiory portal allows customizing this user interface.
+The admin ui for the Bungeni reposiory portal allows customizing this user interface. 
 
 
 ==Security Considerations==
 
-The customization Admin UI is accessed using a web browser. The repository portal by default listens only on the localhost. It is very important for security reasons that you do not provide direct public access to the repository portal. It is good practice to provide only 'localhost' access and proxy the content. For admin purposes you may open access to a specific IP directly to the system - most firewalls support local proxying for specific IPs, so you can access a local service remotely.
+The customization Admin UI is accessed using a web browser. The public portal by default listens only on the localhost. It is very important for security reasons that you do not provide direct public access to the repository portal. It is good practice to provide only 'localhost' access and proxy the content. For admin purposes you may open access to a specific IP directly to the system - most firewalls support local proxying for specific IPs, so you can access a local service remotely.
 
 ==Accessing the Admin/Customization UI==
+
+The Customization UI is accesible over a web browser - to be able to access the Customization UI you will need to switch the Public Portal to developer mode. You will need [http://code.google.com/p/bungeni-portal/wiki/HowTo_Get_Fabric_Scripts Fabric] access to switch eXist to developer mode. This is also good security practice since only a user with SSH access can provide customization access to the public portal.
+
+To switch the public portal to developer mode run the following fabric command :
+
+{{{
+./fl exist_dev_mode
+}}
+
+This command will restart the public portal in developer mode. Note that the public portal will *not* be available for public access when in Developer mode.
 
 The Admin UI is accessed over the web browser :
 
@@ -46,6 +61,14 @@ Enter the admin user name and password and you will get the preliminary screen o
 [http://bungeni-portal.googlecode.com/files/admin_ui_main.jpg]
 
 There are various tabs allowing you to customize different aspects of the system.
+
+To exit from developer mode run the following fabric command :
+
+{{{
+./fl exist_deploy_mode
+}}}
+
+This will restart the public portal in deployment mode and the customization interface will no longer be accessible 
 
 == Customizing top level Menu and Navigation == 
 

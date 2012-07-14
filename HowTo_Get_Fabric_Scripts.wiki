@@ -13,7 +13,7 @@ The assumption here is that you have already [http://code.google.com/p/bungeni-p
 Checkout the fabric scripts into a folder called `fabric` or any name of your choice
 
 {{{
-svn co http://bungeni-portal.googlecode.com/svn/capistrano/fabric ./fabric
+svn co http://bungeni-portal.googlecode.com/svn/fabric/trunk ./fabric
 }}}
 
 
