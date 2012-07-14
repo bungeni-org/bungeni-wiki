@@ -8,10 +8,14 @@
 
 === The customization folder === 
 
-Bungeni packages the customization aspects of the system in a specific folder. The default system comes packaged with a customization setup in 
+Bungeni packages the customization aspects of the system in a specific folder. 
+
+Rather than start with no customization configuraitons, to make things easier, Bungeni comes packaged with a default customization folder which can be used as a basis for creating your own customizations. 
+
+The system comes packaged with a default customization setup in 
 the `src/bungeni_custom` folder within the `bungeni_apps/bungeni` folder.
 
-The `bungeni_custom` looks like this :
+The customization folder structure looks like this :
 {{{
 bungeni_custom/
 ├── forms
@@ -26,11 +30,23 @@ bungeni_custom/
 └── workspace
 }}}
 
-This structure provides points of access to different aspects of customization discussed later in this document.
+This structure provides points of access to different aspects of customization discussed later in this document. The content of the folders is described below.
 
-We don't recommend making customizations in the default customization folder, instead the system provides a mechanism to create and use your own customization folder. This kind of setup will allow you to test your customization against the reference customization implementation provided out of the box in Bungeni.
+|| *file / folder name* || *purpose* ||
+|| forms || contains the ui.xml file which is used to customize forms in Bungeni ||
+|| notifications || contains the notification configuration files used for workflow notifications ||
+|| registry || Contains the format for numbering content||
+|| reporting || Contains the reporting templates in XHTML format ||
+|| sys || Contains configuration files related to database connections, openoffice access and default roles in the system ||
+|| translations || Contains the localized message strings in [http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html PO format] ||
+|| vocabularies || Contains the different vocabularies used in the system in VDEX format ||
+|| workflows || Contains the Workflow customization files. There is one file per document type ||
+|| workspace || Contains the Workspace customization files. There is one file per document type||
 
-=== How Bungeni knows which customization folder to use === 
+
+*We don't recommend making customizations in the default customization folder, instead the system provides a mechanism to create and use your own customization folder. This kind of setup will allow you to test your customization against the reference customization implementation provided out of the box in Bungeni*.
+
+=== Creating your own customization folder === 
 
 Bungeni determines the customization folder to use on the basis of a `bungeni_custom.pth` customization path file.
 
