@@ -72,18 +72,29 @@ This will restart the public portal in deployment mode and the customization int
 
 == Customizing top level Menu and Navigation == 
 
-Click on Navigation and a screen like the below appears :
-
+Click on Navigation and a screen _Navigation Configuration UI_ like the below appears :
 
 [http://bungeni-portal.googlecode.com/files/xml_ui_nav_ui.jpg]
 
+This screen lets you customize the navigation ; if you notice on the screenshot above there are items corresponding to the home, business and members menu items below :
+
+[http://bungeni-portal.googlecode.com/files/xml_ui_main.jpg]
+
+To edit the `business` navigation, click on `business` in the _Navigation Configuration UI_ and click `load selected`, This will load the sub-navigation for editing :
 
 [http://bungeni-portal.googlecode.com/files/admin_ui_edit_subnav.jpg]
+
+You will notice here that the items available for editing : `whats on`, `committees`, `bills` etc are the same ones that appear in the `business` section of the public portal :
+
+[http://code.google.com/p/bungeni-portal/imagxml_ui_business.jpg]
+
+
 
 [http://bungeni-portal.googlecode.com/files/admin_ui_edit_delete_subnav.jpg]
 
 
 == Setting Date and Time formats ==
+
 == System Parameters ==
 == Customizing Menus and Navigation ==
 == Search and Listing filters customization ==
