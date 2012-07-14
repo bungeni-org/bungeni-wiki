@@ -12,22 +12,22 @@ Bungeni packages the customization aspects of the system in a specific folder.
 
 Rather than start with no customization configuraitons, to make things easier, Bungeni comes packaged with a default customization folder which can be used as a basis for creating your own customizations. 
 
-The system comes packaged with a default customization setup in the `src/bungeni_custom` folder (let's refer to this as `{BUNGENI_CUSTOM}` from here on) within your main Bungeni installation folder i.e. somewhere like `/my/installation/path/bungeni_apps/bungeni` (and let's refer to this one simply as `{BUNGENI}` from here on).
+The system comes packaged with a default customization setup in 
+the `src/bungeni_custom` folder within the `bungeni_apps/bungeni` folder.
 
 The customization folder structure looks like this :
 {{{
 bungeni_custom/
+├── forms
 ├── __init__.py
-├── types.xml
-├── forms/
-├── notifications/
-├── registry/
-├── reporting/
-├── sys/
-├── translations/
-├── vocabularies/
-├── workflows/
-└── workspace/
+├── notifications
+├── registry
+├── reporting
+├── sys
+├── translations
+├── vocabularies
+├── workflows
+└── workspace
 }}}
 
 This structure provides points of access to different aspects of customization discussed later in this document. The content of the folders is described below.
@@ -48,10 +48,14 @@ This structure provides points of access to different aspects of customization d
 
 === Creating your own customization folder === 
 
-Bungeni determines the customization folder by means of a `{BUNGENI}/bungeni_custom.pth` _python package path_ customization file that simply contains a path to where the system should look for a `bungeni_custom` _python package_. The default one contains:
+Bungeni determines the customization folder to use on the basis of a `bungeni_custom.pth` customization path file.
+
+This file can be found in the main bungeni installation folder `bungeni_apps/bungeni`.
+
+The contents of this file simply indicate a folder where the system should look for the `bungeni_custom` package :
 
 {{{
-    /home/undesa/bungeni_apps/bungeni/src
+/home/undesa/bungeni_apps/bungeni/src
 }}}
 
 Changing the path here will tell bungeni to look for the customization folder in a different location.
@@ -60,44 +64,39 @@ Changing the path here will tell bungeni to look for the customization folder in
 
 To create your own private customization folder do the following --
 
- * Create a copy of the `{BUNGENI}/src/bungeni_custom` folder--you may call it and place it anywhere you like but it should be outside of the `{BUNGENI}/src` folder. For example, let's call it `my_custom` and place it under `{BUNGENI}`.
- * Edit the `{BUNGENI}/bungeni_custom.pth` file, and change the path contained in this file to point to the _parent_ folder containing your customization folder:
-    {{{
+ * Create a copy of the `src/bungeni_custom` folder, and put it under `bungeni_apps/bungeni`, call it with a different name e.g. `my_custom`.
+ * Edit the `bungeni_apps/bungeni/bungeni_custom.pth` file , and change the path in the file to :
+	{{{
 	/my/installation/path/bungeni_apps/bungeni
 	}}}
-    Where /my/installation/path is the folder under which you have installed the bungeni applications.
- * Restart Bungeni and do a small test to verify if everything is working properly (e.g. login as a member and publish a question) 
+    Where /my/installation/path is the folder under which the bungeni applications are installed.
+  * Restart Bungeni and do a small test to verify if everything is working properly (e.g. login as a member and publish a question) 
 
-Your customization folder tree at `{BUNGENI}/my_custom` (so at `/my/installation/path/bungeni_apps/bungeni/my_custom`) should now look like this:
+Your customization folder tree should look like this under `/my/installation/path/bungeni_apps/bungeni`:
 {{{
 my_custom/
+├── forms
 ├── __init__.py
-├── types.xml
-├── forms/
-├── notifications/
-├── registry/
-├── reporting/
-├── sys/
-├── translations/
-├── vocabularies/
-├── workflows/
-└── workspace/
+├── notifications
+├── registry
+├── reporting
+├── sys
+├── translations
+├── vocabularies
+├── workflows
+└── workspace
 }}}
 
-You can now start customizing workflows, vocabularies, workspaces, et cetera, for your Bungeni in the `my_custom` folder.
-
-Whatever you may call and wherever you may place the customization folder, let's refer to _your_ customization folder simply as `{MY_CUSTOM}` from now on.
-
+You can now start customizing workflows, vocabularies and workspaces in Bungeni in the `my_custom` folder.
 
 === Testing customizations ===
 
-While customizing, it may sometimes be useful to switch between customizations (e.g. the one you are working on and the default one that bungeni installs with); you may switch anytime by simply rediting the `{BUNGENI}/bungeni_custom.pth` file (and restarting Bungeni).
 
 === Best practices ===
 
  * You need to back up or better version control your customization folder since it isn't part of shipped bungeni source code. Which means if your server crashes for whatever reason and you have to reinstall and re-setup Bungeni, you will be able to restore the system and the default customisation since they are version controlled - but you won't be able to restore your own customizations unless you have your own backup.
 
- * Do *not* make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will recieve updates. Always use a private customization folder as specified aove.
+ * Do Not make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will recieve updates. Always use a private customization folder as specified aove.
 
 
 
@@ -112,7 +111,7 @@ If you have enabled more than one language, the default language (see below) wil
 
 Bungeni language configuration is managed in this file:
 {{{
-    {MY_CUSTOM}/__init__.py
+{BUNGENI_INSTALL_PATH}/src/bungeni_custom/__init__.py. 
 }}}
 The location of this file may be different if you have a custom configuration location. (See [HowTo_CustomizeParliamentaryInformationManagement#Using_the_customization_folder Using the customization folder])
 
@@ -210,11 +209,11 @@ The above example sets a new sub-role within the legalDepartment role. To associ
 
 === Parliamentary document types ===
 
-Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Items_, _Bills_, _Motions_, _Questions_, _Tabled Documents_, with an easy possibility to extend for any number of other types.
+Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Items_, _Bill_, _Motions_, _Questions_, _Tabled Documents_, with any number of other types being easily added.
 
-All parliamentary document types are *workflowed*--with the workflow definition for any type being entirely customizable. Most other aspects of a document type definition are also customizable e.g. the various *user interface views* (via UI _descriptors_) for the type, or which *features* are enabled by the type.
+All parliamentary document types are *workflowed*--with the workflow definition for any type being entirely customizable. Most other aspects of a document type definition are also customizable e.g. the various *user interface views* for the type, or what *features* does the type support. 
 
-Note that, because all object types (parliamentary documents or not) supported by Bungeni are customizable in a consistent way, the explanations below will sometimes also mention or refer to types other than just the *parliamentary document types* listed above, for example:
+Note that, because all object types, parliamentary documents or not, supported by Bungeni are customizable in a consistent way, the explanations below will sometimes also mention or refer to other types than just the *parliamentary document types* listed above, for exmaple:
  # other _support_ document types e.g. _Events_ or _Attachments_;
  # other types that are _not_ parliamentary documents e.g. _Groups_ or _Sittings_.
 
@@ -225,7 +224,7 @@ A document type may enable or disable a variety of *features*. When enabled for 
 
 In each case, when a feature is enabled for a type, the system will also provide the necessary User Interface views for the feature e.g. if _audit_ is enabled for a type, then the UI will provide various ways to view the audit log of the document.
 
-Here's a summary of supported features for parliamentary documents:
+Here's a summary supported features for parliamentary documents:
 
  * *audit*: all changes on a document are _audited_.
  * *version*: a document may be _versioned_.
@@ -243,10 +242,10 @@ Enabling or disabling, and in some cases parametrizing, a feature for a type is 
 
 The entry point to all type customization is the file:
 {{{
-    {MY_CUSTOM}/types.xml
+    {BUNGENI_CUSTOM}/types.xml
 }}}
 
-A document type is enabled simply by including a {{{<doc>}}} element with the type name, and setting the attribute {{{@enabled="true"}}}. To disable, set the attribute {{{@enabled="false"}}} (or just remove the {{{<doc>}}} element): 
+A document type is simply enabled simply by including a {{{<doc>}}} element with the type name, and setting the attribute {{{@enabled="true"}}}. To disable, set the attribute {{{@enabled="false"}}} (or just remove the {{{<doc>}}} element): 
 
 {{{
 <types>
@@ -263,13 +262,13 @@ All custom document types must specify a name, that will be the _key_ used throu
 
 As previously mentioned, all types are _workflowed_. By default, the workflow definition file for a type is expected to be at: 
 {{{
-    {MY_CUSTOM}/workflows/{TYPE_NAME}.xml
+    {BUNGENI_CUSTOM}/workflows/{TYPE_NAME}.xml
 }}}
 Similarly for other configuration aspects that have dedicated configuration files, namely {{{workspace}}} and {{{notification}}}.
 
 Disabling a type means the type will *not* be registered (so will be _unknown_ to Bungeni), and all associated configuration e.g. workflow, descriptor, workspace, etc, will also not be loaded.
 
-Group types and their memberships types are also set in a similar way. See the `{MY_CUSTOM}/types.xml` itself for further explanations and sample settings of these.
+Group types and their memberships types are also set in a similar way. See the {{{{BUNGENI_CUSTOM}/types.xml}}} itself for further explanations and sample settings of these.
 
 ----
 == Forms ==
@@ -352,7 +351,7 @@ The notifications system uses a message queue system called RabbitMQ to route an
 Every document type has a notifications configuration file in the notifications folder
 
 {{{
-    {MY_CUSTOM}/notifications/{TYPE_NAME}.xml
+    {BUNGENI_CUSTOM}/notifications/{TYPE_NAME}.xml
 }}}
 
 || attribute || example || note ||
@@ -373,7 +372,7 @@ The email machinery in Bungeni uses the notifications system described above.
 The templates used for each document type are found in
 
 {{{
-    {MY_CUSTOM}/email/templates/{TYPE_NAME}.xml
+    {BUNGENI_CUSTOM}/email/templates/{TYPE_NAME}.xml
 }}}
 
 The email subject and body templates are defined using ZPT, the template system used in Bungeni.
@@ -389,9 +388,29 @@ The email subject and body templates are defined using ZPT, the template system 
 == Layout, theme and formats == 
 The layout, look and feel of the portal is controlled by a theme template in conjunction with a set of css styles and rule files. A default theme is enabled for each Bungeni installation.
 
-=== Enabling a country theme ===
+=== How to create a theme ===
 
-Sample country themes exist at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
+Bungeni comes with a default theme and layout. You can create your own themes inside the custom folder. (see [http://code.google.com/p/bungeni-portal/w/edit.do#The_customization_folder customization folder])
+
+The theme folder should have the structure: 
+
+{{{
+name_of_theme/
+├── css
+├── images
+└── layout.html
+}}}
+
+Copy _`css`_ and _`images`_ folder together with the _`layout.html`_ file from the default Bungeni theme into your theme folder found in:
+
+{{{
+{BUNGENI_INSTALL_PATH}/portal/src/portal.theme/portal/theme/static/
+}}}
+
+  * see [http://code.google.com/p/bungeni-portal/w/edit.do#Changing_page_layout How to change page layout]
+  * see [http://code.google.com/p/bungeni-portal/w/edit.do#Styling_with_CSS How to style with CSS]
+
+=== Enabling a custom theme ===
 
 To enable a country theme, edit the country_theme parameter in the Fabric 'setup.ini' file. The default setting is as follows:
 
@@ -416,15 +435,9 @@ then run the following command in fabric
 fab -H localhost enable_country_theme config_ini:portal 
 }}}
 
+Sample country themes exist at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
+
 === Changing page layout ===   
-
-Each country theme directory has a default structure:
-
-{{{
-|-- css
-|-- images
-`-- layout.html
-}}}
 
 The `layout.html` is an HTML file which defines the arrangement of HTML elements on both Portal and Workspace. It contains place-holder elements where to insert content from various Bungeni components. 
 
@@ -445,6 +458,8 @@ Think of `layout.html` as a template document that defines where to insert conte
   </body>
 </html>
 }}}
+
+=== Getting layout content ===
 
 There are rules that match content elements with the corresponding layout's elements. The rule to insert content into the above element looks like this:
 
@@ -513,6 +528,5 @@ Similar process for change background-color albeit under the _skin.css_ file
 Bungeni skins are located under the custom folder:
 
 {{{
-    {BUNGENI}/src/bungeni_custom/
+{BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
 }}}
-
