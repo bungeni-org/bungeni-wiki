@@ -402,7 +402,7 @@ name_of_theme/
 └── layout.html
 }}}
 
-Copy _`css`_ and _`images`_ folder together with the _`layout.html`_ file from the default Bungeni theme into your theme folder found in:
+Copy _`css`_ and _`images`_ folders together with _`layout.html`_ file from the default Bungeni theme into your theme folder. The Bungeni theme is located at:
 
 {{{
 {BUNGENI_INSTALL_PATH}/portal/src/portal.theme/portal/theme/static/
