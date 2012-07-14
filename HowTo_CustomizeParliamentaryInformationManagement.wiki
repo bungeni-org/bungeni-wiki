@@ -408,8 +408,8 @@ Copy _`css`_ and _`images`_ folder together with the _`layout.html`_ file from t
 {BUNGENI_INSTALL_PATH}/portal/src/portal.theme/portal/theme/static/
 }}}
 
-  * see [http://code.google.com/p/bungeni-portal/w/edit.do#Changing_page_layout How to change page layout]
-  * see [http://code.google.com/p/bungeni-portal/w/edit.do#Styling_with_CSS How to style with CSS]
+  * see [HowTo_CustomizeParliamentaryInformationManagement#Changing_page_layout How to change page layout]
+  * see [HowTo_CustomizeParliamentaryInformationManagement#Styling_with_CSS How to style with CSS]
 
 === Enabling a custom theme ===
 
