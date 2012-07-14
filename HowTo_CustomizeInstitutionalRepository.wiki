@@ -46,7 +46,7 @@ To switch the public portal to developer mode run the following fabric command :
 
 {{{
 ./fl exist_dev_mode
-}}
+}}}
 
 This command will restart the public portal in developer mode. Note that the public portal will *not* be available for public access when in Developer mode.
 
