@@ -29,7 +29,7 @@ If you browse the business and members section you will see the content from the
 
 e.g. - the following is the business section :
 
-[http://code.google.com/p/bungeni-portal/imagxml_ui_business.jpg]
+[http://code.google.com/p/bungeni-portal/xml_ui_business.jpg]
 
 The admin ui for the Bungeni reposiory portal allows customizing this user interface. 
 
@@ -86,11 +86,23 @@ To edit the `business` navigation, click on `business` in the _Navigation Config
 
 You will notice here that the items available for editing : `whats on`, `committees`, `bills` etc are the same ones that appear in the `business` section of the public portal :
 
-[http://code.google.com/p/bungeni-portal/imagxml_ui_business.jpg]
+[http://code.google.com/p/bungeni-portal/xml_ui_business.jpg]
 
+To change the label for an item - e.g. if you want to change the label for the committees link to offices - edit the field called `Default Name` in the `committees` subnavigation form - change it to e.g. 'offices' :
 
+[http://bungeni-portal.googlecode.com/files/xml_ui_edit_subnav.jpg]
 
-[http://bungeni-portal.googlecode.com/files/admin_ui_edit_delete_subnav.jpg]
+and then click `apply changes` at the bottom of the form to save changes to the sub-navigation. 
+
+[http://bungeni-portal.googlecode.com/files/apply_changes_sub-nav.png]
+
+and then finally click `save changes` on the main navigation selector.
+
+[http://bungeni-portal.googlecode.com/files/apply_changes_main-nav.png]
+
+Now if you browse to the public portal UI you will see the link text has changed :
+
+[http://bungeni-portal.googlecode.com/files/offices_link_edit_name.png]
 
 
 == Setting Date and Time formats ==
