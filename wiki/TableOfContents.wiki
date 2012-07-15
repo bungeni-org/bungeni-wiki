@@ -1,7 +1,7 @@
 #summary Table of Contents for the wiki
 #labels Featured
 
- *  [Install_BungeniApplicationStack How to setup Bungeni]
+ *  [Install_BungeniApplicationStack Getting started with Bungeni]
      *  [Install_PreRequisites_Fabric How to install pre-requisites]
      *  [Install_Bungeni_Fabric How to install Bungeni]
      *  [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
