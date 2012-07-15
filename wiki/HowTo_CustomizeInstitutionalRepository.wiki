@@ -106,9 +106,11 @@ Now if you browse to the public portal UI you will see the link text has changed
 
 [http://bungeni-portal.googlecode.com/files/offices_link_edit_name.png]
 
+Note: the `href` property maps to a url in the public portal. Creating new URLs requires developer knowledge of the public portal. The `href` property is also known as a `route` further below in `route` configuration.
+
 === Changing Listing Behaviors === 
 
-The listing behavior of the XML UI can be changed in the following ways :
+The listing behavior of the XML UI can be changed in the following ways globally :
  * The number of items to be shown per page in a listing
  * The number of pages to show links to for paged listings.
 
@@ -123,6 +125,31 @@ These properties can be set via the `Pagination Preferences` screen :
 Changing the properties to as shown in the screen above the screen ; `page limit` to 3 and `pagination count` to 2 results in the listing page appearing as follows :
 
 [http://bungeni-portal.googlecode.com/files/xml_ui_edited_pagination.png]
+
+Listing behavior can also be changed per content type by using the `Order Configuration` screen :
+
+[http://bungeni-portal.googlecode.com/files/order_by_config.png]
+
+This `Order Configuration` allows changing listing ordering behavior per content type.
+
+In the example above, the `Order Configuration` is being used to edit the ordering behavior for the `Question` content type.
+
+The `Question` content type supports 4 different kinds of ordering - these are listed as submission date(oldest and newest), status date (oldest and newest ) . Using the forms the order behavior can be changed. Listing ordering is available on all listing screens :
+
+[http://bungeni-portal.googlecode.com/files/ordering_selection.png]
+
+
+=== Changing Navigation and Page Titles === 
+
+Pages resolve to urls, and urls are internally represented in the public portal as *routes*. 
+Indivdual routes can be configured via `route configuration` 
+
+[http://bungeni-portal.googlecode.com/files/route_config.png]
+
+A route property includes the `title` this is the title of the page that the route resolves to.
+A route allows specifying a navigation and sub-navigation. The navigation and sub-navigation let the indicate under what active navigation (home, business or members ) and what active sub-navigation (e.g. commitees, whats on, bills, questions ...) the specified route falls under.
+
+[http://bungeni-portal.googlecode.com/files/route_config_edit.png]
 
 
 == Setting Date and Time formats ==
