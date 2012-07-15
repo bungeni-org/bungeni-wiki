@@ -32,6 +32,8 @@ bungeni_custom/
 
 This structure provides points of access to different aspects of customization discussed later in this document. The content of the folders is described below.
 
+|| __init__.py || special file that defines this folder as a _python package_; sets some general variables ||
+|| types.xml || declares all custom types ||
 || *file / folder name* || *purpose* ||
 || forms || contains the ui.xml file which is used to customize forms in Bungeni ||
 || notifications || contains the notification configuration files used for workflow notifications ||
@@ -54,50 +56,33 @@ Bungeni determines the customization folder by means of a `{BUNGENI}/bungeni_cus
     /home/undesa/bungeni_apps/bungeni/src
 }}}
 
-Changing the path here will tell bungeni to look for the customization folder in a different location.
+Changing the path here will tell Bungeni to look for the customization folder, i.e. the `bungeni_custom` python package, in a different location.
 
 === Making a private customization folder ===
 
 To create your own private customization folder do the following --
 
- * Create a copy of the `{BUNGENI}/src/bungeni_custom` folder--you may call it and place it anywhere you like but it should be outside of the `{BUNGENI}/src` folder. For example, let's call it `my_custom` and place it under `{BUNGENI}`.
- * Edit the `{BUNGENI}/bungeni_custom.pth` file, and change the path contained in this file to point to the _parent_ folder containing your customization folder:
+ * Create a copy of the `{BUNGENI}/src/bungeni_custom` folder, with *same name*--you may place it anywhere you like as long as it is outside of the `{BUNGENI}/src` folder. For example, let's place it at `{BUNGENI}/bungeni_custom`.
+ * Edit the `{BUNGENI}/bungeni_custom.pth` file, and change the path contained in this file to point to the _parent_ folder containing your customization folder, i.e:
     {{{
 	/my/installation/path/bungeni_apps/bungeni
 	}}}
-    Where /my/installation/path is the folder under which you have installed the bungeni applications.
+    Where {{{/my/installation/path}}} is the folder under which you have installed the Bungeni applications.
  * Restart Bungeni and do a small test to verify if everything is working properly (e.g. login as a member and publish a question) 
 
-Your customization folder tree at `{BUNGENI}/my_custom` (so at `/my/installation/path/bungeni_apps/bungeni/my_custom`) should now look like this:
-{{{
-my_custom/
-├── __init__.py
-├── types.xml
-├── forms/
-├── notifications/
-├── registry/
-├── reporting/
-├── sys/
-├── translations/
-├── vocabularies/
-├── workflows/
-└── workspace/
-}}}
+You can now start customizing workflows, vocabularies, workspaces, et cetera, for your Bungeni in _your_ `bungeni_custom` folder at at `/my/installation/path/bungeni_apps/bungeni/bungeni_custom`. 
 
-You can now start customizing workflows, vocabularies, workspaces, et cetera, for your Bungeni in the `my_custom` folder.
-
-Whatever you may call and wherever you may place the customization folder, let's refer to _your_ customization folder simply as `{MY_CUSTOM}` from now on.
-
+Wherever you place your customization folder, let's refer to _your_ customization folder simply as `{MY_CUSTOM}` from now on.
 
 === Testing customizations ===
 
-While customizing, it may sometimes be useful to switch between customizations (e.g. the one you are working on and the default one that bungeni installs with); you may switch anytime by simply rediting the `{BUNGENI}/bungeni_custom.pth` file (and restarting Bungeni).
+While customizing, it may sometimes be useful to switch between customizations (e.g. the one you are working on and the default one that bungeni installs with); you may switch anytime by simply re-editing the `{BUNGENI}/bungeni_custom.pth` file (and restarting Bungeni).
 
 === Best practices ===
 
  * You need to back up or better version control your customization folder since it isn't part of shipped bungeni source code. Which means if your server crashes for whatever reason and you have to reinstall and re-setup Bungeni, you will be able to restore the system and the default customisation since they are version controlled - but you won't be able to restore your own customizations unless you have your own backup.
 
- * Do *not* make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will recieve updates. Always use a private customization folder as specified aove.
+ * Do *not* make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will receive updates. Always use a private customization folder as specified above.
 
 
 
@@ -237,11 +222,11 @@ Here's a summary of supported features for parliamentary documents:
  * *notification*: user may subscribe and receive a variety of _notifications_ as the document changes.
  * *download*: the document may be available for _download_ e.g. in PDF.
 
-Enabling or disabling, and in some cases parametrizing, a feature for a type is part of the workflow definition for the _enabled_ type.
+Enabling, disabling and possibly parametrizing a feature for a type is part of the workflow definition for type--that must itself have been _enabled_.
 
 === Enabling and disabling custom document types ===
 
-The entry point to all type customization is the file:
+The entry point to type customization is the file:
 {{{
     {MY_CUSTOM}/types.xml
 }}}
@@ -280,15 +265,15 @@ The Bungeni User Interface allows a number of interactions or manipulations for 
 
  * the term *forms* as a more general term for the UI views for a type; 
  * the term *modes* to distinguish between the various interactions i.e. the above mentioned interactions correspond to the modes *add*, *view*, *edit* and *listing*.
- * *roles* to manage who may do what.
+ * *roles* to manage who may access specific fields in the different modes.
 
 We use a _descriptor_ to describe all the above for each type in Bungeni. 
 
-*All types* in Bungeni are customizable, some to a larger degree than others. For example custom types are (will be ;-) of course completely customizable (so, as an example, we may even disable them completely). But we may also quite extensively customize other system-required _support_ types (but not completely--as an example, we may not disable them).
+*All types* in Bungeni are customizable, some to a larger degree than others. For example custom types are (will be ;-) of course completely customizable (so, as an example, we may even disable them completely). But we may also quite extensively customize other system-required _support_ types (but not completely--as an example, we may _not_ disable them).
 
 === Form field _descriptors_ === 
 
-We customize the form views per type in Bungeni by means of a _descriptor_ per type, conatined the the file:
+We customize the form views per type in Bungeni by means of a _descriptor_ per type, contained in the file:
 {{{
     {MY_CUSTOM}/forms/ui.xml
 }}}
@@ -313,8 +298,7 @@ This file simply contains a UI _descriptor_ per type, and it looks something lik
             <hide modes="listing" />
         </field>
         <field name="response_type" displayable="view edit add listing" localizable="view edit listing">
-            <show modes="view edit" />
-            <show modes="listing" />
+            <show modes="view edit listing" />
         </field>
         ...
     </descriptor>
@@ -325,33 +309,34 @@ This file simply contains a UI _descriptor_ per type, and it looks something lik
 Each type _descriptor_ here controls the following aspects of the UI for the type:
  * the list of named UI fields for the type
  * the appearance _order_ of the UI fields for the type
- * the _modes_ in which the system may show/hide the field--the `@displayable` attribute (this is for convenience, provided for _information only_, may not modify)
- * the _modes_ for which each field *may be* customized--the `@localizable` attribute (this is for convenience, provided for _information only_, may not modify); all modes here are a sub-set of those in @displayable
- * the _modes_ that each *is* customized in--the sum value of the `@modes` attribute of all the `<show>` and `<hide>` elements on the field; all modes in @localizable *must* also be set here, once and once only
- * for each _mode_, the _roles_ for whom the field is shown or not--the sum value of the _optional_ `@roles` attribute of all the `<show>` and `<hide>` elements on the field
+ * the _modes_ in which the system may show/hide the field--this is the `@displayable` attribute (a convenience, provided for _information only_, may not modify)
+ * the _modes_ for which each field *may be* customized--this is the `@localizable` attribute (a convenience, provided for _information only_, may not modify); all modes here are a sub-set of those in `@displayable`
+ * the _modes_ that each field *is* customized in--the sum value of the `@modes` attribute of all the `<show>` and `<hide>` elements on the field; all modes in `@localizable` *must* also be set here, once and once only
+ * for each _mode_, the _roles_ for whom the field is shown or not--the value of the _optional_ `@roles` attribute of all the `<show>` and `<hide>` elements on the field
 
 The `descriptor/@order` attribute provides a hint to how references to descriptors themselves may be ordered e.g. for when generating navigation menus for browsing content such as the tree menu under the `admin` section.
 
-The above extract describes some fields for a _question_. Here, as an example, is what the UI view will look like when we are logged in as the _Clerk_ and in *add* mode:
+The above extract describes some fields for a _question_. Here, as an example, is what the UI view might look like when we are logged in as the _Clerk_ and in *add* mode:
 
 http://bungeni-portal.googlecode.com/svn/wiki/images/add-question.png
 
+Note that the `type_number` field (that is the number of the question, updated at a later stage in the question's life-cycle) does not appear in *add* mode as per the field descriptor.
 
 === Changing display order of fields === 
 
-The is simply a matter of re-ordering the `<field>` elements. So, for example if we would like to make `type_number` (in this case this is the number of the question) field appear after `acronym`, we simply move the field down i.e.
+The is simply a matter of re-ordering the `<field>` elements. So, for example if we would like to make `description` field appear after `response_type`, we simply move the field descriptor down i.e.
 {{{
         ...
-        <field name="acronym" displayable="view edit add listing" localizable="view edit add listing">
+        <field name="response_type" displayable="view edit add listing" localizable="view edit listing">
+            <show modes="view edit listing" />
+        </field>
+        <field name="description" displayable="view edit add listing" localizable="view edit add listing">
             <show modes="view edit add" />
             <hide modes="listing" />
         </field>
-        <field name="type_number" displayable="view listing" localizable="view listing">
-            <show modes="view listing" />
-        </field>
         ...
 }}}
-Then, whenever both fields are shown, the `acronym` field will appear above the `type_number` field. But note that this will have no visible affect in `listing` mode as `acronym` is not set to be displayed there.
+Then, whenever both fields are shown, the `description` field will appear above the `response_type` field. But note that this will have no visible affect in `listing` mode as `description` is not set to be displayed there (for all _roles_),
 
 === Show/Hide fields on a Form per mode ===  
 
@@ -361,11 +346,11 @@ Fields are customized using any number of `<show>` and `<hide>` elements, within
  * _@roles_ - lists the roles for which the modes are to be shown or hidden. The only roles allowed here are the ones listed in the `ui/@roles` attribute. This is optional, and when not set all the roles listed in `ui/@roles` are implied.
 
 `<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles, and `<hide>` hides the field for the listed modes and roles. A field may specify as many `<show>` and/or `<hide>` directives as it needs.
+The action of the `show` or `hide` directive is applied to the list of roles specified in _@roles_--meaning also that the _opposite_ action is applied to the _complement_ of the set of roles specified in _@roles i.e. to all other roles in ui/@roles. Thus, `show` and `hide` are really complementary ways to state the same thing, but one may at times be more convenient to use than the other.
 
 There are some simple rules to follow while using `<show>` and `<hide>`:
  * The only modes available for use are the ones provided by the `field/@localizable` attribute.
  * May have as many `<show>` or `<hide>` elemenets as we need, but any given _mode_ may appear *only once* i.e. in only one of the `<show>` or `<hide>` elements.
- * The action of the `show` or `hide` directive is applied to the list of roles specified in _@roles_--meaning also that the _opposite_ action is applied to the _complement_ of the set of roles specified in _@roles i.e. the difference with the list in ui/@roles. Thus, `show` and `hide` are really complementary ways to state the same thing, but one may at times be more conveninet to use than the other.
 
 ==== Show/Hide example ====
 
