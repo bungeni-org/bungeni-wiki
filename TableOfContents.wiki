@@ -57,7 +57,6 @@
  * Deployment and Testing 
      * [ISSUES_Categorized Issue Tracker Categorized Listing]
      * [Bungeni_Troubleshooting Troubleshoooting]
-     * [APIDOC_Capistrano_Bungeni_Installation Capistrano Command documentation for Bungeni]   
      * [HowTo_Setup_PackageIndex_Server How to setup a package index server]
      * [HOWTO_RunBungeniUnitTests   How to run Bungeni unit tests]
      * [HowTo_Test_BungeniBuilds How to do automated functional and integration tests]
