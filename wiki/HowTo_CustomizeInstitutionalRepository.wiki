@@ -70,7 +70,9 @@ To exit from developer mode run the following fabric command :
 
 This will restart the public portal in deployment mode and the customization interface will no longer be accessible 
 
-== Customizing top level Menu and Navigation == 
+== Application Customization == 
+
+=== Customizing top level Menu and Navigation ===
 
 Click on Navigation and a screen _Navigation Configuration UI_ like the below appears :
 
@@ -90,7 +92,7 @@ You will notice here that the items available for editing : `whats on`, `committ
 
 To change the label for an item - e.g. if you want to change the label for the committees link to offices - edit the field called `Default Name` in the `committees` subnavigation form - change it to e.g. 'offices' :
 
-[http://bungeni-portal.googlecode.com/files/xml_ui_edit_subnav.jpg]
+[http://bungeni-portal.googlecode.com/files/xml_ui_edit_sub_nav.jpg]
 
 and then click `apply changes` at the bottom of the form to save changes to the sub-navigation. 
 
@@ -103,6 +105,24 @@ and then finally click `save changes` on the main navigation selector.
 Now if you browse to the public portal UI you will see the link text has changed :
 
 [http://bungeni-portal.googlecode.com/files/offices_link_edit_name.png]
+
+=== Changing Listing Behaviors === 
+
+The listing behavior of the XML UI can be changed in the following ways :
+ * The number of items to be shown per page in a listing
+ * The number of pages to show links to for paged listings.
+
+For example, the default behavior is to show 15 items per listing (`page limit`) and 3 linked pages on the listing page (`pagination count`) :
+
+[http://bungeni-portal.googlecode.com/files/listing_questions.png]
+
+These properties can be set via the `Pagination Preferences` screen :
+
+[http://bungeni-portal.googlecode.com/files/pagination_preferences.png]
+
+Changing the properties to as shown in the screen above the screen ; `page limit` to 3 and `pagination count` to 2 results in the listing page appearing as follows :
+
+[http://bungeni-portal.googlecode.com/files/xml_ui_edited_pagination.png]
 
 
 == Setting Date and Time formats ==
