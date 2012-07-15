@@ -126,6 +126,8 @@ Changing the properties to as shown in the screen above the screen ; `page limit
 
 [http://bungeni-portal.googlecode.com/files/xml_ui_edited_pagination.png]
 
+More advanced listing behavior customizations are also possible; 
+
 Listing behavior can also be changed per content type by using the `Order Configuration` screen :
 
 [http://bungeni-portal.googlecode.com/files/order_by_config.png]

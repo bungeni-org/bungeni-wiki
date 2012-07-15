@@ -1,11 +1,6 @@
 #summary Table of Contents for the wiki
 #labels Featured
 
- * Architecture 
-     * [Architecture_Overview Overview of Bungeni Architecture]
-     * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
-     * [Framework_Internals Framework Internals]
-     * [Architecture_References References]
  *  [Install_BungeniApplicationStack How to setup Bungeni]
      *  [Install_PreRequisites_Fabric How to install pre-requisites]
      *  [Install_Bungeni_Fabric How to install Bungeni]
@@ -53,6 +48,12 @@
      * [How_to_translations How to generate translation catalogs]
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [UpdatingOreYUI Updating ore.yui]
+     * Architecture 
+        * [Architecture_Overview Overview of Bungeni Architecture]
+        * [Architecture_PoliciesAndMechanisms Architectural Policies and Mechanisms]
+        * [Framework_Internals Framework Internals]
+        * [Architecture_References References]
+
  * Deployment and Testing 
      * [ISSUES_Categorized Issue Tracker Categorized Listing]
      * [Bungeni_Troubleshooting Troubleshoooting]
