@@ -229,7 +229,7 @@ If you need to have finer grained roles you may use sub-roles e.g. If you want a
 Example
 
 {{{
-<bungeni:subrole id="legalOffice_billOffice" title="Question Clerk" role="legalDepartment/>
+<bungeni:subrole id="legalOffice_billOffice" title="Bill Clerk" role="legalDepartment/>
 }}}
 
 The above example sets a new sub-role within the legalDepartment role. To associate this role with an office, in “administration” go to “offices” open the “Legal Department” and add  the “Bill Office” and then in the "roles select box” " select  “Bill Office”. Please note that the “Bill Office” sub-role will be available only within the parent “office”, in this case the Legal Department.
