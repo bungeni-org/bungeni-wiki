@@ -17,7 +17,7 @@ Additionally there is a need to maintain a separation of systems and data betwee
 For developer and admin purposes you will need to access the institutional portal directly. By default it runs on port 8088 - to access the institutional portal interface directly use the URL :
 
 {{{
-http://localhost:8088/exist/apps/framework/bungeni
+http://localhost:8088/exist/apps/framework/bungeni/
 }}}
 
 You will see a screen like the below - 
@@ -165,7 +165,7 @@ However unlike the ordering behavior, new `search` behavior can be added via con
 [http://bungeni-portal.googlecode.com/files/search_ui_config.png]
 
 In the config screen above the specific XPath for the search is configured via the `Search Path` parameter.
-This however still requires an index on the specific Xpath to be create in the XML database.
+This however still requires an index on the specific Xpath to be create in the XML database. To see how to configure indexes in eXist [http://www.exist-db.org/exist/indexing.xml#idxconf see here].
 
 
 
