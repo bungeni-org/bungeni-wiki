@@ -1,6 +1,6 @@
 #summary How to build an index from a directory containing tarballs, eggs, zip files and any other packaged files.
-#sidebar TableOfContents
 #labels Phase-Implementation,installation,packageindex
+#sidebar TableOfContents
 
 = Introduction =
 This page describes how to setup a local index to serve up packages that are needed for a Bungeni installation.
@@ -10,6 +10,10 @@ This page describes how to setup a local index to serve up packages that are nee
     It is advisable to install repoze.bfg into a virtualenv
 
   * UNIX 
+    * Install python headers and build-essential
+{{{
+sudo apt-get install python26-dev build-essential
+}}}
     * Ensure that setuptools is installed - download [http://peak.telecommunity.com/dist/ez_setup.py ez_setup.py]; invoke it using the Python interpreter you want to install setuptools into: 
 {{{
 $ sudo python ez_setup.py
@@ -57,7 +61,7 @@ Name it 'index' - Add any packages and sub-folders necessary for your installati
 
 Using the interpreter from the virtualenv created when installing repoze.bfg, invoke the following command when inside the project directory against the setup.py:
 {{{
-$ ../bin/python setup.py develop
+$ ./bin/python setup.py develop
 }}}
 Run the package from the virtualenv root folder:
 {{{
