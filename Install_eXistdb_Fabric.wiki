@@ -38,7 +38,7 @@ This installs the eXist framework files for browsing the Bungeni XML repository.
 
 Alternatively, if you are running Bungeni on localhost, you can run:
 {{{
-./fl exist_install && ./fl exist_load_demodata && ./fl exist_fw_install 
+./fl exist_install exist_load_demodata exist_fw_install 
 }}}
 
 This will install eXist-db and load some demo data altogether.
