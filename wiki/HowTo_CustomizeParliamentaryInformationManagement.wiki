@@ -65,8 +65,8 @@ To create your own private customization folder do the following --
  * Create a copy of the `{BUNGENI}/src/bungeni_custom` folder, with *same name*--you may place it anywhere you like as long as it is outside of the `{BUNGENI}/src` folder. For example, let's place it at `{BUNGENI}/bungeni_custom`.
  * Edit the `{BUNGENI}/bungeni_custom.pth` file, and change the path contained in this file to point to the _parent_ folder containing your customization folder, i.e:
     {{{
-	/my/installation/path/bungeni_apps/bungeni
-	}}}
+	    /my/installation/path/bungeni_apps/bungeni
+	    }}}
     Where {{{/my/installation/path}}} is the folder under which you have installed the Bungeni applications.
  * Restart Bungeni and do a small test to verify if everything is working properly (e.g. login as a member and publish a question) 
 
@@ -117,7 +117,65 @@ http://bungeni-portal.googlecode.com/svn/wiki/images/languages-menu.png
 
 ----
 == Vocabularies ==
+
+A vocabulary is a _value list_ where each value needs to be remembered (e.g. stored in a database) in a standard way, but represented in a variety of ways, and possibly in different languages. Such value lists may also be nested i.e. a _value tree_. Bungeni uses the [http://www.imsglobal.org/vdex/ Vocabulary Definition Exchange] (VDEX) standard to manage customizable vocabularies, each with a dedicated XML file, are to be found at: 
+
+{{{
+    {MY_CUSTOM}/vocabularies/
+        attachment_type.vdex
+        attendance_type.vdex
+        bill_type.vdex
+        change_procedure.vdex
+        committee_continuity.vdex
+        committee_type.vdex
+        event_type.vdex
+        gender.vdex
+        logical_address_type.vdex
+        marital_status.vdex
+        member_election_type.vdex
+        party.vdex
+        postal_address_type.vdex
+        question_type.vdex
+        representation.vdex
+        response_type.vdex
+        sitting-activity-types.vdex
+        sitting-convocation-types.vdex
+        sitting-meeting-types.vdex
+        subject-terms.vdex
+        yes_no.vdex
+}}}
+
 === Managing  vocabularies ===
+
+To manage a vocabulary we simply modify the corresponding XML file that defines it (in [http://www.imsglobal.org/vdex/ VDEX format]). 
+
+A vdex file defines a vocabulary _completely_. For example, we can add all individual terms that we need (the `<term>`), the _token_ value (the `<termIdentifier>`) for each term, the _display label_ (the `<caption>`) for each term, and in as many languages as we desire (a `<langstring>` per language per term).
+
+Here, as an example, is a relatively simple vocabulary defining the types of Bills we choose to support in our parliament:
+{{{
+<vdex xmlns="http://www.imsglobal.org/xsd/imsvdex_v1p0" 
+    orderSignificant="true" profileType="flatTokenTerms">
+    <vocabName>
+        <langstring language="en">bill_type</langstring>
+    </vocabName>
+    <vocabIdentifier>org.bungeni.metadata.vocabularies.bill_type</vocabIdentifier>
+    <term>
+        <termIdentifier>government</termIdentifier>
+        <caption>
+            <langstring language="en">Government Initiative</langstring>
+            <langstring language="pt">Governo</langstring>
+        </caption>
+    </term>
+    <term>
+        <termIdentifier>member</termIdentifier>
+        <caption>
+            <langstring language="en">Member Initiative</langstring>
+            <langstring language="pt">Membro</langstring>
+        </caption>
+    </term>
+</vdex>
+}}}
+
 
 ----
 == Roles ==
@@ -476,7 +534,7 @@ The layout, look and feel of the portal is controlled by a theme template in con
 
 === How to create a theme ===
 
-Bungeni comes with a default theme and layout. You can create your own themes inside the custom folder. (see [http://code.google.com/p/bungeni-portal/w/edit.do#The_customization_folder customization folder])
+Bungeni comes with a default theme and layout. You can create your own themes inside the custom folder. (see [#The_customization_folder customization folder])
 
 The theme folder should have the structure: 
 
