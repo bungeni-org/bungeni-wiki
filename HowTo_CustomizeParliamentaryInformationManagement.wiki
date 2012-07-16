@@ -428,11 +428,71 @@ To achieve this, we could modify the field descriptor as follows:
 
 ----
 == Workflow  ==
+
+<wiki:comment>
 === How to map documents/groups/membership workflow === 
 === How to configure documents/groups/membership workflow === 
+</wiki:comment>
 
+Every document type in Bungeni is _workflowed_, as mentioned above in the [#Documents Documents] section that also indicates how to *relate* a _workflow definition_ to a _type_. 
 
+A definition of a workflow in Bungeni is an XML file that defines the following behavioral aspects of the type it "workflows": 
+ * The _features_ enabled by the type, see [#Document_features Document features] section for the list of available features on parliamentary document types in Bungeni.
+ * _All_ the _global permissions_, dedicated to the type, that are to be granted to the various _roles_ you have defined in your parliament.
+ * _All_ the possible _states_ the type may be in, thoughout its life-cycle.
+ * _All_ the _local permissions_, dedicated to the type, that are to be granted or denied _on the document instance_, to the various _roles_ we have defined in our parliament.  
+ * _All_ the "paths" or _transitions_ we wish to allow from any state to another, along with other related information such as which _roles_ may execute the _transition_ or under what _condition_ should the transition be "made possible".
 
+Here, just as indication of the various functions of a workflow XML definition, is a skeletal extract of a workflow definition for a _Motion_ document type: 
+
+{{{
+<workflow title="Motion Workflow" 
+    description="A Motion"
+    tags="draft private public approved ... terminal"
+    >
+    
+    <!-- features -->
+    <feature name="audit" enabled="true" />
+    <feature ...
+    
+    <!-- global grants -->
+    <grant permission="bungeni.motion.View" role="bungeni.Owner" />
+    <grant ...
+
+    <!-- states -->
+    ...
+    <state id="draft" ... ></state>
+    <state id="redraft" title="Redraft" like_state="draft"
+        note="document under review before resubmission"
+        version="true">
+        <deny permission="bungeni.motion.Delete" role="bungeni.Owner" />
+    </state>
+    <state id="submitted_signatories" ... ></state>
+    ...
+
+    <!-- transitions -->
+    ...
+    <transition title="Submit to Signatories"
+        source="draft redraft"
+        destination="submitted_signatories"
+        condition="pi_has_signatories"
+        roles="bungeni.Owner"
+    />
+    ...
+    <transition title="Redraft"
+        source="submitted_signatories"
+        destination="redraft"
+        condition="user_is_context_owner"
+        roles="bungeni.Owner"
+    />
+    ...
+}}}
+
+Note that managing permissions for a type is the biggest and trickiest chore in managing a workflow. To help manage this arduous task, some tools and conventions are available:
+
+ * We only grant _global_ grants (never _deny_) and if we have granted a permission globally (for all instances of this type) we may not again grant it (or deny it) _locally_ i.e. for this _instance_ within a given _state_.
+
+ * To make local grants easier, you may make use of the `state/@like_state` attribute, as in the sample above for the `redraft` state, that simply "adopts" all the local permission grants/denies for the "liked state" (i.e. from `draft` in the sample here) and then simply declare only the _differences_.
 
 
 ----
