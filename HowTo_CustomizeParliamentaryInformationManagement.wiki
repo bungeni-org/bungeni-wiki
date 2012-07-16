@@ -205,12 +205,12 @@ A Bungeni administrator may define additional parliament specific roles in bunge
 
 || *attribute* || *example* || *note* ||
 || title || Legal Department || The title "Legal Department" is what appears in the user interface ||
-|| role || legalDepartment || This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. || 
+|| id || legalDepartment || This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. || 
 
 Example
 
 {{{
-<role title="Legal Department" role="legalDepartment">
+<role title="Legal Department" id="legalDepartment">
 }}}
 
 To associate the role above with an office, in “administration” go to “offices” and add the “Legal Department”, then select it in the "roles select box” “Legal Department”. If the Department already exists, just edit and select the "roles" select box “Legal Department”.
@@ -783,5 +783,3 @@ Within parliaments the different categories of information that may be need to s
  * *governments* Add _government/ministries/member of ministries_;
 
  * *title types* Add the title use in your parliament, e.g. Speaker/President/Chief Whip etc. Please note that _titles_ in all groups may be associated to a _role_ (see section on roles).
-
-
