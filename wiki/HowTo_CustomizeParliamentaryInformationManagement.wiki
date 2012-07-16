@@ -177,7 +177,7 @@ Example
 The above example sets a new sub-role within the legalDepartment role. To associate this role with an office, in “administration” go to “offices” open the “Legal Department” and add  the “Bill Office” and then in the "roles select box” " select  “Bill Office”. Please note that the “Bill Office” sub-role will be available only within the parent “office”, in this case the Legal Department.
 
 
-
+<wiki:comment>
 ----
 == Parliamentary Metadata ==
 === Adding a parliament ===
@@ -187,7 +187,7 @@ The above example sets a new sub-role within the legalDepartment role. To associ
 === Government ===
 === Users ===
 === Offices ===
-
+</wiki:comment>
 
 
 ----
@@ -616,3 +616,54 @@ Bungeni skins are located under the custom folder:
 {{{
 {BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
 }}}
+
+
+----
+== How to setup a parliament ==
+
+Once you have defined your documents/their workflows and related roles and permissions, you have added their vocabularies, etc. you are ready to set up your own parliament.
+
+To have Bungeni up and running, like any other system there is need a minimum set of data in order to be fully functional. You need to basically add:
+ * *authenticated users* that may have specific roles in the context of parliamentary workflow;
+ * *groups* that in Bungeni terms could be _offices_, _committees_, _political groups_; even _parliament_ is a _group. Groups may have sub-groups, they have begin and end date, they have membership, and title specific to each group and they may also have addresses.
+
+Basically setting up your parliament means to add the authenticated users, define the _offices_ that is the structural organization of your parliament, add a parliament, members of parliament, its committees and political groups, and also setup the Government with its Ministries and the titles used to define the memberships of the different groups.
+
+When you login as Administrator in the _administration_ tab you will find these folders: parliaments, offices, users:
+ * *parliaments* folder lists the _parliaments_, (e.g. 7th Parliament – 2009-2014). Within a parliament you will find all the documents, groups with memberships of that specific parliament;
+ * *offices* folder lists the _office_ of the system. Here, depending of the actual organisation structure of your parliament you can create Departments, Services within them or Directorates and Office. Etc.
+ * *users* folder list all users that are allowed an authenticated access the system e.g. Members of Parliament, Parliamentary staff, government Ministers and staff, etc.
+
+*Step 1: _create a parliament_*
+In {{{administration/parliaments}}} click _add parliament_:
+
+http://bungeni-portal.googlecode.com/svn/wiki/images/add-parliament.png
+
+*Step 2: _add users_*
+In {{{administration/users}}} click: _add user_
+
+All authenticated users, being Members of Parliament, Parliamentary staff, government Ministers or staff, etc. aas to first be added as Bungeni _users_. Here you may input all the biodata of the users, and if required, e.g. the the case of MPs, you may also add a biographical note. You may also add _addresses_ that the users may have, e.g. office, home, etc.
+
+Step 3: add offices and memberships 
+
+In administration/users click _add office_
+
+All authenticated users, being Members of Parliament, Parliamentary staff, government Ministers or staff, etc. aas to first be added as Bungeni _users_. Here you may input all the biodata of the users, and if required, e.g. the the case of MPs, you may also add a biographical note. You may also add _addresses_ that the users may have, e.g. office, home, etc.
+
+Step 4:  add _groups_, related memberships and titles
+
+Within parliaments the different categories of information that may be need to setup the system are listed below.
+
+ * *parliamentary sessions* Here you add parliamentary sessions;
+
+ * *members of parliament* MP are registered uploaded here. Before one is added the group _member of parliament_ one has to be created as _user_;
+
+ * *political groups* Add members of _political groups_. Only MP can be added to political groups;
+
+ * *committees* Add members of _committees_. Only MP can be added to political groups;
+
+ * *governments* Add _government/ministries/member of ministries_;
+
+ * *title types* Add the title use in your parliament, e.g. Speaker/President/Chief Whip etc. Please note that _titles_ in all groups may be associated to a _role_ (see section on roles).
+
+
