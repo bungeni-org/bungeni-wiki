@@ -32,9 +32,9 @@ bungeni_custom/
 
 This structure provides points of access to different aspects of customization discussed later in this document. The content of the folders is described below.
 
+|| *file / folder name* || *purpose* ||
 || __init__.py || special file that defines this folder as a _python package_; sets some general variables ||
 || types.xml || declares all custom types ||
-|| *file / folder name* || *purpose* ||
 || forms || contains the ui.xml file which is used to customize forms in Bungeni ||
 || notifications || contains the notification configuration files used for workflow notifications ||
 || registry || Contains the format for numbering content||
@@ -616,4 +616,3 @@ Bungeni skins are located under the custom folder:
 {{{
 {BUNGENI_INSTALL_PATH}/src/bungeni_custom/ 
 }}}
-
