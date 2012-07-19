@@ -14,38 +14,68 @@ You should have completed the following steps :
  # *The eXist-db build is an optional deployment configuration which adds an XML documents build repository and framework files into Bungeni.*
  # *The eXist-db currently works on Ubuntu 10.04 + *
 
-= Download & Setup =
+= Download & Setup eXist stack =
 
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
-== Installing eXist-db == 
+== eXist stack pre-requisites == 
+The XML repository is updated by Gluescripts, essentially a pair of scripts, "producer" and a "consumer" which implement Rabbit MQ, a messaging broker (see [http://www.rabbitmq.com/ Rabbit MQ]). Presetup installs all dependencies required prior to installing the stack.
+
+{{{
+fab -H <host-name-or-ip> exist_presetup
+}}}
+
+== Installing Rabbit MQ ==
+
+{{{
+fab -H <host-name-or-ip> rabbitmq_install
+}}}
+
+== Installing Gluescripts ==
+
+The Gluescripts run in the background to monitor Bungeni documents that have been serialized and update the XML repository. The "producer" monitors and adds documents to the message queue while "consumer" gets the new documents from the message queue, applies [http://en.wikipedia.org/wiki/XSLT XSLT] and pushes the transformed documents into the XML repository. 
+
+{{{
+fab -H <host-name-or-ip> glue_install
+}}}
+
+== XML Repository ==
+
+eXist-db is an open source database for storing XML documents (see [http://www.exist-db.org/exist/index.xml eXist-db.org]).
+
+=== Installing eXist-db ===
 {{{
 fab -H <host-name-or-ip> exist_install
 }}}
 This installs the eXist-db build.
 
-== Installing demo data ==
+=== Installing demo data ===
 {{{
 fab -H <host-name-or-ip> exist_load_demodata
 }}}
 
-== Installing the framework files == 
+=== Installing the framework files === 
 {{{
 fab -H <host-name-or-ip> exist_fw_install
 }}}
 This installs the eXist framework files for browsing the Bungeni XML repository.
 
 
+
 Alternatively, if you are running Bungeni on localhost, you can run:
 {{{
-./fl exist_install exist_load_demodata exist_fw_install 
+./fl rabbitmq_install glue_install exist_install exist_load_demodata exist_fw_install 
 }}}
 
-This will install eXist-db and load some demo data altogether.
+This will install the entire stack and load some demo data into eXist-db altogether.
 
 = Starting and Stopping exist = 
 
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager#exist using supervisor to start / stop eXist]
+
+= Starting and Stopping rabbitmq services = 
+
+See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager#rabbitmq using supervisor to start / stop rabbitmq]
 
 = About BungeniXQFramework =
 
