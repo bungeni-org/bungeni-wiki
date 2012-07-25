@@ -747,32 +747,33 @@ Copy _`css`_ and _`images`_ folders together with _`layout.html`_ file from the 
   * see [HowTo_CustomizeParliamentaryInformationManagement#Changing_page_layout How to change page layout]
   * see [HowTo_CustomizeParliamentaryInformationManagement#Styling_with_CSS How to style with CSS]
 
-=== Enabling a custom theme ===
+=== Demo themes ===
 
-To enable a country theme, edit the country_theme parameter in the Fabric 'setup.ini' file. The default setting is as follows:
+Demo themes can be found at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
+To enable a demo theme, edit the demo_theme parameter in the Fabric 'setup.ini' file. The default setting is as follows:
 
 {{{
 [custom]
 ...
-country_theme = default
+demo_theme = default
 }}}
 
-Set this parameter to the appropriate value (_It is recommended to use the [http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ISO 3166-1 alpha-2] codes_) e.g. for the Kenya theme the setting would be as follows:
+Set this parameter to the appropriate value (_You must use the name of the theme as it is in the portal.country_themes package_) e.g. for the demo theme with the name 'ke' the setting would be as follows:
 
 {{{
 [custom]
 ...
-country_theme = ke
+demo_theme = ke
 }}}
 
 then run the following command in fabric
 
 
 {{{
-fab -H localhost enable_country_theme config_ini:portal 
+fab -H localhost enable_demo_theme config_ini:portal 
 }}}
 
-Sample country themes exist at this location: http://bungeni-portal.googlecode.com/svn/portal.country_themes/trunk
+
 
 === Changing page layout ===   
 
