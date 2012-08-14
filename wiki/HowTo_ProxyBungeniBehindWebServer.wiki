@@ -75,6 +75,8 @@ proxy_read_timeout      90;
 proxy_buffers           32 4k;
 sendfile on;
 }}}
+*Check that the above configuration exists in a file at this location /etc/nginx/proxy.conf
+If the file does not exist then create it and add the specified configurations.*
 
 
 === Apache configuration ===
@@ -96,6 +98,5 @@ The virtualhost configuration looks like this :
 </VirtualHost>
 
 }}}
-
 
 

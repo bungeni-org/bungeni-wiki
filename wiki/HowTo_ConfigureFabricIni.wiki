@@ -46,8 +46,9 @@ Within the root folder the following installation structure is used :
        * xapian - xapian installation
      * plone - the plone installation
      * portal - the deliverance portal installation
-   * python25 - python 2.5
-   * python24 - python 2.4
+   * python26 - python 2.6 or python27 - python 2.7
+   * exist - the exist installation
+   * rabbitmq - the rabbitmq installation
    * config - folder used for some configuration files
  * cbild - scratch folder used for builds
    
@@ -104,7 +105,8 @@ Setting `verbose=true` runs the build in verbose mode i.e. with a much richer se
 
 === distro_override === 
 
-Specify a distro package list.
+Specify a distro package list: Recommended linux distributions are 10.04 or 12.04
+
 
 {{{
 [global]
@@ -116,7 +118,7 @@ Fabric queries a file called `distro.ini` for a list of required packages. Requi
 {{{
 ....
 [Ubuntu]
-8.04 = 
+12.04 = 
 	package-dev
 	linux-headers
 ....
@@ -131,6 +133,9 @@ In the example above `distro_override` has been specified as `Ubuntu:10.04-gandi
 	pacakge-spec
 	package-two
 }}}
+
+*NB: Specifying the distro as 12.04 requires you to set the python version for the supervisor, bungeni, plone and portal sections to 2.7
+See [HowTo_ConfigureFabricIni#The_bungeni,_plone_and_portal_sections]*
 
 === release === 
 
@@ -161,7 +166,7 @@ portal=8123
 [supervisor]
 host=localhost
 port=8888
-python=2.5
+python=2.6
 }}}
 
 These parameters specify the public host and port name on which the supervisor http server starts up.
@@ -197,7 +202,7 @@ user=my.svn.user.name
 pass=azo28nd8
 }}}
 
-Note that the user and pass parameters are used only when the `development_build` parameter is set to `True` in `[global]`
+*Note that the user and pass parameters are used only when the `development_build` parameter is set to `True` in `[global]*`
 
 
 == The bungeni, plone and portal sections == 
@@ -207,7 +212,7 @@ bungeni, plone and portal have similar configuration parameters.
 {{{
 [bungeni]
 local_index=http://192.168.0.14:6543/bungeni
-python=2.5
+python=2.6
 repo=bungeni-portal.googlecode.com/svn/bungeni.buildout/trunk
 dump_file=dmp_undesa.txt
 http_port = 8081
@@ -218,7 +223,7 @@ attachments_archive=fs.tar.gz
 }}}
 
  * `local_index` is the address of the local package index. This is used only when `local_cache` is set to `True` in `[global]`.
- * `python` is the version of python to use for bungeni (2.4,2.5 or 2.6). Specifying a python version here will cause a custom built python of that version to be built during the `presetup` action. e.g. if you specify 2.6 for `python` in the `[bungeni]` section, and 2.5 for `python` in the `[portal]` section both python 2.5 and 2.6 will be built by fabric during `presetup`.
+ * `python` is the version of python to use for bungeni (2.6 or 2.7). Specifying a python version here will cause a custom built python of that version to be built during the `presetup` action. e.g. if you specify 2.6 for `python` in the `[bungeni]` section, and 2.7 for `python` in the `[portal]` section both python 2.6 and 2.7 will be built by fabric during `presetup`.
  * `repo` is the address of the bungeni subversion repository minus the protocol part of the URL. Fabric sets it appropriately depending upon whether you use `development_mode` or not.
  * `dump_file` the name of the database dump file. this is expected to be in the `testdatadmp` folder
  * `attachments_folder` and `attachments_archive`  the name of the folder where attachments are stored. the archive contains attachment documents part of test data.
@@ -231,7 +236,7 @@ The *portal* section provides certain extra deployment parameters, which are exp
 
 The deliverance portal is an application proxy -- and can be proxied behind a virtualhost / domain. The following parameters allow us to do this easily
 
-The `theme` parameter specifies the theme layout file to be used by the deliverance portal. The path is always relative to `bungeni_installation/src/bungeni.main/bungeni/portal/static/themes`.
+The `theme` parameter specifies the theme layout file to be used by the deliverance portal. The path is always relative to `bungeni_installation/portal/src/portal.theme/portal/theme/static/themes`.
 
 {{{
 [portal]
@@ -273,7 +278,7 @@ web_server_port = 80
 For example nginx and apache configurations see [HowTo_ProxyBungeniBehindWebServer How to proxy Bungeni behind a web server]
 
 
-== The python24, python25, python26, imaging sections == 
+== The python24, python25, python26, python27, imaging sections == 
 
 These sections take a single parameter :
 
@@ -282,10 +287,15 @@ These sections take a single parameter :
 download_url = http://www.python.org/ftp/python/2.5.5/Python-2.5.5.tgz
 }}}
 
+{{{
+[python27]
+download_url = http://www.python.org/ftp/python/2.6.7/Python-2.6.7.tgz
+}}}
+
 `download_url` can either be a http / ftp URL or a file system path (/home/files/file.tar.gz) to the python source archive.
 
 
-== The postgresql, xapian, xapian-bindings and exist sections == 
+== The postgresql, xapian, and xapian-bindings sections == 
 
 These sections take a single parameter `local_url`. This parameter is used only when `local_cache` is set to `True`.
 
