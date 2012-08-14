@@ -7,13 +7,14 @@
 = Pre-Requisites for Bungeni =
 
 The Bungeni Application system has the following pre-requisites :
- * User installed Python 2.6 
- * SSL, Imaging, bz2 extensions for Python 2.6
- * System libraries required for building  PostgreSQL from source
- * OpenOffice.org -- this is used for PDF conversion
+ * User installed Python either Python 2.6 or Python 2.7;
+ * SSL, Imaging, bz2 extensions for user installed Python;
+ * System libraries required for building  PostgreSQL from source;
+ * OpenOffice.org -- this is used for PDF conversion.
 
 Recommended Linux distribution :
- * Ubuntu 10.04 (32 or 64 bit distro)
+ * Ubuntu 10.04 (32 or 64 bit distro);
+ * Ubuntu 12.04 (64 bit distro) - *only runs Python 2.7*. 
 
 The build process downloads various components from the internet - so it is *neccessary* for the computer to have access to the internet.
 

@@ -1,5 +1,4 @@
 #summary How to install Plone
-#labels bungeni-wiki
 #sidebar TableOfContents
 
 <wiki:toc max_depth="4" />
@@ -13,7 +12,7 @@ You should have completed the following steps :
  * *[Install_Bungeni_Fabric How to setup Bungeni Parliamentary Information System]* 
 
  # *The Plone build is an optional deployment configuration which adds a content management system into Bungeni.*
- # *The Plone build currently works only on Ubuntu 10.04*
+ # *The Plone build currently works on Ubuntu 10.04 or Ubuntu 12.04*
 
 = Build & Setup =
 
@@ -37,24 +36,9 @@ fab -H <host-name-or-ip> plone_install config_ini:plone
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
-== Configure the Installation == 
-Log in as the admin user into plone. The default username and password is 'ploneadmin'
 
-=== Create a plone site === 
-
-In the Zope ZMI create a new plone site.
-Enter "plone" as the value of the path identifier and the title of the site.
-
-Under the add ons section select the following products:
- * Bungeni CMS Workspaces
- * Bungeni CMS policy
- * Bungeni CMS theme
- * BungeniHelpCenter
- * PloneHelpCenter
-
-Click on site-setup -> Add on products.
- 
- * LinguaPlone and click activate.
+== Admin User == 
+Log in as the admin user into plone. The default username and password is "ploneadmin"
 
 
 == Import demo structure ==
