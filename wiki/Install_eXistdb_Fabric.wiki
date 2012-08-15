@@ -19,10 +19,10 @@ You should have completed the following steps :
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
 == eXist stack pre-requisites == 
-The XML repository is updated by Gluescripts, essentially a pair of scripts, "publisher" and a "consumer" which implement Rabbit MQ, a messaging broker (see [http://www.rabbitmq.com/ Rabbit MQ]). Presetup installs all dependencies required prior to installing the stack.
+The XML repository is updated by Gluescripts, essentially a pair of scripts, "publisher" and a "consumer" which implement Rabbit MQ, a messaging broker (see [http://www.rabbitmq.com/ Rabbit MQ]). Presetup installs all dependencies required prior to installing the stack. Use `config_supervisord` command to regenerate the configuration templates especially when updating from an existing Bungeni installation.
 
 {{{
-fab -H <host-name-or-ip> exist_presetup
+fab -H <host-name-or-ip> exist_presetup config_supervisord
 }}}
 
 == Installing Rabbit MQ ==
@@ -64,7 +64,7 @@ This installs the eXist framework files for browsing the Bungeni XML repository.
 
 Alternatively, if you are running Bungeni on localhost, you can run:
 {{{
-./fl rabbitmq_install glue_install exist_install exist_load_demodata exist_fw_install 
+./fl exist_presetup config_supervisord rabbitmq_install glue_install exist_install exist_load_demodata exist_fw_install 
 }}}
 
 This will install the entire stack and load some demo data into eXist-db altogether.
