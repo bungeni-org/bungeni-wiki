@@ -10,6 +10,7 @@ You should have completed the following steps :
  
  * *[Install_PreRequisites_Fabric How to setup the Pre-requisites]* 
  * *[Install_Bungeni_Fabric How to setup Bungeni Parliamentary Information System]* 
+ * *[HowTo_SupervisorServiceManager How to use Supervisor Service Manager]*
 
  # *The eXist-db build is an optional deployment configuration which adds an XML documents build repository and framework files into Bungeni.*
  # *The eXist-db currently works on Ubuntu 10.04 + *
@@ -19,7 +20,7 @@ You should have completed the following steps :
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
 == eXist stack pre-requisites == 
-The XML repository is updated by Gluescripts, essentially a pair of scripts, "publisher" and a "consumer" which implement Rabbit MQ, a messaging broker (see [http://www.rabbitmq.com/ Rabbit MQ]). Presetup installs all dependencies required prior to installing the stack. Use `config_supervisord` command to regenerate the configuration templates especially when updating from an existing Bungeni installation.
+The XML repository is updated by Gluescripts which implement Rabbit MQ, a messaging broker (see [http://www.rabbitmq.com/ Rabbit MQ]). Presetup installs all dependencies required prior to installing the stack. Use `config_supervisord` command to regenerate the configuration templates especially when updating from an existing Bungeni installation.
 
 {{{
 fab -H <host-name-or-ip> exist_presetup config_supervisord
@@ -33,7 +34,7 @@ fab -H <host-name-or-ip> rabbitmq_install
 
 == Installing Gluescripts ==
 
-The Gluescripts run in the background to monitor Bungeni documents that have been serialized and update the XML repository. The "publisher" monitors and adds documents to the message queue while "consumer" gets the new documents from the message queue, applies [http://en.wikipedia.org/wiki/XSLT XSLT] and pushes the transformed documents into the XML repository. 
+The Gluescripts subscribe to `bungeni_serialization_output_queue` for serialized documents from Bungeni workflow; [http://en.wikipedia.org/wiki/XSLT XSLT] is applied on the documents and once transformed, pushed into the XML repository. This script runs as "exist-sync" service on [HowTo_SupervisorServiceManager Supervisor].
 
 {{{
 fab -H <host-name-or-ip> glue_install
@@ -73,7 +74,7 @@ This will install the entire stack and load some demo data into eXist-db altoget
 
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager#exist using supervisor to start / stop eXist]
 
-= Starting and Stopping rabbitmq services = 
+= Starting and Stopping rabbitmq = 
 
 See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager#rabbitmq using supervisor to start / stop rabbitmq]
 
