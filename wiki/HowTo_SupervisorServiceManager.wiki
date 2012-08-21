@@ -84,6 +84,20 @@ Stopping :
 fab stop_service:exist
 }}}
 
+== exist sync ==
+
+Starting : 
+
+{{{
+fab start_service:exist-sync
+}}}
+
+Stopping : 
+
+{{{
+fab stop_service:exist-sync
+}}}
+
 == rabbitmq ==
 
 Starting : 
@@ -96,34 +110,6 @@ Stopping :
 
 {{{
 fab stop_service:rabbitmq
-}}}
-
-== rabbitmq publisher ==
-
-Starting : 
-
-{{{
-fab start_service:rabbitmq-publisher
-}}}
-
-Stopping : 
-
-{{{
-fab stop_service:rabbitmq-publisher
-}}}
-
-== rabbitmq consumer ==
-
-Starting : 
-
-{{{
-fab start_service:rabbitmq-consumer
-}}}
-
-Stopping : 
-
-{{{
-fab stop_service:rabbitmq-consumer
 }}}
 
 == deliverance portal ==
