@@ -43,11 +43,20 @@ Log in as the admin user into plone. The default username and password is "plone
 
 == Import demo structure ==
 
- * Once the buildout is complete there will be an 'import' folder on the filesystem found in the root plone folder.
+ * Once the buildout is complete you can import demo data into the plone site.
 
- * Copy and unzip the contents of [http://dist.bungeni.org/plone/import/import-0.1.tar.gz http://dist.bungeni.org/plone/import/import-0.1.tar.gz] into that folder
+ * Start the plone site:
 
- * Run the python script 'import_data' in the root plone directory (using the plone python). Before running the script, edit the file appropriately and put in the necessary values for username, password (ploneadmin, ploneadmin) and the plone site that you want to import to.
+{{{
+./fab -H <host-name-or-ip> start_service:plone 
+}}}
+
+ * Import the demo data *(NB:This will overwrite existing content)*:
+
+{{{
+./fab -H <host-name-or-ip> plone_import_site 
+}}}
+
 
 
 == Updating a Plone installation ==
