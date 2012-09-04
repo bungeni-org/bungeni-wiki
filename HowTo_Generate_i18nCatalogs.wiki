@@ -1,51 +1,26 @@
 #summary How to generate and merge translation catalogs
 
 
-= How to setup i18n scripts =
+= Setting up i18n scripts =
 
-Due to a minor issue in one of the recipes used in buildout, we need to modify the generated i18n scripts to include the path to our xapian library.
+Scripts used to perform i18n will be generated during a bungeni buildout. These scripts are available in the `bin` directory after a bungeni buildout.
 
-so after running buildout you'll need to add an additional 
-
- '$buildout_directory/parts/xapian/lib/python' 
-
-to the list at the top of the *bin/i18nextract* and *bin/i18nmergeall* script, substituting the full path for $buildout_directory. after which you can use the i18nextract script to generate a message catalog (pot file) for translation.
-
+These scripts require gettext. Run this command in the terminal to install it.
+{{{
+   sudo apt-get install gettext
+}}}
 
 = Generate i18n catalogs =
 
-First, extract the message strings of workflow states run (WHY!!!!! This needs to be fixed)
-
-{{{ ./bin/python src/bungeni.main/bungeni/core/workflows/exctractwfi18n.py }}}
-
-Then, to generate the POT file run the following command
+To generate the POT file run the following command
 
 {{{
 ./bin/i18nextract
 }}}
 
-The POT file will be created in locales directory in `src/bungeni.main/bungeni/locales`
-
-You may get errors like the ones below but the catalog are still generated
-
-{{{
-/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/src/ore.alchemist/src/ore/alchemist/introspector.py:22: SADeprecationWarning: the information_schema module is deprecated.
-  from sqlalchemy.databases import information_schema
-Exception in thread Thread-1 (most likely raised during interpreter shutdown):
-Traceback (most recent call last):
-  File "/home/bungeni/cap_installs/python25/lib/python2.5/threading.py", line 486, in __bootstrap_inner
-  File "/home/bungeni/cap_installs/python25/lib/python2.5/threading.py", line 446, in run
-  File "/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/eggs/ore.xapian-0.5.0-py2.5.egg/ore/xapian/queue.py", line 64, in __call__
-  File "/home/bungeni/cap_installs/bungeni_install/bungeni/releases/20091029070249/eggs/ore.xapian-0.5.0-py2.5.egg/ore/xapian/queue.py", line 54, in operations
-<type 'exceptions.AttributeError'>: 'NoneType' object has no attribute 'Empty'
-}}}
+The POT file will be created in locales directory in `src/bungeni_custom/translations/bungeni/`
 
 = Merge old catalogs with new ones =
-
-To merge old translation catalogs with new ones, one needs have gettext installed
-{{{
-   sudo apt-get install gettext
-}}}
 
 Then run this command to merge the pot file with the po files for all enabled languages
 {{{
@@ -58,3 +33,13 @@ Alternatively, use the msgmerge tool directly to merge the old translations with
 cd src/bungeni.main/bungeni/locales/
 msgmerge -U en/LC_MESSAGES/bungeni.po bungeni.pot
 }}}
+
+= Initialize a new message catalog =
+The i18nmergeall script above will only merge to the catalogs in the locales directory (`src/bungeni_custom/translations/bungeni/`).
+To initialize a new catalog automatically, add the language code as described here [HowTo_CustomizeParliamentaryInformationManagement#How_to_configure_languages] and then run 
+
+{{{
+  ./bin/i18nextract
+}}}
+
+This will initialize any new locales with blank message catalogs (PO files) synced to the bungeni POT file. These can then be managed using tools such as [http://www.poedit.net Poedit] or [http://translate.sourceforge.net/wiki/pootle/index Pootle]
