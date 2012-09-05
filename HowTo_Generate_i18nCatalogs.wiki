@@ -45,7 +45,7 @@ To initialize a new catalog, add the locale code as described here [HowTo_Custom
 == LOCALE_CODE examples ==
 
 || *Language* || en || fr ||
-|| *Language + Region* || en_KE || fr_RW ||
+|| *Language + Region* || en-ke || fr-rw ||
 
 
 This will initialize the provided locale's message catalog (PO files) synced to the bungeni POT file. This catalog can then be managed using tools such as [http://www.poedit.net Poedit] or [http://translate.sourceforge.net/wiki/pootle/index Pootle]
