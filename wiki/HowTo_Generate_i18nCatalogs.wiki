@@ -22,7 +22,7 @@ The POT file will be created in locales directory in `src/bungeni_custom/transla
 
 = Merge old catalogs with new ones =
 
-Then run this command to merge the pot file with the po files for all enabled languages
+Then run this command to merge the pot file with the po files in the bungeni translations directory
 {{{
    ./bin/i18nmergeall
 }}}
@@ -35,11 +35,17 @@ msgmerge -U en/LC_MESSAGES/bungeni.po bungeni.pot
 }}}
 
 = Initialize a new message catalog =
-The i18nmergeall script above will only merge to the catalogs in the locales directory (`src/bungeni_custom/translations/bungeni/`).
-To initialize a new catalog automatically, add the language code as described here [HowTo_CustomizeParliamentaryInformationManagement#How_to_configure_languages] and then run 
+The i18nmergeall script above will only merge with the catalogs in the locales directory (`src/bungeni_custom/translations/bungeni/`).
+To initialize a new catalog, add the locale code as described here [HowTo_CustomizeParliamentaryInformationManagement#How_to_configure_languages] and then run 
 
 {{{
-  ./bin/i18nextract
+  ./bin/i18n-init {{LOCALE_CODE}}
 }}}
 
-This will initialize any new locales with blank message catalogs (PO files) synced to the bungeni POT file. These can then be managed using tools such as [http://www.poedit.net Poedit] or [http://translate.sourceforge.net/wiki/pootle/index Pootle]
+== LOCALE_CODE examples ==
+
+|| *Language* || en || fr ||
+|| *Language + Region* || en_KE || fr_RW ||
+
+
+This will initialize the provided locale's message catalog (PO files) synced to the bungeni POT file. This catalog can then be managed using tools such as [http://www.poedit.net Poedit] or [http://translate.sourceforge.net/wiki/pootle/index Pootle]
