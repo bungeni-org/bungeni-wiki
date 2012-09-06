@@ -15,9 +15,10 @@ NOTE: The below scripts cannot be run when the Bungeni service is running, You w
 
 = Generate i18n catalogs =
 
-To generate the POT file run the following command
+To generate the POT file run the following commands
 
 {{{
+./bin/form-xml-restore
 ./bin/i18nextract
 }}}
 
