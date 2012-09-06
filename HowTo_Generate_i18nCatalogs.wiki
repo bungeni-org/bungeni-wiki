@@ -10,6 +10,9 @@ These scripts require gettext. Run this command in the terminal to install it.
    sudo apt-get install gettext
 }}}
 
+
+NOTE: The below scripts cannot be run when the Bungeni service is running, You will need to stop the Bungeni service to be able to run these scripts successfully.
+
 = Generate i18n catalogs =
 
 To generate the POT file run the following command
