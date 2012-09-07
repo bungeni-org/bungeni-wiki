@@ -17,8 +17,9 @@ Tagged release of bungeni are listed in [https://spreadsheets.google.com/pub?key
 Running a svn up to the tagged revision and running a buildout effectively reverts the source code to the specific revision. If there was a schema change between revisions - please see the issue below.
 
 
-= Linux shared memory = 
+= Linux configurations = 
 
+== Shared memory ==
 Increasing the kernel.shmmax variable makes available more shared memory for postgresql.
 
 This will change the maximum shared memory at runtime to 64MB
@@ -38,6 +39,17 @@ Set shared buffers for postgres (in postgresql.conf) to 96 mb :
 shared_buffers=96mb
 }}}
 
+== Maximum file-descriptors ==
+
+The default setting on the maximum number of files opened by a process is set at 1024, this could be low on a very high-volume Bungeni installation. As a precaution, you can increase the limit by adding:
+
+{{{
+
+fs.file-max=100000
+
+}}}
+
+at the bottom of */etc/sysctl.conf* and reboot.
 
 = Schema Changes = 
 
