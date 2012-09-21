@@ -180,60 +180,84 @@ Here, as an example, is a relatively simple vocabulary defining the types of Bil
 ----
 == Roles ==
 
-Roles in Bungeni are used to specify who has permission to perform different tasks. Roles can be seen as a collection of permissions, e.g. a role could be “clerk office”. Permissions are like keys to doors that open to a particular functionality. For example, we might need the permission to view a document while another role may need permission also to edit it, etc.
-“Roles” are used to grant a specific set of permissions to group/s, that could be e.g. Member of Parliament, staff of the Clerk Office etc. User belonging to these groups will have the rights that that specific role has.
+Roles in Bungeni are used to specify who has permission to perform different tasks. Roles can be seen as a collection of permissions while permissions are like keys to doors that open to a particular functionality. For example, there may be a permission to view a document and another to edit the document. These permissions may then be granted to or denied from certain roles.
+
+All the members of a group get the role associated with that group. For example, if a parliament has a "Clerk's Office" with a role "bungeni.Clerk" associated with it then all the members of that office are assigned that role. In addition the administrator may assign a sub-role to a specific member of a group. For example, in the Clerk's Office there may be one person who deals specifically with questions. He may be granted the sub-role bungeni.Question.Clerk and specific permissions may then be granted to this role.
+
+
 
 === System roles - what they mean and default usage ===
 
-There are a number of system roles that are defined in the system
+System roles are the roles already defined in the system that are being used in a certain way and are not part of configuration. These are
 
-|| *Role ID* || *Use* ||
-|| bungeni.Owner || The owner of a document, ie. the person who creates/moves a document ||
-|| bungeni.Signatory || Signatory of a document ||
-|| bungeni.Admin || The bungeni administrator ||
-|| bungeni.Authenticated || All authenticated users ||
-|| bungeni.Anonymous || Bungeni Visitor ||
-|| bungeni.MP || Member of parliament ||
-|| bungeni.Minister || Minister ||
-|| bungeni.PoliticalGroupMember || Political Group Member ||
-|| bungeni.Government || Member of Government ||
-|| bungeni.CommitteeMember || Committee Member ||
+|| *Role ID* || *Use* || *Notes* ||
+|| bungeni.Owner || The owner of a document, ie. the person who creates/moves a document || ||
+|| bungeni.Signatory || Signatory of a document || ||
+|| bungeni.Admin || The bungeni administrator || ||
+|| bungeni.Authenticated || All authenticated users || ||
+|| bungeni.Anonymous || Bungeni Visitor || ||
+|| bungeni.MP || Member of parliament || To be deprecated ||
+|| bungeni.Minister || Minister || To be deprecated ||
+|| bungeni.PoliticalGroupMember || Political Group Member || To be deprecated ||
+|| bungeni.Government || Member of Government || To be deprecated ||
+|| bungeni.CommitteeMember || Committee Member || To be deprecated ||
 
-=== How to set up user defined roles ===
+=== Admin defined roles ===
 
 A Bungeni administrator may define additional parliament specific roles in bungeni_custom/sys/acl/roles.zcml. A role added here may then be associated with an office while adding an office.
 
 || *attribute* || *example* || *note* ||
-|| title || Legal Department || The title "Legal Department" is what appears in the user interface ||
-|| id || legalDepartment || This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. || 
+|| title || Clerk's Office || The title "Clerk's Office" is what appears in the user interface ||
+|| id || bungeni.Clerk || This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. || 
 
 Example
 
 {{{
-<role title="Legal Department" id="legalDepartment">
+<role title="Clerk's Office" id="bungeni.Clerk" />
 }}}
 
-To associate the role above with an office, in “administration” go to “offices” and add the “Legal Department”, then select it in the "roles select box” “Legal Department”. If the Department already exists, just edit and select the "roles" select box “Legal Department”.
+To associate the role above with an office, in “administration” go to “offices” and add an office, then set the "role id" field to this role.
 
+=== Sub Roles ===
 
-==== Sub Roles ====
+If you need to have finer grained roles you may use sub-roles e.g. If you want all staff in the Clerk Office to see all parliamentary documents, but only the “Question Office” staff to actually edit questions and move them in the workflow.
 
-If you need to have finer grained roles you may use sub-roles e.g. If you want all staff in the Clerk Office to see all parliamentary documents, but only the “Question Office” staff to actually edit questions and move then in the workflow. Please note that with “sub role” you can only “add permission” not deny permission that have been granted in the “parent role”.
+Please note that with sub-roles one cannot deny permissions that have been granted to the parent role.
 
 || *attribute* || *example* || *note* ||
-|| title || Bill Office || The title "Bill Office" is what appears in the UI ||
-|| id || legalDepartment_billOffice ||This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. ||
-|| role || legalDepartment || This is the ID parent role ||
+|| title || Question Clerk || The title "Question Clerk" is what appears in the UI ||
+|| id || bungeni.QuestionClerk ||This is the ID that will be used anywhere else in the system where a role may be specified e.g. the workspace configuration or the workflow configuration. ||
+|| role || bungeni.Clerk || This is the ID parent role ||
 
 
 Example
 
 {{{
-<bungeni:subrole id="legalOffice_billOffice" title="Bill Clerk" role="legalDepartment/>
+<bungeni:subrole id="bungeni.QuestionClerk" title="Question Clerk" role="bungeni.Clerk"/>
 }}}
 
-The above example sets a new sub-role within the legalDepartment role. To associate this role with an office, in “administration” go to “offices” open the “Legal Department” and add  the “Bill Office” and then in the "roles select box” " select  “Bill Office”. Please note that the “Bill Office” sub-role will be available only within the parent “office”, in this case the Legal Department.
+The above example creates a new sub-role of the "bungeni.Clerk" role. A Bungeni administrator may then grant this sub-role to a member of the "Clerk's Office" by going to the admin tab -> offices -> Clerk's office -> Office Members, selecting the member they would like to grant the sub-role to from the list then selecting "add sub-role" from the menu.
 
+There is an option to either grant the sub-role to the user globally or not. A global sub-role means that that user is granted that role on the group like the main group role. A non-global sub-role means that the user only gets that sub-role on documents that have been assigned to him.
+
+==== Assignment feature ====
+
+Bungeni supports assigns members of staff to work on different different documents. For example, if a Clerk’s office has 10 Question Clerks and 100 incoming questions, the Clerk can allocate specific questions to the different clerks.
+
+Note: Read more information about document features below.
+
+The assignment feature is enabled per document type in the document's workflow. The assignment feature has two parameters "assigning_roles" and "assign_to_roles". Persons with a role listed in "assign_roles" have the ability to assign the document type to users with an "assign_to" role.
+
+The administrator also needs to specify in which states of the document that the assignments can be viewed or edited by granting or denying the view/edit permissions on that state.
+
+{{{
+<state id="working_draft" title="Working Draft" tags="draft private">
+  <grant permission="bungeni.assignment.View" role="bungeni.Clerk.HeadClerk" />
+  <grant permission="bungeni.assignment.Edit" role="bungeni.Clerk.HeadClerk" />
+</state>
+}}}
+
+When a document is in a state in which assignments may be viewed/edited, a user with a role that may view/edit documents gets a menu items on the document to view/edit assignments
 
 <wiki:comment>
 ----
@@ -279,6 +303,7 @@ Here's a summary of supported features for parliamentary documents:
  * *workspace*: the document is to be included in the private user's _workspace_.
  * *notification*: user may subscribe and receive a variety of _notifications_ as the document changes.
  * *download*: the document may be available for _download_ e.g. in PDF.
+ * *assignment*: the document may be assigned to specific users
 
 Enabling, disabling and possibly parametrizing a feature for a type is part of the workflow definition for type--that must itself have been _enabled_.
 
