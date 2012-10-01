@@ -1,0 +1,125 @@
+#summary How to create a Bungeni Debian package
+#sidebar TableOfContents
+
+
+= Introduction = 
+
+This page documents the steps to create a debian package for Bungeni.
+
+
+= Step 1 - Building Bungeni = 
+
+== Preparing the Environment == 
+
+First we need to build Bungeni using a particular structure.
+
+For the debian package distribution, Bungeni is always installed in the `/opt/bungeni` folder and run using a `bungeni` user.
+
+So we need to create the environemnt for the build first. Check out the debian_package project from svn into a folder
+
+{{{
+svn co https://bungeni-portal.googlecode.com/svn/debian_package/ deb-pack
+}}}
+
+From the deb-pack folder run `prepare_userenv.sh` :
+{{{
+sudo ./prepare_userenv.sh
+}}}
+
+This script creates a `/opt/bungeni` folder and also creates a `bungeni` user with a default `bungeni` password which will be used to create the deployment and packaging installation :
+
+{{{
+#!/bin/bash
+set -x verbose
+# add bungeni user
+useradd bungeni
+# generate default password for bungeni user
+echo bungeni:bungeni | sudo chpasswd
+# create & set home directory for bungeni user
+mkdir -p /opt/bungeni
+chown -R bungeni:bungeni /opt/bungeni
+usermod -d /opt/bungeni bungeni
+}}}
+
+Additionally we also set the home directory for the `bungeni` user to `/opt/bungeni`.
+
+== Building Bungeni == 
+
+First login as the `bungeni` user :
+
+{{{
+su bungeni
+}}}
+
+Check out the fabric scripts into a folder called `exec` :
+
+{{{
+svn co https://bungeni-portal.googlecode.com/svn/fabric/trunk/ exec
+}}}
+
+Edit the release.ini and setup.ini appropriately for the revision that you want to create the package for.
+
+Finally build bungeni using the documented procedures (see Install_Bungeni_Fabric)
+
+= Step 2 - Building the Debian Package =
+
+When you have built and tested the bungeni installation, you are ready to package in a debian distribution file.
+
+First, stop the Bungeni and Postgres service and stop the supervisor monitor via the fabric command :
+
+{{{
+./fab -u bungeni stop_monitor
+}}}
+
+Now exit from the `bungeni` user login to return back to your default login :
+
+{{{
+exit
+}}}
+
+We will now create a tar achive of the full bungeni installation :
+
+{{{
+cd /
+tar cvzf ~/deb-pack/bungeni-r1234.tar.gz ./opt/bungeni
+}}}
+
+Which will create a archive containing bungeni in the deb-pack folder.
+
+We will use the `prepare_debpackfolder.sh` script to build the debian package.
+
+Switch to the deb-pack folder :
+
+{{{
+cd ~/deb-pack
+}}}
+
+The script uses the following syntax :
+{{{
+./prepare_debpackfolder.sh 
+Usage: prepare_debpackfolder.sh <release name> <pre-built-bungeni.tar.gz>
+}}}
+
+`release name` the name of the release; The `pre-built-bungeni.tar.gz` is the path to the bungeni tar archive we created earlier.
+
+We usually follow the convention of the naming the relase with the svn revision number or the date. 
+
+e.g. :
+
+{{{
+./prepare_debpackfolder.sh svn9846 ./bungeni-r1234.tar.gz
+}}}
+
+The script will start building the debian package in a folder called :
+
+{{{
+bungeni_1.0+svn9846
+}}}
+
+When the script finishes, the built package will be available as :
+
+{{{
+./bungeni_1.0+svn9846/bungeni_1.0+svn9846.deb
+}}}
+
+

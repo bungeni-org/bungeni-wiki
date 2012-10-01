@@ -1,0 +1,53 @@
+#summary How to install Bungeni using a Debian package
+#sidebar TableOfContents
+
+= Introduction = 
+
+This page documents how to install Bungeni using a debian package.
+The advantage of installing Bungeni as a debian package is the ease-of-use. Unlike building Bungeni from source (which can take more than hour), installing with the debian package takes only a few minutes.
+
+= Bungeni Debian Package =
+
+Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 bit and 64 bit) on the following link:
+
+[http://dist.bungeni.org/cache/debian/ http://dist.bungeni.org/cache/debian/]
+
+Depending on your operating system please download the appropriate debian package.
+
+
+= How to Install  = 
+
+Once you have downloaded the package, right click on it in Nautilus and click "Open With" -> "GDebi Package manager".
+
+The system will prompt you to enter your password, once you have entered that the installation will commence by installing the dependencies and then complete.
+
+= Starting Bungeni = 
+
+Once the installation is complete, you can start and stop Bungeni from the terminal window :
+
+To start:
+{{{
+sudo service bungeni_services start
+}}}
+
+You can now launch the web browser and browse to `http://localhost:8888` - enter user name and password : admin / admin and then you can start access the different Bungeni services. The core Bungeni package only installs `bungeni` and `postgres`.
+
+Once the `bungeni` and `postgres` service are started, browse to `http://localhost:8081` to access Bungeni.
+
+
+To stop:
+{{{
+sudo service bungeni_services stop
+}}}
+
+
+= To Uninstall = 
+
+You can uninstall using the package manager, by removing the `bungeni` package.
+
+Or alternatively from the command line type :
+
+{{{
+sudo apt-get remove bungeni
+}}}
+
