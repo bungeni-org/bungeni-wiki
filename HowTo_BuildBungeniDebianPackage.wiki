@@ -39,6 +39,7 @@ echo bungeni:bungeni | sudo chpasswd
 mkdir -p /opt/bungeni
 chown -R bungeni:bungeni /opt/bungeni
 usermod -d /opt/bungeni bungeni
+usermod -s /bin/bash bungeni
 }}}
 
 Additionally we also set the home directory for the `bungeni` user to `/opt/bungeni`.
@@ -48,8 +49,10 @@ Additionally we also set the home directory for the `bungeni` user to `/opt/bung
 First login as the `bungeni` user :
 
 {{{
-su bungeni
+ssh bungeni@localhost
 }}}
+
+You will be logged into the  /opt/bungeni folder
 
 Check out the fabric scripts into a folder called `exec` :
 
@@ -71,6 +74,14 @@ First, stop the Bungeni and Postgres service and stop the supervisor monitor via
 ./fab -u bungeni stop_monitor
 }}}
 
+
+Cleanup the installation :
+
+{{{
+cd
+find . -maxdepth 1 -name '.*' -exec rm -rf {}/;
+}}}
+
 Now exit from the `bungeni` user login to return back to your default login :
 
 {{{
@@ -80,8 +91,7 @@ exit
 We will now create a tar achive of the full bungeni installation :
 
 {{{
-cd /
-tar cvzf ~/deb-pack/bungeni-r1234.tar.gz ./opt/bungeni
+cd / && sudo tar cvzf /home/undesa/deb-pack/bungeni-r1234.tar.gz ./opt/bungeni
 }}}
 
 Which will create a archive containing bungeni in the deb-pack folder.
@@ -97,10 +107,11 @@ cd ~/deb-pack
 The script uses the following syntax :
 {{{
 ./prepare_debpackfolder.sh 
-Usage: prepare_debpackfolder.sh <release name> <pre-built-bungeni.tar.gz>
+Usage: prepare_debpackfolder.sh <release name> <pre-built-bungeni.tar.gz> <architecture>
+
 }}}
 
-`release name` the name of the release; The `pre-built-bungeni.tar.gz` is the path to the bungeni tar archive we created earlier.
+`release name` the name of the release; The `pre-built-bungeni.tar.gz` is the path to the bungeni tar archive we created earlier. The `architecture` is either i386 or amd64
 
 We usually follow the convention of the naming the relase with the svn revision number or the date. 
 
@@ -121,5 +132,3 @@ When the script finishes, the built package will be available as :
 {{{
 ./bungeni_1.0+svn9846/bungeni_1.0+svn9846.deb
 }}}
-
-
