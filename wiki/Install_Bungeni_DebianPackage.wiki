@@ -2,24 +2,33 @@
 #sidebar TableOfContents
 
 = Introduction = 
+Install Bungeni using the Debian packaging system 
 
-This page documents how to install Bungeni using a debian package.
-The advantage of installing Bungeni as a debian package is the ease-of-use. Unlike building Bungeni from source (which can take more than hour), installing with the debian package takes only a few minutes.
-
-= Bungeni Debian Package =
+= Download the Bungeni Debian Package =
 
 Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 bit and 64 bit) on the following link:
 
-[http://dist.bungeni.org/cache/debian/ http://dist.bungeni.org/cache/debian/]
-
-Depending on your operating system please download the appropriate debian package.
-
+||Operating System || Download Link ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+2012-10-01-1_i386.deb bungeni_1.0+2012-10-01-1_i386.deb] 
+|| Ubuntu 12.04 64 bit || ||
 
 = How to Install  = 
 
 Once you have downloaded the package, right click on it in Nautilus and click "Open With" -> "GDebi Package manager".
 
 The system will prompt you to enter your password, once you have entered that the installation will commence by installing the dependencies and then complete.
+
+To install from the command line :
+{{{
+  sudo gdebi bungeni_1.0+XXXXXX.deb
+}}}
+
+If you need to install gdebi you can install it using :
+{{{
+ sudo apt-get install gdebi-core
+}}}
+
+*NOTE: We don't recommend installing using `apt-get install bungeni_1.0+XXXXXX.deb` since it doesn't install the dependencies.*
 
 = Starting Bungeni = 
 
