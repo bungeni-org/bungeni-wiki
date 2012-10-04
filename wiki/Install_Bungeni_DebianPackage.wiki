@@ -14,6 +14,12 @@ Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 b
 
 = How to Install  = 
 
+First update your system, either update using Ubuntu update manager or --  :
+{{{
+sudo apt-get update 
+sudo apt-get upgrade
+}}}
+
 Once you have downloaded the package, right click on it in Nautilus and click "Open With" -> "GDebi Package manager".
 
 The system will prompt you to enter your password, once you have entered that the installation will commence by installing the dependencies and then complete.
