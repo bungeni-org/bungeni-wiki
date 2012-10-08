@@ -20,6 +20,7 @@
  * Maintenance   
      *  [HowTo_MaintainAndUpdateInstallation How to maintain and update an installation]
      *  [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]  
+     *  [HowToUpgradeAndDowngradeData How to upgrade and downgrade existing data to different versions of the schema]
      *  [HowTo_BuildBungeniDebianPackage How to build a Bungeni debian package ]  
      *  [HowTo_Setup_PackageIndex_Server How to setup a package index server]    
      *  [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues]          
@@ -32,6 +33,7 @@
      * [DevProgammingGuide Bungeni Programming Guide]
      * [DevDeclarative Declarative Bungeni]
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
+     * [HowToDBMigrationScripts How to add DB migration scripts]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
      * [HowTo_FormActionsAndMenus Form actions and menus]
