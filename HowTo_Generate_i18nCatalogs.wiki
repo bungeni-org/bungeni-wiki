@@ -18,7 +18,7 @@ NOTE: The below scripts cannot be run when the Bungeni service is running, You w
 To generate the POT file run the following commands
 
 {{{
-./bin/form-xml-restore
+./bin/restore-localization-forms-defaults
 ./bin/i18nextract
 }}}
 

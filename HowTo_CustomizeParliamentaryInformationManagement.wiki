@@ -10,7 +10,7 @@
 
 Bungeni packages the customization aspects of the system in a specific folder. 
 
-Rather than start with no customization configuraitons, to make things easier, Bungeni comes packaged with a default customization folder which can be used as a basis for creating your own customizations. 
+Rather than start with no customization configurations, to make things easier, Bungeni comes packaged with a default customization folder which can be used as a basis for creating your own customizations. 
 
 The system comes packaged with a default customization setup in the `src/bungeni_custom` folder (let's refer to this as `{BUNGENI_CUSTOM}` from here on) within your main Bungeni installation folder i.e. somewhere like `/my/installation/path/bungeni_apps/bungeni` (and let's refer to this one simply as `{BUNGENI}` from here on).
 
