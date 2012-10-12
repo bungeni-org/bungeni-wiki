@@ -287,9 +287,9 @@ The following are some examples of show/hide combinations for the above field:
 
 It is good practice to make a backup copy of ui.xml whenever you edit it.
 
-However, you can also regenerate `forms/ui.xml` to its original state by running:
+However, you can also restore the default localization settings for bungeni form descriptors by running:
 {{{
-./bin/form-xml-restore 
+./bin/restore-localization-forms-defaults
 }}}
 from the buildout folder. 
 This will regenerate the `forms/ui.xml` from the source code definition of the forms.
