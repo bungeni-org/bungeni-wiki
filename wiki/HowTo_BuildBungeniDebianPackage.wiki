@@ -74,14 +74,6 @@ First, stop the Bungeni and Postgres service and stop the supervisor monitor via
 ./fab -u bungeni stop_monitor
 }}}
 
-
-Cleanup the installation :
-
-{{{
-cd
-find . -maxdepth 1 -name '.*' -exec rm -rf {}/;
-}}}
-
 Now exit from the `bungeni` user login to return back to your default login :
 
 {{{
@@ -104,31 +96,18 @@ Switch to the deb-pack folder :
 cd ~/deb-pack
 }}}
 
-The script uses the following syntax :
+There are 4 debian packages that can be built using the deb pack (bungeni, exist-db, plone and bungeni portal) The script uses the following syntax :
 {{{
-./prepare_debpackfolder.sh 
-Usage: prepare_debpackfolder.sh <release name> <pre-built-bungeni.tar.gz> <architecture>
-
+./bungeni.sh <version>
+./exist.sh <release>
 }}}
 
-`release name` the name of the release; The `pre-built-bungeni.tar.gz` is the path to the bungeni tar archive we created earlier. The `architecture` is either i386 or amd64
-
-We usually follow the convention of the naming the relase with the svn revision number or the date. 
-
-e.g. :
-
+No arguments for plone shell script
 {{{
-./prepare_debpackfolder.sh svn9846 ./bungeni-r1234.tar.gz
+./plone.sh
 }}}
 
-The script will start building the debian package in a folder called :
-
+No arguments for portal shell script
 {{{
-bungeni_1.0+svn9846
-}}}
-
-When the script finishes, the built package will be available as :
-
-{{{
-./bungeni_1.0+svn9846/bungeni_1.0+svn9846.deb
+./portal.sh
 }}}
