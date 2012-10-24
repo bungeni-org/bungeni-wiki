@@ -80,23 +80,13 @@ Now exit from the `bungeni` user login to return back to your default login :
 exit
 }}}
 
-We will now create a tar achive of the full bungeni installation :
-
-{{{
-cd / && sudo tar cvzf /home/undesa/deb-pack/bungeni-r1234.tar.gz ./opt/bungeni
-}}}
-
-Which will create a archive containing bungeni in the deb-pack folder.
-
-We will use the `prepare_debpackfolder.sh` script to build the debian package.
-
 Switch to the deb-pack folder :
 
 {{{
 cd ~/deb-pack
 }}}
 
-There are 4 debian packages that can be built using the deb pack (bungeni, exist-db, plone and bungeni portal) The script uses the following syntax :
+There are 4 debian packages that can be built using the deb pack (bungeni, exist-db, plone and bungeni portal) The scripts uses the following syntax :
 {{{
 ./bungeni.sh <version>
 ./exist.sh <release>
