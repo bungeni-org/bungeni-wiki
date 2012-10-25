@@ -86,12 +86,11 @@ where :
  # _object_ is a *noun* indicating the target type of object (all lowercase, may optionally have additional dot-separated subtypes).
  # _Action_ is a *verb* indicating the permitted target action (capitalized). 
 
-==== Redefine all TYPE.View permissions to a generic `bungeni.View` ====
-For convenience, all `bungeni.TYPE.View` permissions should always be redefined to `bungeni.View` _(!+zope.View currently)_ and then all "TYPE actions" requiring `bungeni.TYPE.View` can be simply always be checked against this one generic permission i.e. `bungeni.View`.
+==== No redefinition of permissions ====
+The previous practice to redefine `{TYPE}.View` permissions to the generic `zope.View` carries more pitfalls (e.g. confusion from when is it defined, and subsequent grants of either of the permission) than promised convenience gain.
 
-But, only `TYPE.View` class of permissions should be redefined!
+Plus, as the system becomes more and more declartive/dynamic, with type-specific permissions being inferred automatically, there is even less need to redefine permissions (when needed, also just infer the one explicit permission). So, explicit permission id, used consistently, so source code can be understood/debugged using simple string searching.
 
-And, a `TYPE.View` permissions (that is therefore redefined) *must never* be globally granted. In addition to the _minimize global grants_ rule above, to favour "granting only when needed", any redefined permission must *must never* be globally granted, as this can introduce unintentional grant of the generic redefined permission on other unrelated types.
 
 ==== Distinct UI and Type permissions ====
 UI permissions are necessarily *always granted globally*, while `type` permissions _almost always_ need to be granted locally. There should be zero overlap between permissions used for UI elements and components, and permissions used for actions on domain data objects.
