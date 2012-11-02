@@ -87,8 +87,13 @@ cd ~/deb-pack
 }}}
 
 There are 4 debian packages that can be built using the deb pack (bungeni, exist-db, plone and bungeni portal) The scripts uses the following syntax :
+
 {{{
-./bungeni.sh <version>
+sudo ./bungeni.sh <version>
+}}}
+Do sudo for bungeni script because the compress command needs to get database configuration into the zip file.
+
+{{{
 ./exist.sh <release>
 }}}
 
