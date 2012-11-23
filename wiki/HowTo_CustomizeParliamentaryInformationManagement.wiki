@@ -33,17 +33,17 @@ bungeni_custom/
 This structure provides points of access to different aspects of customization discussed later in this document. The content of the folders is described below.
 
 || *file / folder name* || *purpose* ||
-|| __init__.py || special file that defines this folder as a _python package_; sets some general variables ||
-|| types.xml || declares all custom types ||
-|| forms || contains the ui.xml file which is used to customize forms in Bungeni ||
-|| notifications || contains the notification configuration files used for workflow notifications ||
-|| registry || Contains the format for numbering content||
-|| reporting || Contains the reporting templates in XHTML format ||
-|| sys || Contains configuration files related to database connections, openoffice access and default roles in the system ||
-|| translations || Contains the localized message strings in [http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html PO format] ||
-|| vocabularies || Contains the different vocabularies used in the system in VDEX format ||
-|| workflows || Contains the Workflow customization files. There is one file per document type ||
-|| workspace || Contains the Workspace customization files. There is one file per document type||
+|| `__init__.py` || Special file that defines this folder as a _python package_; sets some general variables ||
+|| `types.xml` || Declares all custom types ||
+|| `forms` || Contains the configuration files for UI form descriptors ||
+|| `notifications` || contains the notification configuration files used for workflow notifications ||
+|| `registry` || Contains the format for numbering content||
+|| `reporting` || Contains the reporting templates in XHTML format ||
+|| `sys` || Contains configuration files related to database connections, openoffice access and default roles in the system ||
+|| `translations` || Contains the localized message strings in [http://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html PO format] ||
+|| `vocabularies` || Contains the different vocabularies used in the system in VDEX format ||
+|| `workflows` || Contains the Workflow customization files. There is one file per document type ||
+|| `workspace` || Contains the Workspace customization files. There is one file per document type ||
 
 
 *We don't recommend making customizations in the default customization folder, instead the system provides a mechanism to create and use your own customization folder. This kind of setup will allow you to test your customization against the reference customization implementation provided out of the box in Bungeni*.
