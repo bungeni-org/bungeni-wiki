@@ -30,7 +30,7 @@ bungeni_custom/
 └── workspace/
 }}}
 
-This structure provides points of access to different aspects of customization discussed later in this document. The content of the folders is described below.
+This structure provides points of access to different aspects of customization discussed in this document. The content of the folders is described below.
 
 || *file / folder name* || *purpose* ||
 || `__init__.py` || Special file that defines this folder as a _python package_; sets some general variables ||
@@ -80,7 +80,7 @@ While customizing, it may sometimes be useful to switch between customizations (
 
 === Best practices ===
 
- * You need to back up or better version control your customization folder since it isn't part of shipped bungeni source code. Which means if your server crashes for whatever reason and you have to reinstall and re-setup Bungeni, you will be able to restore the system and the default customisation since they are version controlled - but you won't be able to restore your own customizations unless you have your own backup.
+ * You should version control (or at the very least backup) your customization folder since it isn't part of shipped bungeni source code. Which means if your server crashes for whatever reason and you have to reinstall and re-setup Bungeni, you will be able to restore the system and the default customisation since they are version controlled - but you won't be able to restore your own customizations unless you have your own backup.
 
  * Do *not* make your customizations in the default `bungeni_custom` customization folder. This is intended only as a test customization setup and is version controlled and will receive updates. Always use a private customization folder as specified above.
 
@@ -272,21 +272,30 @@ When a document is in a state in which assignments may be viewed/edited, a user 
 </wiki:comment>
 
 
+
 ----
-== Documents ==
+== Document, Group and other Types ==
 
-=== Parliamentary document types ===
+Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Items_, _Bills_, _Motions_, _Questions_, _Tabled Documents_, as well as a variety of *group and membership types* that are typical of many parliament-like institutions e.g. _Ministry_, Committee_, _Office. 
 
-Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Items_, _Bills_, _Motions_, _Questions_, _Tabled Documents_, with an easy possibility to extend for any number of other types.
+=== Archetypes, custom types ===
+
+All these above-mentioned types are not only entirely customizable in Bungeni, but may also be extended to instruct the system to handle other _document_ or _group_ or _membership_ types. And, for each of these categories of custom types, bungeni offers an _archetype_ that is to be used as the base _template_ for any additional types we wish to extend the system with. Each archetype provides the necessary "behaviour" for the given category of type (bundled as _features_) that we can enable and disable as we need per type we define. Custom types are entirely customizable (including possibility of disabling them altogether). 
+
+=== System support types === 
+
+Bungeni also provides a variety of other _support_ types, such as _Sitting_, _User_, _Signatory_, _Event_, _Attachment_, _Audit_ etc, needed to support the functionality of the various archetype-based types we define. Support types may be customized to quite some degree (but may not be disabled).
+
+Note that, because if an aspect of a Bungeni object type (be it parliamentary documents, groups, memberships, or any support type) is customizable, then it is customizable in a consistent way i.e. if a type is _workflowed_ then the workflow is always controlled in the same way. if a type has a Form UI Views, then those views are always controlled in the same way (via a UI Descriptor), and so on.
+
+
+=== Parliamentary Documents ===
+
+All *parliamentary document types* are based on the _Doc_ archetype. The document types _Agenda Items_, _Bills_, _Motions_, _Questions_, _Tabled Documents_, are included in Bungeni out of the box, and as mentioned others types may be added to the system easily.
 
 All parliamentary document types are *workflowed*--with the workflow definition for any type being entirely customizable. Most other aspects of a document type definition are also customizable e.g. the various *user interface views* (via UI _descriptors_) for the type, or which *features* are enabled by the type.
 
-Note that, because all object types (parliamentary documents or not) supported by Bungeni are customizable in a consistent way, the explanations below will sometimes also mention or refer to types other than just the *parliamentary document types* listed above, for example:
- # other _support_ document types e.g. _Events_ or _Attachments_;
- # other types that are _not_ parliamentary documents e.g. _Groups_ or _Sittings_.
-
-
-=== Document _features_ ===
+==== Document _features_ ====
 
 A document type may enable or disable a variety of *features*. When enabled for the document type, the feature is available for _each_ document of that type.
 
@@ -307,7 +316,7 @@ Here's a summary of supported features for parliamentary documents:
 
 Enabling, disabling and possibly parametrizing a feature for a type is part of the workflow definition for type--that must itself have been _enabled_.
 
-=== Enabling and disabling custom document types ===
+==== Enabling and disabling custom document types ====
 
 The entry point to type customization is the file:
 {{{
@@ -329,16 +338,42 @@ A document type is enabled simply by including a {{{<doc>}}} element with the ty
 
 All custom document types must specify a name, that will be the _key_ used throughout the system to identify this type. 
 
-As previously mentioned, all types are _workflowed_. By default, the workflow definition file for a type is expected to be at: 
+As previously mentioned, all types are _workflowed_ and by default the name for the `{WORKFLOW_NAME}` is the same as the `{TYPE_NAME}` for the type--but this may be set to anything else via a '@workflow' attribute on the {{{<doc>}}} element. Whatever the `{WORKFLOW_NAME}` is specified to be, a correspodning _workflow definition file_ for it is expoected to be found at:
 {{{
-    {MY_CUSTOM}/workflows/{TYPE_NAME}.xml
+    {MY_CUSTOM}/workflows/{WORKFLOW_NAME}.xml
 }}}
-Similarly for other configuration aspects that have dedicated configuration files, namely {{{workspace}}} and {{{notification}}}.
 
 Disabling a type means the type will *not* be registered (so will be _unknown_ to Bungeni), and all associated configuration e.g. workflow, descriptor, workspace, etc, will also not be loaded.
 
-Group types and their memberships types are also set in a similar way. See the `{MY_CUSTOM}/types.xml` itself for further explanations and sample settings of these.
 
+=== Groups ===
+
+Group types included by default are _parliament_, _government_, _committee_, _ministry_, _political_group_, _office_. Group types and their memberships types are also enabled or disabled in a similar way as document types:
+{{{
+<types>
+    ...
+    <group name="parliament" enabled="true">
+        <member name="member_of_parliament" workflow="group_membership" enabled="true" />
+    </group>
+    <group name="ministry" workflow="group" enabled="true">
+        <member name="minister" workflow="group_membership" enabled="true" />
+    </group>
+    <group name="committee" enabled="true">
+        <member name="committee_member" workflow="group_membership" enabled="true" />
+        <member name="committee_staff" workflow="group_membership" enabled="true" />
+    </group>
+    ...
+</types>
+}}}
+Notice that _ministry_ group type is re-using the base _group_ workflow. 
+
+Again, see the `{MY_CUSTOM}/types.xml` itself for further explanations and sample settings of these.
+
+==== Group _features_ ====
+
+ * *address*: the group supports having addresses
+
+Note: other "behaviorial aspects" of groups, such as capacity to have members or capacity to hold sittings, are currently considered _intrinsic_ group features, and so possibility to enable or disable these is not offered (however, this is under consideration and may change).
 
 
 ----
@@ -352,36 +387,49 @@ The Bungeni User Interface allows a number of interactions or manipulations for 
 
 We use a _descriptor_ to describe all the above for each type in Bungeni. 
 
-*All types* in Bungeni are customizable, some to a larger degree than others. For example custom types are (will be ;-) of course completely customizable (so, as an example, we may even disable them completely). But we may also quite extensively customize other system-required _support_ types (but not completely--as an example, we may _not_ disable them).
+*All types* in Bungeni are UI-customizable, some to a larger degree than others--custom types are of course completely customizable (so, as an example, we may even disable them completely) while other system-required _support_ types are quite extensively customizable (but not completely, for example we may _not_ disable them).
+
 
 === Form field _descriptors_ === 
 
-We customize the form views per type in Bungeni by means of a _descriptor_ per type, contained in the file:
+We customize the form views per type in Bungeni by means of a _descriptor_ per type, contained in either of the files:
 {{{
     {MY_CUSTOM}/forms/ui.xml
+    {MY_CUSTOM}/forms/custom.xml
 }}}
-This file simply contains a UI _descriptor_ per type, and it looks something like this:
+The `ui.xml` file contains a UI _descriptor_ for each system support type (and a _default_ of this file may be automatically-regenerated, to reflect default settings in Bungeni for these system types). 
+
+The `custom.xml` files contains (the _master_ definition of) a UI _descriptor_ for each custom type we have added to the system.
+
+A UI _descriptor_ for a type something like this:
 {{{
 <ui roles="bungeni.Clerk bungeni.Speaker bungeni.Owner bungeni.Signatory ... bungeni.Anonymous">
     ...
-    <descriptor name="question" order="13">
+    <descriptor name="question" archetype="doc" order="13">
         ...
-        <field name="title" displayable="view edit add listing" localizable="view edit listing">
+        <field name="title" label="Title" required="true" 
+                value_type="text" render_type="text_box">
+            <show modes="add" />
             <show modes="view edit listing" />
         </field>
-        <field name="type_number" displayable="view listing" localizable="view listing">
+        <field name="type_number" label="Number" required="false" 
+                value_type="number" render_type="number">
             <show modes="view listing" />
         </field>
-        <field name="acronym" displayable="view edit add listing" localizable="view edit add listing">
+        <field name="acronym" label="Acronym" required="false" 
+                value_type="text" render_type="text_line">
             <show modes="view edit add" />
             <hide modes="listing" />
         </field>
-        <field name="description" displayable="view edit add listing" localizable="view edit add listing">
+        <field name="description" label="Description" required="false" 
+                value_type="text" render_type="text_box">
             <show modes="view edit add" />
             <hide modes="listing" />
         </field>
-        <field name="response_type" displayable="view edit add listing" localizable="view edit listing">
-            <show modes="view edit listing" />
+        <field name="response_type" label="Response Type" required="false"
+                description="Choose the type of response expected for this question"
+                value_type="vocabulary" render_type="single_select" vocabulary="response_type">
+            <show modes="view edit add listing" />
         </field>
         ...
     </descriptor>
@@ -392,9 +440,14 @@ This file simply contains a UI _descriptor_ per type, and it looks something lik
 Each type _descriptor_ here controls the following aspects of the UI for the type:
  * the list of named UI fields for the type
  * the appearance _order_ of the UI fields for the type
+ * various UI handling and rendering aspects for each field:
+   * the field label and/or description 
+   * is it a required field or not?
+   * what type should the value be considered as?
+   * what class of UI widget should be used? 
+   * the controlled vocabulary to use, if any
  * the _modes_ in which the system may show/hide the field--this is the `@displayable` attribute (a convenience, provided for _information only_, may not modify)
- * the _modes_ for which each field *may be* customized--this is the `@localizable` attribute (a convenience, provided for _information only_, may not modify); all modes here are a sub-set of those in `@displayable`
- * the _modes_ that each field *is* customized in--the sum value of the `@modes` attribute of all the `<show>` and `<hide>` elements on the field; all modes in `@localizable` *must* also be set here, once and once only
+ * the _modes_ that each field *is* customized in--the sum value of the `@modes` attribute of all the `<show>` and `<hide>` elements on the field;
  * for each _mode_, the _roles_ for whom the field is shown or not--the value of the _optional_ `@roles` attribute of all the `<show>` and `<hide>` elements on the field
 
 The `descriptor/@order` attribute provides a hint to how references to descriptors themselves may be ordered e.g. for when generating navigation menus for browsing content such as the tree menu under the `admin` section.
@@ -410,30 +463,31 @@ Note that the `type_number` field (that is the number of the question, updated a
 The is simply a matter of re-ordering the `<field>` elements. So, for example if we would like to make `description` field appear after `response_type`, we simply move the field descriptor down i.e.
 {{{
         ...
-        <field name="response_type" displayable="view edit add listing" localizable="view edit listing">
-            <show modes="view edit listing" />
+        <field name="response_type" label="Response Type" required="false"
+                description="Choose the type of response expected for this question"
+                value_type="vocabulary" render_type="single_select" vocabulary="response_type">
+            <show modes="view edit add listing" />
         </field>
-        <field name="description" displayable="view edit add listing" localizable="view edit add listing">
+        <field name="description" label="Description" required="false" 
+                value_type="text" render_type="text_box">
             <show modes="view edit add" />
             <hide modes="listing" />
         </field>
         ...
 }}}
-Then, whenever both fields are shown, the `description` field will appear above the `response_type` field. But note that this will have no visible affect in `listing` mode as `description` is not set to be displayed there (for all _roles_),
+Then, whenever both fields are shown, the `description` field will appear above the `response_type` field. But note that this will have no visible affect in `listing` mode as `description` is not set to be displayed there (for all _roles_).
 
 === Show/Hide fields on a Form per mode ===  
 
 Fields are customized using any number of `<show>` and `<hide>` elements, within the `<field>` element. Both the `<show>` and `<hide>` elements have the following attributes that allow customization of the field behavior:
 
- * _@modes_ - lists the modes that are to be shown or hidden. The only modes allowed here are the ones listed in the `field/@localizable` attribute.
+ * _@modes_ - lists the modes that are to be shown or hidden.
  * _@roles_ - lists the roles for which the modes are to be shown or hidden. The only roles allowed here are the ones listed in the `ui/@roles` attribute. This is optional, and when not set all the roles listed in `ui/@roles` are implied.
 
 `<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles, and `<hide>` hides the field for the listed modes and roles. A field may specify as many `<show>` and/or `<hide>` directives as it needs.
 The action of the `show` or `hide` directive is applied to the list of roles specified in _@roles_--meaning also that the _opposite_ action is applied to the _complement_ of the set of roles specified in _@roles i.e. to all other roles in ui/@roles. Thus, `show` and `hide` are really complementary ways to state the same thing, but one may at times be more convenient to use than the other.
 
-There are some simple rules to follow while using `<show>` and `<hide>`:
- * The only modes available for use are the ones provided by the `field/@localizable` attribute.
- * May have as many `<show>` or `<hide>` elemenets as we need, but any given _mode_ may appear *only once* i.e. in only one of the `<show>` or `<hide>` elements.
+One thing to remember when using `<show>` and `<hide>` is that we may have as many `<show>` or `<hide>` elements as we need, but any given _mode_ may appear *only once*.
 
 ==== Show/Hide example ====
 
@@ -443,7 +497,8 @@ Above, the question _acronym_ field is shown to all in _view edit add_ modes, an
  # but for _view_ mode we keep it as it is i.e. it is shown to all.
 To achieve this, we could modify the field descriptor as follows: 
 {{{
-        <field name="acronym" displayable="view edit add listing" localizable="view edit add listing">
+        <field name="acronym" label="Acronym" required="false" 
+                value_type="text" render_type="text_line">
             <show modes="view" />
             <show modes="edit add" roles="bungeni.Clerk bungeni.Owner" />
             <hide modes="listing" roles="bungeni.Anonymous" />
@@ -459,11 +514,12 @@ To achieve this, we could modify the field descriptor as follows:
 === How to configure documents/groups/membership workflow === 
 </wiki:comment>
 
-Every document type in Bungeni is _workflowed_, as mentioned above in the [#Documents Documents] section that also indicates how to *relate* a _workflow definition_ to a _type_. 
+Every document type in Bungeni is _workflowed_, as mentioned above in the [#Parliamentary_Documents Parliamentary Documents] section that also indicates how to *relate* a _workflow definition_ to a _type_. 
 
 A definition of a workflow in Bungeni is an XML file that defines the following behavioral aspects of the type it "workflows": 
- * The _features_ enabled by the type, see [#Document_features Document features] section for the list of available features on parliamentary document types in Bungeni.
+ * The dedicated _permission actions_ for the type.
  * _All_ the _global permissions_, dedicated to the type, that are to be granted to the various _roles_ you have defined in your parliament.
+ * The _features_ enabled by the type, see [#Document_features Document features] section for the list of available features on parliamentary document types in Bungeni.
  * _All_ the possible _states_ the type may be in, thoughout its life-cycle.
  * _All_ the _local permissions_, dedicated to the type, that are to be granted or denied _on the document instance_, to the various _roles_ we have defined in our parliament.  
  * _All_ the "paths" or _transitions_ we wish to allow from any state to another, along with other related information such as which _roles_ may execute the _transition_ or under what _condition_ should the transition be "made possible".
@@ -474,50 +530,112 @@ Here, just as indication of the various functions of a workflow XML definition, 
 <workflow title="Motion Workflow" 
     description="A Motion"
     tags="draft private public approved ... terminal"
+    permission_actions=".View .Edit .Add .Delete"
     >
+    
+    <!-- global grants -->
+    <allow permission=".Add" roles="Clerk MP" />
     
     <!-- features -->
     <feature name="audit" enabled="true" />
-    <feature ...
+    <feature name="version" enabled="true" />
+    <feature name="attachment" enabled="true">
+        <facet name="all_Clerk">
+            <allow permission="attachment.View" roles="Clerk" />
+            <allow permission="attachment.Edit" roles="Clerk" />
+            <allow permission="attachment.Add" roles="Clerk" />
+            <allow permission="attachment.Delete" roles="Clerk" />
+        </facet>
+        <facet name="all_Owner">
+            <allow permission="attachment.View" roles="Owner" />
+            <allow permission="attachment.Edit" roles="Owner" />
+            <allow permission="attachment.Add" roles="Owner" />
+            <allow permission="attachment.Delete" roles="Owner" />
+        </facet>
+        ...
+    </feature>
+    ...
+    <feature name="signatory" enabled="true">
+        <parameter name="min_signatories" value="1" />
+        <parameter name="open_states" value="admissible" />
+        <facet name="all_Clerk">
+            <allow permission="signatory.Add" roles="Clerk" />
+            <allow permission="signatory.Delete" roles="Clerk" />
+        </facet>
+        <facet name="all_Owner">
+            <allow permission="signatory.Add" roles="Clerk" />
+            <allow permission="signatory.Delete" roles="Clerk" />
+        </facet>
+    </feature>
+    ...
     
-    <!-- global grants -->
-    <grant permission="bungeni.motion.View" role="bungeni.Owner" />
-    <grant ...
-
+    <!-- workflow facets -->
+    <facet name="all_Clerk">
+        <allow permission=".View" roles="Clerk" />
+        <allow permission=".Edit" roles="Clerk" />
+        <allow permission=".Delete" roles="Clerk" />
+    </facet>
+    ...
+    
     <!-- states -->
     ...
-    <state id="draft" ... ></state>
-    <state id="redraft" title="Redraft" like_state="draft"
-        note="document under review before resubmission"
-        version="true">
-        <deny permission="bungeni.motion.Delete" role="bungeni.Owner" />
+    <!-- workflow states -->
+    <state id="working_draft" title="Working Draft" tags="draft private">
+        <facet ref=".all_Clerk" />
+        <facet ref="signatory.all_Clerk" />
+        <facet ref="attachment.all_Clerk" />
     </state>
-    <state id="submitted_signatories" ... ></state>
+    <state id="draft" title="Draft" tags="draft private">
+        <facet ref=".all_Owner" />
+        <facet ref="signatory.all_Owner" />
+        <facet ref="attachment.all_Owner" />
+    </state>
+    <state id="submitted_signatories" title="Submitted to Signatories"
+            version="true" tags="actionmp">
+        <facet ref=".view_Owner_Signatory" />
+        <facet ref="signatory.add_Owner" />
+        <facet ref="attachment.view_Clerk" />
+    </state>
+    <state id="redraft" title="Redraft"
+            note="document under review before resubmission"
+            version="true">
+        <facet ref=".redraft_Owner" />
+        <facet ref="signatory.all_Owner" />
+        <facet ref="attachment.all_Owner_view_Clerk" />
+    </state>
     ...
-
+    
     <!-- transitions -->
     ...
     <transition title="Submit to Signatories"
         source="draft redraft"
         destination="submitted_signatories"
         condition="pi_has_signatories"
-        roles="bungeni.Owner"
+        roles="Owner"
     />
-    ...
     <transition title="Redraft"
         source="submitted_signatories"
         destination="redraft"
         condition="user_is_context_owner"
-        roles="bungeni.Owner"
+        roles="Owner"
     />
     ...
 }}}
 
 Note that managing permissions for a type is the biggest and trickiest chore in managing a workflow. To help manage this arduous task, some tools and conventions are available:
 
- * We only grant _global_ grants (never _deny_) and if we have granted a permission globally (for all instances of this type) we may not again grant it (or deny it) _locally_ i.e. for this _instance_ within a given _state_.
+ * The reponsibility of managing feature-related permissions is with the features themselves. Each feature defines as many _facet_ as needed by a workflow, for as many _behaviourial faces_ the feature takes on within the workflow. 
+   * Each state then may specify up to a single facet per feature, thus deciding how that feature should behave for when the document is in that state.
+   * A facet may be set as the _default_, by setting `@default="true"`--in which case all states will automatically use this facet unless they specify another one explicitly.
+   * Disabling a feature in a workflow will also _disable_ all teh permsissions assocaited with any of its facets.
+ 
+ * We only allow permissions (never _deny_); each state we must explictly state what is allowed. 
+ 
+ * We may allow a permission either _globally_ or _locally_ (i.e. for this _instance_ within a given _state_.), but not both.
 
- * To make local grants easier, you may make use of the `state/@like_state` attribute, as in the sample above for the `redraft` state, that simply "adopts" all the local permission grants/denies for the "liked state" (i.e. from `draft` in the sample here) and then simply declare only the _differences_.
+ * It is possibile to _bind_ the permissions of a state to that of another (for states with identical permissions), by using the `state/@permissions_from_state` attribute (to reference another state in teh same workflow). However, once a state is bound to another in this way, no permission changes may be added i.e. it is all or nothing.
+
+ * Similarly to previous, for sub-items such as _attachments_, _events_, _addresses_, we may delegate the permissions of a given state to the parent (head) document that _owns_ the sub-item, by setting the `state/@permissions_from_parent="true"` boolean attribute. Again, this is all or nothing, so if set no other permissions may be specified.
 
 
 ----
