@@ -36,6 +36,7 @@
      * [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]
      * [HowToDBMigrationScripts How to add DB migration scripts]
      * [HowTo_AddNewContentType How to add a new content type to Bungeni]
+     * [HowTo_MapNewDoctype_for_eXistdb How to map a new document-type for exporting to eXist-db]
      * [HowTo_CreateManualFormsInBungeni How to create manual forms in Bungeni]
      * [HowTo_FormActionsAndMenus Form actions and menus]
      * [HowTo_ViewletManagers Viewlet Managers in Bungeni]
