@@ -40,15 +40,6 @@ The customization Admin UI is accessed using a web browser. The public portal by
 
 ==Accessing the Admin/Customization UI==
 
-The Customization UI is accesible over a web browser - to be able to access the Customization UI you will need to switch the Public Portal to developer mode. You will need [http://code.google.com/p/bungeni-portal/wiki/HowTo_Get_Fabric_Scripts Fabric] access to switch eXist to developer mode. This is also good security practice since only a user with SSH access can provide customization access to the public portal.
-
-To switch the public portal to developer mode run the following fabric command :
-
-{{{
-./fl exist_dev_mode
-}}}
-
-This command will restart the public portal in developer mode. Note that the public portal will *not* be available for public access when in Developer mode.
 
 The Admin UI is accessed over the web browser :
 
@@ -62,13 +53,6 @@ Enter the admin user name and password and you will get the preliminary screen o
 
 There are various tabs allowing you to customize different aspects of the system.
 
-To exit from developer mode run the following fabric command :
-
-{{{
-./fl exist_deploy_mode
-}}}
-
-This will restart the public portal in deployment mode and the customization interface will no longer be accessible 
 
 == Application Customization == 
 
@@ -166,8 +150,6 @@ However unlike the ordering behavior, new `search` behavior can be added via con
 
 In the config screen above the specific XPath for the search is configured via the `Search Path` parameter.
 This however still requires an index on the specific Xpath to be create in the XML database. To see how to configure indexes in eXist [http://www.exist-db.org/exist/indexing.xml#idxconf see here].
-
-
 
 
 
