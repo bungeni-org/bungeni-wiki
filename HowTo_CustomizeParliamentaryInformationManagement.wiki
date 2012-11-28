@@ -192,21 +192,23 @@ Here, as an example, is a relatively simple vocabulary defining the types of Bil
 
 Bungeni pre-defines the following data or context dependent vocabularies, each being intended for a very specific purpose and context.
 
-|| *name* || *diescription* ||
-|| `office_role` || The sub-list of roles that may be assigned to an office ||
-|| `group_sub_role` || The sub-roles of the role assigned to this group ||
-|| `group_title_types` || The title types associated with this group ||
+|| *name* || *description* ||
+|| `language_vocabulary` || The list of available languages ||
 || `workflow_states` || The list of states in this workflow ||
+|| `workflowed_type` || The list of workflowed types ||
 || `user` || The list of all active users ||
 || `group` || The list of all active groups ||
+|| `group_sub_role` || The sub-roles of the role assigned to this group ||
+|| `group_title_types` || The title types associated with this group ||
 || `ministry` || The list of all ministyries in current parliament ||
 || `member` || The members of this group ||
+|| `office_role` || The sub-list of roles that may be assigned to an office ||
 || `owner_or_login` || The context owner OR the current logged in user (a list of 1 item) ||
-|| `user_not_mp` || The list of user who are not MPs ||
-|| `sitting_attendance` || All members of this group who do not have an attendance record yet ||
-|| `substitution` || Active user of the same group ||
 || `parliament_member` || The list of all Members of Parliament ||
 || `parliament_member_delegation` || The list of MPs Delegating to this user (if any) or of all MPs ||
+|| `sitting_attendance` || All members of this group who do not have an attendance record yet ||
+|| `user_not_mp` || The list of user who are not MPs ||
+|| `substitution` || Active user of the same group ||
 || `signatory` || The list of MP Signatories for this document ||
 || `country` || The list of all countries ||
 || `parliament` || The list of all parliaments ||
@@ -597,15 +599,19 @@ Here, just as indication of the various functions of a workflow XML definition, 
         <parameter name="min_signatories" value="1" />
         <parameter name="open_states" value="admissible" />
         <facet name="all_Clerk">
+            <allow permission="signatory.View" roles="Clerk" />
             <allow permission="signatory.Add" roles="Clerk" />
             <allow permission="signatory.Delete" roles="Clerk" />
         </facet>
         <facet name="all_Owner">
-            <allow permission="signatory.Add" roles="Clerk" />
-            <allow permission="signatory.Delete" roles="Clerk" />
+            <allow permission="signatory.View" roles="Owner" />
+            <allow permission="signatory.Add" roles="Owner" />
+            <allow permission="signatory.Delete" roles="Owner" />
         </facet>
+        ...
     </feature>
     ...
+    
     
     <!-- workflow facets -->
     <facet name="all_Clerk">
@@ -615,9 +621,8 @@ Here, just as indication of the various functions of a workflow XML definition, 
     </facet>
     ...
     
+    
     <!-- states -->
-    ...
-    <!-- workflow states -->
     <state id="working_draft" title="Working Draft" tags="draft private">
         <facet ref=".all_Clerk" />
         <facet ref="signatory.all_Clerk" />
@@ -642,6 +647,7 @@ Here, just as indication of the various functions of a workflow XML definition, 
         <facet ref="attachment.all_Owner_view_Clerk" />
     </state>
     ...
+    
     
     <!-- transitions -->
     ...
