@@ -118,7 +118,18 @@ http://bungeni-portal.googlecode.com/svn/wiki/images/languages-menu.png
 ----
 == Vocabularies ==
 
-A vocabulary is a _value list_ where each value needs to be remembered (e.g. stored in a database) in a standard way, but represented in a variety of ways, and possibly in different languages. Such value lists may also be nested i.e. a _value tree_. Bungeni uses the [http://www.imsglobal.org/vdex/ Vocabulary Definition Exchange] (VDEX) standard to manage customizable vocabularies, each with a dedicated XML file, are to be found at: 
+A vocabulary is a _value list_ where each value needs to be remembered (e.g. stored in a database) in a standard way, but represented in a variety of ways, and possibly in different languages. Such value lists may also be nested i.e. a _value tree_. 
+
+Vocabularies may be static, so are a priori known and thus pre-defined, or dynamic, so a priori unknown as may depend on current data or context. 
+
+=== Vocabulary names ===
+
+Both static and dynamic vocabularies have a unique *name*, needed for when configuring _field descriptors_ in [#Forms UI Forms]. By convention, the name of a static vocabulary is the name of the file (without the extension) that defines it. Dynamic vocabularies are pre-defined, and named, by the Bungeni application.
+
+
+=== Static vocabularies ===
+
+Bungeni uses the [http://www.imsglobal.org/vdex/ Vocabulary Definition Exchange] (VDEX) standard to manage customizable static vocabularies, each with a dedicated XML file, are to be found at: 
 
 {{{
     {MY_CUSTOM}/vocabularies/
@@ -138,14 +149,14 @@ A vocabulary is a _value list_ where each value needs to be remembered (e.g. sto
         question_type.vdex
         representation.vdex
         response_type.vdex
-        sitting-activity-types.vdex
-        sitting-convocation-types.vdex
-        sitting-meeting-types.vdex
-        subject-terms.vdex
+        sitting-activity-types.vdex  # name: sitting_activity_types
+        sitting-convocation-types.vdex  # name: sitting_convocation_types
+        sitting-meeting-types.vdex  # name: sitting_meeting_types
+        subject_terms.vdex
         yes_no.vdex
 }}}
 
-=== Managing  vocabularies ===
+==== Managing static vocabularies ====
 
 To manage a vocabulary we simply modify the corresponding XML file that defines it (in [http://www.imsglobal.org/vdex/ VDEX format]). 
 
@@ -175,6 +186,33 @@ Here, as an example, is a relatively simple vocabulary defining the types of Bil
     </term>
 </vdex>
 }}}
+
+
+=== Dynamic vocabularies ===
+
+Bungeni pre-defines the following data or context dependent vocabularies, each being intended for a very specific purpose and context.
+
+|| *name* || *diescription* ||
+|| `office_role` || The sub-list of roles that may be assigned to an office ||
+|| `group_sub_role` || The sub-roles of the role assigned to this group ||
+|| `group_title_types` || The title types associated with this group ||
+|| `workflow_states` || The list of states in this workflow ||
+|| `user` || The list of all active users ||
+|| `group` || The list of all active groups ||
+|| `ministry` || The list of all ministyries in current parliament ||
+|| `member` || The members of this group ||
+|| `owner_or_login` || The context owner OR the current logged in user (a list of 1 item) ||
+|| `user_not_mp` || The list of user who are not MPs ||
+|| `sitting_attendance` || All members of this group who do not have an attendance record yet ||
+|| `substitution` || Active user of the same group ||
+|| `parliament_member` || The list of all Members of Parliament ||
+|| `parliament_member_delegation` || The list of MPs Delegating to this user (if any) or of all MPs ||
+|| `signatory` || The list of MP Signatories for this document ||
+|| `country` || The list of all countries ||
+|| `parliament` || The list of all parliaments ||
+|| `report` || The list of all reports ||
+|| `sitting` || The list of all sittings ||
+|| `venue` || The list of all venues ||
 
 
 ----
@@ -276,7 +314,7 @@ When a document is in a state in which assignments may be viewed/edited, a user 
 ----
 == Document, Group and other Types ==
 
-Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Items_, _Bills_, _Motions_, _Questions_, _Tabled Documents_, as well as a variety of *group and membership types* that are typical of many parliament-like institutions e.g. _Ministry_, Committee_, _Office. 
+Bungeni provides rich support for a variety of *parliamentary document types* e.g. _Agenda Item_, _Bill_, _Motion_, _Question_, _Tabled Document_, as well as a variety of *group and membership types* that are typical of many parliament-like institutions e.g. _Ministry_, _Committee_, _Office_. 
 
 === Archetypes, custom types ===
 
@@ -286,12 +324,12 @@ All these above-mentioned types are not only entirely customizable in Bungeni, b
 
 Bungeni also provides a variety of other _support_ types, such as _Sitting_, _User_, _Signatory_, _Event_, _Attachment_, _Audit_ etc, needed to support the functionality of the various archetype-based types we define. Support types may be customized to quite some degree (but may not be disabled).
 
-Note that, because if an aspect of a Bungeni object type (be it parliamentary documents, groups, memberships, or any support type) is customizable, then it is customizable in a consistent way i.e. if a type is _workflowed_ then the workflow is always controlled in the same way. if a type has a Form UI Views, then those views are always controlled in the same way (via a UI Descriptor), and so on.
+Note that, if an aspect of a Bungeni object type (be it parliamentary documents, groups, memberships, or any support type) is customizable, then it is customizable in a consistent way i.e. if a type is _workflowed_ then the workflow is always controlled in the same way. if a type has a Form UI Views, then those views are always controlled in the same way (via a UI Descriptor), and so on.
 
 
 === Parliamentary Documents ===
 
-All *parliamentary document types* are based on the _Doc_ archetype. The document types _Agenda Items_, _Bills_, _Motions_, _Questions_, _Tabled Documents_, are included in Bungeni out of the box, and as mentioned others types may be added to the system easily.
+All *parliamentary document types* are based on the _Doc_ archetype. The document types _Agenda Item_, _Bill_, _Motion_, _Question_, _Tabled Document_, are included in Bungeni out of the box, and as mentioned others types may be added to the system easily.
 
 All parliamentary document types are *workflowed*--with the workflow definition for any type being entirely customizable. Most other aspects of a document type definition are also customizable e.g. the various *user interface views* (via UI _descriptors_) for the type, or which *features* are enabled by the type.
 
@@ -348,7 +386,7 @@ Disabling a type means the type will *not* be registered (so will be _unknown_ t
 
 === Groups ===
 
-Group types included by default are _parliament_, _government_, _committee_, _ministry_, _political_group_, _office_. Group types and their memberships types are also enabled or disabled in a similar way as document types:
+Group types included by default are _Parliament_, _Government_, _Committee_, _Ministry_, _Political Group_, _Office_. Group types and their memberships types are also enabled or disabled in a similar way as document types:
 {{{
 <types>
     ...
@@ -365,7 +403,7 @@ Group types included by default are _parliament_, _government_, _committee_, _mi
     ...
 </types>
 }}}
-Notice that _ministry_ group type is re-using the base _group_ workflow. 
+Notice that _Ministry_ group type is re-using the base _group_ workflow and the various membership types are all using the base _group\_membership_ workflow.
 
 Again, see the `{MY_CUSTOM}/types.xml` itself for further explanations and sample settings of these.
 
