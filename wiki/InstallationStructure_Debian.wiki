@@ -5,6 +5,8 @@
 Bungeni can also be installed using a set of Debian packages.
 When installed via the debian package method - the installation is much faster as the debian packages include pre-built binaries, so there is no build process required using the typical installation method.
 
+= Starting services = 
+
 When the debian packages have been installed, the bungeni services can be started using the ubuntu service manager :
 
 {{{
@@ -12,6 +14,8 @@ sudo service bungeni_services start
 }}}
 
 Which will start supervisor on port 8888 , and the user can browse to http://localhost:8888 to start / stop the bungeni services (default user / pass : admin / admin) .
+
+= Folder Structure = 
 
 The folder structure for deployment is :
 
@@ -22,11 +26,31 @@ The folder structure for deployment is :
 }}}
 
 
-The installation also creates a `bungeni` user who becomes the owner of the /opt/bungeni and its sub-folders.
+= Service Execution and Permissions = 
+
+All the bungeni services : postgres, bungeni, plone, portal etc are run using the "bungeni" user. The default password for the bungeni user is "bungeni".
+
+The "bungeni" user is also the owner of the /opt/bungeni and its sub-folders.
 
 *bungeni_apps* - all the software components are installed within this folder, the structure is exactly the same as a built from source Bungeni
 
 *exec* - this folders contains the fabric scripts. You can access them by ssh-ing to localhost using the `bungeni` user.
 
-For live deployments the `bungeni` user needs to be disabled to prevent security intrusions. 
+{{{
+ssh bungeni@localhost
+cd exec
+}}}
 
+If you want to install packages using the "bungeni" user, you will need to make the "bungeni" user as the sudo user :
+
+{{{
+sudo visudo
+}}}
+
+and then add the line in the visudo screen :
+
+{{{
+bungeni ALL=(ALL:ALL) ALL
+}}
+
+WARNING : Making "bungeni" a sudo user is not recommended for live deployments ! For live deployments the `bungeni` user needs to be disabled to prevent security intrusions. 
