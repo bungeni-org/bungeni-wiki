@@ -882,6 +882,7 @@ Below you can see a sample of the body section of a report and customizable attr
 || || html || Includes the specified context variable as HTML || Display the body of a document as html: <br/> `<div br:type="html" br:source="body_text"/>` ||
 || || link || Renders a link to with the link as the named *br:url* parameter || Display a link to a document uri with the dublin core title as link text: <br/> `<a br:type="link" br:url="uri" br:source="dc:title/>"` ||
 || || listing || Generates a list of items || Display the list of titles of questions included in the template: <br/> `<ul br:type="listing" br:source="questions">`<br/>`    <li br:type="text" br:source="dc:title"/>` <br/> `</ul>` ||
+|| || block || Uses specified br:source as context || Display document owner details for a question: <br/> `<table br:type="block" br:source="owner">` <br/>    `<tr>`<br/>        `<td>Title</td>`        <br/>        `<td br:type="text" br:source="dc:title_member"/>`<br/>    `</tr>` <br/>`</table>` ||
 || br:source || A named context variable || names of available context variables are determined from the object available to the current template tag || See [HowTo_CustomizeParliamentaryInformationManagement#Available_context_names] ||
 || br:condition || A named context variable || This attribute determines if the current tag should be rendered.<br/> Checks existense of a value for the named context variable. || This tag will only be rendered if there is a title <br/> `<span br:source="title" br:condition="title"/>` ||
 
