@@ -736,6 +736,7 @@ Bungeni has a notifications system that can be configured to send out notificati
 
 The notifications system uses a message queue system called RabbitMQ to route and queue messages. When an event occurs in Bungeni that requires that someone be notified, a message is sent to the queue. Services such as email or SMS can then retrieve the message from the queue and send it to the intended recipient. Parliaments can build other applications that make use of the messages from the message queue such as Instant Messaging notifications e.g. Jabber, Social Media sites such as Facebook and Twitter and so on.
 
+Enabling notifications is one step, one also has to configure the delivery method of the notification. Bungeni ships with an "email" feature, you may build other delivery methods that consume messages from the queue.
 
 === How to set up notifications === 
 
@@ -756,9 +757,17 @@ For example
     <notify roles="bungeni.Owner" onstate="received"/>
 }}}
 
-In the above example, members of the clerks office will be notified when the document is submitted and the person who owns the document will be notified once it is received by the Clerk's office
+In the above example, members of the clerks office will be notified when the document is submitted and the person who owns the document will be notified once it is received by the Clerk's office.
 
-The email machinery in Bungeni uses the notifications system described above. 
+== Email ==
+
+The email feature in Bungeni uses the notifications system described above. To enable email notifications for a workflowed type eg. a document or sitting, enable the feature "email" in the workflow for that type and add an email template in the email/templates folder in bungeni_custom. 
+
+=== Configuring the SMTP server ===
+
+The first step of configuring the email notifications feature in Bungeni is to enter the details of the SMTP server. Login to bungeni and browse to "email settings" under the "administration" tab and enter the details of the SMTP server.
+
+=== Email Templates ===
 
 The templates used for each document type are found in
 
