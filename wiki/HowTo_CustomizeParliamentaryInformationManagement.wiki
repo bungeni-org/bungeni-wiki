@@ -194,26 +194,27 @@ Bungeni pre-defines the following data or context dependent vocabularies, each b
 
 || *name* || *description* ||
 || `language` || The list of available languages ||
+|| `country` || The list of all countries ||
 || `workflow_states` || The list of states in this workflow ||
 || `workflowed_type` || The list of workflowed types ||
-|| `user` || The list of all active users ||
 || `group` || The list of all active groups ||
+|| `committee` || The list of all committees ||
+|| `parliament` || The list of all parliaments ||
+|| `ministry` || The list of all ministyries in current parliament ||
 || `group_sub_role` || The sub-roles of the role assigned to this group ||
 || `group_title_types` || The title types associated with this group ||
-|| `ministry` || The list of all ministyries in current parliament ||
-|| `member` || The members of this group ||
 || `office_role` || The sub-list of roles that may be assigned to an office ||
-|| `owner_or_login` || The context owner OR the current logged in user (a list of 1 item) ||
+|| `member` || The members of this group ||
 || `parliament_member` || The list of all Members of Parliament ||
 || `parliament_member_delegation` || The list of MPs Delegating to this user (if any) or of all MPs ||
-|| `sitting_attendance` || All members of this group who do not have an attendance record yet ||
+|| `user` || The list of all active users ||
 || `user_not_mp` || The list of user who are not MPs ||
+|| `owner_or_login` || The context owner OR the current logged in user (a list of 1 item) ||
 || `substitution` || Active user of the same group ||
 || `signatory` || The list of MP Signatories for this document ||
-|| `country` || The list of all countries ||
-|| `parliament` || The list of all parliaments ||
-|| `report` || The list of all reports ||
 || `sitting` || The list of all sittings ||
+|| `sitting_attendance` || All members of this group who do not have an attendance record yet ||
+|| `report` || The list of all reports ||
 || `venue` || The list of all venues ||
 
 
@@ -288,13 +289,21 @@ Note: Read more information about document features below.
 
 The assignment feature is enabled per document type in the document's workflow. The assignment feature has two parameters "assigning_roles" and "assign_to_roles". Persons with a role listed in "assign_roles" have the ability to assign the document type to users with an "assign_to" role.
 
-The administrator also needs to specify in which states of the document that the assignments can be viewed or edited by granting or denying the view/edit permissions on that state.
+The administrator also needs to specify in which states of the document that the assignments can be viewed or edited by granting the view/edit permissions on that state.
 
 {{{
-<state id="working_draft" title="Working Draft" tags="draft private">
-  <grant permission="bungeni.assignment.View" role="bungeni.Clerk.HeadClerk" />
-  <grant permission="bungeni.assignment.Edit" role="bungeni.Clerk.HeadClerk" />
-</state>
+    <facet name="internal">
+        ...
+        <allow permission="user_assignment.View" roles="Clerk.HeadClerk" />
+        <allow permission="user_assignment.Edit" roles="Clerk.HeadClerk" />
+    </facet>
+    
+    ...
+    
+    <state id="received" title="Received by clerk" tags="actionclerk">
+        <facet ref=".internal" />
+        ...
+    </state>
 }}}
 
 When a document is in a state in which assignments may be viewed/edited, a user with a role that may view/edit documents gets a menu items on the document to view/edit assignments
@@ -405,7 +414,7 @@ Group types included by default are _Parliament_, _Government_, _Committee_, _Mi
     ...
 </types>
 }}}
-Notice that _Ministry_ group type is re-using the base _group_ workflow and the various membership types are all using the base _group\_membership_ workflow.
+Notice that _Ministry_ group type is re-using the base _group_ workflow and all the various membership types are using the base _group\_membership_ workflow.
 
 Again, see the `{MY_CUSTOM}/types.xml` itself for further explanations and sample settings of these.
 
@@ -517,7 +526,7 @@ The is simply a matter of re-ordering the `<field>` elements. So, for example if
 }}}
 Then, whenever both fields are shown, the `description` field will appear above the `response_type` field. But note that this will have no visible affect in `listing` mode as `description` is not set to be displayed there (for all _roles_).
 
-=== Show/Hide fields on a Form per mode ===  
+=== Show/Hide fields on a Form per mode ===
 
 Fields are customized using any number of `<show>` and `<hide>` elements, within the `<field>` element. Both the `<show>` and `<hide>` elements have the following attributes that allow customization of the field behavior:
 
@@ -525,7 +534,7 @@ Fields are customized using any number of `<show>` and `<hide>` elements, within
  * _@roles_ - lists the roles for which the modes are to be shown or hidden. The only roles allowed here are the ones listed in the `ui/@roles` attribute. This is optional, and when not set all the roles listed in `ui/@roles` are implied.
 
 `<show>` and `<hide>` do exactly what they are named as, `<show>` shows the field for the listed modes and roles, and `<hide>` hides the field for the listed modes and roles. A field may specify as many `<show>` and/or `<hide>` directives as it needs.
-The action of the `show` or `hide` directive is applied to the list of roles specified in _@roles_--meaning also that the _opposite_ action is applied to the _complement_ of the set of roles specified in _@roles i.e. to all other roles in ui/@roles. Thus, `show` and `hide` are really complementary ways to state the same thing, but one may at times be more convenient to use than the other.
+The action of the `show` or `hide` directive is applied to the list of roles specified in _@roles_--meaning also that the _opposite_ action is applied to the _complement_ of the set of roles specified in _@roles_ i.e. to all other roles in `ui/@roles`. Thus, `show` and `hide` are really complementary ways to state the same thing, but at times it may be more convenient to use than the other.
 
 One thing to remember when using `<show>` and `<hide>` is that we may have as many `<show>` or `<hide>` elements as we need, but any given _mode_ may appear *only once*.
 
@@ -540,8 +549,8 @@ To achieve this, we could modify the field descriptor as follows:
         <field name="acronym" label="Acronym" required="false" 
                 value_type="text" render_type="text_line">
             <show modes="view" />
-            <show modes="edit add" roles="bungeni.Clerk bungeni.Owner" />
-            <hide modes="listing" roles="bungeni.Anonymous" />
+            <show modes="edit add" roles="Clerk Owner" />
+            <hide modes="listing" roles="Anonymous" />
         </field>
 }}}
 
@@ -560,8 +569,9 @@ A definition of a workflow in Bungeni is an XML file that defines the following 
  * The dedicated _permission actions_ for the type.
  * _All_ the _global permissions_, dedicated to the type, that are to be granted to the various _roles_ you have defined in your parliament.
  * The _features_ enabled by the type, see [#Document_features Document features] section for the list of available features on parliamentary document types in Bungeni.
+ * The various _facets_--or _behaviourial faces_--that we would like to have the workflow may assume. A workflow facet allows a set of permissions, that may then be used by any state to allow the same set of permissions. Note that to configure permissions relating to a _feature_, a state uses a facet defined by the workflow of the sub-item. 
  * _All_ the possible _states_ the type may be in, thoughout its life-cycle.
- * _All_ the _local permissions_, dedicated to the type, that are to be granted or denied _on the document instance_, to the various _roles_ we have defined in our parliament.  
+ * _All_ the _local permissions_, that are to be granted or denied _on the document instance_, to the various _roles_ we have defined in our parliament. Local permissions are defined by referring a single facet from same workflow, plus up to a facet per supported feature. Facets for disabled features are ignored.
  * _All_ the "paths" or _transitions_ we wish to allow from any state to another, along with other related information such as which _roles_ may execute the _transition_ or under what _condition_ should the transition be "made possible".
 
 Here, just as indication of the various functions of a workflow XML definition, is a skeletal extract of a workflow definition for a _Motion_ document type: 
@@ -579,42 +589,25 @@ Here, just as indication of the various functions of a workflow XML definition, 
     <!-- features -->
     <feature name="audit" enabled="true" />
     <feature name="version" enabled="true" />
-    <feature name="attachment" enabled="true">
-        <facet name="all_Clerk">
-            <allow permission="attachment.View" roles="Clerk" />
-            <allow permission="attachment.Edit" roles="Clerk" />
-            <allow permission="attachment.Add" roles="Clerk" />
-            <allow permission="attachment.Delete" roles="Clerk" />
-        </facet>
-        <facet name="all_Owner">
-            <allow permission="attachment.View" roles="Owner" />
-            <allow permission="attachment.Edit" roles="Owner" />
-            <allow permission="attachment.Add" roles="Owner" />
-            <allow permission="attachment.Delete" roles="Owner" />
-        </facet>
-        ...
-    </feature>
-    ...
+    <!-- NOTE on Feature Facet Permissions: Sub-item permissions (apart from the
+    Add permission, that is by defn unbound to an *existing* item) that are 
+    allowed within a *feature facet* apply only for when the (workflowed, always)
+    sub-item itself is in a permissions_from_parent="true" state. -->
+    <feature name="attachment" enabled="true" />
+    <feature name="event" enabled="true" />
     <feature name="signatory" enabled="true">
         <parameter name="min_signatories" value="1" />
         <parameter name="open_states" value="admissible" />
-        <facet name="all_Clerk">
-            <allow permission="signatory.View" roles="Clerk" />
-            <allow permission="signatory.Add" roles="Clerk" />
-            <allow permission="signatory.Delete" roles="Clerk" />
-        </facet>
-        <facet name="all_Owner">
-            <allow permission="signatory.View" roles="Owner" />
-            <allow permission="signatory.Add" roles="Owner" />
-            <allow permission="signatory.Delete" roles="Owner" />
-        </facet>
-        ...
     </feature>
-    ...
-    
+    <feature name="schedule" enabled="true" />
+    <feature name="workspace" enabled="true" />
+    <feature name="notification" enabled="true" />
+    <feature name="email" enabled="true" />
+    <feature name="download" enabled="true" />
+    <feature name="group_assignment" enabled="true" />
     
     <!-- workflow facets -->
-    <facet name="all_Clerk">
+    <facet name="draft_Clerk">
         <allow permission=".View" roles="Clerk" />
         <allow permission=".Edit" roles="Clerk" />
         <allow permission=".Delete" roles="Clerk" />
@@ -624,27 +617,29 @@ Here, just as indication of the various functions of a workflow XML definition, 
     
     <!-- states -->
     <state id="working_draft" title="Working Draft" tags="draft private">
-        <facet ref=".all_Clerk" />
-        <facet ref="signatory.all_Clerk" />
-        <facet ref="attachment.all_Clerk" />
+        <facet ref=".draft_Clerk" />
+        <facet ref="attachment.draft_Clerk" />
+        <facet ref="event.draft_Clerk" />
+        <facet ref="signatory.draft_Clerk" />
     </state>
     <state id="draft" title="Draft" tags="draft private">
-        <facet ref=".all_Owner" />
-        <facet ref="signatory.all_Owner" />
-        <facet ref="attachment.all_Owner" />
+        <facet ref=".draft_Owner" />
+        <facet ref="attachment.draft_Owner" />
+        <facet ref="event.draft_Owner" />
+        <facet ref="signatory.draft_Owner" />
     </state>
-    <state id="submitted_signatories" title="Submitted to Signatories"
-            version="true" tags="actionmp">
-        <facet ref=".view_Owner_Signatory" />
-        <facet ref="signatory.add_Owner" />
-        <facet ref="attachment.view_Clerk" />
+    <state id="submitted_signatories" title="Submitted to Signatories" version="true" tags="actionmp">
+        <facet ref=".internal_Signatory" />
+        <facet ref="attachment.internal" />
+        <facet ref="event.internal" />
+        <facet ref="signatory.internal" />
     </state>
-    <state id="redraft" title="Redraft"
-            note="document under review before resubmission"
-            version="true">
+    <state id="redraft" title="Redraft" version="true" 
+            note="document under review before resubmission">
         <facet ref=".redraft_Owner" />
-        <facet ref="signatory.all_Owner" />
-        <facet ref="attachment.all_Owner_view_Clerk" />
+        <facet ref="attachment.internal_Owner" />
+        <facet ref="event.internal" />
+        <facet ref="signatory.internal_Owner" />
     </state>
     ...
     
@@ -668,16 +663,16 @@ Here, just as indication of the various functions of a workflow XML definition, 
 
 Note that managing permissions for a type is the biggest and trickiest chore in managing a workflow. To help manage this arduous task, some tools and conventions are available:
 
- * The reponsibility of managing feature-related permissions is with the features themselves. Each feature defines as many _facet_ as needed by a workflow, for as many _behaviourial faces_ the feature takes on within the workflow. 
-   * Each state then may specify up to a single facet per feature, thus deciding how that feature should behave for when the document is in that state.
-   * A facet may be set as the _default_, by setting `@default="true"`--in which case all states will automatically use this facet unless they specify another one explicitly.
-   * Disabling a feature in a workflow will also _disable_ all teh permsissions assocaited with any of its facets.
+ * The reponsibility of managing feature-related permissions is with the features themselves. Each feature defines as many _facets_ as needed i.e. for as many _behaviourial faces_ the feature takes on within the workflow.
+   * Each state then may specify up to a single facet per feature, thus deciding how that feature should behave for when the document is in the state.
+   * A facet may be set as the _default_, by setting `@default="true"`--in which case all states will automatically use this facet unless they explicitly specify another one.
+   * Disabling a feature in a workflow will also _disable_ all the permsissions assocaited with any of its facets.
  
- * We only allow permissions (never _deny_); each state we must explictly state what is allowed. 
+ * We only allow permissions (never _deny_); each state must explictly state what is allowed. 
  
- * We may allow a permission either _globally_ or _locally_ (i.e. for this _instance_ within a given _state_.), but not both.
+ * We may allow a permission to a Role either _globally_ (unlimited, not bound to any instance) or _locally_ (only for this _instance_ within a given _state_) but *not both*.
 
- * It is possibile to _bind_ the permissions of a state to that of another (for states with identical permissions), by using the `state/@permissions_from_state` attribute (to reference another state in teh same workflow). However, once a state is bound to another in this way, no permission changes may be added i.e. it is all or nothing.
+ * It is possibile to _bind_ the permissions of a state to that of another (for states with identical permissions), by using the `state/@permissions_from_state` attribute (to reference another state in the same workflow). However, when a state is bound to another in this way, no permission changes may be added i.e. it is all or nothing.
 
  * Similarly to previous, for sub-items such as _attachments_, _events_, _addresses_, we may delegate the permissions of a given state to the parent (head) document that _owns_ the sub-item, by setting the `state/@permissions_from_parent="true"` boolean attribute. Again, this is all or nothing, so if set no other permissions may be specified.
 
@@ -1114,3 +1109,6 @@ Within parliaments the different categories of information that may be need to s
  * *governments* Add _government/ministries/member of ministries_;
 
  * *title types* Add the title use in your parliament, e.g. Speaker/President/Chief Whip etc. Please note that _titles_ in all groups may be associated to a _role_ (see section on roles).
+
+
+
