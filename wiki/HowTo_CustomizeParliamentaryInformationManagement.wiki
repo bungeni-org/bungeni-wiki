@@ -469,7 +469,8 @@ A UI _descriptor_ for a type something like this:
         </field>
         <field name="response_type" label="Response Type" required="false"
                 description="Choose the type of response expected for this question"
-                value_type="vocabulary" render_type="single_select" vocabulary="response_type">
+                value_type="vocabulary" render_type="single_select" vocabulary="response_type"
+                extended="text">
             <show modes="view edit add listing" />
         </field>
         ...
@@ -498,6 +499,15 @@ The above extract describes some fields for a _question_. Here, as an example, i
 http://bungeni-portal.googlecode.com/svn/wiki/images/add-question.png
 
 Note that the `type_number` field (that is the number of the question, updated at a later stage in the question's life-cycle) does not appear in *add* mode as per the field descriptor.
+
+==== Extended properties ====
+
+A descriptor may _extend_ the base descriptor it is based on with additional fields. This is done by simply adding an `extended` attribute to the `<field>` with the value being a supported extended property type that currently are:
+ * `text`: the value is a piece of text e.g. the Question `response_type` field.
+ * `translated_text`: the value is a piece of i18n text (can be translated to different languages) e.g. the Bill `short_title` field.
+
+You may *not* declare a property in the base descriptor as extended.
+
 
 === Changing display order of fields === 
 
