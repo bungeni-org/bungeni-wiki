@@ -1,11 +1,9 @@
 #summary How to create a Bungeni Debian package
 #sidebar TableOfContents
 
-
 = Introduction = 
 
 This page documents the steps to create a debian package for Bungeni.
-
 
 = Step 1 - Building Bungeni = 
 
@@ -18,31 +16,97 @@ For the debian package distribution, Bungeni is always installed in the `/opt/bu
 So we need to create the environemnt for the build first. Check out the debian_package project from svn into a folder
 
 {{{
-svn co https://bungeni-portal.googlecode.com/svn/debian_package/ deb-pack
+svn co https://bungeni-portal.googlecode.com/svn/debian_package_devscripts/ debian_package_devscripts
 }}}
 
-From the deb-pack folder run `prepare_userenv.sh` :
+This will give you a list of utility scripts and will also checkout debian_package and debian_package_update repositories via externals.
+
+The structure you get should look like this:
+
+{{{
+	debian_package_devscripts
+	├── clean_today
+	├── debian_package - Folder
+	├── debian_package_update - Folder
+	├── externals.txt
+	├── inst_all
+	├── mk_dev
+	├── mv_2_dist
+	├── prepare_userenv.sh
+	├── README
+	├── rm_rf_bungeni
+	└── svn_set_xtrnls.sh
+}}}
+
+This is what the scripts do:
+
+*clean_today* - When building you may need to clean out broken packages and their related archives inorder to rebuild a fresh. 
+
+The generated archives are scattered in the packager and to manually remove them would be tidious because of 
+
+the use of sudo to build the packages, a clean up script is recommended inorder to speed up the build process.
+
+{{{
+clean_today <packager folder>
+
+e.g 
+
+$ sudo ./clean_today debian_package
+}}}
+
+*inst_all* - You may need to install all the debian packages of a single release without always prompting a yes during the procees.
+
+{{{
+inst_all <dist release folder>
+
+e.g
+
+$ sudo ./inst_all dist/bungeni_debs32_snapshot_2012-12-21
+}}}
+
+Note : No trailing back slash
+
+*mk_dev* - This script takes the original debian packager (production packager) and creates a development packager. Appends "dev" to new packager folder.
+
+{{{
+mk_dev <debian packager folder>
+
+e.g
+
+$ sudo ./mk_dev debian_packager
+}}}
+
+*mv_2_dist* - Takes the packages and deposits them in dist under a folder with proper naming
+
+{{{
+mv_2_dist <debian packager folder>
+
+e.g
+
+$ sudo ./mv_2_dist debian_packger
+}}}
+
+*rm_rf_bungeni* - Forces removal of bungeni. Use only  when the bungeni package is broken.
+
+{{{
+$ sudo ./rm_rf_bungeni
+}}}
+
+*svn_set_xtrnls.sh* - Sets externals, you can define the specific releases in the externals.txt file
+
+{{{
+./svn_set_xtrnls.sh
+}}}
+
+*prepare_userenv.sh* - This script should be the first to run after checking out development scripts. 
+
+It creates a `/opt/bungeni` folder and also creates a `bungeni` user with a default `bungeni` password which will be used to 
+
+create the deployment and packaging installation, additionally we also set the home directory for the `bungeni` user to `/opt/bungeni`.
+
 {{{
 sudo ./prepare_userenv.sh
 }}}
-
-This script creates a `/opt/bungeni` folder and also creates a `bungeni` user with a default `bungeni` password which will be used to create the deployment and packaging installation :
-
-{{{
-#!/bin/bash
-set -x verbose
-# add bungeni user
-useradd bungeni
-# generate default password for bungeni user
-echo bungeni:bungeni | sudo chpasswd
-# create & set home directory for bungeni user
-mkdir -p /opt/bungeni
-chown -R bungeni:bungeni /opt/bungeni
-usermod -d /opt/bungeni bungeni
-usermod -s /bin/bash bungeni
-}}}
-
-Additionally we also set the home directory for the `bungeni` user to `/opt/bungeni`.
 
 == Building Bungeni == 
 
@@ -80,10 +144,10 @@ Now exit from the `bungeni` user login to return back to your default login :
 exit
 }}}
 
-Switch to the deb-pack folder :
+Switch to the debian_package_devscripts folder :
 
 {{{
-cd ~/deb-pack
+cd ~/debian_package_devscripts/debian_package
 }}}
 
 There are 4 debian packages that can be built using the deb pack (bungeni, exist-db, plone and bungeni portal) The scripts uses the following syntax :
@@ -105,4 +169,9 @@ No arguments for plone shell script
 No arguments for portal shell script
 {{{
 ./portal.sh
+}}}
+
+You can also build all the debian packages
+{{{
+sudo ./build_all.sh
 }}}
