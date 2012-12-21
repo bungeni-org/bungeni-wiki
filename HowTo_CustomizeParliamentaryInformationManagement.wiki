@@ -46,9 +46,11 @@ This structure provides points of access to different aspects of customization d
 || `workspace` || Contains the Workspace customization files. There is one file per document type ||
 
 
-*We don't recommend making customizations in the default customization folder, instead the system provides a mechanism to create and use your own customization folder. This kind of setup will allow you to test your customization against the reference customization implementation provided out of the box in Bungeni*.
+By default when you install the system - a private customization folder is created within `bungeni_apps/customizations` called by the same name `bungeni_custom`.
 
-=== Creating your own customization folder === 
+*We don't recommend making customizations in the default customization folder, instead use the private customization folder in `bungeni_apps/customizations` to make your custom modifications. This kind of setup will allow you to test your customization against the reference customization implementation provided out of the box in Bungeni*.
+
+=== How Bungeni determines the active customization folder === 
 
 Bungeni determines the customization folder by means of a `{BUNGENI}/bungeni_custom.pth` _python package path_ customization file that simply contains a path to where the system should look for a `bungeni_custom` _python package_. The default one contains:
 
@@ -58,19 +60,9 @@ Bungeni determines the customization folder by means of a `{BUNGENI}/bungeni_cus
 
 Changing the path here will tell Bungeni to look for the customization folder, i.e. the `bungeni_custom` python package, in a different location.
 
-=== Making a private customization folder ===
+=== Using the working customization folder ===
 
-To create your own private customization folder do the following --
-
- * Create a copy of the `{BUNGENI}/src/bungeni_custom` folder, with *same name*--you may place it anywhere you like as long as it is outside of the `{BUNGENI}/src` folder. For example, let's place it at `{BUNGENI}/bungeni_custom`.
- * Edit the `{BUNGENI}/bungeni_custom.pth` file, and change the path contained in this file to point to the _parent_ folder containing your customization folder, i.e:
-    {{{
-	    /my/installation/path/bungeni_apps/bungeni
-	    }}}
-    Where {{{/my/installation/path}}} is the folder under which you have installed the Bungeni applications.
- * Restart Bungeni and do a small test to verify if everything is working properly (e.g. login as a member and publish a question) 
-
-You can now start customizing workflows, vocabularies, workspaces, et cetera, for your Bungeni in _your_ `bungeni_custom` folder at at `/my/installation/path/bungeni_apps/bungeni/bungeni_custom`. 
+You can start customizing workflows, vocabularies, workspaces, et cetera, for your Bungeni in _your_ `bungeni_custom` folder at `/my/installation/path/bungeni_apps/customizations/bungeni_custom`. 
 
 Wherever you place your customization folder, let's refer to _your_ customization folder simply as `{MY_CUSTOM}` from now on.
 
