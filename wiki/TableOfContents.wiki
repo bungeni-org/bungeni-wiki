@@ -23,6 +23,7 @@
      *  [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]  
      *  [HowToUpgradeAndDowngradeData How to upgrade and downgrade existing data to different versions of the schema]
      *  [HowTo_BuildBungeniDebianPackage How to build a Bungeni debian package ]  
+     *  [HowTo_BuildBungeniDebianPackageUpdate How to build a Bungeni debian package update ]  
      *  [HowTo_Setup_PackageIndex_Server How to setup a package index server]    
      *  [HOWTO_VIrtualBox How-To / FAQ for virtualbox configuration issues]          
  * [Bungeni_Customization_Guide Customization Guide]
