@@ -125,3 +125,17 @@ Stopping :
 {{{
 fab stop_service:portal
 }}}
+
+== varnish ==
+
+Starting : 
+
+{{{
+fab start_service:varnish
+}}}
+
+Stopping : 
+
+{{{
+fab stop_service:varnish
+}}}

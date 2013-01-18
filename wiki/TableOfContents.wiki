@@ -8,6 +8,7 @@
      *  [Install_Plone_Fabric How to install Plone]
      *  [Install_eXistdb_Fabric How to install eXist-db]
      *  [Install_DeliverancePortal_Fabric How to install Deliverance]
+     *  [Install_Varnish_Fabric How to install Varnish]
      *  [HowTo_SupervisorServiceManager How to use the supervisor service manager]
      *  [HowTo_ProxyBungeniBehindWebServer How to proxy Bungeni behind a web server]
      *  [Bungeni_Build_Problems Common Build issues and how to resolve them]

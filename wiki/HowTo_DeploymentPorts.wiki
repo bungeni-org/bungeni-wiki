@@ -19,6 +19,7 @@ Note that all the services listed below, are by default mapped to the localhost.
 ||Deliverance Static || 8083 ||localhost ||
 ||eXist XML DB || 8088 || localhost ||
 ||Supervisor Process monitor || 8888 || localhost ||
+||Varnish Cache || 8000 || localhost ||
 
 = Changing Default Ports = 
 
