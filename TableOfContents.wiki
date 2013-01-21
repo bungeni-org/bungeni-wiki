@@ -52,7 +52,6 @@
      * [ChangingDBSchema How to add objects to the db schema]
      * [SetPermissionForWorkflows How to set permissions on a object on workflow transition]
      * [ParliamentaryGlossary Glossary of Parliamentary Terms]
-     * [How_to_translations How to generate translation catalogs]
      * [InstallingRootCertificateForGoogleCode Installing a root certificate for googlecode]
      * [UpdatingOreYUI Updating ore.yui]
      * Architecture 
