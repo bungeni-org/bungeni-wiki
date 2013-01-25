@@ -1,0 +1,31 @@
+*Setting up Guide*
+
+  * Country
+  * default listing items
+  * ??????
+
+= How to configure languages =
+
+Here you can set the default language used in the Bungeni user interface as well as enable alternative languages. If you have enabled more than one language, the default language (see below) will be used in the Bungeni user interface unless the browser language is not one of the alternative languages, in that case the alternative language will be used.
+
+== How to enable and set the default language ==
+
+Bungeni language configuration is managed in this file:
+{{{
+
+`{MY_CUSTOM}/__init__.py`
+}}}
+
+The parameters in the table below will be found in this file and determine how languages are handled in Bungeni. Murithi what about indigenous languages … e.g. PSA?
+
+|| *Parameter* || *Sample* || *Notes* ||
+|| `zope_i18n_allowed_languages` || `"ar en es es-do fr it nl pt ru sw tk" ` || A space separated string of language ids of available languages. To enable or disable language, add or remove its id from this list ||
+|| `default_language` || `"en"` || This is the default language used in the system. It should be one of those in `zope_i18n_allowed_languages`. ||
+|| `right_to_left_languages` || `"ar" ` || This is a space separated list of language ids for which the user interface should be displayed right-to-left. These language ids must be a subset of `zope_i18n_allowed_languages` ||
+|| `zope_i18n_compile_mo_files` || `true/false` || Set this to True/False to turn on/off compiling of message catalogues into a binary format (faster). ||
+
+Only enabled languages will show up in Bungeni's language menu. With the `zope_i18n_allowed_languages` setting above, this would be the resulting language menu.
+
+[2222_html_m723d77b8.png]
+
+MURITHI: Here we have now to explain how to generate the catalogues and then translated, et. et. http://code.google.com/p/bungeni-portal/wiki/HowTo_Generate_i18nCatalogs This
