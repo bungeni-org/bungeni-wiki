@@ -6,27 +6,33 @@ Install Bungeni using the Debian packaging system
 
 = Download the Bungeni Debian Package =
 
-Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 bit and 64 bit) on the following link:
+Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 bit) on the following link:
 
 ||Operating System || Download Link ||
-|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+2012-10-01-1_i386.deb bungeni 2012-10-01 Release] ||
-|| Ubuntu 12.04 64 bit || ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-postgresql_9.2.0+2013-02-25-dev_i386.deb bungeni-postgres 2013-02-24 Release] ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+10589-2013-02-25-dev_i386.deb bungeni-core 2013-02-24 Release] ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-exist-db_2.0.0+18031-2013-02-25-dev_i386.deb	 bungeni-exist 2012-02-24 Release] ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.2+10589-2013-02-25-dev_i386.deb bungeni-plone 2013-02-24 Release] ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+10589-2013-02-25-dev_i386.deb bungeni-proxy 2013-02-24 Release] ||
+
 
 = How to Install  = 
 
-First update your system, either update using Ubuntu update manager or --  :
+First update your Operating system, either update using Ubuntu update manager or --  :
 {{{
 sudo apt-get update 
 sudo apt-get upgrade
 }}}
 
-Once you have downloaded the package, right click on it in Nautilus and click "Open With" -> "GDebi Package manager".
+Once this has completed, download the packages, right click on it in Nautilus and click "Open With" -> "GDebi Package manager" (or "Open With" Update Manager")
 
 The system will prompt you to enter your password, once you have entered that the installation will commence by installing the dependencies and then complete.
 
+The packages need to be installed in the order listed above.
+
 To install from the command line :
 {{{
-  sudo gdebi bungeni_1.0+XXXXXX.deb
+  sudo gdebi bungeni_YYYY+XXXXXX.deb
 }}}
 
 If you need to install gdebi you can install it using :
@@ -58,11 +64,10 @@ sudo service bungeni_services stop
 
 = To Uninstall = 
 
-You can uninstall using the package manager, by removing the `bungeni` package.
+You can uninstall using the package manager, by removing the `bungeni-XXXXX` packages.
 
 Or alternatively from the command line type :
 
 {{{
-sudo apt-get remove bungeni
+sudo apt-get remove bungeni-XXXXX 
 }}}
-
