@@ -6,7 +6,7 @@ Install Bungeni using the Debian packaging system
 
 = Download the Bungeni Debian Package =
 
-Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 bit) on the following links:
+== Ubuntu 12.04 32 bit release == 
 
 ||Operating System || Download Link ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+10589-2013-02-25-dev_i386.deb bungeni-core 2013-02-24 Release] ||
@@ -15,7 +15,7 @@ Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 b
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.2+10589-2013-02-25-dev_i386.deb bungeni-plone 2013-02-24 Release] ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+10589-2013-02-25-dev_i386.deb bungeni-proxy 2013-02-24 Release] ||
 
-and for Ubuntu 12.04 (64 bit) on the following links:
+== Ubuntu 12.04 64 bit release == 
 
 ||Operating System || Download Link ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+10589-2013-02-25-dev_amd64.deb bungeni-core 2013-02-24 Release] ||
