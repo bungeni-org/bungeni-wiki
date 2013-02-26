@@ -15,6 +15,9 @@ Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 b
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.2+10589-2013-02-25-dev_i386.deb bungeni-plone 2013-02-24 Release] ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+10589-2013-02-25-dev_i386.deb bungeni-proxy 2013-02-24 Release] ||
 
+= Requirements = 
+
+Operating System as stated on the list above, at least 1 GB of free RAM, 15 GB of free disk space on the /opt partition (which is generally mapped to the root partition )
 
 = How to Install  = 
 
