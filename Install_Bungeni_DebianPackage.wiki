@@ -9,8 +9,8 @@ Install Bungeni using the Debian packaging system
 Bungeni is available for installation as a debian package for Ubuntu 12.04 (32 bit) on the following link:
 
 ||Operating System || Download Link ||
-|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-postgresql_9.2.0+2013-02-25-dev_i386.deb bungeni-postgres 2013-02-24 Release] ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+10589-2013-02-25-dev_i386.deb bungeni-core 2013-02-24 Release] ||
+|| Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-postgresql_9.2.0+2013-02-25-dev_i386.deb bungeni-postgres 2013-02-24 Release] ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-exist-db_2.0.0+18031-2013-02-25-dev_i386.deb	 bungeni-exist 2012-02-24 Release] ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.2+10589-2013-02-25-dev_i386.deb bungeni-plone 2013-02-24 Release] ||
 || Ubuntu 12.04 32 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+10589-2013-02-25-dev_i386.deb bungeni-proxy 2013-02-24 Release] ||
@@ -32,7 +32,11 @@ The packages need to be installed in the order listed above.
 
 To install from the command line :
 {{{
-  sudo gdebi bungeni_YYYY+XXXXXX.deb
+sudo gdebi bungeni_1.0+10589-2013-02-25-dev_i386.deb
+sudo gdebi bungeni-postgresql_9.2.0+2013-02-25-dev_i386.deb
+sudo gdebi bungeni-exist-db_2.0.0+18031-2013-02-25-dev_i386.deb
+sudo gdebi bungeni-plone_4.2+10589-2013-02-25-dev_i386.deb
+sudo gdebi bungeni-portal_0.6.1+10589-2013-02-25-dev_i386.deb
 }}}
 
 If you need to install gdebi you can install it using :
@@ -42,7 +46,7 @@ If you need to install gdebi you can install it using :
 
 *NOTE: We don't recommend installing using `apt-get install bungeni_1.0+XXXXXX.deb` since it doesn't install the dependencies.*
 
-= Starting Bungeni = 
+= Starting and Stopping Bungeni = 
 
 Once the installation is complete, you can start and stop Bungeni from the terminal window :
 
@@ -51,23 +55,39 @@ To start:
 sudo service bungeni_services start
 }}}
 
-You can now launch the web browser and browse to `http://localhost:8888` - enter user name and password : admin / admin and then you can start access the different Bungeni services. The core Bungeni package only installs `bungeni` and `postgres`.
-
-Once the `bungeni` and `postgres` service are started, browse to `http://localhost:8081` to access Bungeni.
-
+You can now launch the web browser and browse to `http://localhost:8888` - enter user name and password : admin / admin and then you can start access the different Bungeni services. All the services need to be running for Bungeni to be accessible. 
 
 To stop:
 {{{
 sudo service bungeni_services stop
 }}}
 
+= Accessing the Services =
+
+Once all the services have been started via service manager, you can access individual services via the web browser 
+
+`http://localhost:8081` - Bungeni legislative management
+`http://localhost:8082` - Bungeni Plone content management
+`http://localhost:8088` - Bungeni XML Repository
+
+These can be proxied behind Nginx - see [HowTo_ProxyBungeniBehindWebServer Proxying Bungeni behind nginx]
+
+= Ports Used =
+
+The following ports are used by Bungeni: 
+
+8888 (supervisor) , 8080 (bungeni proxy), 8081 (bungeni), 8082 (plone), 8088 & 8443 (exist), 5432 (postgres), 55672 & 4369 & 35197 & 5672 (all used by rabbitmq)
 
 = To Uninstall = 
 
-You can uninstall using the package manager, by removing the `bungeni-XXXXX` packages.
+You can uninstall using the package manager, by removing the `bungeni-XXXXX` packages via synaptic or update manager.
 
 Or alternatively from the command line type :
 
 {{{
-sudo apt-get remove bungeni-XXXXX 
+sudo apt-get remove bungeni-portal
+sudo apt-get remove bungeni-plone
+sudo apt-get remove bungeni-exist-db
+sudo apt-get remove bungeni-postgresql
+sudo apt-get remove bungeni
 }}}
