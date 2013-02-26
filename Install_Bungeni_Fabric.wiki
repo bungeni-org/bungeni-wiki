@@ -26,6 +26,7 @@ fab -H localhost bungeni_install config_ini:bungeni config_supervisord
 
 See also [http://code.google.com/p/bungeni-portal/wiki/HowTo_SetupFabricScripts#Executing_fabric_actions Executing Fabric actions]
 
+Bungeni has a functional dependency on the eXist XMLdb repository component,  You will need to install this component next : [Install_eXistdb_Fabric Installing Bungeni XML db repository]
 
 == Option 2: Installing using the local package index ==
 
