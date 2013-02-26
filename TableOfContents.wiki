@@ -7,9 +7,8 @@
      *  Installing Manually using Fabric Build Scripts
          *  [Install_PreRequisites_Fabric How to install pre-requisites]
          *  [Install_Bungeni_Fabric How to install Bungeni]
-            *  [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
-         *  [Install_Plone_Fabric How to install Plone]
          *  [Install_eXistdb_Fabric How to install eXist-db]
+         *  [Install_Plone_Fabric How to install Plone]
          *  [Install_DeliverancePortal_Fabric How to install Deliverance]
          *  [Install_Varnish_Fabric How to install Varnish]
      *  [HowTo_SupervisorServiceManager How to use the supervisor service manager]
@@ -22,6 +21,7 @@
           * [HowTo_DatabaseConnection database connection ]               
      * [HowTo_NotificationConfiguration Notification configuration ]  
  * Maintenance   
+     *  [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
      *  [HowTo_MaintainAndUpdateInstallation How to maintain and update an installation]
      *  [HowTo_UpdateDevelopmentInstanceofBungeni How to update a development instance of Bungeni]  
      *  [HowToUpgradeAndDowngradeData How to upgrade and downgrade existing data to different versions of the schema]
