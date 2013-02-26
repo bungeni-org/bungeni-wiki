@@ -78,6 +78,10 @@ The following ports are used by Bungeni:
 
 8888 (supervisor) , 8080 (bungeni proxy), 8081 (bungeni), 8082 (plone), 8088 & 8443 (exist), 5432 (postgres), 55672 & 4369 & 35197 & 5672 (all used by rabbitmq)
 
+= Installation Structure & Details = 
+
+Please see [InstallationStructure_Debian  Installation Structure]
+
 = To Uninstall = 
 
 You can uninstall using the package manager, by removing the `bungeni-XXXXX` packages via synaptic or update manager.
