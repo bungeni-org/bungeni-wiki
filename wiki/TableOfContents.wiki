@@ -2,17 +2,19 @@
 #labels Featured
 
  *  [Install_BungeniApplicationStack Getting started with Bungeni]
-     *  [Install_PreRequisites_Fabric How to install pre-requisites]
-     *  [Install_Bungeni_Fabric How to install Bungeni]
-        *  [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
-     *  [Install_Plone_Fabric How to install Plone]
-     *  [Install_eXistdb_Fabric How to install eXist-db]
-     *  [Install_DeliverancePortal_Fabric How to install Deliverance]
-     *  [Install_Varnish_Fabric How to install Varnish]
+     *  [Install_Bungeni_DebianPackage Automated Install using Debian Packages]
+          *  [InstallationStructure_Debian Debian Packaged based Installations]
+     *  Installing Manually using Fabric Build Scripts
+         *  [Install_PreRequisites_Fabric How to install pre-requisites]
+         *  [Install_Bungeni_Fabric How to install Bungeni]
+            *  [HowTo_Generate_i18nCatalogs How to generate i18n catalogs]
+         *  [Install_Plone_Fabric How to install Plone]
+         *  [Install_eXistdb_Fabric How to install eXist-db]
+         *  [Install_DeliverancePortal_Fabric How to install Deliverance]
+         *  [Install_Varnish_Fabric How to install Varnish]
      *  [HowTo_SupervisorServiceManager How to use the supervisor service manager]
      *  [HowTo_ProxyBungeniBehindWebServer How to proxy Bungeni behind a web server]
      *  [Bungeni_Build_Problems Common Build issues and how to resolve them]
-     *  [InstallationStructure_Debian Debian Packaged based Installations]
      *  [Bungeni_Live_Installation_Guidelines Live installation guidelines]  
  *  Configuration and Initialization
      *  [HowTo_SetupConfigurations Setup configurations ]
