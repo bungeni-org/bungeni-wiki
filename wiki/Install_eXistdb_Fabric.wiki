@@ -81,3 +81,9 @@ See [http://code.google.com/p/bungeni-portal/wiki/HowTo_SupervisorServiceManager
 = About BungeniXQFramework =
 
 see [http://code.google.com/p/bungeni-exist/wiki/BungeniXQFramework Bungeni XQ Framework Documentation]
+
+= Next Steps =
+
+ * *[Install_Plone_Fabric How to setup Plone Content Management System]* 
+ * *[Install_DeliverancePortal_Fabric How to setup Deliverance Portal]* 
+

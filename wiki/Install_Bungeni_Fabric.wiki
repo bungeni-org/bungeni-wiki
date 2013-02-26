@@ -65,12 +65,7 @@ At the end of this step your folder structure should look like this :
 |-- config
 |-- logs
 |-- pid
-|-- python24
-|   |-- bin
-|   |-- include
-|   |-- lib
-|   `-- man
-`-- python26
+`-- python27
     |-- bin
     |-- include
     |-- lib
@@ -115,6 +110,7 @@ You can also install some demo data which you can use to test-drive the system :
 
 = Next Steps =
 
+ * *[Install_eXistdb_Fabric How to install eXist-db]
  * *[Install_Plone_Fabric How to setup Plone Content Management System]* 
  * *[Install_DeliverancePortal_Fabric How to setup Deliverance Portal]* 
 
