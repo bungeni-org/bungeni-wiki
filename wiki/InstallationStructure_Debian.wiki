@@ -57,7 +57,7 @@ bungeni ALL=(ALL:ALL) ALL
 
 = Creating a working bungeni_custom folder =
 
-The correct way to correct a working bungeni_custom folder is to use the fabric action `switch_bungeni_custom`. This fabric action will create a new bungeni_custom folder within `/opt/bungeni/bungeni_apps/bungeni` called `deploy_custom`. 
+The correct way to correct a working bungeni_custom folder is to use the fabric action `switch_bungeni_custom`. This fabric action will create a new bungeni_custom folder within `/opt/bungeni/bungeni_apps/` called `customizations`. 
 
 e.g if you run :
 
@@ -92,4 +92,6 @@ Done.
 Disconnecting from localhost... done.
 }}}
 
-The command also switches bungeni to use the /opt/bungeni/bungeni_apps/bungeni/deploy_custom folder as the custom folder (and also deletes things like .svn files from the new custom folder).
+The command also switches bungeni to use the /opt/bungeni/bungeni_apps/customizations folder as the custom folder (and also deletes things like .svn files from the new custom folder).
+
+You can start with making customizations to the system in this folder.
