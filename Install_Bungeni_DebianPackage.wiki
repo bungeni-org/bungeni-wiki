@@ -7,7 +7,7 @@ Install Bungeni using the Debian packaging system
 = Download the Bungeni Debian Package =
 
 
-== Ubuntu 12.04 64 bit release (Development Build) == 
+== Ubuntu 12.04 64 bit release 24-04-2013 (Development Build) == 
 
 ||Operating System || Download Link ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+10910-2013-04-22-dev_amd64.deb  bungeni-core 2013-04-22 Release] ||
