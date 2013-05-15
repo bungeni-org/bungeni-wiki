@@ -26,7 +26,7 @@ You should have completed the following steps :
 The following command will download and install varnish
 
 {{{
-fab -H <host-name-or-ip> varnish_install config_supervisord
+fab -H <host-name-or-ip> varnish_install config_varnish config_supervisord
 }}}
 
 == Configuring Varnish ==
