@@ -7,14 +7,14 @@ Install Bungeni using the Debian packaging system
 = Download the Bungeni Debian Package =
 
 
-== Ubuntu 12.04 64 bit release 24-04-2013 (Development Build) == 
+== Ubuntu 12.04 64 bit release 28-05-2013 (Development Build) == 
 
 ||Operating System || Download Link ||
-|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+10910-2013-04-22-dev_amd64.deb  bungeni-core 2013-04-22 Release] ||
-|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-postgresql_9.2.0+2013-04-22-dev_amd64.deb bungeni-postgres 2013-02-22 Release] ||
-|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-exist-db_2.0.0+18252-2013-04-22-dev_amd64.deb bungeni-exist 2013-02-22 Release] ||
-|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.2+10899-2013-04-22-dev_amd64.deb  2013-02-24 Release] ||
-|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+10899-2013-04-22-dev_amd64.deb  bungeni-proxy 2013-02-22 Release] ||
+|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+11113-2013-05-28_amd64.deb  bungeni-workflow] ||
+|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-postgresql_9.2+2013-05-28_amd64.deb bungeni-postgresql] ||
+|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-exist-db_2.0.0+18252-2013-05-28_amd64.deb bungeni-xml] ||
+|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.3+11085-2013-05-28.deb  bungeni-plone-cms] ||
+|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+11085-2013-05-28_amd64.deb  bungeni-proxy] ||
 
 [Older_Releases Archived Releases]
 
@@ -38,11 +38,11 @@ The packages need to be installed in the order listed above.
 
 To install from the command line :
 {{{
-sudo gdebi bungeni_1.0+10589-2013-02-25-dev_i386.deb
-sudo gdebi bungeni-postgresql_9.2.0+2013-02-25-dev_i386.deb
-sudo gdebi bungeni-exist-db_2.0.0+18031-2013-02-25-dev_i386.deb
-sudo gdebi bungeni-plone_4.2+10589-2013-02-25-dev_i386.deb
-sudo gdebi bungeni-portal_0.6.1+10589-2013-02-25-dev_i386.deb
+sudo gdebi bungeni_1.0+11113-2013-05-28_amd64.deb
+sudo gdebi bungeni-postgresql_9.2+2013-05-28_amd64.deb
+sudo gdebi bungeni-exist-db_2.0.0+18252-2013-05-28_amd64.deb
+sudo gdebi bungeni-plone_4.3+11085-2013-05-28.deb
+sudo gdebi bungeni-portal_0.6.1+11085-2013-05-28_amd64.deb
 }}}
 
 If you need to install gdebi you can install it using :
@@ -93,6 +93,12 @@ Please see [InstallationStructure_Debian  Installation Structure]
 You can uninstall using the package manager, by removing the `bungeni-XXXXX` packages via synaptic or update manager.
 
 Or alternatively from the command line type :
+
+{{{
+sudo apt-get autoremove bungeni
+}}}
+
+Or to individually remove the packages : 
 
 {{{
 sudo apt-get remove bungeni-portal
