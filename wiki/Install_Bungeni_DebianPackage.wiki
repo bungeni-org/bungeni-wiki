@@ -13,7 +13,7 @@ Install Bungeni using the Debian packaging system
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni_1.0+11113-2013-05-28_amd64.deb  bungeni-workflow] ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-postgresql_9.2+2013-05-28_amd64.deb bungeni-postgresql] ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-exist-db_2.0.0+18252-2013-05-28_amd64.deb bungeni-xml] ||
-|| Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.3+11131-2013-05-29.deb  bungeni-plone-cms] ||
+|| Ubuntu 12.04 64 bit || [https://docs.google.com/open?id=0B3-mFsOC6yxVNnZZM25QXy1DaUU  bungeni-plone-cms] ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+11085-2013-05-28_amd64.deb  bungeni-proxy] ||
 
 [Older_Releases Archived Releases]
