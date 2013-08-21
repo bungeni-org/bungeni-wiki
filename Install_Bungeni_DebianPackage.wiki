@@ -30,7 +30,7 @@ sudo apt-get update
 sudo apt-get upgrade
 }}}
 
-Once this has completed, download the packages, right click on it in Nautilus and click "Open With" -> "GDebi Package manager" (or "Open With" Update Manager")
+Once this has completed, download the packages, right click on it in Nautilus and click "Open With" -> "GDebi Package manager" (DO NOT use "Ubuntu Software Center")
 
 The system will prompt you to enter your password, once you have entered that the installation will commence by installing the dependencies and then complete.
 
