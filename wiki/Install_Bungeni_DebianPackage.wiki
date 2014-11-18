@@ -6,14 +6,14 @@ Install Bungeni using the Debian packaging system
 
 = Download the Bungeni Debian Package =
 
-== [http://releases.ubuntu.com/precise/ Ubuntu 12.04 64 bit] release 14-10-2013 (Development Build) == 
+== [http://releases.ubuntu.com/precise/ Ubuntu 12.04 64 bit] release 18-11-2014 (Development Build) == 
 
 ||Operating System || Download Link ||
-|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6Mm45Q3d4RmdtWTg/edit?usp=sharing  bungeni-workflow] ||
-|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6X0UySVJ5eHN4UHM/edit?usp=sharing bungeni-postgresql] ||
-|| Ubuntu 12.04 64 bit || [https://drive.google.com/folderview?id=0B82nQbDJYHQ6cDR1bk5wQUs1Xzg&usp=sharing bungeni-xml] ||
-|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6ellZMFhKSWRQc1U/edit?usp=sharing&pli=1  bungeni-plone-cms] ||
-|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6SXRQZGh5bWhJZEk/edit?usp=sharing&pli=1  bungeni-proxy] ||
+|| Ubuntu 12.04 64 bit || [https://drive.google.com/open?id=0B_uFxV_V1PC8SmY0R3IxTTFjckU&authuser=0  bungeni-workflow] ||
+|| Ubuntu 12.04 64 bit || [https://drive.google.com/open?id=0B_uFxV_V1PC8R0tOZkh5ZGZvYzg&authuser=0 bungeni-postgresql] ||
+|| Ubuntu 12.04 64 bit || [https://drive.google.com/open?id=0B_uFxV_V1PC8MDVaYktOWTd6QTQ&authuser=0 bungeni-xml] ||
+|| Ubuntu 12.04 64 bit || [https://drive.google.com/open?id=0B_uFxV_V1PC8Qm15djdMbGViUzA&authuser=0  bungeni-plone-cms] ||
+|| Ubuntu 12.04 64 bit || [https://drive.google.com/open?id=0B_uFxV_V1PC8eXRmbmdWVW53bG8&authuser=0  bungeni-proxy] ||
 
 [Older_Releases Archived Releases]
 
