@@ -4,6 +4,16 @@
 
 = Older Releases =
 
+= 14-10-2013 Release = 
+
+== [http://releases.ubuntu.com/precise/ Ubuntu 12.04 64 bit](Development Build) == 
+
+||Operating System || Download Link ||
+|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6Mm45Q3d4RmdtWTg/edit?usp=sharing  bungeni-workflow] ||
+|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6X0UySVJ5eHN4UHM/edit?usp=sharing bungeni-postgresql] ||
+|| Ubuntu 12.04 64 bit || [https://drive.google.com/folderview?id=0B82nQbDJYHQ6cDR1bk5wQUs1Xzg&usp=sharing bungeni-xml] ||
+|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6ellZMFhKSWRQc1U/edit?usp=sharing&pli=1  bungeni-plone-cms] ||
+|| Ubuntu 12.04 64 bit || [https://docs.google.com/file/d/0B82nQbDJYHQ6SXRQZGh5bWhJZEk/edit?usp=sharing&pli=1  bungeni-proxy] ||
 = 28-05-2013 Release = 
 
 == Ubuntu 12.04 64 bit (Development Build) == 
@@ -48,4 +58,3 @@
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-exist-db_2.0.0+18031-2013-02-25-dev_amd64.deb	 bungeni-exist 2012-02-24 Release] ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-plone_4.2+10589-2013-02-25-dev_amd64.deb bungeni-plone 2013-02-24 Release] ||
 || Ubuntu 12.04 64 bit || [http://bungeni-portal.googlecode.com/files/bungeni-portal_0.6.1+10589-2013-02-25-dev_amd64.deb bungeni-proxy 2013-02-24 Release] ||
-
