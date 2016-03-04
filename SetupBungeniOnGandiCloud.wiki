@@ -1,5 +1,0 @@
-#summary How to setup Bungeni on the Gandi Cloud
-#sidebar TableOfContents
-#labels Phase-Implementation,Phase-Requirements
-
-[http://docs.google.com/View?id=dffkvb6v_1c36p6jdx Setting up Bungeni on Gandi Cloud]

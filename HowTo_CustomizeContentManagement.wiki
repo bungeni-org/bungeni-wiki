@@ -1,8 +1,0 @@
-#summary How to customize content management
-
-<wiki:toc max_depth="5" />
-
-== Customizing Plone ==
-== Using Plone Content types ==
-== Defining Content Editors and Managers ==
-== Workspaces ==

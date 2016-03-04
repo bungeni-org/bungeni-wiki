@@ -1,0 +1,5 @@
+  * [How to install Perl](http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_perl.odt)
+  * [How to install the zebra index server](http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_zebra.odt)
+  * [How to install Koha](http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_koha_ubuntu.odt)
+  * [How to install virtualbox](http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_virtualbox.odt)
+  * [How to install apache2](http://bungeni-portal.googlecode.com/svn/docs/trunk/bungeni/install_apache2.odt)
