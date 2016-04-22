@@ -1,6 +1,6 @@
 {
   "name": "Bungeni",
   "tagline": "Legislative Information Management System",
-  "body": "### About Bungeni\r\nBungeni - is a Parliamentary and Legislative Information System that aims at making Parliaments more open and accessible to citizens, virtually allowing them \" inside Parliament\" or \"Bungeni\" the Kiswahili word for \"inside Parliament\". It is based on open standards, and open source applications that aim to provide solutions for drafting, managing, consolidating and publishing legislative and other parliamentary documents.\r\n",
+  "body": "### About Bungeni\r\nBungeni - is a Parliamentary and Legislative Information System that aims at making Parliaments more open and accessible to citizens, virtually allowing them \" inside Parliament\" or \"Bungeni\" the Kiswahili word for \"inside Parliament\". It is based on open standards, and open source applications that aim to provide solutions for drafting, managing, consolidating and publishing legislative and other parliamentary documents.\r\n\r\nDebian Packages for Ubuntu 14.04 (64 bit) available at: \r\n\r\n[Debian Packages](https://drive.google.com/open?id=0B_uFxV_V1PC8fnZhZ0VlZ2s5cVlVQXVKNURhQ0FUN1hMTTh5YWpzVWFDWTljV3BCSEx3aXc&authuser=0)\r\n\r\nDocumentation can be browsed here:  [Table of Contents](https://github.com/bungeni-org/bungeni-wiki/blob/master/Readme.md) ",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
